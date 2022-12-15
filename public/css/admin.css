@@ -1,0 +1,183 @@
+@import "components.css";
+
+.admin ul {
+   list-style: none;
+   text-decoration: none;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+.admin .wrapper .sidebar {
+   box-shadow: 0px 2px 22px 0 rgba(0, 0, 0, 0.2), 0px 2px 30px 0 rgba(0, 0, 0, 0.35);
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 312px;
+   height: 100%;
+   transition: all 0.5s ease;
+}
+.admin .wrapper .sidebar hr {
+   border-top: 3px solid #fff;
+}
+.admin .wrapper .sidebar.seller {
+   background: #3E9E14;
+}
+.admin .wrapper .sidebar.buyer {
+   background: #333;
+}
+.admin .wrapper .sidebar.main {
+   background: #212121;
+}
+.admin .wrapper .sidebar.main ul li a {
+   border-bottom: 1px solid #fff !important;
+}
+.admin .wrapper .sidebar ul li a {
+   display: block;
+   padding: 13px 30px;
+   border-bottom: 1px solid #3E9E14;
+   color: rgb(241, 237, 237);
+   font-size: 16px;
+   position: relative;
+   text-decoration: none;
+}
+.admin .wrapper .sidebar ul li a .icon {
+   color: #dee4ec;
+   width: 30px;
+   display: inline-block;
+}
+.admin .wrapper .sidebar ul li a:hover, .admin .wrapper .sidebar ul li a.active {
+   color: #3E9E14;
+   background: white;
+   border-right: 2px solid #3E9E14;
+}
+.admin .wrapper .sidebar ul li a:hover .icon, .admin .wrapper .sidebar ul li a.active .icon {
+   color: #3E9E14;
+}
+.admin .wrapper .sidebar ul li a:hover:before, .admin .wrapper .sidebar ul li a.active:before {
+   display: block;
+}
+.admin .wrapper .sidebar-header {
+   padding: 25px;
+   text-align: center;
+}
+.admin .wrapper .sidebar-header h3 {
+   font-size: 20px !important;
+   color: #fff;
+   font-weight: 700;
+}
+.admin .wrapper .section {
+   width: calc(100% - 312px);
+   margin-left: 312px;
+   transition: all 0.5s ease;
+}
+.admin .wrapper .section .top_navbar {
+   background: #3E9E14;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   padding: 0 30px;
+}
+.admin .wrapper .section .top_navbar.main {
+   background: #212121;
+}
+.admin .wrapper .section .top_navbar .hamburger a {
+   font-size: 28px;
+   color: #f4fbff;
+}
+.admin .wrapper .section .top_navbar .hamburger a:hover {
+   color: #a2ecff;
+}
+
+
+
+/*
+
+.admin ul {
+   list-style: none;
+   text-decoration: none;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+.admin .wrapper .sidebar {
+   box-shadow: 0px 2px 22px 0 rgba(0, 0, 0, 0.2), 0px 2px 30px 0 rgba(0, 0, 0, 0.35);
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 312px;
+   height: 100%;
+   transition: all 0.5s ease;
+}
+.admin .wrapper .sidebar hr {
+   border-top: 3px solid #fff;
+}
+.admin .wrapper .sidebar.seller {
+   background: #3E9E14;
+}
+.admin .wrapper .sidebar.buyer {
+   background: #333;
+}
+.admin .wrapper .sidebar.main {
+   background: #212121;
+}
+.admin .wrapper .sidebar.main ul li a {
+   border-bottom: 1px solid #fff !important;
+}
+.admin .wrapper .sidebar ul li a {
+   display: block;
+   padding: 13px 30px;
+   border-bottom: 1px solid #3E9E14;
+   color: rgb(241, 237, 237);
+   font-size: 16px;
+   position: relative;
+   text-decoration: none;
+}
+.admin .wrapper .sidebar ul li a .icon {
+   color: #dee4ec;
+   width: 30px;
+   display: inline-block;
+}
+.admin .wrapper .sidebar ul li a:hover, .admin .wrapper .sidebar ul li a.active {
+   color: #3E9E14;
+   background: white;
+   border-right: 2px solid #3E9E14;
+}
+.admin .wrapper .sidebar ul li a:hover .icon, .admin .wrapper .sidebar ul li a.active .icon {
+   color: #3E9E14;
+}
+.admin .wrapper .sidebar ul li a:hover:before, .admin .wrapper .sidebar ul li a.active:before {
+   display: block;
+}
+.admin .wrapper .sidebar-header {
+   padding: 25px;
+   text-align: center;
+}
+.admin .wrapper .sidebar-header h3 {
+   font-size: 20px !important;
+   color: #fff;
+   font-weight: 700;
+}
+.admin .wrapper .section {
+   width: calc(100% - 312px);
+   margin-left: 312px;
+   transition: all 0.5s ease;
+}
+.admin .wrapper .section .top_navbar {
+   background: #3E9E14;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   padding: 0 30px;
+}
+.admin .wrapper .section .top_navbar.main {
+   background: #212121;
+}
+.admin .wrapper .section .top_navbar .hamburger a {
+   font-size: 28px;
+   color: #f4fbff;
+}
+.admin .wrapper .section .top_navbar .hamburger a:hover {
+   color: #a2ecff;
+}
+
+*/
