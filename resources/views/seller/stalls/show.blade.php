@@ -105,7 +105,7 @@
                                         <h3 class="alert alert-danger">Please check your contract and contact you admin for renewal.</h3>
                                     @endif
 
-                                    
+
                                     @if($seller_stall->stall_appointment)
                                         <h4>Appointment Details</h4>
                                         <table class="table table-bordered">

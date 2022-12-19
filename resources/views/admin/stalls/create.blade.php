@@ -246,15 +246,15 @@
                 $('#stall_image_' + counter).removeClass('hide');
 
 
-            //    var counter = $('.stall-image').length;
+               /* var counter = $('.stall-image').length;
 
-            //     if(counter <= 5){
+                if(counter <= 5){
 
-            //         var clone = $('.stall-image:last').clone().insertAfter('.stall-image:last');
-            //         clone.find('input[type="file"]').attr('name', 'image_' + parseInt(parseInt(counter - 1) + 1));
-            //     }else{
+                    var clone = $('.stall-image:last').clone().insertAfter('.stall-image:last');
+                    clone.find('input[type="file"]').attr('name', 'image_' + parseInt(parseInt(counter - 1) + 1));
+                }else{
 
-                // }
+                }*/
 
             })
         }

@@ -235,7 +235,7 @@ class SellerController extends Controller
         }
 
 //        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
-        return redirect(route('seller.stalls.create', [$request->stall_id]))->with(['message' => 'Stall application sent!']);
+        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
 
     }
 
@@ -286,7 +286,7 @@ class SellerController extends Controller
 
 
 //        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
-        return redirect(route('seller.stalls.create.details', [$request->stall_id]))->with(['message' => 'Stall application sent!']);
+        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
 
     }
 

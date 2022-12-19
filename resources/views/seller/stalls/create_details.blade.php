@@ -9,7 +9,7 @@
         <div class="profile-wrapper">
             <div class="card basic-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
-                    Product Information
+                    Stall Information
                 </div>
                 <div class="basic-info-body">
 
