@@ -36,7 +36,7 @@ class StallsController extends Controller
             'section'	=> $request->section,
             'market'	=> $request->market,
             'image'	=> $request->image,
-            'status' => $request->status,
+            'status' => 'vacant',
         ];
 
         if($request->file('image')){

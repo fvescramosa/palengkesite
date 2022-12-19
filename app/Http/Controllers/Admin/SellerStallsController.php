@@ -24,8 +24,11 @@ class SellerStallsController extends Controller
             $data['status'] = 'active';
 
             if($seller_stalls->update($data)){
+
+                $seller_stalls->stall->update(['status' => 'occupied']);
                 return redirect(route('admin.seller.stalls.show'))->with(['message'. '']);
             }
+
 
         }else{
             return false;

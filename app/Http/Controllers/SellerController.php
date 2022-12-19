@@ -9,6 +9,7 @@ use App\Seller;
 use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
+use App\StallAppointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -230,7 +231,7 @@ class SellerController extends Controller
                 'type' => 1,
             ];
 
-            $createAppointment = StallApointment::create($appointment);
+            $createAppointment = StallAppointment::create($appointment);
         }
 
 //        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
@@ -241,7 +242,7 @@ class SellerController extends Controller
     /*No Stall*/
     public function stallCreateDetails(){
 
-        $stalls = Stall::where('status', 'active')->whereDoesntHave('seller_stall', function ($query){
+        $stalls = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
         })->get();
 
@@ -297,6 +298,7 @@ class SellerController extends Controller
         if(Auth::user()->seller()->has('seller_stalls')->get()->count() > 0) {
             $seller_stall = auth()->user()->seller->seller_stalls;
 
+           
             return view('seller/stalls/show', compact(['seller_stall']))->with(['message' => '']);
         }else{
             return redirect(route('seller.stalls.haveany'));
@@ -309,7 +311,7 @@ class SellerController extends Controller
     public function stallSelect()
     {
 
-        $stalls =  Stalls::whereDoesntHave('seller_stall', function ($query){
+        $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
         })->get();
 

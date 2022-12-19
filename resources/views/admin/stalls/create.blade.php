@@ -206,14 +206,6 @@
                                 <button type="button" id="addImage" class="btn option-btn"><span class="fa fa-plus-circle"> </span> Add Image</button>
                             </div>
 
-
-                            <div class="form-group long">
-                            <label for="status">Status</label>
-                            <input type="text"  class="form-control @error('status') is-invalid @enderror"
-                                   id="status"
-                                   name="status"
-                                   placeholder="" value="" >
-
                             </select>
                             @error('status')
                             <span class="invalid-feedback" role="alert">
@@ -254,15 +246,15 @@
                 $('#stall_image_' + counter).removeClass('hide');
 
 
-               /* var counter = $('.stall-image').length;
+            //    var counter = $('.stall-image').length;
 
-                if(counter <= 5){
+            //     if(counter <= 5){
 
-                    var clone = $('.stall-image:last').clone().insertAfter('.stall-image:last');
-                    clone.find('input[type="file"]').attr('name', 'image_' + parseInt(parseInt(counter - 1) + 1));
-                }else{
+            //         var clone = $('.stall-image:last').clone().insertAfter('.stall-image:last');
+            //         clone.find('input[type="file"]').attr('name', 'image_' + parseInt(parseInt(counter - 1) + 1));
+            //     }else{
 
-                }*/
+                // }
 
             })
         }
