@@ -38,6 +38,7 @@
             @endforeach
             </tbody>
         </table>
+        <a href="{{ route('admin.products.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a>
             </div>
         </div>
     </div>

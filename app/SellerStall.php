@@ -28,4 +28,8 @@ class SellerStall extends Model
     public function stall(){
         return $this->belongsTo( Stall::class);
     }
+
+    public function stall_appointment(){
+        return $this->hasOne( StallAppointment::class, 'seller_stall_id');
+    }
 }

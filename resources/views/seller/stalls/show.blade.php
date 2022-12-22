@@ -106,6 +106,24 @@
                                     @endif
 
 
+                                    @if($seller_stall->stall_appointment)
+                                        <h4>Appointment Details</h4>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <th>Date of Appointment</th>
+                                                <th>Status</th>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $seller_stall->stall_appointment->date }}</td>
+                                                    <td>{{ $seller_stall->stall_appointment->status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    @endif
+
+
                                 </div>
                             </div>
 

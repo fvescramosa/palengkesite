@@ -4,7 +4,7 @@
     <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
-                <h3>Stalls</h3>
+                <h3>Seller Stalls</h3>
                 <table class="table table-group-divider">
                     <thead>
                     <tr>

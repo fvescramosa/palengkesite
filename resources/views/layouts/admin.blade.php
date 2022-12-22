@@ -24,7 +24,7 @@
     {{--<link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
-    <script type="text/javascript" src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
     </head>
@@ -35,13 +35,13 @@
             <div class="wrapper">
                 <div class="sidebar main">
                     <div class="sidebar-header">
-                        <h3><i class="fas fa-shopping-basket"></i> Palengkesite</h3>
+                        <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
                     </div>
                     <ul>
                         <li>
                             <a href="{{ route('admin.index') }}">
-                                <span class="icon"><i class="fas fa-desktop"></i></span>
-                                <span class="item">Profile</span>
+                                <span class="icon"><i class="fa fa-users"></i></span>
+                                <span class="item">Users</span>
                             </a>
                         </li>
                         <li>
@@ -52,7 +52,7 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.products.show') }}">
-                                <span class="icon"><i class="fa fa-project-diagram"></i></span>
+                                <span class="icon"><i class="fa fa-shopping-basket"></i></span>
                                 <span class="item">Products</span>
                             </a>
                         </li>
