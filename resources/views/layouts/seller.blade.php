@@ -37,14 +37,20 @@
             <div class="wrapper">
                 <div class="sidebar seller">
                     <div class="sidebar-header">
-                        <h3><i class="fas fa-shopping-basket"></i> Palengkesite</h3>
+                        <h3><i class="fa fa-desktop"></i> Seller Dashboard</h3>
                         <hr>
                     </div>
                     <ul>
                         <li>
                             <a href="{{ route('seller.profile') }}">
-                                <span class="icon"><i class="fas fa-desktop"></i></span>
+                                <span class="icon"><i class="fas fa-user"></i></span>
                                 <span class="item">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('seller.stalls.show') }}">
+                                <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                <span class="item">My Stall</span>
                             </a>
                         </li>
                         <li>
@@ -54,9 +60,21 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('seller.stalls.show') }}">
-                                <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                                <span class="item">My Stalls</span>
+                            <a href="#">
+                                <span class="icon"><i class="fas fa-shipping-fast"></i></span>
+                                <span class="item">Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                <span class="item">Messages</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                                <span class="item">Sales</span>
                             </a>
                         </li>
 

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
-                <h3>Stalls</h3>
+                <h3>Stall Appointment</h3>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -39,7 +39,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a>
             </div>
         </div>
     </div>

@@ -206,14 +206,6 @@
                                 <button type="button" id="addImage" class="btn option-btn"><span class="fa fa-plus-circle"> </span> Add Image</button>
                             </div>
 
-
-                            <div class="form-group long">
-                            <label for="status">Status</label>
-                            <input type="text"  class="form-control @error('status') is-invalid @enderror"
-                                   id="status"
-                                   name="status"
-                                   placeholder="" value="" >
-
                             </select>
                             @error('status')
                             <span class="invalid-feedback" role="alert">
