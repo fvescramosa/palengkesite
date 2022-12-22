@@ -73,7 +73,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                                <span class="icon"><i class="fas fa-chart-bar"></i></span>
                                 <span class="item">Sales</span>
                             </a>
                         </li>
