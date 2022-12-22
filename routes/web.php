@@ -22,11 +22,14 @@ use \App\Http\Controllers\HomeController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+|g
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+
+
+
 
 
 Auth::routes();
@@ -64,7 +67,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/stalls/store/details', [SellerController::class, 'stallStoreDetails'])->name('stalls.store.details');
 
     /*No Stall*/
-    Route::get('/stalls/create/test/{id}', [SellerController::class, 'stallCreate'])->name('stalls.create');
+    Route::get('/stalls/create/{id}', [SellerController::class, 'stallCreate'])->name('stalls.create');
     Route::post('/stalls/store', [SellerController::class, 'stallStore'])->name('stalls.store');
     Route::get('/stalls/select', [SellerController::class, 'stallSelect'])->name('stalls.select');
     Route::post('/stalls/upload/contract', [SellerController::class, 'submitContract'])->name('stalls.contract');

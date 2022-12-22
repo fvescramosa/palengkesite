@@ -9,7 +9,7 @@
         <div class="profile-wrapper">
             <div class="card basic-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
-                    Product Information
+                    Stall Information
                 </div>
                 <div class="basic-info-body">
 
@@ -66,17 +66,6 @@
                                     <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration">
 
                                      @error('duration')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="info-item">
-                                    <label for="">Occupancy Fee</label>
-                                    <input type="text" class="form-control @error('occupancy_fee') is-invalid @enderror" name="occupancy_fee" id="occupancy_fee">
-
-                                     @error('occupancy_fee')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
