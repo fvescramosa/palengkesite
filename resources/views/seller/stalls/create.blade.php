@@ -165,6 +165,15 @@
                     });
                 })
             },
+            initDuration: function( trigger ){
+                trigger.change(function () {
+                    let date_1 = new Date($('#start_date').val());
+                    let date_2 = new Date($('#end_date').val());
+
+                    let difference = date_1.getTime() - date_2.getTime();
+                    console.log(difference);
+                });
+            },
             initPreviewSlick: function () {
                 $('#slide-for').slick({
                     slidesToShow: 1,
@@ -190,6 +199,7 @@
         $(window).on('load', function(){
             products.init();
             products.initPreviewSlick();
+            products.initDuration($('input[type="date"]'));
 
         });
 

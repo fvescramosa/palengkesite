@@ -78,6 +78,10 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
 
     //My Stalls
     Route::get('/stalls/show', [SellerController::class, 'stallShow'])->name('stalls.show');
+
+
+    Route::post('/stall/display/details/', [SellerController::class, 'display_details'])->name('display.details');
+
 });
 
 
@@ -128,6 +132,9 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
 
     //Price Monitoring
     Route::get('/pricing/show/{id}', [PricingController::class, 'index'])->name('pricing.show');
+
+
+
 });
 
 Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
