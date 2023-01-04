@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\SellerStall;
+use function dd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,6 +12,7 @@ class SellerStallsController extends Controller
     //
     public function index(){
         $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])->get();
+
 
         return view('admin/seller/stalls/index', compact(['stalls']));
 

@@ -35,13 +35,27 @@
             <div class="wrapper">
                 <div class="sidebar main">
                     <div class="sidebar-header">
-                        <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
+                        <a href="{{ route('admin.index') }}">
+                            <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
+                        </a>
                     </div>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.index') }}">
+                            <a href="{{ route('admin.users.show') }}">
                                 <span class="icon"><i class="fa fa-users"></i></span>
                                 <span class="item">Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.show.buyers') }}">
+                                <span class="icon"><i class="fa fa-users"></i></span>
+                                <span class="item">Buyers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.show.sellers.list') }}">
+                                <span class="icon"><i class="fa fa-users"></i></span>
+                                <span class="item">Sellers</span>
                             </a>
                         </li>
                         <li>
