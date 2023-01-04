@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SellerStallsController;
 use App\Http\Controllers\Admin\StallAppointmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoriesController;
+// use App\Http\Controllers\Admin\UserController;
 use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -95,6 +96,15 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/register', [RegisterController::class, 'showAdminRegisterForm'])->name('register');
     Route::post('/store', [ RegisterController::class, 'createAdmin'])->name('store');
 
+    //users
+    Route::get('/users/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
+    Route::get('/users/buyers/list', [\App\Http\Controllers\Admin\UserController::class, 'showBuyer'])->name('show.buyers');
+    Route::get('/users/sellers/list', [\App\Http\Controllers\Admin\UserController::class, 'showSellerList'])->name('show.sellers.list');
+    Route::get('/users/seller/show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'showSeller'])->name('show.seller');
+    Route::get('/users/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
+    Route::post('/users/update/{id}',  [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+    Route::post('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'delete'])->name('users.delete');
+
     //products
     Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [ProductsController::class, 'store'])->name('products.store');
@@ -142,6 +152,6 @@ Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
 });
 
-Route::get('/chat/', 'ChatsController@index');
+Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
 Route::post('/chat/messages', 'ChatsController@sendMessage');

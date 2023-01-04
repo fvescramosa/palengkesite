@@ -54,31 +54,33 @@
                             </a>
                         </li>
 
-                        @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
-                            <li>
-                                <a href="{{ route('seller.products.show') }}">
-                                    <span class="icon"><i class="fa fa-store"></i></span>
-                                    <span class="item">Products</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="icon"><i class="fas fa-shipping-fast"></i></span>
-                                    <span class="item">Orders</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                                    <span class="item">Messages</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="icon"><i class="fas fa-chart-bar"></i></span>
-                                    <span class="item">Sales</span>
-                                </a>
-                            </li>
+                        @if(auth()->user()->seller()->exists())
+                            @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
+                                <li>
+                                    <a href="{{ route('seller.products.show') }}">
+                                        <span class="icon"><i class="fa fa-store"></i></span>
+                                        <span class="item">Products</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><i class="fas fa-shipping-fast"></i></span>
+                                        <span class="item">Orders</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                                        <span class="item">Messages</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                                        <span class="item">Sales</span>
+                                    </a>
+                                </li>
+                            @endif
                         @endif
                         {{--<li>
                             <a href="#">
