@@ -73,6 +73,11 @@
                                 </div>
 
                                 <div class="info-item">
+                                    <label for="">Rental Fee</label>
+                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee">
+                                </div>
+
+                                <div class="info-item">
                                     <label for="">Contract Lease</label>
                                     <input type="file" class="form-control @error('contract_of_lease') is-invalid @enderror" name="contract_of_lease" id="contract_of_lease">
 

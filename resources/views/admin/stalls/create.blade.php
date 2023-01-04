@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Amount_Sqm">Amount Sqm</label>
+                                <label for="Amount_Sqm">Amount/Sqm</label>
                                 <input type="text"  class="form-control @error('amount_sqm') is-invalid @enderror"
                                                     id="amount_sqm"
                                                     name="amount_sqm"

@@ -9,9 +9,9 @@
                     <thead>
                     <tr>
                         <th>Number</th>
-                        <th>sqm</th>
+                        <th>Sqm</th>
                         <th>Section</th>
-                        <th>Amount / sqm</th>
+                        <th>Amount / Sqm</th>
                         <th>Rental Fee</th>
                         <th>Status</th>
                         <th></th>
