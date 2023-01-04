@@ -25,6 +25,5 @@ $factory->define(Stall::class, function (Faker $faker) {
         'image_4' => $faker->imageUrl(640,480, null, false),
         'image_5' => $faker->imageUrl(640,480, null, false),
         'status' => 'vacant',
-
     ];
 });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\StallAppointmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoriesController;
 // use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BuyerController;
 use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -41,6 +42,15 @@ Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')
 Route::post('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
+Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+});
+
+Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/create', [BuyerController::class, 'create'])->name('create');
+    Route::post('/store', [BuyerController::class, 'store'])->name('store');
+    Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
+});
 
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/profile', [SellerController::class, 'profile'])->name('profile');

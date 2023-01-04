@@ -10,6 +10,7 @@ use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
 use App\StallAppointment;
+use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -389,4 +390,6 @@ class SellerController extends Controller
 
         return response()->json($stall);
     }
+
+
 }
