@@ -1305,11 +1305,11 @@ span.invalid-feedback {
    background-image: url("/images/palengke.jpg");
 }
 .login-container .bg-area .logo-area {
-   width: 180px;
+   width: 185px;
    height: auto;
    position: absolute;
-   top: 20px;
-   left: 40px;
+   top: -15px;
+   left: 25px;
 }
 .login-container .bg-area .logo-area img {
    -o-object-fit: cover;
@@ -1323,6 +1323,11 @@ span.invalid-feedback {
 .login-container .form-area .form-wrapper {
    width: 75%;
    margin: 0 auto;
+}
+.login-container .form-area .form-wrapper h1{
+   color: var(--orange);
+   text-transform: uppercase;
+   text-shadow: 1px 1px var(--black);
 }
 .login-container .form-area .logo-area {
    width: 320px;

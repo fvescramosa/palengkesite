@@ -41,23 +41,29 @@
                     </div>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.users.show') }}">
+                            <a href="#" class="collapsed" data-toggle="collapse" data-target="#users_submenu">
                                 <span class="icon"><i class="fa fa-users"></i></span>
                                 <span class="item">Users</span>
                             </a>
+                            <div class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" id="users_submenu" aria-expanded="false">
+                                <ul>
+                                    <li >
+                                    <a href="{{ route('admin.show.buyers.list') }}"  class="{{ ( request()->routeIs('admin.show.buyers.list') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-users"></i></span>
+                                        <span class="item">Buyers</span>
+                                    </a>                           
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.show.sellers.list') }}" class="{{ ( request()->routeIs('admin.show.sellers.list') ? 'active' : '' )}}">
+                                            <span class="icon"><i class="fa fa-users"></i></span>
+                                            <span class="item">Sellers</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.show.buyers') }}">
-                                <span class="icon"><i class="fa fa-users"></i></span>
-                                <span class="item">Buyers</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.show.sellers.list') }}">
-                                <span class="icon"><i class="fa fa-users"></i></span>
-                                <span class="item">Sellers</span>
-                            </a>
-                        </li>
+                        
+                        
                         <li>
                             <a href="{{ route('admin.stalls.show') }}">
                                 <span class="icon"><i class="fas fa-store"></i></span>
@@ -133,3 +139,4 @@
         </div>
     </body>
 </html>
+
