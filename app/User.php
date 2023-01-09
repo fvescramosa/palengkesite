@@ -64,4 +64,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Message::class);
     }
+
+    public function delivery_addresses(){
+        return $this->hasMany(DeliveryAddress::class);
+    }
 }

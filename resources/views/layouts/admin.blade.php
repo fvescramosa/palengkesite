@@ -35,7 +35,7 @@
             <div class="wrapper">
                 <div class="sidebar main">
                     <div class="sidebar-header">
-                        <a href="{{ route('admin.index') }}">
+                        <a href="{{  route('admin.index') }}">
                             <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
                         </a>
                     </div>
