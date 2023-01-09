@@ -62,6 +62,17 @@
                                 </div>
 
                                 <div class="info-item">
+                                    <label for="">Rental Fee</label>
+                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
+
+                                    @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="info-item">
                                     <label for="">Duration</label>
                                     <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration">
 
@@ -99,33 +110,39 @@
     <script>
         const products = {
             init: function(  ){
-                products.initCategories($('#category'));
+                products.initStallDetails($('#stall'));
+                products.initDuration( $('input[type="date"]'));
+
             },
-            initCategories: function( trigger ){
+            initStallDetails: function( trigger ){
                 trigger.change(function () {
                     var options = '';
-                    console.log(this.value);
+
                     $.ajax({
                         type:'POST',
                         dataType: 'JSON',
-                        url:'{{ route('seller.products.find.category') }}',
+                        url:'{{ route('seller.display.details') }}',
                         data: {
                             id: this.value,
                             _token: "{{ csrf_token() }}"
                         },
                         success:function(data) {
 
+                            $('#rental_fee').val(data.rental_fee);
 
-                            for( i = 0; i < data.length; i++){
-
-                                options += '<option value="'+ data[i].id +'">' + data[i].product_name + '</option>';
-
-                            }
-
-                            $('#product').html(options);
                         }
                     });
                 })
+            },
+            initDuration: function( trigger ){
+                trigger.change(function () {
+                    let date_1 = new Date($('#end_date').val());
+                    let date_2 = new Date($('#start_date').val());
+
+                    let difference = date_1.getTime() - date_2.getTime();
+                    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    $('#duration').val(TotalDays);
+                });
             },
             initPreviewSlick: function () {
                 $('#slide-for').slick({
@@ -150,6 +167,7 @@
         $(window).on('load', function(){
             products.init();
             products.initPreviewSlick();
+
 
         });
 

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CompleteSellerInfo;
+use App\Http\Middleware\SellerCapabilityMiddleware;
 use App\Http\Middleware\SellerHasStall;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'complete.seller.info' => CompleteSellerInfo::class,
         'sellerHasStall' => SellerHasStall::class,
+        'buyer-seller' => SellerCapabilityMiddleware::class,
     ];
 
     /**

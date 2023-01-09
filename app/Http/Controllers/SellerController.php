@@ -10,9 +10,11 @@ use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
 use App\StallAppointment;
+use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use function response;
 
 class SellerController extends Controller
 {
@@ -380,4 +382,14 @@ class SellerController extends Controller
     public function myStalls(){
 
     }
+
+    public function display_details(Request $request){
+
+        $stall = Stall::findOrFail($request->id);
+
+
+        return response()->json($stall);
+    }
+
+
 }
