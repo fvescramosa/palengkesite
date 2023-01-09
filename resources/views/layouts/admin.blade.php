@@ -123,11 +123,18 @@
                         const app = {
                             initCollapse: function(){
                                 console.log('A script has been loaded');
-                            }
+                            },
+                            filter: function(trigger){
+                                trigger.change(function(e){
+
+                                    $('#sortlist').submit();
+                                });
+                            },
                         };
 
                         $(window).on('load', function(){
                             app.initCollapse();
+                            app.filter($('#orderby'));
                         });
 
 

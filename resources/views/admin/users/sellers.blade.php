@@ -4,6 +4,14 @@
 <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
+                <form action="" method="GET" id="sortlist">
+                    <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
+                        <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>A-Z</option>
+                        <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Z-A</option>
+                        <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
+                        <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
+                    </select>
+                </form>
                 <h3>Users</h3>
                 <table class="table table-bordered">
                     <thead>
@@ -34,3 +42,6 @@
         </div>
     </div>
 @endsection
+
+
+</script>

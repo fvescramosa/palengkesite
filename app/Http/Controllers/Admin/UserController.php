@@ -22,8 +22,42 @@ class UserController extends Controller
     }
 
     public function showSellerList(){
-        $users = User::where('user_type_id', '1')->get();
+        $users = User::where('user_type_id', '1');
 
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['first_name', 'asc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['first_name', 'desc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+
+            else{
+
+            }
+
+            
+        }
+
+        $users = $users->get();
+
+        
         return view('admin.users/sellers', compact(['users']));
     }
 
