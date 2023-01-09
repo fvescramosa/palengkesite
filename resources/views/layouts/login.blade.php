@@ -46,7 +46,7 @@
 
                 <div class="bg-area" style="">
                     <div class="logo-area">
-                        <img src="{{ asset('images/logo.png') }}" alt="Palengkesite">
+                        <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
                     </div>
                 </div>
                 @yield('content')
