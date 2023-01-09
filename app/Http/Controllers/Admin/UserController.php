@@ -63,9 +63,9 @@ class UserController extends Controller
         $user_type = User::find($id)->user_type_id;
 
         if($user_type == 2){
-            return redirect(route('admin.show.buyers'));
+            return redirect(route('admin.show.buyers.list'));
         }else{
-            return redirect(route('admin.show.sellers')); 
+            return redirect(route('admin.show.sellers.list')); 
         }
 
     }
@@ -80,9 +80,9 @@ class UserController extends Controller
    
 
         if($user_type == 2){
-            return redirect(route('admin.show.buyers'));
+            return redirect(route('admin.show.buyers.list'));
         }else{
-            return redirect(route('admin.show.sellers')); 
+            return redirect(route('admin.show.sellers.list')); 
         }
     }
 }
