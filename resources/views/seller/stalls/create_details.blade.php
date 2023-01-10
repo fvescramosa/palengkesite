@@ -40,6 +40,18 @@
                                         </span>
                                     @enderror
                                 </div>
+
+                                <div class="info-item">
+                                    <label for="">Rental Fee per Month</label>
+                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
+
+                                    @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
                                 <div class="info-item short">
                                     <label for="">Start Date</label>
                                     <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date">
@@ -62,30 +74,14 @@
                                 </div>
 
                                 <div class="info-item">
-                                    <label for="">Rental Fee</label>
-                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
-
-                                    @error('duration')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="info-item">
-                                    <label for="">Duration</label>
-                                    <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration">
+                                    <label for="">Duration (Months)</label>
+                                    <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration" readonly>
 
                                      @error('duration')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-
-                                <div class="info-item">
-                                    <label for="">Rental Fee</label>
-                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee">
                                 </div>
 
                                 <div class="info-item">
@@ -139,9 +135,20 @@
                     let date_1 = new Date($('#end_date').val());
                     let date_2 = new Date($('#start_date').val());
 
-                    let difference = date_1.getTime() - date_2.getTime();
-                    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-                    $('#duration').val(TotalDays);
+                    // let difference = date_1.getTime() - date_2.getTime();
+                    // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    // $('#duration').val(TotalDays);
+
+                    
+                        var months;
+                        var result;
+                        months = (date_1.getFullYear() - date_2.getFullYear()) * 12;
+                        months -= date_2.getMonth();
+                        months += date_1.getMonth();
+
+                        result = months <= 0  ? 0 : months;
+                        $('#duration').val(result);
+
                 });
             },
             initPreviewSlick: function () {
