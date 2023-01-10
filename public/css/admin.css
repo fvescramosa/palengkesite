@@ -92,6 +92,22 @@
    padding-left: 25px;
 }
 
+
+#sortlist{
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: right;
+}
+
+#sortlist select {
+   flex: 1 1 calc(25% - 25px);
+   max-width: calc(25% - 25px);
+   height: 35px;
+    font-size: 15px;
+}
+#sortlist select:not(:last-child) {
+   margin-right: 25px;
+}
 /*
 
 .admin ul {
