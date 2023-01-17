@@ -43,14 +43,14 @@
         @endif
         <main>
             <div class="container login-container">
-
                 <div class="bg-area" style="">
                     <div class="logo-area">
-                        <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
+                        <a href="{{ url('/') }}">
+                            <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
+                        </a>
                     </div>
                 </div>
                 @yield('content')
-
             </div>
         </main>
 

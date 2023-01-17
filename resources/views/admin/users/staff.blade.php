@@ -5,7 +5,7 @@
         <div class="profile">
             <div class="profile-wrapper">
                 <div class="list-header">
-                    <h3>Users</h3>
+                    <h3>Staff</h3>
                     <form action="" method="GET" id="sortlist">
                         <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
                             <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>A-Z</option>
@@ -19,23 +19,17 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($staffs as $staff)
                         <tr>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
-                                <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.users.delete', $user->id) }}"> Delete </a>
-                            </td>
+                            <td>{{ $staff->name }}</td>
+                            <td>{{ $staff->email }}</td>
+                            
                         </tr>
                     @endforeach
                     </tbody>
@@ -45,6 +39,3 @@
         </div>
     </div>
 @endsection
-
-
-</script>

@@ -15,6 +15,8 @@
     <!-- Fonts -->
     {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
     {{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
+    <link href="{{ asset('thirdparty/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    
 
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
@@ -24,14 +26,18 @@
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer ></script>
+    <!-- <script type="text/javascript" src="{{ asset('js/app.js') }}" defer ></script> -->
 </head>
 <body>
     <div >
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <div class="bg-area" style="">
+                        <div class="logo-area">
+                            <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
+                        </div>
+                    </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,13 +45,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav">
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Stores</a>
+                        </li>
+                        
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -77,6 +90,9 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart "></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -129,5 +145,38 @@
 
         </footer>
     </div>
+
+    <script>
+       const el = {
+            initDetectScroll: function() {
+
+                if($(window).scrollTop()  > 100 ) {
+                    console.log('WORKING');
+                    $('.navbar').addClass('fixed');
+                    } else {
+                        $('.navbar').removeClass('fixed');
+                    }
+            },
+            initSlick: function(){
+                // $('#box-container').slick({
+                //     slidesToShow: 5,
+                //     slidesToScroll: 1,
+                //     infinite: true,
+            
+                //     dots: false ,
+                //     focusOnSelect: true
+                // });
+            }
+       }
+
+       $(window).on('scroll', function(){
+            el.initDetectScroll();
+       });
+
+       $(window).on('load', function(){
+            el.initSlick();
+        });
+    </script>
+
 </body>
 </html>
