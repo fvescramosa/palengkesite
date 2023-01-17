@@ -96,11 +96,16 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Market">Market</label>
-                                <input type="text"  class="form-control @error('market') is-invalid @enderror"
-                                                    id="market"
-                                                    name="market"
-                                                    placeholder="" value="" >
+                            <label for="Market">Market</label>
+                                <select  class="form-control @error('market') is-invalid @enderror" 
+                                            id="market" 
+                                            name="market" 
+                                            placeholder="Market">
+                                            <option value=""></option>
+                                            @foreach($markets as $market)
+                                                <option value="{{ $market->id }}">{{ $market->market }}</option>
+                                            @endforeach
+                                </select>
 
                                 @error('market')
                                 <span class="invalid-feedback" role="alert">

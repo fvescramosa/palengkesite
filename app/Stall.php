@@ -13,7 +13,7 @@ class Stall extends Model
         'amount_sqm',
         'rental_fee',
         'section',
-        'market',
+        'market_id',
         'image',
         'image_1',
         'image_2',
@@ -25,5 +25,9 @@ class Stall extends Model
 
     public function seller_stall(){
         return $this->hasOne( SellerStall::class, 'stall_id');
+    }
+
+    public function market(){
+        return $this->hasOne( Market::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Stall;
+use App\Market;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,8 +12,14 @@ class StallsController extends Controller
     //
     public function show(){
 
-        $stalls = Stall::all();
+        $stalls = new Stall();
 
+        if(session()->has('market')){
+            $stalls = $stalls->where('market_id', session()->get('market'));
+        }
+
+        $stalls = $stalls->get();
+        
         return view('admin.stalls/show', compact(['stalls']));
     }
 
@@ -23,7 +30,9 @@ class StallsController extends Controller
     }
 
     public function create(){
-        return view('admin/stalls/create');
+        $markets = Market::all();
+
+        return view('admin/stalls/create', compact(['markets']));
     }
 
     public function store(Request $request){
@@ -34,11 +43,12 @@ class StallsController extends Controller
             'amount_sqm' => $request->amount_sqm,
             'rental_fee'	=> $request->rental_fee,
             'section'	=> $request->section,
-            'market'	=> $request->market,
+            'market_id'	=> $request->market, //market from name
             'image'	=> $request->image,
             'status' => 'vacant',
         ];
 
+      
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();

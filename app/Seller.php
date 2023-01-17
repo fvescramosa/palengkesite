@@ -30,4 +30,9 @@ class Seller extends Model
     public function stall_appointments(){
         return $this->hasMany( StallAppointment::class);
     }
+
+    public function market(){
+        return $this->hasOne( Market::class);
+    }
+
 }

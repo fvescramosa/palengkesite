@@ -17,7 +17,7 @@ $factory->define(Stall::class, function (Faker $faker) {
         'amount_sqm' => '25',
         'rental_fee' => '1000',
         'section' => $faker->randomElement(['meat', 'vegetable', 'groceries', 'fish']),
-        'market' => 'poblacion',
+        'market_id' => $faker->unique()->numberBetween(1,3),
         'image' => $faker->imageUrl(640,480, null, false),
         'image_1' => $faker->imageUrl(640,480, null, false),
         'image_2' => $faker->imageUrl(640,480, null, false),
