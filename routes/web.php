@@ -52,6 +52,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
     Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
 });
 
+
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
 
@@ -167,3 +168,4 @@ Route::get('/test/mail', function (){
 Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
 Route::post('/chat/messages', 'ChatsController@sendMessage');
+

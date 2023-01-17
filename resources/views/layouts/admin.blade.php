@@ -30,13 +30,21 @@
         </head>
         <body id="page-top">
 
-            <div class="admin">
-                <!-- Page Wrapper -->
-                <div class="wrapper">
-                    <div class="sidebar main">
-                        <div class="sidebar-header">
-                            <a href="{{ route('admin.index') }}">
-                                <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
+
+        <div class="admin">
+            <!-- Page Wrapper -->
+            <div class="wrapper">
+                <div class="sidebar main">
+                    <div class="sidebar-header">
+                        <a href="{{  route('admin.index') }}">
+                            <h3><i class="fa fa-desktop"></i> Admin Dashboard</h3>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#" class="collapsed" data-toggle="collapse" data-target="#users_submenu">
+                                <span class="icon"><i class="fa fa-users"></i></span>
+                                <span class="item">Users</span>
                             </a>
                             
                         </div>
