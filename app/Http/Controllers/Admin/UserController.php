@@ -52,8 +52,21 @@ class UserController extends Controller
     }
 
     public function showSellerList(){
+
+       
+
         $users = User::where('user_type_id', '1');
 
+        if(session()->has('market')){
+
+            $marketOption = session()->get('market');
+
+            $users->whereHas('seller', function($q) use ($marketOption){
+                    $q->where('market_id', $marketOption);
+            });
+
+           
+        }
 
         $orderby = '';
         if(isset($_GET['orderby'])){
@@ -82,6 +95,10 @@ class UserController extends Controller
             $orderby = ['first_name', 'asc'];
             $users->orderBy($orderby[0], $orderby[1]);
         }
+
+
+
+        
         $users = $users->get();
 
         

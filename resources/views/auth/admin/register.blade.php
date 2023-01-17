@@ -1,7 +1,10 @@
-@extends('layouts.login')
+@extends('layouts.admin')
 
 @section('content')
-
+<div class="container">
+        <div class="profile">
+            <div class="profile-wrapper">
+            
         <div class="form-area">
 
 
@@ -70,6 +73,12 @@
             </form>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+
+
+
 
 
 @endsection

@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="home-bg">
+    <div class="home-bg"> 
+        <div class="overlay"></div>
         <section class="home">
-
+           
             <div class="content">
-                <span>Buy now, Deliver later</span>
+                <span>Buy Now, Deliver Later</span>
                 <h3>Fresh and Quality Products</h3>
                 <p>To serve your Palengke needs right in your front door</p>
                 <a href="products.php" class="home-btn white-btn">Products</a>
@@ -15,43 +16,28 @@
     </div>
     <section class="home-category">
 
-        <h1 class="title">shop by category</h1>
+        <h1 class="title">shop by <span>category</span></h1>
 
-        <div class="box-container">
+        <div class="box-container" id="box-container">
 
-            <div class="box">
-                <img src="images/cat-1.png" alt="">
-                <h3>fruits</h3>
-                <p>To serve you different kinds of fresh fruits.</p>
-                <a href="category.php?category=fruits" class="home-btn white-btn">fruits</a>
+            <div class="box" style="background-image: url('images/meat.jpg')">
+                <div class="overlay"></div>
             </div>
 
-            <div class="box">
-                <img src="images/cat-2.png" alt="">
-                <h3>meat</h3>
-                <p>All time favorite like pork liempo, chicken adobo, pork adobo, and porkchop are here.</p>
-                <a href="category.php?category=meat" class="home-btn white-btn">meat</a>
+            <div class="box" style="background-image: url('images/fish.jpg')">
+                <div class="overlay"></div>
             </div>
 
-            <div class="box">
-                <img src="images/cat-3.png" alt="">
-                <h3>vegetables</h3>
-                <p>Eggplant, Carrots, Potatoes, Kalabasa, Sili, etc.</p>
-                <a href="category.php?category=vegitables" class="home-btn white-btn">vegetables</a>
+            <div class="box" style="background-image: url('images/fruits-veggy.jpg')">
+                <div class="overlay"></div>
             </div>
 
-            <div class="box">
-                <img src="images/cat-4.png" alt="">
-                <h3>fish and seafood</h3>
-                <p>Different kinds of fresh fish and seafood are here to serve your cravings.</p>
-                <a href="category.php?category=fish" class="home-btn white-btn">fish & seafood</a>
+            <div class="box" style="background-image: url('images/poultry.jpg')">
+                <div class="overlay"></div>
             </div>
 
-            <div class="box">
-                <img src="images/cat-5.png" alt="">
-                <h3>grocery items</h3>
-                <p>All the grocery items like canned goods and even your favorite snacks are here.</p>
-                <a href="category.php?category=grocery" class="home-btn white-btn">grocery</a>
+            <div class="box" style="background-image: url('images/grocery.jpg')">
+                <div class="overlay"></div>
             </div>
 
         </div>
@@ -59,7 +45,7 @@
     </section>
     <section class="home-products products">
 
-        <h1 class="title">Featured Products</h1>
+        <h1 class="title">Featured <span>Products</span></h1>
 
 
 
@@ -89,5 +75,14 @@
         </div>
 
     </section>
+    <script>    
+        const elements = {
+            
+        }
 
+        $(document).ready(function(){
+           
+        });
+
+    </script>
 @endsection
