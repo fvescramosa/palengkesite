@@ -7,6 +7,8 @@ use function compact;
 use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function redirect;
+use function route;
 
 class UserController extends Controller
 {
@@ -23,9 +25,14 @@ class UserController extends Controller
     }
 
     public function profile($id){
+
         $user = User::findOrFail($id);
 
-       return view('buyer.profile', compact(['user']));
+        if(!$user->buyer()->exists()){
+            return redirect(route('buyer.create'));
+        }else{
+            return view('buyer.profile', compact(['user']));
+        }
     }
 
 

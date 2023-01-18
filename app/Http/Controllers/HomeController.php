@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SellerProduct;
+use function auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -43,7 +44,7 @@ class HomeController extends Controller
 
     public function profile(){
         if(auth()->user()->user_type_id == '1'){
-            return redirect( route('seller.profile') );
+            return redirect( route('buyer.profile',  ['id' => auth()->user()->id]) );
         }elseif(auth()->user()->user_type_id == '2'){
             return redirect( route('buyer.profile') );
         }

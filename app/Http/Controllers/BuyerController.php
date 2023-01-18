@@ -3,24 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\User;
 use function dd;
+use function extract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function json_decode;
+use function json_encode;
+use const JSON_PRETTY_PRINT;
+use function print_r;
 use function redirect;
+use function response;
 
 class BuyerController extends Controller
 {
     //
     public function create(){
 
-        if(auth()->user()->buyer()->exists()){
-            return redirect(route( 'buyer.edit' , auth()->user()->id));
-        }else{
-            return view('buyer/create');
-        }
+
+       return view('buyer/create');
     }
 
     public function store(Request $request){
+
 
         $validate = $request->validate([
             'birthday' => ['required', ''],
@@ -35,30 +40,38 @@ class BuyerController extends Controller
             'user_id' => '',
         ]);
 
-        if($validate){
-            $buyer = Buyer::create(
-                [
-                    'birthday' => $request->birthday,
-                    'age' => $request->age,
-                    'gender' => $request->gender,
-                    'contact' =>  $request->contact,
-                    'stnumber' =>  $request->stnumber,
-                    'stname' =>  $request->stname,
-                    'city' =>  $request->city,
-                    'province' =>  $request->province,
-                    'country' =>  $request->country,
-                    'user_id' => auth()->user()->id,
-                ]
-            );
+        if (!Auth::user()->buyer()->exists()){
 
-            if($buyer->save()){
+            if($validate){
+                $buyer = Buyer::create(
+                    [
+                        'birthday' => $request->birthday,
+                        'age' => $request->age,
+                        'gender' => $request->gender,
+                        'contact' =>  $request->contact,
+                        'user_id' => auth()->user()->id,
+                    ]
+                );
+
+                if($buyer->save()){
+                    $buyer->user->delivery_addresses()->create([
+                        'stnumber' =>  $request->stnumber,
+                        'stname' =>  $request->stname,
+                        'barangay' =>  $request->barangay,
+                        'city' =>  $request->city,
+                        'province' =>  $request->province,
+                        'country' =>  $request->country,
+                        'zip' =>  $request->zip,
+                    ]);
+                }
 
             }
 
         }
 
 
-        return redirect(route('buyer.profile', $buyer->user->id))->with(['message' => 'Seller info added']);
+
+        return redirect(route('buyer.profile', Auth::user()->id))->with(['message' => 'Seller info added']);
     }
 
 
@@ -88,10 +101,14 @@ class BuyerController extends Controller
                     'birthday' => $buyer_info->birthday,
                     'age' => $buyer_info->age,
                     'gender' => $buyer_info->gender,
-                    'contact' => $buyer_info->contact,
+                    'market_id' => 1,
                 ];
 
-                $seller_create = Auth::user()->seller()->create($data);
+
+                Auth::user()->seller()->create($data);
+
+
+
             }
 
         }

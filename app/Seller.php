@@ -12,7 +12,8 @@ class Seller extends Model
         'birthday',
         'age',
         'gender',
-        'user_id'
+        'user_id',
+        'market_id',
     ];
 
     public function user(){
@@ -32,7 +33,7 @@ class Seller extends Model
     }
 
     public function market(){
-        return $this->hasOne( Market::class);
+        return $this->belongsTo( Market::class);
     }
 
 }
