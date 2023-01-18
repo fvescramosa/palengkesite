@@ -85,6 +85,10 @@
                                                 <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
                                                 <td> <p>{{ $stall->rental_fee }}</p></td>
                                             </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Location: </strong></p> </td>
+                                                <td> <p>{{ $stall->market }}</p></td>
+                                            </tr>
                                         </table>
                                     </div>
 
