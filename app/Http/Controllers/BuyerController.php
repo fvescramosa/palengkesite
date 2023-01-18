@@ -101,10 +101,14 @@ class BuyerController extends Controller
                     'birthday' => $buyer_info->birthday,
                     'age' => $buyer_info->age,
                     'gender' => $buyer_info->gender,
-                    'contact' => $buyer_info->contact,
+                    'market_id' => 1,
                 ];
 
-                $seller_create = Auth::user()->seller()->create($data);
+
+                Auth::user()->seller()->create($data);
+
+
+
             }
 
         }

@@ -204,6 +204,7 @@ class SellerController extends Controller
         $stall = Stall::whereDoesntHave('seller_stall')->findOrFail($id);
 
 
+        dd($stall->market);
         return view('seller/stalls/create', compact(['stall']));
     }
 
