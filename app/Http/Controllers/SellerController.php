@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use function response;
+use function session;
 
 class SellerController extends Controller
 {
@@ -440,4 +441,28 @@ class SellerController extends Controller
     }
 
 
+    public function switch_as_buyer(){
+
+        if(Auth::user()->user_type_id == 2){
+
+            if(!Auth::user()->buyer()->exists()){
+                $seller_info = Auth::user()->seller;
+
+                $data = [
+                    'birthday' => $seller_info->birthday,
+                    'age' => $seller_info->age,
+                    'gender' => $seller_info->gender,
+                ];
+
+
+                Auth::user()->buyer()->create($data);
+
+            }
+
+        }
+
+            session()->put('user_type', 'buyer');
+
+        return redirect(route('buyer.profile', ['id' => Auth::user()->id]));
+    }
 }
