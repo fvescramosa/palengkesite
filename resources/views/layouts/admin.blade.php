@@ -197,6 +197,8 @@
                     app.initCollapse();
                     app.filter($('#orderby'));
                     app.initPalengkeFilter($('#marketOption'));
+                    app.initNotifStallAppointment();
+                    app.initNotifStallApproval();
                 });
 
 

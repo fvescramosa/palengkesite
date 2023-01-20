@@ -16,7 +16,7 @@ class UserController extends Controller
     }
 
     public function showBuyer(){
-        $users = User::where('user_type_id', '2');
+        $users = User::whereHas('buyer');
 
         $orderby = '';
         if(isset($_GET['orderby'])){
@@ -55,7 +55,9 @@ class UserController extends Controller
 
        
 
-        $users = User::where('user_type_id', '1');
+        $users = User::whereHas('seller')->whereHas('seller.seller_stalls', function($q){
+            $q->where('status', 'active');
+        });
 
         if(session()->has('market')){
 

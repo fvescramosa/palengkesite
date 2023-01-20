@@ -21,7 +21,9 @@ class AdminController extends Controller
 
     public function index(){
 
-        $sellers = Seller::with(['seller_stalls', 'seller_stalls.stall']);
+        $sellers = Seller::with(['seller_stalls', 'seller_stalls.stall'])->whereHas('seller_stalls', function($q){
+            $q->where('status', 'active');
+        });
         if(session()->has('market')){
             $marketOption = session()->get('market');
             $sellers->whereHas('seller_stalls.stall', function($q) use ($marketOption){
