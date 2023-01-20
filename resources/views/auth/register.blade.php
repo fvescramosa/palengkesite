@@ -80,6 +80,12 @@
                             {{ __('Seller') }}
                         </label>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="user_type_id" id="user_type_id"  value="1" >
+                        <label class="form-check-label" for="remember">
+                            {{ __('Buyer') }}
+                        </label>
+                    </div>
                 </div>
                 <div class="row mb-0">
                     <div class="">

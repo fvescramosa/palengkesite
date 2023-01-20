@@ -12,6 +12,7 @@
                         <th>Stall No.</th>
                         <th>Section</th>
                         <th>Sqm</th>
+                        <th>Location</th>
                         <th>Amount / sqm</th>
                         <th>Rental Fee</th>
                         <th></th>
@@ -25,6 +26,7 @@
                             <td> {{ $stall->stall->number }}</td>
                             <td> {{ $stall->stall->section }}</td>
                             <td> {{ $stall->stall->sqm }}</td>
+                            <td> {{ $stall->stall->market->market }}</td>
                             <td> {{ $stall->stall->amount_sqm }}</td>
                             <td> {{ $stall->stall->rental_fee }}</td>
                             <td>
@@ -38,7 +40,7 @@
                             </td>
                             <td>
 
-                                @if( $stall->status == 'pending')
+                                @if( $stall->status == 'pending' &&  $stall->type == 0 )
                                     <form action="{{ route('admin.seller.stalls.approve') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="seller_id" value="{{  $stall->seller->user->id   }}">

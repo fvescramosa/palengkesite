@@ -20,6 +20,7 @@
                         <tr>
                             <td>{{ $appointment->seller->user->first_name }} {{ $appointment->seller->user->last_name }}</td>
                             <td> {{ $appointment->stall->number }}</td>
+                            <td> {{ $appointment->stall->market->market }}</td>
                             <td> {{ $appointment->date }}</td>
                             <td> {{ $appointment->status }}</td>
                             <td>

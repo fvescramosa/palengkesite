@@ -58,6 +58,18 @@
 
                                 </div>
 
+                                <select  class="form-control" id="seller_type" name="seller_type" placeholder="" value="" >
+                                    <option value="wholesaler">Wholesaler</option>
+                                    <option value="retailer">Retailer</option>
+                                </select>
+                                
+                                <select  class="form-control" id="market_id" name="market_id" placeholder="" value="" >
+                                    <option value="1">Poblacion</option>
+                                    <option value="2">Anilao</option>
+                                    <option value="3">Talaga</option>
+                                </select>
+                            
+
 
                             @endif
 

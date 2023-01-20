@@ -11,7 +11,25 @@ class SellerStallsController extends Controller
 {
     //
     public function index(){
-        $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])->get();
+
+        
+        $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])
+                            ->whereHas('stall',function($q){
+                                            if(session()->has('market')){
+                                                if(session()->get('market') != ''){
+                                                    $q->where('market_id', session()->get('market'));
+                                                }    
+                                            }
+                                        }
+                                    );
+
+        // if(session()->has('market')){
+        //     $stalls = $stalls->whereHas([ 'stall' => function($q){
+        //         $q->where('market_id', session()->get('market'));
+        //     }]);
+        // }
+
+        $stalls = $stalls->get();
 
 
         return view('admin/seller/stalls/index', compact(['stalls']));

@@ -13,6 +13,7 @@ class Seller extends Model
         'age',
         'gender',
         'user_id',
+        'seller_type',
         'market_id',
     ];
 

@@ -75,7 +75,9 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/products/find-by-category', [SellerController::class, 'findProductsByCategory'])->name('products.find.category');
 
     /*Has Stall*/
-    Route::get('/stalls/create/details', [SellerController::class, 'stallCreateDetails'])->name('stalls.create.details');
+    Route::get('/stalls/has/select', [SellerController::class, 'stallHasSelect'])->name('stalls.has.select');
+    Route::get('/stalls/has/create/{id}', [SellerController::class, 'stallHasCreate'])->name('stalls.has.create');
+    //Route::get('/stalls/create/details', [SellerController::class, 'stallCreateDetails'])->name('stalls.create.details');
     Route::post('/stalls/store/details', [SellerController::class, 'stallStoreDetails'])->name('stalls.store.details');
 
     /*No Stall*/
@@ -168,4 +170,8 @@ Route::get('/test/mail', function (){
 Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
 Route::post('/chat/messages', 'ChatsController@sendMessage');
+
+Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
+Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
+
 

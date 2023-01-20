@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Categories;
 use App\Mail\NewUserWelcomeMail;
 use App\Products;
+use App\Buyer;
 use App\Seller;
 use App\SellerProduct;
 use App\SellerStall;
@@ -47,10 +48,13 @@ class SellerController extends Controller
 
     public function store(Request $request){
 
+        
         $validate = $request->validate([
             'birthday' => ['required', ''],
             'age' => ['required', 'numeric', 'min:18'],
-            'gender' => ['required', ''],
+            'gender' => ['required'],
+            'market_id' => ['required'],
+            'seller_type' => ['required'],
             'user_id' => '',
         ]);
 
@@ -60,9 +64,25 @@ class SellerController extends Controller
                     'birthday' => $request->birthday,
                     'age' => $request->age,
                     'gender' => $request->gender,
+                    'market_id' => $request->market_id,
+                    'seller_type' => $request->seller_type,
                     'user_id' => auth()->user()->id,
                 ]
             );
+
+            if(auth()->user()->buyer()->exists() == false){
+                $buyer = Buyer::create(
+                    [
+                        'birthday' => $request->birthday,
+                        'age' => $request->age,
+                        'gender' => $request->gender,
+                        'market_id' => $request->market_id,
+                        'user_id' => auth()->user()->id,
+                    ]
+                );
+
+                $buyer->save();
+            }
 
             if($seller->save()){
                 $data = array('name'=>"Frank Test");
@@ -198,12 +218,12 @@ class SellerController extends Controller
 
     }
 
-    /*Has Stall*/
+    /*NO Stall*/
     public function stallCreate($id){
 
         $stall = Stall::whereDoesntHave('seller_stall')->findOrFail($id);
 
-
+        
         return view('seller/stalls/create', compact(['stall']));
     }
 
@@ -213,7 +233,8 @@ class SellerController extends Controller
         $data = [
             'stall_id' => $request->stall_id ,
             'status' => 'pending',
-            'seller_id' => auth()->user()->seller->id
+            'seller_id' => auth()->user()->seller->id,
+            'type' => 1,
         ];
 
 
@@ -230,7 +251,7 @@ class SellerController extends Controller
                 'seller_stall_id' => $create->id,
                 'date' => $request->appointment_date,
                 'status' => 'pending',
-                'type' => 1,
+                
             ];
 
             $createAppointment = StallAppointment::create($appointment);
@@ -241,7 +262,34 @@ class SellerController extends Controller
 
     }
 
-    /*No Stall*/
+    /*HAS Stall*/
+    
+    public function stallHasSelect()
+    {
+
+        $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
+                            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+                        })
+        ->where('market_id', auth()->user()->seller->market_id)
+        ->orderByRaw('CONVERT(number, SIGNED)', 'asc')
+        ->get();
+
+
+        return view('seller.stalls.select-has-stall', compact(['stalls']))->with(['message' => '']);
+
+    }
+
+    public function stallHasCreate($id){
+
+        $stall = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
+            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+        })->findOrFail($id);
+
+        
+        return view('seller/stalls/has-create', compact(['stall']));
+    }
+
+
     public function stallCreateDetails(){
 
         $stalls = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
@@ -315,7 +363,7 @@ class SellerController extends Controller
 
         $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-        })->get();
+        })->where('market_id', auth()->user()->seller->market_id)->get();
 
 
 

@@ -46,7 +46,7 @@ class HomeController extends Controller
         if(auth()->user()->user_type_id == '1'){
             return redirect( route('buyer.profile',  ['id' => auth()->user()->id]) );
         }elseif(auth()->user()->user_type_id == '2'){
-            return redirect( route('buyer.profile') );
+            return redirect( route('seller.create') );
         }
     }
 }

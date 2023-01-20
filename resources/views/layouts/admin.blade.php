@@ -86,13 +86,17 @@
                 <li>
                     <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
                         <span class="icon"><i class="fa fa-user-shield"></i></span>
-                        <span class="item">Seller Stalls</span>
+                        <span class="item">Stall Approval</span>
+
+                        <span class="notif badge badge-danger" id="stall-approval-notif">0</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.appointments.show') }}" class="{{ ( request()->routeIs('admin.appointments.show') ? 'active' : '' )}}">
                         <span class="icon"><i class="fa fa-clock"></i></span>
                         <span class="item">Stall Appointment</span>
+
+                        <span class="notif badge badge-danger" id="stall-app-notif">0</span>
                     </a>
                 </li>
                 <li>
@@ -151,12 +155,50 @@
                             $('#palengke-filter').submit();
                         });
                     },
+                    initNotifStallAppointment: function(){
+
+                        setInterval(function(){
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url:"{{route('get.stall.appointment.notif')}}",
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                  $('#stall-app-notif').text(data); 
+                                }
+                            }); 
+                        }, 10000);
+                    },
+
+                    initNotifStallApproval: function(){
+
+                        setInterval(function(){
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url:"{{route('get.stall.approval.notif')}}",
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                    $('#stall-approval-notif').text(data); 
+                                }
+                            }); 
+                        }, 10000);
+                    }
+                    
                 };
 
                 $(window).on('load', function(){
                     app.initCollapse();
                     app.filter($('#orderby'));
                     app.initPalengkeFilter($('#marketOption'));
+                    app.initNotifStallAppointment();
+                    app.initNotifStallApproval();
                 });
 
 
