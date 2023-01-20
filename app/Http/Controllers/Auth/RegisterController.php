@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_type_id' =>  ( isset($data['user_type_id']) ? $data['user_type_id'] :  1)
+            'user_type_id' =>  $data['user_type_id'] 
         ]);
 
 
@@ -100,7 +100,7 @@ class RegisterController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->intended('admin/');
+        return redirect()->intended('admin/users/staff');
     }
     protected function adminValidator(array $data)
     {

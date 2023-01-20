@@ -10,7 +10,15 @@ class StallAppointmentController extends Controller
 {
     //
     public function index(){
-        $appointments = StallAppointment::all();
+        $appointments = StallAppointment::with(['stall' ])->whereHas('stall',function($q){
+            if(session()->has('market')){
+                if(session()->get('market') != ''){
+                    $q->where('market_id', session()->get('market'));
+                }
+            }
+        
+        })->get();
+
 
         return view('admin/appointments/index', compact(['appointments']));
 

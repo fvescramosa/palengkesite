@@ -33,7 +33,7 @@ class BuyerController extends Controller
             'gender' => ['required', ''],
             'contact' => ['required', ''],
             'stnumber' => ['required', ''],
-            'stname' => ['required', ''],
+            'stname' => [''],
             'city' => ['required', ''],
             'province' => ['required', ''],
             'country' => ['required', ''],

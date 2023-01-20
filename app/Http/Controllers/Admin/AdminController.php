@@ -6,6 +6,10 @@ use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\StallAppointment;
+use App\SellerStall;
+use App\Buyer;
+use App\Seller;
 
 class AdminController extends Controller
 {
@@ -17,7 +21,41 @@ class AdminController extends Controller
 
     public function index(){
 
-        return view('admin.index');
+        $sellers = Seller::with(['seller_stalls', 'seller_stalls.stall']);
+        if(session()->has('market')){
+            $marketOption = session()->get('market');
+            $sellers->whereHas('seller_stalls.stall', function($q) use ($marketOption){
+                $q->where('market_id', $marketOption);
+            });
+        }
+
+        $sellers = $sellers->get()->count();
+
+        
+        $buyers = Buyer::all()->count();
+        
+
+        
+        if(session()->has('market')){
+            $marketOption = session()->get('market');
+            $stallappointments = StallAppointment::whereHas('stall', function($q) use ($marketOption){
+                $q->where('market_id', $marketOption);
+            })->get()->count();
+        }else{
+            $stallappointments = StallAppointment::where('status', 'pending')->get()->count();
+        }
+
+        if(session()->has('market')){
+            $marketOption = session()->get('market');
+            $stallapproval = SellerStall::whereHas('stall', function($q) use ($marketOption){
+                $q->where('market_id', $marketOption);
+            })->get()->count();
+        }else{
+            $stallapproval = SellerStall::where('status', 'pending')->get()->count();
+        }
+
+
+        return view('admin.index', compact(['sellers', 'buyers', 'stallappointments', 'stallapproval']));
     }
 
     public function logout(Request $request)
@@ -83,5 +121,19 @@ class AdminController extends Controller
 
       
         return redirect( url()->previous() );
+    }
+
+    public function getStallAppointmentNotif(){
+        $stallappointments = StallAppointment::where('status', 'pending')->get();
+
+        return response()->json($stallappointments->count());
+        
+    }
+
+    public function getStallApprovalNotif(){
+        $approvalnotif = SellerStall::where('status', 'pending')->get();
+
+        return response()->json($approvalnotif->count());
+        
     }
 }
