@@ -26,13 +26,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($sellers as $seller)
                         <tr>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ $seller->user->first_name }}</td>
+                            <td>{{ $seller->user->last_name }}</td>
+                            <td>{{ $seller->user->email }}</td>
                             <td>
-                                <a href="{{ route('admin.users.retrieve', $user->id) }}"> Recover </a>
+                                <a href="{{ route('admin.sellers.recover', $seller->id) }}"> Recover </a>
                             </td>
                         </tr>
                     @endforeach
