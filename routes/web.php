@@ -103,6 +103,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/login', [LoginController::class, 'showAdminLoginForm'])->name('login');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 });
+
 Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin')->group(function(){
     Route::get('', [AdminController::class, 'index'])->name('index');
     Route::post('/login', [LoginController::class, 'adminLogin'])->name('signup');
@@ -114,8 +115,13 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     //users
     Route::get('/users/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
     Route::get('/users/buyers/list', [\App\Http\Controllers\Admin\UserController::class, 'showBuyer'])->name('show.buyers.list');
+    Route::get('/users/buyers/trash', [\App\Http\Controllers\Admin\UserController::class, 'showBuyerTrash'])->name('show.buyers.trash');
+    Route::get('/buyers/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'deleteBuyer'])->name('buyers.delete');
+    Route::get('/buyers/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'recoverBuyer'])->name('buyers.recover');
     Route::get('/users/sellers/list', [\App\Http\Controllers\Admin\UserController::class, 'showSellerList'])->name('show.sellers.list');
     Route::get('/users/sellers/trash', [\App\Http\Controllers\Admin\UserController::class, 'showSellerTrash'])->name('show.sellers.trash');
+    Route::get('/sellers/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'deleteSeller'])->name('sellers.delete');
+    Route::get('/sellers/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'recoverSeller'])->name('sellers.recover');
     Route::get('/users/seller/show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'showSeller'])->name('show.seller');
     Route::get('/users/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
     Route::post('/users/update/{id}',  [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');

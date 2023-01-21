@@ -34,7 +34,7 @@
                             <td>
                                 <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
                                 <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.users.delete', $user->id) }}"> Delete </a>
+                                <a href="{{ route('admin.buyers.delete', $user->id) }}"> Delete </a>
                             
                             </td>
                         </tr>

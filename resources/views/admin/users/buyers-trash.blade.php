@@ -26,15 +26,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($buyers as $buyer)
                         <tr>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ $buyer->user->first_name }}</td>
+                            <td>{{ $buyer->user->last_name }}</td>
+                            <td>{{ $buyer->user->email }}</td>
                             <td>
-                                <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
-                                <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.sellers.delete', $user->id) }}"> Delete </a>
+                                <a href="{{ route('admin.buyers.recover', $buyer->id) }}"> Recover </a>
                             </td>
                         </tr>
                     @endforeach

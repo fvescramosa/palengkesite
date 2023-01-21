@@ -48,24 +48,56 @@
                     </a>
                     <div class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" id="users_submenu" aria-expanded="false">
                         <ul>
-                            <li >
-                                <a href="{{ route('admin.show.buyers.list') }}"  class="{{ ( request()->routeIs('admin.show.buyers.list') ? 'active' : '' )}}">
+                            <li class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" data-toggle="collapse" data-target="#buyers_submenu">
+                                <a href="#"  class="">
                                     <span class="icon"><i class="fa fa-users"></i></span>
                                     <span class="item">Buyers</span>
                                 </a>
+                                <div class="collapse {{ (request()->segment(3) == 'buyers') ? 'show' : ''}}" id="buyers_submenu" aria-expanded="false">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ route('admin.show.buyers.list') }}" class="{{ ( request()->routeIs('admin.show.buyers.list') ? 'active' : '' )}}">
+                                                <span class="icon"><i class="fa fa-users"></i></span>
+                                                <span class="item">List</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.show.buyers.trash') }}" class="{{ ( request()->routeIs('admin.show.buyers.trash') ? 'active' : '' )}}">
+                                                <span class="icon"><i class="fa fa-trash"></i></span>
+                                                <span class="item">Roma Trash</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-                            <li>
-                                <a href="{{ route('admin.show.sellers.list') }}" class="{{ ( request()->routeIs('admin.show.sellers.list') ? 'active' : '' )}}">
+                            
+
+                            
+                            <!-- Seller -->
+                            <li class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" data-toggle="collapse" data-target="#sellers_submenu">
+                                <a href="#"  class="">
                                     <span class="icon"><i class="fa fa-users"></i></span>
                                     <span class="item">Sellers</span>
                                 </a>
+                                <div class="collapse {{ (request()->segment(3) == 'sellers') ? 'show' : ''}}" id="sellers_submenu" aria-expanded="false">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ route('admin.show.sellers.list') }}" class="{{ ( request()->routeIs('admin.show.sellers.list') ? 'active' : '' )}}">
+                                                <span class="icon"><i class="fa fa-users"></i></span>
+                                                <span class="item">List</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.show.sellers.trash') }}" class="{{ ( request()->routeIs('admin.show.sellers.trash') ? 'active' : '' )}}">
+                                                <span class="icon"><i class="fa fa-trash"></i></span>
+                                                <span class="item">Trash</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-                            <li>
-                                <a href="{{ route('admin.show.sellers.trash') }}" class="{{ ( request()->routeIs('admin.show.sellers.trash') ? 'active' : '' )}}">
-                                    <span class="icon"><i class="fa fa-trash"></i></span>
-                                    <span class="item">Trash</span>
-                                </a>
-                            </li>
+                            
+                            <!-- Seller -->
                             <li>
                                 <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
                                     <span class="icon"><i class="fa fa-users"></i></span>

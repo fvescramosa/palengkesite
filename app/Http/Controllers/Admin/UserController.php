@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Seller;
+use App\Buyer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -106,9 +108,15 @@ class UserController extends Controller
     }
 
     public function  showSellerTrash(){
-        $users = User::onlyTrashed()->get();
+        $sellers = Seller::onlyTrashed()->get();
 
-        return view('admin.users.trash', compact(['users']));
+        return view('admin.users/trash', compact(['sellers']));
+    }
+
+    public function  showBuyerTrash(){
+        $buyers = Buyer::onlyTrashed()->get();
+
+        return view('admin.users/buyers-trash', compact(['buyers']));
     }
 
     public function showSeller($id){
@@ -154,35 +162,41 @@ class UserController extends Controller
 
     }
 
-    public function delete($id){
+    public function deleteSeller($id){
 
-        $user_type = User::find($id)->user_type_id;
-       $delete =  User::where('id', $id)->delete();
+       
+        $delete =  Seller::where('user_id', $id)->delete();
 
-    //   dd( $delete );
 
-   
-
-        if($user_type == 2){
-            return redirect(route('admin.show.buyers.list'));
-        }else{
-            return redirect(route('admin.show.sellers.list')); 
-        }
+        return redirect(route('admin.show.sellers.list')); 
+        
     }
 
-    public function retrieve($id){
+    public function deleteBuyer($id){
 
-        $user_type = User::withTrashed()->find($id)->user_type_id;
+       
+        $delete =  Buyer::where('user_id', $id)->delete();
 
 
-        $recover =  User::where('id', $id)->restore();
+        return redirect(route('admin.show.buyers.list')); 
+        
+    }
 
-        //   dd( $delete );
+    public function recoverSeller($id){
 
-        if($user_type == 2){
-            return redirect(route('admin.show.buyers.list'));
-        }else{
-            return redirect(route('admin.show.sellers.list'));
-        }
+        $recover = Seller::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.show.sellers.list'));
+        
+    }
+
+    public function recoverBuyer($id){
+
+        $recover = Buyer::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.show.buyers.list'));
+        
     }
 }
