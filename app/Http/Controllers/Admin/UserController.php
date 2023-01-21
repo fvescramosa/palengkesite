@@ -53,8 +53,6 @@ class UserController extends Controller
 
     public function showSellerList(){
 
-       
-
         $users = User::whereHas('seller')->whereHas('seller.seller_stalls', function($q){
             $q->where('status', 'active');
         });
@@ -105,6 +103,12 @@ class UserController extends Controller
 
         
         return view('admin.users/sellers', compact(['users']));
+    }
+
+    public function  showSellerTrash(){
+        $users = User::onlyTrashed()->get();
+
+        return view('admin.users.trash', compact(['users']));
     }
 
     public function showSeller($id){
@@ -163,6 +167,22 @@ class UserController extends Controller
             return redirect(route('admin.show.buyers.list'));
         }else{
             return redirect(route('admin.show.sellers.list')); 
+        }
+    }
+
+    public function retrieve($id){
+
+        $user_type = User::withTrashed()->find($id)->user_type_id;
+
+
+        $recover =  User::where('id', $id)->restore();
+
+        //   dd( $delete );
+
+        if($user_type == 2){
+            return redirect(route('admin.show.buyers.list'));
+        }else{
+            return redirect(route('admin.show.sellers.list'));
         }
     }
 }

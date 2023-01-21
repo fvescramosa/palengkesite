@@ -61,6 +61,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.show.sellers.trash') }}" class="{{ ( request()->routeIs('admin.show.sellers.trash') ? 'active' : '' )}}">
+                                    <span class="icon"><i class="fa fa-trash"></i></span>
+                                    <span class="item">Trash</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
                                     <span class="icon"><i class="fa fa-users"></i></span>
                                     <span class="item">Staff</span>

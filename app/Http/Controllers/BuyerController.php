@@ -113,7 +113,7 @@ class BuyerController extends Controller
 
         }
 
-
+        session()->put('user_type', 'seller');
        return redirect(route('seller.profile'));
     }
 }
