@@ -111,6 +111,8 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/store', [ RegisterController::class, 'createAdmin'])->name('store');
     Route::get('/users/staff', [AdminController::class, 'show'])->name('show.staff');
     Route::get('/set/market', [AdminController::class, 'setMarket'])->name('set.market');
+    Route::get('/settings/', [AdminController::class, 'settings'])->name('settings');
+    Route::post('/settings/update/password', [AdminController::class, 'updatePassword'])->name('update.password');
 
     //users
     Route::get('/users/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');

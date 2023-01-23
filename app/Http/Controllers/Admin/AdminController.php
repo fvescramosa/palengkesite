@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use function dd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,10 @@ use App\StallAppointment;
 use App\SellerStall;
 use App\Buyer;
 use App\Seller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use function redirect;
+use function view;
 
 class AdminController extends Controller
 {
@@ -113,7 +118,8 @@ class AdminController extends Controller
             $staffs = $staffs->orderBy($orderby[0], $orderby[1]);
         }
 
-        $staffs=$staffs->get();
+        $staffs= $staffs->where('is_super', 0)->get();
+
 
         return view('admin.users/staff', compact(['staffs']));
     }
@@ -137,5 +143,26 @@ class AdminController extends Controller
 
         return response()->json($approvalnotif->count());
         
+    }
+
+    public function settings(){
+
+        return view('admin.change-password');
+    }
+
+    public function updatePassword(Request $request){
+        $validate = $request->validate([
+                'password' => ['required', 'string',  /*'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',*/  'confirmed'],
+            ],
+            [
+                'password.regex' => 'Password must contain at least one number, one uppercase and one lowercase letter, and a special character.'
+            ]
+        );
+
+        if($validate){
+            Admin::where('id', auth()->guard('admin')->user()->id)->update([ 'password' => Hash::make($request->password)]);
+        }
+
+        return redirect(route('admin.settings'))->with(['message' =>  'Updated!']);
     }
 }

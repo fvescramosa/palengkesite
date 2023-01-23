@@ -98,17 +98,28 @@
                             </li>
                             
                             <!-- Seller -->
+                            @if(auth()->guard('admin')->user()->is_super)
                             <li>
                                 <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
                                     <span class="icon"><i class="fa fa-users"></i></span>
                                     <span class="item">Staff</span>
                                 </a>
                             </li>
+
+
+                            @endif
+
+
                         </ul>
                     </div>
                 </li>
 
-
+                <li>
+                    <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
+                        <span class="icon"><i class="fa fa-cog"></i></span>
+                        <span class="item">Settings</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
                         <span class="icon"><i class="fas fa-store"></i></span>
