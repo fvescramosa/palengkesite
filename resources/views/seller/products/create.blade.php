@@ -60,11 +60,12 @@
                                 </div>
                                 <div class="info-item short">
                                     <label for="type">Type</label>
-                                    <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
+                                    <!-- <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
                                         <option value=""></option>
                                         <option value="Retail">Retail</option>
                                         <option value="Retail">Wholesale</option>
-                                    </select>
+                                    </select> -->
+                                    <input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type" readonly>
                                     @error('type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -91,6 +92,7 @@
         const products = {
             init: function(  ){
                 products.initCategories($('#category'));
+                products.initProductDetails($('#product'));
                 products.addImage($('#addImage'));
             },
             initCategories: function( trigger ){
@@ -117,6 +119,24 @@
                             $('#product').html(options);
                         }
                     });
+                })
+            },
+            initProductDetails: function( trigger ){
+                trigger.change(function () {
+                    $.ajax({
+                        type:'POST',
+                        dataType: 'JSON',
+                        url:'{{ route('seller.products.details') }}',
+                        data: {
+                            id: this.value,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success:function(data) {
+                            console.log(data[0].type);
+                            $('#type').val(data[0].type);
+                        }
+                    });
+
                 })
             },
             addImage: function (trigger) {

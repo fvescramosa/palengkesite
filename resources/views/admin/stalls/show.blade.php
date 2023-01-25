@@ -14,6 +14,9 @@
                         <th>Amount / Sqm</th>
                         <th>Rental Fee</th>
                         <th>Status</th>
+                        <th>Rate</th>
+                        <th>Coordinates</th>
+                        <th>Meter Number</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -26,6 +29,9 @@
                             <td>{{ $stall->amount_sqm }}</td>
                             <td>{{ $stall->rental_fee }}</td>
                             <td>{{ $stall->status }}</td>
+                            <td>{{ $stall->rate }}</td>
+                            <td>{{ $stall->coords }}</td>
+                            <td>{{ $stall->meter_num }}</td>
                             <td><a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a></td>
                         </tr>
                     @endforeach

@@ -11,6 +11,7 @@ use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
 use App\StallAppointment;
+use App\Notification;
 use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,7 @@ class SellerController extends Controller
                         'age' => $request->age,
                         'gender' => $request->gender,
                         'market_id' => $request->market_id,
+                        'seller_type' => $request->seller_type,
                         'user_id' => auth()->user()->id,
                     ]
                 );
@@ -159,8 +161,17 @@ class SellerController extends Controller
         return response()->json($data);
     }
 
-    public function productStore(Request $request){
+    public function findProductsByID(Request $request){
 
+        $data = Products::where('id', $request->id)->get();
+
+//        return view('seller/products/list', compact(['products']));
+        return response()->json($data);
+    }
+
+    public function productStore(Request $request){
+        $product = Products::findorFail($request->product);
+        
         $create = SellerProduct::create([
             'seller_id' => auth()->user()->seller->id,
             'product_id' => $request->product,
@@ -171,6 +182,17 @@ class SellerController extends Controller
         ]);
 
         $create->save();
+
+        if($request->price > $product->max_price){
+            Notification::create([
+                'title' => 'Overpriced Product',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'user_id' => auth()->user()->id,
+                'status' => 'unread',
+                'product_id' => $product->id,
+                'type' => 'pricing',
+            ]);
+        }
 
         $categories = Categories::all();
         if($create){
@@ -216,6 +238,48 @@ class SellerController extends Controller
         $seller_products =  auth()->user()->seller->seller_products;
 
         return view('seller/products/show', compact(['seller_products']))->with(['message' => 'Product has been updated!']);
+
+    }
+
+    public function stallStoreDetails(Request $request){
+
+
+        $data = [
+            'stall_id' => $request->stall ,
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'duration' => $request->duration,
+            'occupancy_fee' => $request->occupancy_fee,
+            'seller_id' => auth()->user()->seller->id,
+            'status' => 'pending',
+            'type' => 0,
+        ];
+
+        
+        $validate = $request->validate([
+            "stall" => "required",
+            "contract_of_lease" => "required|mimes:pdf|max:10000"
+        ]);
+
+        if($validate) {
+
+            if ($request->file('contract_of_lease')) {
+                $file = $request->file('contract_of_lease');
+                $filename = date('YmdHi') . $file->getClientOriginalName();
+                $file->move(public_path('public/contracts'), $filename);
+                $data['contact_of_lease'] = $filename;
+
+                $create = SellerStall::create($data);
+                $create->save();
+
+            }
+        }
+
+
+
+//        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
+        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
 
     }
 
@@ -301,45 +365,7 @@ class SellerController extends Controller
         return view('seller/stalls/create_details', compact(['stalls']));
     }
 
-    public function stallStoreDetails(Request $request){
-
-
-        $data = [
-            'stall_id' => $request->stall ,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'duration' => $request->duration,
-            'occupancy_fee' => $request->occupancy_fee,
-            'seller_id' => auth()->user()->seller->id,
-            'status' => 'pending',
-            'type' => 0,
-        ];
-
-        $validate = $request->validate([
-            "stall" => "required",
-            "contract_of_lease" => "required|mimes:pdf|max:10000"
-        ]);
-
-        if($validate) {
-
-            if ($request->file('contract_of_lease')) {
-                $file = $request->file('contract_of_lease');
-                $filename = date('YmdHi') . $file->getClientOriginalName();
-                $file->move(public_path('public/contracts'), $filename);
-                $data['contact_of_lease'] = $filename;
-
-                $create = SellerStall::create($data);
-                $create->save();
-
-            }
-        }
-
-
-
-//        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
-        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
-
-    }
+    
 
     public function stallShow()
     {

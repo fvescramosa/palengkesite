@@ -46,6 +46,9 @@ class StallsController extends Controller
             'market_id'	=> $request->market, //market from name
             'image'	=> $request->image,
             'status' => 'vacant',
+            'rate' => $request->rate,
+            'coords' => $request->coords,
+            'meter_num' => $request->meter_num,
         ];
 
       
@@ -125,6 +128,9 @@ class StallsController extends Controller
                 'market'	=> $request->market,
                 'image'	=> $request->image,
                 'status' => $request->status,
+                'rate' => $request->rate,
+                'coords' => $request->coords,
+                'meter_num' => $request->meter_num,
             ]
         );
 
