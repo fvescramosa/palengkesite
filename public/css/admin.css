@@ -92,20 +92,34 @@
    padding-left: 25px;
 }
 
+#products_submenu li {
+   padding-left: 25px;
+}
 
-#sortlist{
+
+#sortlist,
+#palengke-filter{
    display: flex;
    flex-flow: row wrap;
    justify-content: right;
    flex: 1 1 75%;
 }
 
-#sortlist select {
+#sortlist select,
+#palengke-filter select {
    flex: 1 1 calc(25% - 25px);
    max-width: calc(25% - 25px);
-   height: 35px;
-    font-size: 15px;
+   font-size: 15px;
 }
+
+#sortlist select{
+   height: 35px;
+}
+
+#palengke-filter select{
+   height: 30px;
+}
+
 #sortlist select:not(:last-child) {
    margin-right: 25px;
 }
@@ -215,7 +229,7 @@
    border-radius:25px; 
    margin: 15px 15px;
    /* flex 1 occupy row if col is less than assigned count of col  */
-   flex: 1 1 calc(33.3333% - 30px); /*calculate the width of column - total margin left and right of 1 column*/
+   flex: 1 1 calc(33.3333% - 30px); /*(100% / 3 = 33.3333%) calculate the width of column - total margin left and right of 1 column*/
    max-width: calc(33.3333% - 30px);
    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
@@ -248,4 +262,20 @@
 .col-left h3{
    font-size: 28px;
    padding-left: 15px;
+}
+
+.sidebar-content{
+   overflow-y: scroll;
+   height: calc(100% - 50px);
+   padding-bottom: 50px;
+}
+
+.notif-container{
+   max-width: 771px;
+   margin: 50px auto;
+}
+
+.notif-container .content{
+   padding: 15px 15px;
+   border-bottom: 1px solid #e5e5e5;
 }

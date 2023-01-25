@@ -33,6 +33,7 @@ class ProductsController extends Controller
 
 
 
+        
         $products = Products::create(
             [
                 'category_id' => $request->category,
@@ -46,14 +47,14 @@ class ProductsController extends Controller
             ]
         );
 
-
+       
         if(  $products->save() ){
             $message = ['success' => true, 'message' => 'Update Succesful!'];
         }else{
             $message = ['success' => false, 'message' => 'Update failed!'];
         }
 
-        return redirect( route('products.show'))->with($message);
+        return redirect( route('admin.products.show'))->with($message);
     }
 
     public function edit($id){
@@ -89,7 +90,30 @@ class ProductsController extends Controller
         return view('admin.products.edit', compact(['categories', 'products']))->with($message);
     }
 
-    public function delete(){}
+    public function trash(){
+        $products = Products::onlyTrashed()->get();
+
+        return view('admin.products/trash', compact(['products']));
+    }
+
+    public function deleteProduct($id){
+
+       
+        $delete =  Products::where('id', $id)->delete();
+
+
+        return redirect(route('admin.products.show')); 
+        
+    }
+
+    public function recoverProduct($id){
+
+        $recover = Products::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.products.show'));
+        
+    }
 
     public function showByCategory($category){
 
@@ -97,7 +121,6 @@ class ProductsController extends Controller
             $q->where('category',$category);
         })->get();
 
-        dd($products);
 
     }
 }

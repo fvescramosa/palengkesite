@@ -14,7 +14,6 @@ class PricingController extends Controller
 
         $products = Products::with('seller_products')->findOrFail($id);
 
-
         return view('admin.pricing.show', compact(['products']));
 
     }

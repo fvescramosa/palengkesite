@@ -21,6 +21,9 @@ class Stall extends Model
         'image_4',
         'image_5',
         'status',
+        'rate',
+        'coords',
+        'meter_num',
     ];
 
     public function seller_stall(){

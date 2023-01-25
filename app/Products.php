@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
+    use SoftDeletes;
     //
     protected $fillable = [
         'product_name',
@@ -24,6 +26,6 @@ class Products extends Model
     }
 
     public function seller_products(){
-        return $this->hasMany(SellerProduct::class );
+        return $this->hasMany(SellerProduct::class , 'product_id');
     }
 }

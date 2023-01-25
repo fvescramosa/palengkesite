@@ -79,7 +79,19 @@
                                             </tr>
                                             <tr>
                                                 <td class="stall-info-title-container"><p><strong>Amount / Sqm: </strong> </p> </td>
-                                                <td> <p>Php {{ $stall->amount_sqm }}</p></td>
+                                                <td> <p>₱{{ $stall->amount_sqm }}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Rate: </strong> </p> </td>
+                                                <td> <p>{{ $stall->rate}}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Coordinates: </strong> </p> </td>
+                                                <td> <p>{{ $stall->coords }}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Meter Number: </strong> </p> </td>
+                                                <td> <p>{{ $stall->meter_num }}</p></td>
                                             </tr>
                                             <tr>
                                                 <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
@@ -106,6 +118,18 @@
                         @csrf
                             <div class="form-group" style="display: flex; flex-flow:  row wrap">
                                <input type="hidden" name="stall" value="{{ $stall->id }}">
+
+                               <div class="info-item">
+                                    <label for="">Stall Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="" >
+
+                                    @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="info-item">
                                     <label for="">Rental Fee per Month</label>
                                     <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" value="{{ $stall->rental_fee }}" readonly>

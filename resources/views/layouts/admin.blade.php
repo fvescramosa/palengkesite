@@ -40,130 +40,148 @@
                 </a>
 
             </div>
-            <ul>
-                <li>
-                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#users_submenu">
-                        <span class="icon"><i class="fa fa-users"></i></span>
-                        <span class="item">Users</span>
-                    </a>
-                    <div class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" id="users_submenu" aria-expanded="false">
+            <div class="sidebar-content">
+                <ul>
+                    <li>
+                        <a href="#" class="collapsed" data-toggle="collapse" data-target="#users_submenu">
+                            <span class="icon"><i class="fa fa-users"></i></span>
+                            <span class="item">Users</span>
+                        </a>
+                        <div class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" id="users_submenu" aria-expanded="false">
                         <ul>
-                            <li class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" data-toggle="collapse" data-target="#buyers_submenu">
-                                <a href="#"  class="">
-                                    <span class="icon"><i class="fa fa-users"></i></span>
-                                    <span class="item">Buyers</span>
-                                </a>
-                                <div class="collapse {{ (request()->segment(3) == 'buyers') ? 'show' : ''}}" id="buyers_submenu" aria-expanded="false">
-                                    <ul>
-                                        <li>
-                                            <a href="{{ route('admin.show.buyers.list') }}" class="{{ ( request()->routeIs('admin.show.buyers.list') ? 'active' : '' )}}">
-                                                <span class="icon"><i class="fa fa-users"></i></span>
-                                                <span class="item">List</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('admin.show.buyers.trash') }}" class="{{ ( request()->routeIs('admin.show.buyers.trash') ? 'active' : '' )}}">
-                                                <span class="icon"><i class="fa fa-trash"></i></span>
-                                                <span class="item">Roma Trash</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            
+                                <li class="collapsed" data-toggle="collapse" data-target="#buyers_submenu">
+                                    <a href="#"  class="">
+                                        <span class="icon"><i class="fa fa-users"></i></span>
+                                        <span class="item">Buyers</span>
+                                    </a>
+                                    <div class="collapse {{ (request()->segment(3) == 'buyers') ? 'show' : ''}}" id="buyers_submenu" aria-expanded="false">
+                                        <ul>
+                                                <li>
+                                                    <a href="{{ route('admin.show.buyers.list') }}" class="{{ ( request()->routeIs('admin.show.buyers.list') ? 'active' : '' )}}">
+                                                        <span class="icon"><i class="fa fa-users"></i></span>
+                                                        <span class="item">List</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('admin.show.buyers.trash') }}" class="{{ ( request()->routeIs('admin.show.buyers.trash') ? 'active' : '' )}}">
+                                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                                        <span class="item">Archive</span>
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                </li>
 
-                            
-                            <!-- Seller -->
-                            <li class="collapse {{ (request()->segment(2) == 'users') ? 'show' : ''}}" data-toggle="collapse" data-target="#sellers_submenu">
-                                <a href="#"  class="">
-                                    <span class="icon"><i class="fa fa-users"></i></span>
-                                    <span class="item">Sellers</span>
-                                </a>
-                                <div class="collapse {{ (request()->segment(3) == 'sellers') ? 'show' : ''}}" id="sellers_submenu" aria-expanded="false">
-                                    <ul>
-                                        <li>
-                                            <a href="{{ route('admin.show.sellers.list') }}" class="{{ ( request()->routeIs('admin.show.sellers.list') ? 'active' : '' )}}">
-                                                <span class="icon"><i class="fa fa-users"></i></span>
-                                                <span class="item">List</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('admin.show.sellers.trash') }}" class="{{ ( request()->routeIs('admin.show.sellers.trash') ? 'active' : '' )}}">
-                                                <span class="icon"><i class="fa fa-trash"></i></span>
-                                                <span class="item">Trash</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            
-                            <!-- Seller -->
-                            @if(auth()->guard('admin')->user()->is_super)
-                            <li>
-                                <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
-                                    <span class="icon"><i class="fa fa-users"></i></span>
-                                    <span class="item">Staff</span>
-                                </a>
-                            </li>
+                                <!-- Seller -->
+                                <li class="collapsed" data-toggle="collapse" data-target="#sellers_submenu">
+                                    <a href="#"  class="">
+                                        <span class="icon"><i class="fa fa-users"></i></span>
+                                        <span class="item">Sellers</span>
+                                    </a>
+                                    <div class="collapse {{ (request()->segment(3) == 'sellers') ? 'show' : ''}}" id="sellers_submenu" aria-expanded="false">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('admin.show.sellers.list') }}" class="{{ ( request()->routeIs('admin.show.sellers.list') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-users"></i></span>
+                                                    <span class="item">List</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('admin.show.sellers.trash') }}" class="{{ ( request()->routeIs('admin.show.sellers.trash') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-archive"></i></span>
+                                                    <span class="item">Archive</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
 
-
-                            @endif
-
-
+                                <!-- Staff -->
+                                @if(auth()->guard('admin')->user()->is_super)
+                                <li>
+                                    <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-users"></i></span>
+                                        <span class="item">Staff</span>
+                                    </a>
+                                </li>
+                                @endif
                         </ul>
-                    </div>
-                </li>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.notifications.show') }}" class="{{ ( request()->routeIs('admin.notifications.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fas fa-bell"></i></span>
+                            <span class="item">Notifications</span>
+                            <span class="badge badge-danger" id="notif">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fas fa-store"></i></span>
+                            <span class="item">Stalls</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-user-shield"></i></span>
+                            <span class="item">Stall Approval</span>
 
-                <li>
-                    <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fa fa-cog"></i></span>
-                        <span class="item">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fas fa-store"></i></span>
-                        <span class="item">Stalls</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.products.show') }}" class="{{ ( request()->routeIs('admin.products.show') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fa fa-shopping-basket"></i></span>
-                        <span class="item">Products</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fa fa-user-shield"></i></span>
-                        <span class="item">Stall Approval</span>
+                            <span class="notif badge badge-danger" id="stall-approval-notif">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.appointments.show') }}" class="{{ ( request()->routeIs('admin.appointments.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-clock"></i></span>
+                            <span class="item">Stall Appointment</span>
 
-                        <span class="notif badge badge-danger" id="stall-approval-notif">0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.appointments.show') }}" class="{{ ( request()->routeIs('admin.appointments.show') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fa fa-clock"></i></span>
-                        <span class="item">Stall Appointment</span>
-
-                        <span class="notif badge badge-danger" id="stall-app-notif">0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
-                        <span class="icon"><i class="fa fa-store-alt"></i></span>
-                        <span class="item">Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
-                        <span class="icon"><i class="fas fa-power-off"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
-                    <form id="frm-logout" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-            </ul>
+                            <span class="notif badge badge-danger" id="stall-app-notif">0</span>
+                        </a>
+                    </li>
+                    <li class="collapsed" data-toggle="collapse" data-target="#products_submenu">
+                        <a href="#"  class="">
+                            <span class="icon"><i class="fa fa-cart-plus"></i></span>
+                            <span class="item">Products</span>
+                        </a>
+                        <div class="collapse {{ (request()->segment(2) == 'products') ? 'show' : ''}}" id="products_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.products.show') }}" class="{{ ( request()->routeIs('admin.products.show') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-cart-plus"></i></span>
+                                        <span class="item">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.products.trash') }}" class="{{ ( request()->routeIs('admin.products.trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-store-alt"></i></span>
+                            <span class="item">Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-cog"></i></span>
+                            <span class="item">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            <span class="icon"><i class="fas fa-power-off"></i></span>
+                            <span class="item">Logout</span>
+                        </a>
+                        <form id="frm-logout" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="section">
             <div class="top_navbar main">
@@ -204,23 +222,6 @@
                             $('#palengke-filter').submit();
                         });
                     },
-                    initNotifStallAppointment: function(){
-
-                        setInterval(function(){
-                            $.ajax({
-                                type:'GET',
-                                dataType:"json",
-                                url:"{{route('get.stall.appointment.notif')}}",
-                                crossDomain:true,
-                                data: {
-                                    _token: "{{ csrf_token() }}"
-                                },
-                                success:function(data) {
-                                  $('#stall-app-notif').text(data); 
-                                }
-                            }); 
-                        }, 10000);
-                    },
 
                     initNotifStallApproval: function(){
 
@@ -237,7 +238,43 @@
                                     $('#stall-approval-notif').text(data); 
                                 }
                             }); 
-                        }, 10000);
+                        }, 500);
+                    },
+
+                    initNotifStallAppointment: function(){
+
+                        setInterval(function(){
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url:"{{route('get.stall.appointment.notif')}}",
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                  $('#stall-app-notif').text(data); 
+                                }
+                            }); 
+                        }, 500);
+                    },
+
+                    initNotifications: function(){
+
+                        setInterval(function(){
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url:"{{route('get.notif')}}",
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                    $('#notif').text(data); 
+                                }
+                            }); 
+                        }, 500);
                     }
                     
                 };
@@ -248,6 +285,7 @@
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();
                     app.initNotifStallApproval();
+                    app.initNotifications();
                 });
 
 

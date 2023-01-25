@@ -45,7 +45,7 @@
                                     <label for="">Rental Fee per Month</label>
                                     <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
 
-                                    @error('duration')
+                                    @error('rental_fee')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
