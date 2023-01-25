@@ -125,11 +125,112 @@ class AdminController extends Controller
         return view('admin.users/staff', compact(['staffs']));
     }
 
-    public function setMarket(Request $request){
-        session(['market' => $request->marketOption]);
+    public function edit($id){
+        $staff = Admin::findOrFail($id);
 
+        // dd($users);
+        return view('admin.users/edit-staff', compact(['staff']));
+    }
+
+    public function update($id, Request $request){
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        
+        $validate = $request->validate([
+                'password' => ['required', 'string',  /*'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',*/  'confirmed'],
+            ],
+            [
+                'password.regex' => 'Password must contain at least one number, one uppercase and one lowercase letter, and a special character.'
+            ]
+        );
+
+        if($validate){
+            Admin::where('id', auth()->guard('admin')->user()->id)->update([ 'password' => Hash::make($request->password)]);
+        }
+
+        $staff = Admin::where('id', $id)->update(
+            $data
+         );
+
+        return redirect(route('admin.show.staff')); 
+
+    }
+
+    public function  showStaffTrash(){
+        $staffs = Admin::onlyTrashed();
+        
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['name', 'asc'];
+                $staffs->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['name', 'desc'];
+                $staffs->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['deleted_at', 'desc'];
+                $staffs->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['deleted_at', 'asc'];
+                $staffs->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['name', 'asc'];
+            $staffs->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $staffs = $staffs->get();
+
+        return view('admin.users/staff-trash', compact(['staffs']));
+    }
+
+    public function deleteStaff($id){
+
+       
+        $delete =  Admin::where('id', $id)->delete();
+
+
+        return redirect(route('admin.show.staff')); 
+        
+    }
+
+    public function recoverStaff($id){
+
+        $recover = Admin::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.show.staff'));
+        
+    }
+
+    public function StaffForceDelete($id){
+        
+        $delete = Admin::where('id', $id)->forceDelete();
+        return redirect(route('admin.show.staffs.trash'));
+    }
+
+    public function setMarket(Request $request){
+
+
+        session()->forget('market');
+        $old = $request->current_url;
+        session(['market' => $request->marketOption]);
+        
+        // session()->put('market', $request->marketOtion);
       
-        return redirect( url()->previous() );
+        return redirect( $old );
     }
 
     public function getStallAppointmentNotif(){

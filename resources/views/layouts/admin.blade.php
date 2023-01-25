@@ -98,11 +98,27 @@
 
                                 <!-- Staff -->
                                 @if(auth()->guard('admin')->user()->is_super)
-                                <li>
-                                    <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
+                                <li class="collapsed" data-toggle="collapse" data-target="#staff_submenu">
+                                    <a href="#"  class="">
                                         <span class="icon"><i class="fa fa-users"></i></span>
-                                        <span class="item">Staff</span>
+                                        <span class="item">Staffs</span>
                                     </a>
+                                    <div class="collapse {{ (request()->segment(3) == 'staff') ? 'show' : ''}}" id="staff_submenu" aria-expanded="false">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('admin.show.staff') }}" class="{{ ( request()->routeIs('admin.show.staff') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-users"></i></span>
+                                                    <span class="item">List</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('admin.show.staffs.trash') }}" class="{{ ( request()->routeIs('admin.show.staffs.trash') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-archive"></i></span>
+                                                    <span class="item">Archive</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                                 @endif
                         </ul>
@@ -191,7 +207,9 @@
                     </a>
                 </div>
                 <form action="{{ route('admin.set.market') }}" method="GET" id="palengke-filter">
-                    <select  class="form-control" id="marketOption" name="marketOption" placeholder="Order By" value="" >
+
+                    <input type="hidden" name="current_url" value="{{ url()->current() }}">
+                    <select  class="form-control" id="marketOption" name="marketOption" placeholder="Order By"  >
                         <option value=""    >All</option>
                         <option value="1"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '1' ) ? 'selected' : '' : '' ); ?>>Poblacion</option>
                         <option value="2"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '2' ) ? 'selected' : '' : '' ); ?>>Anilao</option>
@@ -283,9 +301,9 @@
                     app.initCollapse();
                     app.filter($('#orderby'));
                     app.initPalengkeFilter($('#marketOption'));
-                    app.initNotifStallAppointment();
-                    app.initNotifStallApproval();
-                    app.initNotifications();
+                    // app.initNotifStallAppointment();
+                    // app.initNotifStallApproval();
+                    // app.initNotifications();
                 });
 
 

@@ -5,6 +5,8 @@
         <div class="profile">
             <div class="profile-wrapper">
                 <h3>Seller Stalls</h3>
+
+                {{ session()->get('market') }}
                 <table class="table table-group-divider">
                     <thead>
                     <tr>

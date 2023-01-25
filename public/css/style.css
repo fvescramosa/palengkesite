@@ -981,13 +981,14 @@ section{
    color: var(--green);
 }
 
-
-.form-group label{
-   padding: 15px 2px;
-   font-size: 16px;
+.form-group {
+   margin-bottom: 10px;
 }
 
-
+.form-group label{
+   padding: 10px 2px;
+   font-size: 16px;
+}
 
 .form-group select,
 .form-group input[type="text"],
@@ -1019,10 +1020,6 @@ span.invalid-feedback {
 
 .container {
    max-width: 1600px;
-}
-
-.form-group {
-   margin-bottom: 20px;
 }
 
 /*PROFILE*/

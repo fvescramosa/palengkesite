@@ -29,6 +29,11 @@
                         <tr>
                             <td>{{ $staff->name }}</td>
                             <td>{{ $staff->email }}</td>
+                            <td>
+                                <a href="{{ route('admin.edit.staff', $staff->id) }}">Edit</a> | 
+                                <a href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
+                            
+                            </td>
                             
                         </tr>
                     @endforeach

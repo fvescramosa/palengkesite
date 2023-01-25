@@ -19,21 +19,19 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($buyers as $buyer)
+                    @foreach($staffs as $staff)
                         <tr>
-                            <td>{{ $buyer->user->first_name }}</td>
-                            <td>{{ $buyer->user->last_name }}</td>
-                            <td>{{ $buyer->user->email }}</td>
+                            <td>{{ $staff->name }}</td>
+                            <td>{{ $staff->email }}</td>
                             <td>
-                                <a href="{{ route('admin.buyers.recover', $buyer->id) }}"> Retrieve </a> | 
-                                <a href="{{ route('admin.buyers.permanentdelete', $buyer->id) }}" title="Permanent Delete">Delete</a>
+                                <a href="{{ route('admin.staffs.recover', $staff->id) }}"> Retrieve </a> | 
+                                <a href="{{ route('admin.staffs.permanentdelete', $staff->id) }}" title="Permanent Delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach

@@ -32,7 +32,8 @@
                             <td>{{ $seller->user->last_name }}</td>
                             <td>{{ $seller->user->email }}</td>
                             <td>
-                                <a href="{{ route('admin.sellers.recover', $seller->id) }}"> Recover </a>
+                                <a href="{{ route('admin.sellers.recover', $seller->id) }}"> Retrieve </a> | 
+                                <a href="{{ route('admin.sellers.permanentdelete', $seller->id) }}" title="Permanent Delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
