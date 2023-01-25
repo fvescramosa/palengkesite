@@ -133,12 +133,11 @@
 
                                 <div class="info-item long">
                                     <label for="type">Type</label>
-                                    <input type="text"  class="form-control @error('type') is-invalid @enderror" 
-                                                        id="type" 
-                                                        name="type" 
-                                                        placeholder="" value="" >
-
+                                    <select  class="form-control" id="type" name="type" placeholder=""  >
+                                        <option value="Wholesale">Wholesale</option>
+                                        <option value="Retail">Retail</option>
                                     </select>
+
                                     @error('product')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

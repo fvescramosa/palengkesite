@@ -86,8 +86,20 @@
                                                 <td> <p>{{ $stall->rental_fee }}</p></td>
                                             </tr>
                                             <tr>
+                                                <td class="stall-info-title-container"><p><strong>Rate: </strong></p> </td>
+                                                <td> <p>{{ $stall->rate }}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>
+                                                <td> <p>{{ $stall->coords }}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stall-info-title-container"><p><strong>Meter Number: </strong></p> </td>
+                                                <td> <p>{{ $stall->meter_num }}</p></td>
+                                            </tr>
+                                            <tr>
                                                 <td class="stall-info-title-container"><p><strong>Location: </strong></p> </td>
-                                                <td> <p>{{ $stall->market }}</p></td>
+                                                <td> <p>{{ $stall->market->market }}</p></td>
                                             </tr>
                                         </table>
                                     </div>

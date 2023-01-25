@@ -96,6 +96,51 @@
                             </div>
 
                             <div class="form-group long">
+                                <label for="Rate">Rate</label>
+                                <input type="text"  class="form-control @error('rate') is-invalid @enderror"
+                                                    id="rate"
+                                                    name="rate"
+                                                    placeholder="" value="" >
+
+                                @error('rate')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
+                                <label for="Coords">Coordinates</label>
+                                <input type="text"  class="form-control @error('coords') is-invalid @enderror"
+                                                    id="coords"
+                                                    name="coords"
+                                                    placeholder="" value="" >
+
+                                @error('coords')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
+                                <label for="Meter Number">Meter Number</label>
+                                <input type="text"  class="form-control @error('meter_num') is-invalid @enderror"
+                                                    id="meter_num"
+                                                    name="meter_num"
+                                                    placeholder="" value="" >
+
+                                @error('meter_num')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
                             <label for="Market">Market</label>
                                 <select  class="form-control @error('market') is-invalid @enderror" 
                                             id="market" 

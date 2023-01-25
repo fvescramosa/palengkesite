@@ -11,6 +11,7 @@ use App\StallAppointment;
 use App\SellerStall;
 use App\Buyer;
 use App\Seller;
+use App\Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use function redirect;
@@ -45,7 +46,7 @@ class AdminController extends Controller
         
         if(session()->has('market')){
             $marketOption = session()->get('market');
-            $stallappointments = StallAppointment::whereHas('stall', function($q) use ($marketOption){
+            $stallappointments = StallAppointment::where('status', 'pending')->whereHas('stall', function($q) use ($marketOption){
                 $q->where('market_id', $marketOption);
             })->get()->count();
         }else{
@@ -54,7 +55,7 @@ class AdminController extends Controller
 
         if(session()->has('market')){
             $marketOption = session()->get('market');
-            $stallapproval = SellerStall::whereHas('stall', function($q) use ($marketOption){
+            $stallapproval = SellerStall::where('status', 'pending')->whereHas('stall', function($q) use ($marketOption){
                 $q->where('market_id', $marketOption);
             })->get()->count();
         }else{
@@ -142,6 +143,13 @@ class AdminController extends Controller
         $approvalnotif = SellerStall::where('status', 'pending')->get();
 
         return response()->json($approvalnotif->count());
+        
+    }
+
+    public function getNotifications(){
+        $notif = Notification::where('status', 'unread')->get();
+
+        return response()->json($notif->count());
         
     }
 

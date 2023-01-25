@@ -31,7 +31,10 @@
                     <td>{{ $product->code }}</td>
                     <td>{{ $product->manufacturer }}</td>
                     <td>{{ $product->type }}</td>
-                    <td><a href="{{ route('admin.products.edit', $product->id) }}">Edit</a></td>
+                    <td>
+                        <a href="{{ route('admin.products.edit', $product->id) }}">Edit</a>
+                        <a href="{{ route('admin.products.delete', $product->id) }}">Delete</a>
+                    </td>
                     <td><a href="{{ route('admin.pricing.show', $product->id) }}"><span class="fa fa-eye"> </span> View Pricing</a></td>
 
                 </tr>

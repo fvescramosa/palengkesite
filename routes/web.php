@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoriesController;
 // use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -73,6 +74,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/products/update/', [SellerController::class, 'productUpdate'])->name('products.update');
 
     Route::post('/products/find-by-category', [SellerController::class, 'findProductsByCategory'])->name('products.find.category');
+    Route::post('/products/details', [SellerController::class, 'findProductsByID'])->name('products.details');
 
     /*Has Stall*/
     Route::get('/stalls/has/select', [SellerController::class, 'stallHasSelect'])->name('stalls.has.select');
@@ -136,6 +138,9 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/products/show', [ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/edit/{id}', [ ProductsController::class, 'edit'])->name('products.edit');
     Route::post('/products/update/{id}', [ProductsController::class, 'update'])->name('products.update');
+    Route::get('/products/trash', [ProductsController::class, 'trash'])->name('products.trash');
+    Route::get('/products/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('products.delete');
+    Route::get('/products/recover/{id}', [ProductsController::class, 'recoverProduct'])->name('products.recover');
 
 
 
@@ -168,6 +173,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     //Price Monitoring
     Route::get('/pricing/show/{id}', [PricingController::class, 'index'])->name('pricing.show');
 
+    Route::get('/notif/show', [NotificationController::class, 'show'])->name('notifications.show');
 
 
 });
@@ -183,5 +189,8 @@ Route::post('/chat/messages', 'ChatsController@sendMessage');
 
 Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
 Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
+Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.notif');
+
+
 
 
