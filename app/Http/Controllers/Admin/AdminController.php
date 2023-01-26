@@ -119,8 +119,7 @@ class AdminController extends Controller
             $staffs = $staffs->orderBy($orderby[0], $orderby[1]);
         }
 
-        $staffs= $staffs->where('is_super', 0)->get();
-
+        $staffs= $staffs->where('is_super', 0)->paginate(10);
 
         return view('admin.users/staff', compact(['staffs']));
     }
@@ -191,7 +190,7 @@ class AdminController extends Controller
             $staffs->orderBy($orderby[0], $orderby[1]);
         }
 
-        $staffs = $staffs->get();
+        $staffs = $staffs->paginate(10);
 
         return view('admin.users/staff-trash', compact(['staffs']));
     }

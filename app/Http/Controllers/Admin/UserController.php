@@ -101,8 +101,7 @@ class UserController extends Controller
 
 
         
-        $users = $users->get();
-
+        $users = $users->paginate(10);
         
         return view('admin.users/sellers', compact(['users']));
     }
@@ -149,7 +148,7 @@ class UserController extends Controller
             $sellers->orderBy($orderby[0], $orderby[1]);
         }
 
-        $sellers = $sellers->get();
+        $sellers = $sellers->paginate(10);
 
         return view('admin.users/trash', compact(['sellers']));
     }
@@ -187,8 +186,7 @@ class UserController extends Controller
             $buyers->orderBy($orderby[0], $orderby[1]);
         }
 
-        $buyers = $buyers->get();
-
+        $buyers = $buyers->paginate(10);
 
         return view('admin.users/buyers-trash', compact(['buyers']));
     }
