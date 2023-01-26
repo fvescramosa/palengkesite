@@ -42,6 +42,12 @@
                     </tbody>
                 </table>
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
+                
+                @if( isset($_GET['orderby'] ) )
+                {{$users->appends(['orderby' => $_GET['orderby']])->links()}}
+                @else
+                {{$users->links()}}
+                @endif
             </div>
         </div>
     </div>

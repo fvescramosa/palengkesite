@@ -48,7 +48,7 @@ class UserController extends Controller
             $users->orderBy($orderby[0], $orderby[1]);
         }
 
-        $users = $users->get();
+        $users = $users->paginate(10);
 
         return view('admin.users/buyers', compact(['users']));
     }
