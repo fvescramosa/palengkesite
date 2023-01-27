@@ -146,12 +146,21 @@
     @endforeach
 
     <script>
+        let date_1 = '';
+        let date_2 = '';
         const products = {
             initDuration: function( trigger ){
                 trigger.change(function () {
-                    let date_1 = new Date($('#end_date').val());
-                    let date_2 = new Date($('#start_date').val());
 
+                    var self = $(this);
+                    if(self.attr('id') == 'end_date'){
+                         date_1 = new Date(self.val());
+                    }
+                    if(self.attr('id') == 'start_date'){
+                         date_2 = new Date(self.val());
+                    }
+
+                    if(date_1 !== '' && date_2 !== ''){
                     // let difference = date_1.getTime() - date_2.getTime();
                     // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
                     // $('#duration').val(TotalDays);
@@ -164,8 +173,8 @@
                         months += date_1.getMonth();
 
                         result = months <= 0  ? 0 : months;
-                        $('#duration').val(result);
-
+                        self.closest('form').find('#duration').val(result);
+                    }
                 });
             },
 
