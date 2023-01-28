@@ -27,4 +27,16 @@ class Buyer extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function carts(){
+        return $this->hasMany(Cart::class );
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class );
+    }
+
+    public function order_products(){
+        return $this->hasMany(OrderProduct::class );
+    }
 }
