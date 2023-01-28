@@ -19,7 +19,7 @@
 
 
                             <div class="form-group long">
-                                <label for="Number">Number</label>
+                                <label for="number">Stall No.</label>
                                 <input type="text"  class="form-control @error('number') is-invalid @enderror"
                                                     id="number"
                                                     name ="number"
@@ -81,11 +81,16 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Section">Section</label>
-                                <input type="text"  class="form-control @error('section') is-invalid @enderror"
-                                                    id="section"
-                                                    name="section"
-                                                    placeholder="" value="" >
+                            <label for="Section">Section</label>
+                                <select  class="form-control @error('section') is-invalid @enderror" 
+                                            id="section" 
+                                            name="section" 
+                                            placeholder="Section">
+                                            <option value=""></option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                            @endforeach
+                                </select>
 
                                 @error('section')
                                 <span class="invalid-feedback" role="alert">

@@ -6,7 +6,7 @@
         <div class="profile-wrapper">
             <div class="card basic-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
-                    Product Information
+                    Stall Information
                 </div>
                 <div class="basic-info-body">
 
@@ -18,7 +18,7 @@
                         <div class="info-body-flex">
 
                             <div class="info-item long">
-                                <label for="Number">Number</label>
+                                <label for="Number">Stall No.</label>
                                 <input type="text"  class="form-control @error('number') is-invalid @enderror"
                                        id="number"
                                        name ="number"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Stall;
 use App\Market;
+use App\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +17,34 @@ class StallsController extends Controller
 
         if(session()->has('market')){
             $stalls = $stalls->where('market_id', session()->get('market'));
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['number', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['number', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['number', 'asc'];
+            $stalls->orderBy($orderby[0], $orderby[1]);
         }
 
         $stalls = $stalls->paginate(10);
@@ -31,8 +60,9 @@ class StallsController extends Controller
 
     public function create(){
         $markets = Market::all();
+        $categories = Categories::all();
 
-        return view('admin/stalls/create', compact(['markets']));
+        return view('admin/stalls/create', compact(['markets', 'categories']));
     }
 
     public function store(Request $request){

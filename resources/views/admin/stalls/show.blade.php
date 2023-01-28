@@ -19,7 +19,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>Number</th>
+                        <th>Stall No.</th>
                         <th>Sqm</th>
                         <th>Section</th>
                         <th>Amount / Sqm</th>
@@ -48,7 +48,11 @@
                     @endforeach
                     </tbody>
                 </table>
+                @if( isset($_GET['orderby'] ) )
+                {{$stalls->appends(['orderby' => $_GET['orderby']])->links()}}
+                @else
                 {{$stalls->links()}}
+                @endif
                 <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
