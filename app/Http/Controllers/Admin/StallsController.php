@@ -18,7 +18,7 @@ class StallsController extends Controller
             $stalls = $stalls->where('market_id', session()->get('market'));
         }
 
-        $stalls = $stalls->get();
+        $stalls = $stalls->paginate(10);
         
         return view('admin.stalls/show', compact(['stalls']));
     }

@@ -5,6 +5,8 @@
         <div class="profile">
             <div class="profile-wrapper">
                 <h3>Seller Stalls</h3>
+
+                {{ session()->get('market') }}
                 <table class="table table-group-divider">
                     <thead>
                     <tr>
@@ -100,7 +102,7 @@
                                     </div>
                                     <div class="form-group long">
                                         <label for="">Duration</label>
-                                        <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration"  value="{{ $stall->duration }}">
+                                        <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration"  value="{{ $stall->duration }}" readonly>
 
                                         @error('duration')
                                         <span class="invalid-feedback" role="alert">
@@ -142,6 +144,49 @@
         </div>
 
     @endforeach
+
+    <script>
+        let date_1 = '';
+        let date_2 = '';
+        const products = {
+            initDuration: function( trigger ){
+                trigger.change(function () {
+
+                    var self = $(this);
+                    if(self.attr('id') == 'end_date'){
+                         date_1 = new Date(self.val());
+                    }
+                    if(self.attr('id') == 'start_date'){
+                         date_2 = new Date(self.val());
+                    }
+
+                    if(date_1 !== '' && date_2 !== ''){
+                    // let difference = date_1.getTime() - date_2.getTime();
+                    // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    // $('#duration').val(TotalDays);
+
+                    
+                        var months;
+                        var result;
+                        months = (date_1.getFullYear() - date_2.getFullYear()) * 12;
+                        months -= date_2.getMonth();
+                        months += date_1.getMonth();
+
+                        result = months <= 0  ? 0 : months;
+                        self.closest('form').find('#duration').val(result);
+                    }
+                });
+            },
+
+        };
+
+            $(window).on('load', function(){
+           
+
+            products.initDuration($('input[type="date"]'));
+        });
+
+    </script>
 
 
 @endsection

@@ -14,6 +14,7 @@ class SellerStallsController extends Controller
 
         
         $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])
+                            ->whereHas('seller')
                             ->whereHas('stall',function($q){
                                             if(session()->has('market')){
                                                 if(session()->get('market') != ''){

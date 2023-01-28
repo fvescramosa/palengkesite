@@ -115,6 +115,12 @@ class ProductsController extends Controller
         
     }
 
+    public function ProductForceDelete($id){
+        
+        $delete = Products::where('id', $id)->forceDelete();
+        return redirect(route('admin.products.trash'));
+    }
+
     public function showByCategory($category){
 
         $products = Products::whereHas('category', function($q) use ($category){

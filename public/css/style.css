@@ -981,13 +981,14 @@ section{
    color: var(--green);
 }
 
-
-.form-group label{
-   padding: 15px 2px;
-   font-size: 16px;
+.form-group {
+   margin-bottom: 10px;
 }
 
-
+.form-group label{
+   padding: 10px 2px;
+   font-size: 16px;
+}
 
 .form-group select,
 .form-group input[type="text"],
@@ -1021,10 +1022,6 @@ span.invalid-feedback {
    max-width: 1600px;
 }
 
-.form-group {
-   margin-bottom: 20px;
-}
-
 /*PROFILE*/
 .profile-wrapper {
    max-width: 1400px;
@@ -1033,6 +1030,7 @@ span.invalid-feedback {
    border: 1px solid #e1e1e1;
    box-shadow: 7px 0px 38px -11px rgba(0, 0, 0, 0.58);
    padding: 50px;
+   position: relative;
 }
 .profile .basic-info {
    width: 100% !important;
@@ -1624,4 +1622,12 @@ display: flex;
 .btn-container button{
    padding: 8px;
    font-size: 12px;
+}
+
+.info-header-edit{
+   bottom: -28px;
+   position: absolute;
+   right: 27px;
+   font-size: 35px;
+   text-decoration: none !important
 }

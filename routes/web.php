@@ -112,6 +112,12 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/register', [RegisterController::class, 'showAdminRegisterForm'])->name('register');
     Route::post('/store', [ RegisterController::class, 'createAdmin'])->name('store');
     Route::get('/users/staff', [AdminController::class, 'show'])->name('show.staff');
+    Route::get('/users/staff-edit/{id}', [AdminController::class, 'edit'])->name('edit.staff');
+    Route::post('/users/staff-update/{id}',  [AdminController::class, 'update'])->name('update.staff');
+    Route::get('/users/staff/trash', [AdminController::class, 'showStaffTrash'])->name('show.staffs.trash');
+    Route::get('/staffs/delete/{id}', [AdminController::class, 'deleteStaff'])->name('staffs.delete');
+    Route::get('/staffs/permanentdelete/{id}', [AdminController::class, 'StaffForceDelete'])->name('staffs.permanentdelete');
+    Route::get('/staffs/recover/{id}', [AdminController::class, 'recoverStaff'])->name('staffs.recover');
     Route::get('/set/market', [AdminController::class, 'setMarket'])->name('set.market');
     Route::get('/settings/', [AdminController::class, 'settings'])->name('settings');
     Route::post('/settings/update/password', [AdminController::class, 'updatePassword'])->name('update.password');
@@ -121,10 +127,12 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/users/buyers/list', [\App\Http\Controllers\Admin\UserController::class, 'showBuyer'])->name('show.buyers.list');
     Route::get('/users/buyers/trash', [\App\Http\Controllers\Admin\UserController::class, 'showBuyerTrash'])->name('show.buyers.trash');
     Route::get('/buyers/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'deleteBuyer'])->name('buyers.delete');
+    Route::get('/buyers/permanentdelete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'BuyerForceDelete'])->name('buyers.permanentdelete');
     Route::get('/buyers/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'recoverBuyer'])->name('buyers.recover');
     Route::get('/users/sellers/list', [\App\Http\Controllers\Admin\UserController::class, 'showSellerList'])->name('show.sellers.list');
     Route::get('/users/sellers/trash', [\App\Http\Controllers\Admin\UserController::class, 'showSellerTrash'])->name('show.sellers.trash');
     Route::get('/sellers/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'deleteSeller'])->name('sellers.delete');
+    Route::get('/sellers/permanentdelete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'SellerForceDelete'])->name('sellers.permanentdelete');
     Route::get('/sellers/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'recoverSeller'])->name('sellers.recover');
     Route::get('/users/seller/show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'showSeller'])->name('show.seller');
     Route::get('/users/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
@@ -140,6 +148,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/products/update/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::get('/products/trash', [ProductsController::class, 'trash'])->name('products.trash');
     Route::get('/products/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('products.delete');
+    Route::get('/products/permanentdelete/{id}', [ProductsController::class, 'ProductForceDelete'])->name('products.permanentdelete');
     Route::get('/products/recover/{id}', [ProductsController::class, 'recoverProduct'])->name('products.recover');
 
 

@@ -19,31 +19,28 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($staffs as $staff)
                         <tr>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ $staff->name }}</td>
+                            <td>{{ $staff->email }}</td>
                             <td>
-                                <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
-                                <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.sellers.delete', $user->id) }}"> Delete </a>
+                                <a href="{{ route('admin.staffs.recover', $staff->id) }}"> Retrieve </a> | 
+                                <a href="{{ route('admin.staffs.permanentdelete', $staff->id) }}" title="Permanent Delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 @if( isset($_GET['orderby'] ) )
-                {{$users->appends(['orderby' => $_GET['orderby']])->links()}}
+                {{$staffs->appends(['orderby' => $_GET['orderby']])->links()}}
                 @else
-                {{$users->links()}}
+                {{$staffs->links()}}
                 @endif
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
             </div>

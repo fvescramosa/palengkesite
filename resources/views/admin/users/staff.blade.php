@@ -8,8 +8,8 @@
                     <h3>Staff</h3>
                     <form action="" method="GET" id="sortlist">
                         <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
-                            <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>A-Z</option>
-                            <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Z-A</option>
+                            <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>Name (A-Z)</option>
+                            <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Name (Z-A)</option>
                             <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
                             <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
                         </select>
@@ -29,12 +29,22 @@
                         <tr>
                             <td>{{ $staff->name }}</td>
                             <td>{{ $staff->email }}</td>
+                            <td>
+                                <a href="{{ route('admin.edit.staff', $staff->id) }}">Edit</a> | 
+                                <a href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
+                            
+                            </td>
                             
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <a href="{{ route('admin.register') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a>
+                @if( isset($_GET['orderby'] ) )
+                {{$staffs->appends(['orderby' => $_GET['orderby']])->links()}}
+                @else
+                {{$staffs->links()}}
+                @endif
+                <a href="{{ route('admin.register') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>

@@ -8,8 +8,8 @@
                     <h3>Users</h3>
                     <form action="" method="GET" id="sortlist">
                         <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
-                            <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>A-Z</option>
-                            <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Z-A</option>
+                            <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>Name (A-Z)</option>
+                            <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Name (Z-A)</option>
                             <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
                             <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
                         </select>
@@ -42,6 +42,12 @@
                     </tbody>
                 </table>
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
+                
+                @if( isset($_GET['orderby'] ) )
+                {{$users->appends(['orderby' => $_GET['orderby']])->links()}}
+                @else
+                {{$users->links()}}
+                @endif
             </div>
         </div>
     </div>

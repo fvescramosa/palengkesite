@@ -48,7 +48,7 @@ class UserController extends Controller
             $users->orderBy($orderby[0], $orderby[1]);
         }
 
-        $users = $users->get();
+        $users = $users->paginate(10);
 
         return view('admin.users/buyers', compact(['users']));
     }
@@ -101,20 +101,92 @@ class UserController extends Controller
 
 
         
-        $users = $users->get();
-
+        $users = $users->paginate(10);
         
         return view('admin.users/sellers', compact(['users']));
     }
 
     public function  showSellerTrash(){
-        $sellers = Seller::onlyTrashed()->get();
+        $sellers = Seller::with('user')->onlyTrashed()
+        ->select('sellers.*')
+        ->join('users', 'sellers.user_id', '=', 'users.id');
+
+
+        if(session()->has('market')){
+
+            $marketOption = session()->get('market');
+
+            $sellers->where('sellers.market_id', $marketOption);
+        
+
+        }
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['users.first_name', 'asc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['users.first_name', 'desc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['sellers.deleted_at', 'desc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['sellers.deleted_at', 'asc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['users.first_name', 'asc'];
+            $sellers->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $sellers = $sellers->paginate(10);
 
         return view('admin.users/trash', compact(['sellers']));
     }
 
     public function  showBuyerTrash(){
-        $buyers = Buyer::onlyTrashed()->get();
+        
+        $buyers = Buyer::with('user')->onlyTrashed()
+        ->select('buyers.*')->join('users', 'buyers.user_id', '=', 'users.id');
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['users.first_name', 'asc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['users.first_name', 'desc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['buyers.deleted_at', 'desc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['buyers.deleted_at', 'asc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['users.first_name', 'asc'];
+            $buyers->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $buyers = $buyers->paginate(10);
 
         return view('admin.users/buyers-trash', compact(['buyers']));
     }
@@ -198,5 +270,17 @@ class UserController extends Controller
 
         return redirect(route('admin.show.buyers.list'));
         
+    }
+
+    public function SellerForceDelete($id){
+        
+        $delete = Seller::where('id', $id)->forceDelete();
+        return redirect(route('admin.show.sellers.trash'));
+    }
+
+    public function BuyerForceDelete($id){
+        
+        $delete = Buyer::where('id', $id)->forceDelete();
+        return redirect(route('admin.show.buyers.trash'));
     }
 }

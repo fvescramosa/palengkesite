@@ -42,7 +42,8 @@
                             <td>{{ $product->manufacturer }}</td>
                             <td>{{ $product->type }}</td>
                             <td>
-                                <a href="{{ route('admin.products.recover', $product->id) }}"> Recover </a>
+                                <a href="{{ route('admin.products.recover', $product->id) }}"> Retrieve </a> | 
+                                <a href="{{ route('admin.products.permanentdelete', $product->id) }}" title="Permanent Delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
