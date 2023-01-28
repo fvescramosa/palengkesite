@@ -190,12 +190,15 @@
                         <i class="fas fa-bars"></i>
                     </a>
                 </div>
+
+                @php $parameter = '' @endphp
+
                 <form action="{{ route('admin.set.market') }}" method="GET" id="palengke-filter">
                     <select  class="form-control" id="marketOption" name="marketOption" placeholder="Order By" value="" >
-                        <option value=""    >All</option>
-                        <option value="1"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '1' ) ? 'selected' : '' : '' ); ?>>Poblacion</option>
-                        <option value="2"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '2' ) ? 'selected' : '' : '' ); ?>>Anilao</option>
-                        <option value="3"  <?=  ( session()->has('market' ) ?  ( session()->get('market') == '3' ) ? 'selected' : '' : '' ); ?>>Talaga</option>
+                        <option value="" >All</option>
+                        <option value="1"   <?=  ( session()->has('market' ) ?  ( session()->get('market') == '1' ) ? 'selected' : '' : '' ); ?>>Poblacion</option>
+                        <option value="2"   <?=  ( session()->has('market' ) ?  ( session()->get('market') == '2' ) ? 'selected' : '' : '' ); ?>>Anilao</option>
+                        <option value="3"   <?=  ( session()->has('market' ) ?  ( session()->get('market') == '3' ) ? 'selected' : '' : '' ); ?>>Talaga</option>
                     </select>
                 </form>
             </div>

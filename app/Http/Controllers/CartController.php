@@ -71,6 +71,7 @@ class CartController extends Controller
 
         }
 
+        dd(Cart::whereIn('id', $request->cart_ids)->delete());
         return view('cart.index');
     }
 
