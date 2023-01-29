@@ -82,10 +82,15 @@
 
                             <div class="form-group long">
                                 <label for="Section">Section</label>
-                                <input type="text"  class="form-control @error('section') is-invalid @enderror"
+                                <select  class="form-control @error('section') is-invalid @enderror"
                                                     id="section"
                                                     name="section"
                                                     placeholder="" value="" >
+
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{ $category->category }}</option>
+                                    @endforeach
+                                </select>
 
                                 @error('section')
                                 <span class="invalid-feedback" role="alert">

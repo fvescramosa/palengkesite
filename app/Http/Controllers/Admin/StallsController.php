@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Categories;
 use App\Stall;
 use App\Market;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class StallsController extends Controller
     public function create(){
         $markets = Market::all();
 
-        return view('admin/stalls/create', compact(['markets']));
+        $categories = Categories::all();
+        return view('admin/stalls/create', compact(['markets', 'categories']));
     }
 
     public function store(Request $request){
