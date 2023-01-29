@@ -15,9 +15,6 @@
                 <h3>{{ 'Change Password' }}</h3>
                 <form method="POST" action="{{ route('admin.update.password') }}">
                 @csrf
-
-
-
                  <div class="form-group">
                     <label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
 

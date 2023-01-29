@@ -201,5 +201,14 @@ Route::get('/stall/approval/pending', [AdminController::class, 'getStallApproval
 Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.notif');
 
 
+//displaybycategory
 
+Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
+    Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
+});
 
+Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+});

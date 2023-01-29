@@ -28,4 +28,8 @@ class Products extends Model
     public function seller_products(){
         return $this->hasMany(SellerProduct::class , 'product_id');
     }
+
+    public function carts(){
+        return $this->hasMany(Cart::class );
+    }
 }
