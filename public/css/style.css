@@ -1641,3 +1641,6 @@ display: flex;
 .list-header select, input{
    max-width: 240px;
 }
+.list-header .list-header-fields > div{
+   flex: 1 1 auto
+}

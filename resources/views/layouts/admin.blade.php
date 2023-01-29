@@ -212,6 +212,9 @@
                 <form action="{{ route('admin.set.market') }}" method="GET" id="palengke-filter">
 
                     <input type="hidden" name="current_url" value="{{ url()->current() }}">
+                    <input type="hidden" name="page" value="{{ $_GET['page'] ?? '' }}">
+                    <input type="hidden" name="orderby" value="{{ $_GET['orderby'] ?? '' }}">
+                    <input type="hidden" name="search" value="{{ $_GET['search'] ?? '' }}">
                     <select  class="form-control" id="marketOption" name="marketOption" placeholder="Order By"  >
                         <option value=""    >All</option>
                         <option value="1"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '1' ) ? 'selected' : '' : '' ); ?>>Poblacion</option>
