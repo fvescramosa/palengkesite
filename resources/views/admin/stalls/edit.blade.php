@@ -96,14 +96,19 @@
 
                             </div>
 
-                            <div class="info-item long">
+                            <div class="info-item short">
                                 <label for="Market">Market</label>
-                                <input type="text"  class="form-control @error('market') is-invalid @enderror"
-                                       id="market"
-                                       name="market"
-                                       placeholder="" value="{{ $stalls->market }}" >
 
+
+                                <select   class="form-control @error('market') is-invalid @enderror" id="market"
+                                         name="market">
+                                    @foreach($markets as $market)
+                                        <option value="{{ $market->id }}" {{ ($stalls->market->id == $market->id) ? 'selected' : '' }}>
+                                            {{ $market->market }}
+                                        </option>
+                                    @endforeach
                                 </select>
+
                                 @error('market')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

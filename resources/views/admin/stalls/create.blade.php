@@ -81,13 +81,7 @@
                             </div>
 
                             <div class="form-group long">
-<<<<<<< HEAD
-                                <label for="Section">Section</label>
-                                <select  class="form-control @error('section') is-invalid @enderror"
-                                                    id="section"
-                                                    name="section"
-                                                    placeholder="" value="" >
-=======
+
                             <label for="Section">Section</label>
                                 <select  class="form-control @error('section') is-invalid @enderror" 
                                             id="section" 
@@ -98,12 +92,7 @@
                                                 <option value="{{ $category->category }}">{{ $category->category }}</option>
                                             @endforeach
                                 </select>
->>>>>>> ce57a3418dbb58cef4effa29a902aa78f077254c
 
-                                    @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{ $category->category }}</option>
-                                    @endforeach
-                                </select>
 
                                 @error('section')
                                 <span class="invalid-feedback" role="alert">
