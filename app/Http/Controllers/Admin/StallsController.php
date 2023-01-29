@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Categories;
 use App\Stall;
 use App\Market;
+use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,8 +22,11 @@ class StallsController extends Controller
 
 
         if(isset($_GET['search'])){
-            $stalls = $stalls->Where('number', 'like', '%' . $_GET['search'] . '%');
+            $stalls = $stalls->where( function ($query){
+                $query->orWhere('number', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhere('section', 'like', '%' . $_GET['search'] . '%');
 
+            });
         }
 
             //->get();
