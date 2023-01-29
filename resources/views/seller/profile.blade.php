@@ -7,7 +7,7 @@
                <div class="card-header basic-info-header">
                    Basic Information
 
-                   <a href="{{ route('seller.edit') }}" class="info-header-edit"> <i class="fa fa-edit"></i> Edit</a>
+                   <a href="{{ route('seller.edit') }}" class="info-header-edit"> <i class="fa fa-edit"></i></a>
                </div>
                 <div class="basic-info-body">
                     <div class="info-body-flex">

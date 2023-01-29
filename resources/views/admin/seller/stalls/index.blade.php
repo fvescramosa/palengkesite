@@ -111,16 +111,6 @@
                                         @enderror
                                     </div>
                                     <div class="form-group long">
-                                        <label for="">Occupancy Fee</label>
-                                        <input type="text" class="form-control @error('occupancy_fee') is-invalid @enderror" name="occupancy_fee" id="occupancy_fee" value="{{ $stall->occupancy_fee }}">
-
-                                        @error('occupancy_fee')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group long">
                                         <label for="">Contract Lease</label>
                                         <input type="file" class="form-control @error('contract_of_lease') is-invalid @enderror" name="contract_of_lease" id="contract_of_lease" >
 
