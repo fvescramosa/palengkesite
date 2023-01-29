@@ -59,6 +59,14 @@ class UserController extends Controller
             $q->where('status', 'active');
         });
 
+        if(isset($_GET['search'])){
+            $users = $users->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
         if(session()->has('market')){
 
             $marketOption = session()->get('market');
