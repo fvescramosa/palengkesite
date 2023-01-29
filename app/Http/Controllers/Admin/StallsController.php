@@ -146,9 +146,10 @@ class StallsController extends Controller
     }
 
     public function edit($id){
+        $markets = Market::all();
         $stalls = Stall::findOrFail($id);
 
-        return view('admin.stalls.edit', compact(['stalls']));
+        return view('admin.stalls.edit', compact(['stalls', 'markets']));
     }
 
     public function update($id, Request $request){
