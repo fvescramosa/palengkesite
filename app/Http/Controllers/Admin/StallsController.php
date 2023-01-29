@@ -19,6 +19,7 @@ class StallsController extends Controller
             $stalls = $stalls->Where('market_id', session()->get('market'));
         }
 
+
         if(isset($_GET['search'])){
             $stalls = $stalls->Where('number', 'like', '%' . $_GET['search'] . '%');
 
@@ -26,6 +27,7 @@ class StallsController extends Controller
 
             //->get();
         $orderby = '';
+
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['number', 'asc'];
@@ -150,9 +152,10 @@ class StallsController extends Controller
     }
 
     public function edit($id){
+        $markets = Market::all();
         $stalls = Stall::findOrFail($id);
 
-        $markets = Market::all();
+
         return view('admin.stalls.edit', compact(['stalls', 'markets']));
     }
 
@@ -171,7 +174,7 @@ class StallsController extends Controller
                 'coords' => $request->coords,
                 'meter_num' => $request->meter_num,
             ]
-        );
+            );
 
         if($stalls){
             $message = ['success' => true, 'message' => 'Stall updated'];
