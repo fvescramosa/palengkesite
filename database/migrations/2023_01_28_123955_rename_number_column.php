@@ -1,4 +1,4 @@
-<?php
+composer require doctrine/dbal<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

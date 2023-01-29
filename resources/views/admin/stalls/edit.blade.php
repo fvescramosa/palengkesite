@@ -96,71 +96,23 @@
 
                             </div>
 
-                            <div class="info-item long">
-                                <label for="Rate">Rate</label>
-                                <input type="text"  class="form-control @error('rate') is-invalid @enderror"
-                                       id="rate"
-                                       name="rate"
-                                       placeholder="" value="{{ $stalls->rate }}" >
+                            <div class="info-item short">
+                                <label for="Market">Market</label>
 
-                                </select>
-                                @error('rate')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
 
-                            </div>
-
-                            <div class="info-item long">
-                                <label for="Coordinates">Coordinates</label>
-                                <input type="text"  class="form-control @error('coords') is-invalid @enderror"
-                                       id="coords"
-                                       name="coords"
-                                       placeholder="" value="{{ $stalls->coords }}" >
-
-                                </select>
-                                @error('coords')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-
-                            <div class="info-item long">
-                                <label for="Meter Number">Meter Number</label>
-                                <input type="text"  class="form-control @error('meter_num') is-invalid @enderror"
-                                       id="meter_num"
-                                       name="meter_num"
-                                       placeholder="" value="{{ $stalls->meter_num }}" >
-
-                                </select>
-                                @error('meter_num')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-
-                            <div class="info-item long">
-                            <label for="Market">Market</label>
-                                <select  class="form-control @error('market') is-invalid @enderror" 
-                                            id="market" 
-                                            name="market" 
-                                            placeholder="Market">
-                                            <option value="{{ $stalls->market_id }}">{{ $stalls->market->market }}</option>
-                                            @foreach($markets as $market)
-                                                <option value="{{ $market->id }}">{{ $market->market }}</option>
-                                            @endforeach
-                                            
+                                <select   class="form-control @error('market') is-invalid @enderror" id="market"
+                                         name="market">
+                                    @foreach($markets as $market)
+                                        <option value="{{ $market->id }}" {{ ($stalls->market->id == $market->id) ? 'selected' : '' }}>
+                                            {{ $market->market }}
+                                        </option>
+                                    @endforeach
                                 </select>
 
                                 @error('market')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
 
                             </div>

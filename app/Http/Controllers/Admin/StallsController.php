@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Categories;
 use App\Stall;
 use App\Market;
-use App\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,12 +16,18 @@ class StallsController extends Controller
         $stalls = new Stall();
 
         if(session()->has('market')){
-            $stalls = $stalls->where('market_id', session()->get('market'));
+            $stalls = $stalls->Where('market_id', session()->get('market'));
         }
 
 
+        if(isset($_GET['search'])){
+            $stalls = $stalls->Where('number', 'like', '%' . $_GET['search'] . '%');
+
+        }
+
             //->get();
-    $orderby = '';
+        $orderby = '';
+
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['number', 'asc'];
@@ -148,6 +154,7 @@ class StallsController extends Controller
     public function edit($id){
         $markets = Market::all();
         $stalls = Stall::findOrFail($id);
+
 
         return view('admin.stalls.edit', compact(['stalls', 'markets']));
     }

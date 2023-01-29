@@ -336,7 +336,7 @@ class SellerController extends Controller
                             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
                         })
         ->where('market_id', auth()->user()->seller->market_id)
-        ->orderByRaw('CONVERT(number, SIGNED)', 'asc')
+        ->orderByRaw('CONVERT(number, SIGNED)', 'desc')
         ->get();
 
 
