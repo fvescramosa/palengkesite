@@ -235,7 +235,14 @@
                     filter: function(trigger){
                         trigger.change(function(e){
 
-                            $('#sortlist').submit();
+                            $('#form-header').submit();
+                        });
+                    },
+
+                    initSearch: function(trigger){
+                        trigger.change(function(e){
+
+                            $('#form-header').submit();
                         });
                     },
                     initPalengkeFilter: function(trigger){
@@ -304,6 +311,7 @@
                 $(window).on('load', function(){
                     app.initCollapse();
                     app.filter($('#orderby'));
+                    app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
                     // app.initNotifStallAppointment();
                     // app.initNotifStallApproval();

@@ -81,6 +81,7 @@
                             </div>
 
                             <div class="form-group long">
+
                             <label for="Section">Section</label>
                                 <select  class="form-control @error('section') is-invalid @enderror" 
                                             id="section" 
@@ -91,6 +92,7 @@
                                                 <option value="{{ $category->category }}">{{ $category->category }}</option>
                                             @endforeach
                                 </select>
+
 
                                 @error('section')
                                 <span class="invalid-feedback" role="alert">
