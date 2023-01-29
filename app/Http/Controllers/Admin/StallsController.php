@@ -47,6 +47,7 @@ class StallsController extends Controller
             $stalls->orderBy($orderby[0], $orderby[1]);
         }
 
+        
         $stalls = $stalls->paginate(10);
         
         return view('admin.stalls/show', compact(['stalls']));
@@ -81,7 +82,7 @@ class StallsController extends Controller
             'meter_num' => $request->meter_num,
         ];
 
-      
+  
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
