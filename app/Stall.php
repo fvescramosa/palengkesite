@@ -8,7 +8,7 @@ class Stall extends Model
 {
     //
     protected $fillable = [
-        'number',
+        'stall',
         'sqm',
         'amount_sqm',
         'rental_fee',

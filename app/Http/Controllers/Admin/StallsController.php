@@ -19,6 +19,35 @@ class StallsController extends Controller
             $stalls = $stalls->where('market_id', session()->get('market'));
         }
 
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['number', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['number', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['number', 'asc'];
+            $stalls->orderBy($orderby[0], $orderby[1]);
+        }
+
+        
         $stalls = $stalls->paginate(10);
         
         return view('admin.stalls/show', compact(['stalls']));
@@ -32,8 +61,8 @@ class StallsController extends Controller
 
     public function create(){
         $markets = Market::all();
-
         $categories = Categories::all();
+
         return view('admin/stalls/create', compact(['markets', 'categories']));
     }
 
@@ -53,7 +82,7 @@ class StallsController extends Controller
             'meter_num' => $request->meter_num,
         ];
 
-      
+  
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
