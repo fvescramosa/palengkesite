@@ -19,35 +19,38 @@ class StallsController extends Controller
             $stalls = $stalls->where('market_id', session()->get('market'));
         }
 
-        $orderby = '';
+
+            //->get();
+    $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['number', 'asc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
             }
 
             else if($_GET['orderby'] == 'Z-A'){
                 $orderby = ['number', 'desc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
             }
 
             else if($_GET['orderby'] == 'recent'){
                 $orderby = ['created_at', 'desc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'oldest'){
                 $orderby = ['created_at', 'asc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
             }
             
         }
         else{
             $orderby = ['number', 'asc'];
-            $stalls->orderBy($orderby[0], $orderby[1]);
+            $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
         }
 
-        
+
+
         $stalls = $stalls->paginate(10);
         
         return view('admin.stalls/show', compact(['stalls']));
@@ -156,14 +159,14 @@ class StallsController extends Controller
                 'amount_sqm' => $request->amount_sqm,
                 'rental_fee'	=> $request->rental_fee,
                 'section'	=> $request->section,
-                'market'	=> $request->market,
+                'market_id'	=> $request->market,
                 'image'	=> $request->image,
                 'status' => $request->status,
                 'rate' => $request->rate,
                 'coords' => $request->coords,
                 'meter_num' => $request->meter_num,
             ]
-        );
+            );
 
         if($stalls){
             $message = ['success' => true, 'message' => 'Stall updated'];
