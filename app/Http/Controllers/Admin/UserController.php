@@ -20,6 +20,14 @@ class UserController extends Controller
     public function showBuyer(){
         $users = User::whereHas('buyer');
 
+        if(isset($_GET['search'])){
+            $users = $users->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
         $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
