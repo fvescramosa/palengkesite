@@ -95,6 +95,9 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     //My Stalls
     Route::get('/stalls/show', [SellerController::class, 'stallShow'])->name('stalls.show');
 
+    //Orders
+    Route::get('/orders/', [SellerController::class, 'showOrders'])->name('orders.show');
+
 
     Route::post('/stall/display/details/', [SellerController::class, 'display_details'])->name('display.details');
     Route::get('/switch/buyer', [SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
