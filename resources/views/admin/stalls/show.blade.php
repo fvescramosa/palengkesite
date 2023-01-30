@@ -70,10 +70,12 @@
                     @endforeach
                     </tbody>
                 </table>
+
                 @if( isset($_GET ) )
                 {{$stalls->appends($_GET)->links()}}
+
                 @else
-                {{$stalls->links()}}
+                    {{$stalls->links()}}
                 @endif
 
                 <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
