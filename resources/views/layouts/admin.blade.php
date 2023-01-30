@@ -124,13 +124,13 @@
                         </ul>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('admin.notifications.show') }}" class="{{ ( request()->routeIs('admin.notifications.show') ? 'active' : '' )}}">
                             <span class="icon"><i class="fas fa-bell"></i></span>
                             <span class="item">Notifications</span>
                             <span class="badge badge-danger" id="notif">0</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
                             <span class="icon"><i class="fas fa-store"></i></span>
