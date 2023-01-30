@@ -20,7 +20,7 @@
                         @csrf
                         <div class="info-body-flex">
 
-                                <div class="info-item short">
+                                <div class="info-item long">
                                     <label for="email">Product Categories</label>
                                     <select  class="form-control @error('category') is-invalid @enderror" id="category" name="category" placeholder="Category" value="" >
                                             <option value="">{{ 'Category' }}</option>
@@ -35,11 +35,36 @@
                                     @enderror
 
                                 </div>
-                                <div class="info-item short">
+
+                                <div class="info-item long">
+                                    <div class="form-inline">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
+                                            <label class="form-check-label" for="remember">
+                                                <?php echo e(__('New Product')); ?>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-item long" id="select-product">
                                     <label for="Product">Product</label>
                                     <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product" value="" >
-
+                                        <option value=""></option>
                                     </select>
+                                    @error('product')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="info-item long" id="custom-product-container">
+                                    <label for="Product">Product</label>
+                                    <input type="text"  class="form-control @error('product') is-invalid @enderror" id="custom-product" name="product" placeholder="Product" value="" >
+
                                     @error('product')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,6 +118,7 @@
             init: function(  ){
                 products.initCategories($('#category'));
                 products.initProductDetails($('#product'));
+                products.initCustomProduct($('#new_product'));
                 products.addImage($('#addImage'));
             },
             initCategories: function( trigger ){
@@ -110,6 +136,7 @@
                         success:function(data) {
 
 
+                            options = '<option value="">Products</option>';
                             for( i = 0; i < data.length; i++){
 
                                 options += '<option value="'+ data[i].id +'">' + data[i].product_name + '</option>';
@@ -139,6 +166,18 @@
 
                 })
             },
+            initCustomProduct: function( trigger ){
+                trigger.change(function () {
+                    if ($(this).is(":checked")){
+                        $('#select-product').hide();
+                        $('#custom-product-container').show();
+                    }else{
+                        $('#select-product').show();
+                        $('#custom-product-container').hide();
+                    }
+                });
+
+            },
             addImage: function (trigger) {
                 trigger.click(function () {
 
@@ -165,6 +204,8 @@
 
         $(window).on('load', function(){
             products.init();
+            $('#select-product').show();
+            $('#custom-product-container').hide();
         });
 
     </script>

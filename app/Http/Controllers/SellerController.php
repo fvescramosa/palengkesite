@@ -173,16 +173,32 @@ class SellerController extends Controller
 
     public function productStore(Request $request){
 
-        $product = Products::findorFail($request->product);
+       if($request->new_product !== 'on'){
+           $product = Products::findorFail($request->product);
 
-        $validate = $request->validate([
-            'price' => ['numeric', 'lt:'.$product->max_price]
-        ]);
+           $validate = $request->validate([
+               'price' => ['numeric', 'lt:'.$product->max_price]
+           ]);
 
+       }else{
+
+           $product = Products::create([
+               'category_id' => $request->category,
+               'product_name'	=> $request->product,
+               'min_price' => '',
+               'max_price'	=> '',
+               'srp'	=> '',
+               'code'	=> '',
+               'manufacturer'	=> '',
+               'type' => '',
+           ]);
+
+           $product->save();
+       }
 
         $create = SellerProduct::create([
             'seller_id' => auth()->user()->seller->id,
-            'product_id' => $request->product,
+            'product_id' => $product->id,
             'price' => $request->price,
             'type' => $request->type,
             'featured' => $request->featured,
