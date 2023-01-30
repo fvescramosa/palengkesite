@@ -69,7 +69,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('seller.orders.show') }}">
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
                                     </a>

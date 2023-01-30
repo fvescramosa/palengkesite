@@ -65,7 +65,36 @@
 
         <h1 class="title">Featured <span>Products</span></h1>
 
+        <div class="products-grid">
 
+            @foreach($featuredProducts as $featuredProduct)
+
+            <div class="product-item">
+
+                    <div class="product-image">
+                        <img src="{{ $featuredProduct->product->image }}" alt="">
+                    </div>
+                    <div class="product-details">
+
+
+                        <h4>{{ $featuredProduct->product->product_name }}</h4>
+                        <p>Php {{ number_format($featuredProduct->price, 2) }}</p>
+                        <form action="{{ route('shop.product.addToCart') }}" method="POST">
+
+                            @csrf
+                            <input type="hidden" name="seller_id" id="seller_id" value="{{ $featuredProduct->seller_id }}">
+                            <input type="hidden" name="product_id" id="product_id" value="{{ $featuredProduct->product_id }}">
+                            <input type="hidden" name="price" id="price" value="{{ $featuredProduct->price }}">
+                            <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $featuredProduct->id }}">
+                            <input type="number" name="quantity" id="quantity" value="" max="{{ $featuredProduct->stock }}">
+                            <button type="submit" {{ ($featuredProduct->stock ? '' : 'disabled') }}>Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+
+            @endforeach
+
+        </div>
 
         <div class="box-container">
 

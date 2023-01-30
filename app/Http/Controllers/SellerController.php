@@ -12,12 +12,14 @@ use App\SellerStall;
 use App\Stall;
 use App\StallAppointment;
 use App\Notification;
+use function compact;
 use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use function response;
 use function session;
+use function view;
 
 class SellerController extends Controller
 {
@@ -458,6 +460,14 @@ class SellerController extends Controller
 
     }
 
+
+    public function showOrders(){
+
+        $orders = auth()->user()->seller->orders()->get();
+
+        return view('seller.orders.index', compact(['orders']));
+
+    }
     public function display_details(Request $request){
 
         $stall = Stall::findOrFail($request->id);
@@ -465,6 +475,7 @@ class SellerController extends Controller
 
         return response()->json($stall);
     }
+
 
 
     public function switch_as_buyer(){

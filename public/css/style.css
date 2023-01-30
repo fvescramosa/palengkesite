@@ -1638,7 +1638,7 @@ display: flex;
    flex-flow: row wrap;
    width: 480px;
 }
-.list-header select, input{
+.list-header select, .list-header input{
    max-width: 240px;
 }
 .list-header .list-header-fields > div{
