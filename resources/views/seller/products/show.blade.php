@@ -32,7 +32,7 @@
             @endforeach
             </tbody>
         </table>
-        <a href="{{ route('seller.products.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a>
+        <a href="{{ route('seller.products.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>

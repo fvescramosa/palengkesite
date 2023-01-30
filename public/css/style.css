@@ -988,6 +988,7 @@ section{
 .form-group label{
    padding: 10px 2px;
    font-size: 16px;
+   margin-right: 10px;
 }
 
 .form-group select,
@@ -1637,6 +1638,13 @@ display: flex;
    display: flex;
    flex-flow: row wrap;
    width: 480px;
+}
+.list-header .list-header-fields .form-group{
+   flex: 1 1 auto;
+   display: flex;
+   align-items: center;
+   max-width: 50%;
+   padding: 10px 10px;
 }
 .list-header select, input{
    max-width: 240px;
