@@ -85,12 +85,12 @@
                                 </div>
                                 <div class="info-item short">
                                     <label for="type">Type</label>
-                                    <!-- <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
+                                     <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
                                         <option value=""></option>
                                         <option value="Retail">Retail</option>
                                         <option value="Retail">Wholesale</option>
-                                    </select> -->
-                                    <input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type" readonly>
+                                    </select>
+                                    {{--<input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type" readonly>--}}
                                     @error('type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -171,6 +171,8 @@
                     if ($(this).is(":checked")){
                         $('#select-product').hide();
                         $('#custom-product-container').show();
+
+
                     }else{
                         $('#select-product').show();
                         $('#custom-product-container').hide();
