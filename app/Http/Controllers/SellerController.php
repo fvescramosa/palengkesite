@@ -172,8 +172,14 @@ class SellerController extends Controller
     }
 
     public function productStore(Request $request){
+
         $product = Products::findorFail($request->product);
-        
+
+        $validate = $request->validate([
+            'price' => ['numeric', 'lt:'.$product->max_price]
+        ]);
+
+
         $create = SellerProduct::create([
             'seller_id' => auth()->user()->seller->id,
             'product_id' => $request->product,

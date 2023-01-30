@@ -25,6 +25,11 @@ class StallsController extends Controller
             $stalls = $stalls->where( function ($query){
                 $query->orWhere('number', 'like', '%' . $_GET['search'] . '%');
                 $query->orWhere('section', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhere('status', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhereHas('market', function($q){
+                    $q->where('market', 'like', '%' . $_GET['search'] . '%');
+                });
+
 
             });
         }
