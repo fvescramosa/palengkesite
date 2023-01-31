@@ -132,9 +132,13 @@ class SellerStallsController extends Controller
                 $data['status']= 'active';
 
 
-                SellerStall::where('id', $id)->update($data);
+                $seller_stall = SellerStall::findOrFail($id);
 
+                $seller_stall->update($data);
+
+                $seller_stall->stall()->update(['status' => 'occupied']);
             }
+
 
         }
 
