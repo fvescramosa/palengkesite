@@ -317,7 +317,7 @@
                     app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();
-                    // app.initNotifStallApproval();
+                    app.initNotifStallApproval();
                     // app.initNotifications();
                 });
 
