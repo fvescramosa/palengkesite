@@ -30,6 +30,21 @@ class SellerStallsController extends Controller
         //     }]);
         // }
 
+        if(isset($_GET['search'])){
+            $stalls = $stalls->where( function($query){
+                $query->orwhereHas('seller', function($q){
+                    $q->whereHas('user', function($qr){
+                        $qr->where('first_name', 'like', '%' . $_GET['search'] . '%');
+                    });
+                });
+                $query->orwhereHas('stall', function($q){
+                    $q->where('number', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('section', 'like', '%' . $_GET['search'] . '%');
+                });
+                $query->orwhere('status', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
         $stalls = $stalls->get();
 
 

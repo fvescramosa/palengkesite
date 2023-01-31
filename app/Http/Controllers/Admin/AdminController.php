@@ -87,7 +87,14 @@ class AdminController extends Controller
     }
 
     public function show(){
-        $staffs = new Admin();
+        $staffs = Admin::where('is_super', 0);
+
+        if(isset($_GET['search'])){
+            $staffs = $staffs->where( function($query){
+                $query->orwhere('name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
 
         $orderby = '';
         if(isset($_GET['orderby'])){
@@ -119,7 +126,7 @@ class AdminController extends Controller
             $staffs = $staffs->orderBy($orderby[0], $orderby[1]);
         }
 
-        $staffs= $staffs->where('is_super', 0)->paginate(10);
+        $staffs= $staffs->paginate(10);
 
         return view('admin.users/staff', compact(['staffs']));
     }

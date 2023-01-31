@@ -4,7 +4,16 @@
     <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
+            <form action="" method="GET"  class="form-group list-header" id="form-header">
                 <h3>Seller Stalls</h3>
+
+                <div class="list-header-fields">
+                        
+                        <div class="form-group">
+                            <input  class="form-control" type="text" name="search" id="search" value="{{ old('search') ??  $_GET['search']  ?? '' }}" placeholder="Search">
+                        </div>
+                </div>
+            </form>
 
                 {{ session()->get('market') }}
                 <table class="table table-group-divider">
