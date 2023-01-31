@@ -1638,6 +1638,7 @@ display: flex;
    display: flex;
    flex-flow: row wrap;
    width: 480px;
+   justify-content: flex-end;
 }
 
 .list-header .list-header-fields .form-group{
