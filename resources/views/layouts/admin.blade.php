@@ -270,7 +270,7 @@
                                     $('#stall-approval-notif').text(data); 
                                 }
                             }); 
-                        }, 5000);
+                        }, 100);
                     },
 
                     initNotifStallAppointment: function(){
@@ -288,7 +288,7 @@
                                   $('#stall-app-notif').text(data); 
                                 }
                             }); 
-                        }, 5000);
+                        }, 100);
                     },
 
                     initNotifications: function(){
@@ -306,7 +306,7 @@
                                     $('#notif').text(data); 
                                 }
                             }); 
-                        }, 500);
+                        }, 100);
                     }
                     
                 };
