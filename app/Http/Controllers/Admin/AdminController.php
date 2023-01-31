@@ -168,6 +168,13 @@ class AdminController extends Controller
 
     public function  showStaffTrash(){
         $staffs = Admin::onlyTrashed();
+
+        if(isset($_GET['search'])){
+            $staffs = $staffs->where( function($query){
+                $query->orwhere('name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
         
         $orderby = '';
         if(isset($_GET['orderby'])){
