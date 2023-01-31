@@ -35,6 +35,7 @@ class SellerStallsController extends Controller
                 $query->orwhereHas('seller', function($q){
                     $q->whereHas('user', function($qr){
                         $qr->where('first_name', 'like', '%' . $_GET['search'] . '%');
+                        $qr->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
                     });
                 });
                 $query->orwhereHas('stall', function($q){
@@ -45,7 +46,31 @@ class SellerStallsController extends Controller
             });
         }
 
-        $stalls = $stalls->get();
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['seller.user.first_name', 'asc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['seller.user.first_name', 'desc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+       
+
+        $stalls = $stalls->paginate(10);
 
 
         return view('admin/seller/stalls/index', compact(['stalls']));
