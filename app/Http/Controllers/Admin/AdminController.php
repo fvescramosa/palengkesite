@@ -229,7 +229,6 @@ class AdminController extends Controller
 
     public function setMarket(Request $request){
 
-
         session()->forget('market');
         $old = $request->current_url;
         session(['market' => $request->marketOption]);
