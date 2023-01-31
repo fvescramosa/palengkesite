@@ -46,29 +46,36 @@ class SellerStallsController extends Controller
             });
         }
 
+        $stalls = $stalls->select('seller_stalls.*')->join('sellers', 'seller_stalls.seller_id', '=', 'sellers.id')
+        ->join('users', 'users.id', '=', 'sellers.user_id');
+
         $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
-                $orderby = ['seller.user.first_name', 'asc'];
-                $sellers->orderBy($orderby[0], $orderby[1]);
+                $orderby = ['users.first_name', 'asc'];
+
             }
 
             else if($_GET['orderby'] == 'Z-A'){
-                $orderby = ['seller.user.first_name', 'desc'];
-                $sellers->orderBy($orderby[0], $orderby[1]);
+                $orderby = ['users.first_name', 'desc'];
+
             }
             else if($_GET['orderby'] == 'recent'){
-                $orderby = ['created_at', 'desc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $orderby = ['seller_stalls.created_at', 'desc'];
+
             }
 
             else if($_GET['orderby'] == 'oldest'){
-                $orderby = ['created_at', 'asc'];
-                $stalls->orderBy($orderby[0], $orderby[1]);
+                $orderby = ['seller_stalls.created_at', 'asc'];
+
             }
             
+        }else{
+            $orderby = ['users.first_name', 'asc'];
+
         }
-       
+
+        $stalls->orderBy($orderby[0], $orderby[1]);
 
         $stalls = $stalls->paginate(10);
 

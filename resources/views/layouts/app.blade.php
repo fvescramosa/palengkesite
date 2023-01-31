@@ -92,7 +92,7 @@
                             </li>
                         @endguest
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart "></i></a>
+                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart "></i></a>
                         </li>
                     </ul>
                 </div>
