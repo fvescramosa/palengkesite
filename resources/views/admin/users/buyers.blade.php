@@ -5,7 +5,7 @@
 <div class="profile">
             <div class="profile-wrapper">
                 <form action="" method="GET"  class="form-group list-header" id="form-header">
-                    <h3>Users</h3>
+                    <h3>Buyers</h3>
 
                     <div class="list-header-fields">
                         
@@ -56,8 +56,8 @@
                 </table>
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
                 
-                @if( isset($_GET['orderby'] ) )
-                {{$users->appends(['orderby' => $_GET['orderby']])->links()}}
+                @if( isset($_GET) )
+                {{$users->appends($_GET)->links()}}
                 @else
                 {{$users->links()}}
                 @endif

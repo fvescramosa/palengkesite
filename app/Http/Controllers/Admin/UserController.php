@@ -127,6 +127,17 @@ class UserController extends Controller
         ->select('sellers.*')
         ->join('users', 'sellers.user_id', '=', 'users.id');
 
+        if(isset($_GET['search'])){
+            $sellers = $sellers->where( function($query){
+                $query->orwhereHas('user', function($q){
+                    $q->where('first_name', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+                });
+                $query->orwhere('gender', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
 
         if(session()->has('market')){
 
@@ -173,6 +184,14 @@ class UserController extends Controller
         
         $buyers = Buyer::with('user')->onlyTrashed()
         ->select('buyers.*')->join('users', 'buyers.user_id', '=', 'users.id');
+
+        if(isset($_GET['search'])){
+            $buyers = $buyers->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
 
         $orderby = '';
         if(isset($_GET['orderby'])){

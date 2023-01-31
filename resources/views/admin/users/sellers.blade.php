@@ -57,8 +57,8 @@
                     @endforeach
                     </tbody>
                 </table>
-                @if( isset($_GET['orderby'] ) )
-                {{$users->appends(['orderby' => $_GET['orderby']])->links()}}
+                @if( isset($_GET) )
+                {{$users->appends($_GET)->links()}}
                 @else
                 {{$users->links()}}
                 @endif
