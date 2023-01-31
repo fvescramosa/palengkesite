@@ -27,11 +27,6 @@
                             <input type="hidden" name="page" value="{{ $_GET['page'] }}">
                         @endif
                     </div>
-
-
-
-
-
                 </form>
                 
                 <table class="table table-bordered">
