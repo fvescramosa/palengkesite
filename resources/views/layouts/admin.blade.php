@@ -270,7 +270,7 @@
                                     $('#stall-approval-notif').text(data); 
                                 }
                             }); 
-                        }, 500);
+                        }, 5000);
                     },
 
                     initNotifStallAppointment: function(){
@@ -288,7 +288,7 @@
                                   $('#stall-app-notif').text(data); 
                                 }
                             }); 
-                        }, 500);
+                        }, 5000);
                     },
 
                     initNotifications: function(){
@@ -316,7 +316,7 @@
                     app.filter($('#orderby'));
                     app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
-                    // app.initNotifStallAppointment();
+                    app.initNotifStallAppointment();
                     // app.initNotifStallApproval();
                     // app.initNotifications();
                 });
