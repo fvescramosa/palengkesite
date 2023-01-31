@@ -37,7 +37,7 @@ class ProductsController extends Controller
 
 
 
-          return view('home.category', compact(['products']));
+          return view('shop.category', compact(['products']));
 
     }
 
