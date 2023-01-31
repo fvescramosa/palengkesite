@@ -142,7 +142,7 @@
                             <span class="icon"><i class="fa fa-user-shield"></i></span>
                             <span class="item">Stall Approval</span>
 
-                            <span class="notif badge badge-danger" id="stall-approval-notif">0</span>
+                            <span class="notif badge badge-danger" id="stall-approval-notif">{{ App\SellerStall::where('status', 'pending')->get()->count()  }}</span>
                         </a>
                     </li>
                     <li>
@@ -150,7 +150,7 @@
                             <span class="icon"><i class="fa fa-clock"></i></span>
                             <span class="item">Stall Appointment</span>
 
-                            <span class="notif badge badge-danger" id="stall-app-notif">0</span>
+                            <span class="notif badge badge-danger" id="stall-app-notif">{{ App\StallAppointment::where('status', 'pending')->get()->count() }}</span>
                         </a>
                     </li>
                     <li class="collapsed" data-toggle="collapse" data-target="#products_submenu">
