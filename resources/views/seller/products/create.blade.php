@@ -50,7 +50,7 @@
 
                                 <div class="info-item long" id="select-product">
                                     <label for="Product">Product</label>
-                                    <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product" value="" >
+                                    <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product"  >
                                         <option value=""></option>
                                     </select>
                                     @error('product')
@@ -63,9 +63,9 @@
 
                                 <div class="info-item long" id="custom-product-container">
                                     <label for="Product">Product</label>
-                                    <input type="text"  class="form-control @error('product') is-invalid @enderror" id="custom-product" name="product" placeholder="Product" value="" >
+                                    <input type="text"  class="form-control @error('new_product_name') is-invalid @enderror" id="custom-product" name="new_product_name" placeholder="Product" value="" >
 
-                                    @error('product')
+                                    @error('new_product_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
