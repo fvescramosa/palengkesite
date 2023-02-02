@@ -88,7 +88,7 @@
                                      <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
                                         <option value=""></option>
                                         <option value="Retail">Retail</option>
-                                        <option value="Retail">Wholesale</option>
+                                        <option value="Wholesale">Wholesale</option>
                                     </select>
                                     {{--<input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type" readonly>--}}
                                     @error('type')

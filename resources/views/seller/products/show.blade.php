@@ -25,7 +25,7 @@
                     <td>{{ $seller_product->price }}</td>
                     <td>{{ $seller_product->product->code }}</td>
                     <td>{{ $seller_product->product->category->category }}</td>
-                    <td>{{ $seller_product->product->type }}</td>
+                    <td>{{ $seller_product->type }}</td>
                     <td><a href="{{ route('seller.products.edit', $seller_product->id) }}">Edit</a></td>
 
                 </tr>
