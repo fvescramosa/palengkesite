@@ -37,6 +37,9 @@ class SellerStallsController extends Controller
                         $qr->where('first_name', 'like', '%' . $_GET['search'] . '%');
                         $qr->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
                     });
+                    $q->orwhereHas('market', function($qr){
+                        $qr->where('market', 'like', '%' . $_GET['search'] . '%');
+                    });
                 });
                 $query->orwhereHas('stall', function($q){
                     $q->where('number', 'like', '%' . $_GET['search'] . '%');
