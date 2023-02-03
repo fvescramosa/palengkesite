@@ -29,6 +29,10 @@ class CategoriesController extends Controller
     public function store( Request $request){
         $category = Categories::create($request->all());
 
+        $validate = $request->validate([
+            'image' => "required|mimes:jpeg,jpg,png"
+        ]);
+
         if($category->save()){
             $message = [
                 'success' => true,
@@ -54,7 +58,10 @@ class CategoriesController extends Controller
     public function update($id, Request $request){
 
         $category = Categories::where('id', $id)
-            ->update([ 'category' => $request->category]);
+            ->update([ 
+                'category' => $request->category,
+                'image' => $request->image,
+            ]);
 
         if($category){
             $message = ['success' => true, 'message' => 'Update Successful!'];

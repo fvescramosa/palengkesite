@@ -39,6 +39,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
+                        <th>Type</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -48,6 +49,7 @@
                             <td>{{ $user->first_name }}</td>
                             <td>{{ $user->last_name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->seller->seller_type}}</td>
                             <td>
                                 <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
                                 <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 

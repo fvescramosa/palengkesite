@@ -33,6 +33,20 @@
 
                                 </div>
 
+                                <div class="info-item long">
+                                    <label for="Product">Image Upload</label>
+                                    <input type="file"  class="form-control @error('image') is-invalid @enderror"
+                                                        id="image"
+                                                        name="image"
+                                                        placeholder="" value="" >
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
