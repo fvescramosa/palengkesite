@@ -52,11 +52,6 @@
                 </div>
             </div>
 
-             <div>
-                <div class="box-item" style="background-image: url('https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/79916239_2581938508591436_3263318621106995200_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH04lADOCzBnqq4qJ3OWThZYO8qmJ5JKMBg7yqYnkkowMZiHOqYDaAMKa4VLau_ALAACTxE4XTHnmT2uf2--_aa&_nc_ohc=1FTTsBksEBcAX9KpMrl&tn=W4-puaK1zxrQFpU1&_nc_ht=scontent-hkg4-1.xx&oh=00_AfDKciGidwPFFpnegE_Sf-N0NBkihgYm8GsvBNCmAX5OFw&oe=63F191F6')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
 
         </div>
 
