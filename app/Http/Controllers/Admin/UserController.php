@@ -72,6 +72,9 @@ class UserController extends Controller
                 $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
                 $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
                 $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhereHas('seller', function($q){
+                    $q->where('seller_type', 'like', '%' . $_GET['search'] . '%');
+                });
             });
         }
 
@@ -135,6 +138,7 @@ class UserController extends Controller
                     $q->orwhere('email', 'like', '%' . $_GET['search'] . '%');
                 });
                 $query->orwhere('gender', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('seller_type', 'like', '%' . $_GET['search'] . '%');
             });
         }
 
