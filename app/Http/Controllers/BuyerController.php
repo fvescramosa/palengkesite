@@ -33,7 +33,7 @@ class BuyerController extends Controller
             'gender' => ['required', ''],
             'contact' => ['required', ''],
             'stnumber' => ['required', ''],
-            'stname' => ['required', ''],
+            'stname' => [''],
             'city' => ['required', ''],
             'province' => ['required', ''],
             'country' => ['required', ''],
@@ -113,7 +113,7 @@ class BuyerController extends Controller
 
         }
 
-
+        session()->put('user_type', 'seller');
        return redirect(route('seller.profile'));
     }
 }

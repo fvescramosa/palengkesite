@@ -11,7 +11,76 @@ class SellerStallsController extends Controller
 {
     //
     public function index(){
-        $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])->get();
+
+        
+        $stalls = SellerStall::with(['seller', 'seller.user', 'stall'])
+                            ->whereHas('seller')
+                            ->whereHas('stall',function($q){
+                                            if(session()->has('market')){
+                                                if(session()->get('market') != ''){
+                                                    $q->where('market_id', session()->get('market'));
+                                                }    
+                                            }
+                                        }
+                                    );
+
+        // if(session()->has('market')){
+        //     $stalls = $stalls->whereHas([ 'stall' => function($q){
+        //         $q->where('market_id', session()->get('market'));
+        //     }]);
+        // }
+
+        if(isset($_GET['search'])){
+            $stalls = $stalls->where( function($query){
+                $query->orwhereHas('seller', function($q){
+                    $q->whereHas('user', function($qr){
+                        $qr->where('first_name', 'like', '%' . $_GET['search'] . '%');
+                        $qr->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                    });
+                    $q->orwhereHas('market', function($qr){
+                        $qr->where('market', 'like', '%' . $_GET['search'] . '%');
+                    });
+                });
+                $query->orwhereHas('stall', function($q){
+                    $q->where('number', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('section', 'like', '%' . $_GET['search'] . '%');
+                });
+                $query->orwhere('status', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
+        $stalls = $stalls->select('seller_stalls.*')->join('sellers', 'seller_stalls.seller_id', '=', 'sellers.id')
+        ->join('users', 'users.id', '=', 'sellers.user_id');
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['users.first_name', 'asc'];
+
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['users.first_name', 'desc'];
+
+            }
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['seller_stalls.created_at', 'desc'];
+
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['seller_stalls.created_at', 'asc'];
+
+            }
+            
+        }else{
+            $orderby = ['users.first_name', 'asc'];
+
+        }
+
+        $stalls->orderBy($orderby[0], $orderby[1]);
+
+        $stalls = $stalls->paginate(10);
 
 
         return view('admin/seller/stalls/index', compact(['stalls']));
@@ -66,9 +135,13 @@ class SellerStallsController extends Controller
                 $data['status']= 'active';
 
 
-                SellerStall::where('id', $id)->update($data);
+                $seller_stall = SellerStall::findOrFail($id);
 
+                $seller_stall->update($data);
+
+                $seller_stall->stall()->update(['status' => 'occupied']);
             }
+
 
         }
 

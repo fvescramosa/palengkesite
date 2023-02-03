@@ -6,7 +6,7 @@
         <div class="profile-wrapper">
             <div class="card basic-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
-                    Product Information
+                    Stall Information
                 </div>
                 <div class="basic-info-body">
 
@@ -18,7 +18,7 @@
                         <div class="info-body-flex">
 
                             <div class="info-item long">
-                                <label for="Number">Number</label>
+                                <label for="Number">Stall No.</label>
                                 <input type="text"  class="form-control @error('number') is-invalid @enderror"
                                        id="number"
                                        name ="number"
@@ -97,13 +97,64 @@
                             </div>
 
                             <div class="info-item long">
-                                <label for="Market">Market</label>
-                                <input type="text"  class="form-control @error('market') is-invalid @enderror"
-                                       id="market"
-                                       name="market"
-                                       placeholder="" value="{{ $stalls->market }}" >
+                                <label for="Rate">Rate</label>
+                                <input type="text"  class="form-control @error('rate') is-invalid @enderror"
+                                       id="rate"
+                                       name="rate"
+                                       placeholder="" value="{{ $stalls->rate }}" >
 
                                 </select>
+                                @error('rate')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            
+                            </div>
+                            
+                            <div class="info-item long">
+                                <label for="Coordinates">Coordinates</label>
+                                <input type="text"  class="form-control @error('coords') is-invalid @enderror"
+                                       id="coords"
+                                       name="coords"
+                                       placeholder="" value="{{ $stalls->coords }}" >
+                                
+                                </select>
+                                @error('coords')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            
+                            </div>
+                            
+                            <div class="info-item long">
+                                <label for="Meter Number">Meter Number</label>
+                                <input type="text"  class="form-control @error('meter_num') is-invalid @enderror"
+                                       id="meter_num"
+                                       name="meter_num"
+                                       placeholder="" value="{{ $stalls->meter_num }}" >
+                            
+                                </select>
+                                @error('meter_num')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            
+                            </div>
+                            
+                            <div class="info-item long">
+                                <label for="Market">Market</label>
+                                <select   class="form-control @error('market') is-invalid @enderror" id="market"
+                                         name="market">
+                                    @foreach($markets as $market)
+                                        <option value="{{ $market->id }}" {{ ($stalls->market->id == $market->id) ? 'selected' : '' }}>
+                                            {{ $market->market }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
                                 @error('market')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

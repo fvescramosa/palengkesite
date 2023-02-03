@@ -58,6 +58,30 @@
 
                                 </div>
 
+                                <div class="form-group info-item ">
+                                    <label for="seller_type">Seller Type</label>
+                                    <select  class="form-control" id="seller_type" name="seller_type" placeholder="" value="" >
+                                        <option value="wholesaler">Wholesaler</option>
+                                        <option value="retailer">Retailer</option>
+                                    </select>
+
+                                    @error('seller_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group info-item ">
+                                    <label for="market">Market</label>
+                                    <select  class="form-control" id="market_id" name="market_id" placeholder="" value="" >
+                                        <option value="1">Poblacion</option>
+                                        <option value="2">Anilao</option>
+                                        <option value="3">Talaga</option>
+                                    </select>
+                                </div>
+                            
+
 
                             @endif
 

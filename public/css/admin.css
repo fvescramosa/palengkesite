@@ -92,20 +92,34 @@
    padding-left: 25px;
 }
 
+#products_submenu li {
+   padding-left: 25px;
+}
 
-#sortlist{
+
+#sortlist,
+#palengke-filter{
    display: flex;
    flex-flow: row wrap;
    justify-content: right;
    flex: 1 1 75%;
 }
 
-#sortlist select {
+#sortlist select,
+#palengke-filter select {
    flex: 1 1 calc(25% - 25px);
    max-width: calc(25% - 25px);
-   height: 35px;
-    font-size: 15px;
+   font-size: 15px;
 }
+
+#sortlist select{
+   height: 35px;
+}
+
+#palengke-filter select{
+   height: 30px;
+}
+
 #sortlist select:not(:last-child) {
    margin-right: 25px;
 }
@@ -200,3 +214,107 @@
 }
 
 */
+
+.dashboard-flex{
+   display: flex;
+   width:100%;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
+}
+
+.dashboard-column{
+   border: 1px solid #e3e3e3;
+   height:  250px;
+   border-radius:25px; 
+   margin: 15px 15px;
+   /* flex 1 occupy row if col is less than assigned count of col  */
+   flex: 1 1 calc(33.3333% - 30px); /*(100% / 3 = 33.3333%) calculate the width of column - total margin left and right of 1 column*/
+   max-width: calc(33.3333% - 30px);
+   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.column-content{
+   display: flex;
+   flex-flow: row wrap; /*row = horizontal, wrap = it will squeeze the container*/
+   width:100%;
+   height: 175px;
+}
+
+.col-left,
+.col-right{
+   flex: 1 1 50%;
+   padding: 10px;
+   display: flex;
+   align-items: center;
+   max-width: 50%;
+}
+
+.col-right{
+   justify-content: center;
+   text-align: center;
+   
+}
+
+.col-right span{
+   font-size: 26px;
+   border-radius: 5px;
+}
+
+.col-left h3{
+   font-size: 28px;
+   padding-left: 15px;
+}
+
+.sidebar-content{
+   overflow-y: scroll;
+   height: calc(100% - 50px);
+   padding-bottom: 50px;
+}
+
+.notif-container{
+   max-width: 771px;
+   margin: 50px auto;
+}
+
+.notif-container .content{
+   padding: 15px 15px;
+   border-bottom: 1px solid #e5e5e5;
+}
+
+@media only screen and (max-width: 767px){
+   .dashboard-column{
+      width: 100%;
+      max-width: 100%;
+      flex: 1 1 100%;
+   }
+
+   .col-left,
+   .col-right{
+      width: 100%;
+   }
+
+   .col-left h3 {
+      font-size: 20px;
+   }
+}
+
+@media only screen and (max-width: 480px){
+   .dashboard-column{
+      width: 100%;
+   }
+}
+
+@media only screen and (max-width: 320px){
+   .dashboard-column{
+      width: 100%;
+   }
+}
+
+.pagination {
+   font-size: 15px;
+   padding: 10px 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

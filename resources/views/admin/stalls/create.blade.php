@@ -19,7 +19,7 @@
 
 
                             <div class="form-group long">
-                                <label for="Number">Number</label>
+                                <label for="number">Stall No.</label>
                                 <input type="text"  class="form-control @error('number') is-invalid @enderror"
                                                     id="number"
                                                     name ="number"
@@ -81,13 +81,65 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Section">Section</label>
-                                <input type="text"  class="form-control @error('section') is-invalid @enderror"
-                                                    id="section"
-                                                    name="section"
-                                                    placeholder="" value="" >
+
+                            <label for="Section">Section</label>
+                                <select  class="form-control @error('section') is-invalid @enderror" 
+                                            id="section" 
+                                            name="section" 
+                                            placeholder="Section">
+                                            <option value=""></option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                            @endforeach
+                                </select>
+
 
                                 @error('section')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
+                                <label for="Rate">Rate</label>
+                                <input type="text"  class="form-control @error('rate') is-invalid @enderror"
+                                                    id="rate"
+                                                    name="rate"
+                                                    placeholder="" value="" >
+
+                                @error('rate')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
+                                <label for="Coords">Coordinates</label>
+                                <input type="text"  class="form-control @error('coords') is-invalid @enderror"
+                                                    id="coords"
+                                                    name="coords"
+                                                    placeholder="" value="" >
+
+                                @error('coords')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                            </div>
+
+                            <div class="form-group long">
+                                <label for="Meter Number">Meter Number</label>
+                                <input type="text"  class="form-control @error('meter_num') is-invalid @enderror"
+                                                    id="meter_num"
+                                                    name="meter_num"
+                                                    placeholder="" value="" >
+
+                                @error('meter_num')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

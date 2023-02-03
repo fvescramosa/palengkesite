@@ -18,7 +18,47 @@ class ProductsController extends Controller
     }
 
     public function show(){
-        $products = Products::all();
+        $products = Products::whereHas('category');
+
+        if(isset($_GET['search'])){
+            $products = $products->where( function($query){
+                $query->orwhere('product_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhereHas('category', function($q){
+                    $q->where('category', 'like', '%' . $_GET['search'] . '%');
+                });
+            });
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['product_name', 'asc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['product_name', 'desc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['product_name', 'asc'];
+            $products->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $products = $products->paginate(10);
+
         return view('admin.products.show', compact(['products']));
     }
 
@@ -33,6 +73,7 @@ class ProductsController extends Controller
 
 
 
+        
         $products = Products::create(
             [
                 'category_id' => $request->category,
@@ -46,14 +87,14 @@ class ProductsController extends Controller
             ]
         );
 
-
+       
         if(  $products->save() ){
             $message = ['success' => true, 'message' => 'Update Succesful!'];
         }else{
             $message = ['success' => false, 'message' => 'Update failed!'];
         }
 
-        return redirect( route('products.show'))->with($message);
+        return redirect( route('admin.products.show'))->with($message);
     }
 
     public function edit($id){
@@ -89,7 +130,76 @@ class ProductsController extends Controller
         return view('admin.products.edit', compact(['categories', 'products']))->with($message);
     }
 
-    public function delete(){}
+    public function trash(){
+        $products = Products::with('category')->onlyTrashed();
+        
+        if(isset($_GET['search'])){
+            $products = $products->where( function($query){
+                $query->orwhere('product_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhereHas('category', function($q){
+                    $q->where('category', 'like', '%' . $_GET['search'] . '%');
+                });
+            });
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['product_name', 'asc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['product_name', 'desc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $products->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['product_name', 'asc'];
+            $products->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $products = $products->paginate(10);
+
+
+        return view('admin.products/trash', compact(['products']));
+    }
+
+    public function deleteProduct($id){
+
+       
+        $delete =  Products::where('id', $id)->delete();
+
+
+        return redirect(route('admin.products.show')); 
+        
+    }
+
+    public function recoverProduct($id){
+
+        $recover = Products::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.products.show'));
+        
+    }
+
+    public function ProductForceDelete($id){
+        
+        $delete = Products::where('id', $id)->forceDelete();
+        return redirect(route('admin.products.trash'));
+    }
 
     public function showByCategory($category){
 
@@ -97,7 +207,6 @@ class ProductsController extends Controller
             $q->where('category',$category);
         })->get();
 
-        dd($products);
 
     }
 }

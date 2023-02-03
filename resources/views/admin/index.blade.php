@@ -1,23 +1,82 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<div class="dashboard-flex">
+    <!-- display flex -->
+        <!-- columns 1 x 3 border: 1px solid #e3e3e3; border-radius:25px; flex: 1 1 33.3333% -->
+        <div class="dashboard-column" id="seller-col">
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Sellers</h3>
+                    </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                            {{ $sellers }}
+                        </span>
+                    </div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
                         </div>
-                    @endif
 
-                    {{ __('You are an Admin!') }}
-                </div>
+        </div>
+
+        <div class="dashboard-column" id="buyer-col">
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Buyers</h3>
+                    </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                            {{ $buyers }}
+                        </span>
+                    </div>
+
             </div>
         </div>
+        
+        <div class="dashboard-column" id="staff-col">
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Staff</h3>
+                </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                            0
+                        </span>
+                    </div>
+
+            </div>
+        </div>
+
+        <div class="dashboard-column" id="appointment-col">
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Stall Appointment</h3>
+                    </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                            {{ $stallappointments }}
+                        </span>
+                    </div>
+
     </div>
+</div>
+
+        <div class="dashboard-column" id="approval-col">
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Stall Approval</h3>
+                    </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                            {{ $stallapproval }}
+                        </span>
+                    </div>
+
+            </div>
+        </div>
+        <!-- columns 1 x 3 -->
+    <!-- display flex -->
+
+    
 </div>
 @endsection

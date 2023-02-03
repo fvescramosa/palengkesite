@@ -54,6 +54,12 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('seller.switch.buyer') }}">
+                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
+                                <span class="item">Switch as Buyer</span>
+                            </a>
+                        </li>
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
@@ -63,7 +69,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('seller.orders.show') }}">
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
                                     </a>

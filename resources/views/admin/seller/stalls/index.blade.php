@@ -4,7 +4,31 @@
     <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
+            <form action="" method="GET"  class="form-group list-header" id="form-header">
                 <h3>Seller Stalls</h3>
+
+                <div class="list-header-fields">
+                        
+                        <div class="form-group">
+                            <input  class="form-control" type="text" name="search" id="search" value="{{ old('search') ??  $_GET['search']  ?? '' }}" placeholder="Search">
+                        </div>
+
+                        <div class="form-group">
+                            <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
+                                <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>Name (A-Z)</option>
+                                <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Name (Z-A)</option>
+                                <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
+                                <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
+                            </select>
+                        </div>
+
+                        @if(isset($_GET['page']))
+                            <input type="hidden" name="page" value="{{ $_GET['page'] }}">
+                        @endif
+                </div>
+            </form>
+
+                {{ session()->get('market') }}
                 <table class="table table-group-divider">
                     <thead>
                     <tr>
@@ -12,6 +36,7 @@
                         <th>Stall No.</th>
                         <th>Section</th>
                         <th>Sqm</th>
+                        <th>Location</th>
                         <th>Amount / sqm</th>
                         <th>Rental Fee</th>
                         <th></th>
@@ -25,6 +50,7 @@
                             <td> {{ $stall->stall->number }}</td>
                             <td> {{ $stall->stall->section }}</td>
                             <td> {{ $stall->stall->sqm }}</td>
+                            <td> {{ $stall->stall->market->market }}</td>
                             <td> {{ $stall->stall->amount_sqm }}</td>
                             <td> {{ $stall->stall->rental_fee }}</td>
                             <td>
@@ -38,7 +64,7 @@
                             </td>
                             <td>
 
-                                @if( $stall->status == 'pending')
+                                @if( $stall->status == 'pending' &&  $stall->type == 0 )
                                     <form action="{{ route('admin.seller.stalls.approve') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="seller_id" value="{{  $stall->seller->user->id   }}">
@@ -54,6 +80,11 @@
                     @endforeach
                     </tbody>
                 </table>
+                @if( isset($_GET) )
+                {{$stalls->appends($_GET)->links()}}
+                @else
+                {{$stalls->links()}}
+                @endif
             </div>
         </div>
     </div>
@@ -98,19 +129,9 @@
                                     </div>
                                     <div class="form-group long">
                                         <label for="">Duration</label>
-                                        <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration"  value="{{ $stall->duration }}">
+                                        <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration"  value="{{ $stall->duration }}" readonly>
 
                                         @error('duration')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group long">
-                                        <label for="">Occupancy Fee</label>
-                                        <input type="text" class="form-control @error('occupancy_fee') is-invalid @enderror" name="occupancy_fee" id="occupancy_fee" value="{{ $stall->occupancy_fee }}">
-
-                                        @error('occupancy_fee')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -140,6 +161,49 @@
         </div>
 
     @endforeach
+
+    <script>
+        let date_1 = '';
+        let date_2 = '';
+        const products = {
+            initDuration: function( trigger ){
+                trigger.change(function () {
+
+                    var self = $(this);
+                    if(self.attr('id') == 'end_date'){
+                         date_1 = new Date(self.val());
+                    }
+                    if(self.attr('id') == 'start_date'){
+                         date_2 = new Date(self.val());
+                    }
+
+                    if(date_1 !== '' && date_2 !== ''){
+                    // let difference = date_1.getTime() - date_2.getTime();
+                    // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    // $('#duration').val(TotalDays);
+
+                    
+                        var months;
+                        var result;
+                        months = (date_1.getFullYear() - date_2.getFullYear()) * 12;
+                        months -= date_2.getMonth();
+                        months += date_1.getMonth();
+
+                        result = months <= 0  ? 0 : months;
+                        self.closest('form').find('#duration').val(result);
+                    }
+                });
+            },
+
+        };
+
+            $(window).on('load', function(){
+           
+
+            products.initDuration($('input[type="date"]'));
+        });
+
+    </script>
 
 
 @endsection

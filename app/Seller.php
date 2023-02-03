@@ -2,17 +2,21 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
     //
 
+    use SoftDeletes;
+
     protected $fillable = [
         'birthday',
         'age',
         'gender',
         'user_id',
+        'seller_type',
         'market_id',
     ];
 
@@ -35,5 +39,14 @@ class Seller extends Model
     public function market(){
         return $this->belongsTo( Market::class);
     }
+
+    public function carts(){
+        return $this->hasMany(Cart::class );
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class );
+    }
+
 
 }

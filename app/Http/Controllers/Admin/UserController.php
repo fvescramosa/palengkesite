@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Seller;
+use App\Buyer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -16,7 +18,15 @@ class UserController extends Controller
     }
 
     public function showBuyer(){
-        $users = User::where('user_type_id', '2');
+        $users = User::whereHas('buyer');
+
+        if(isset($_GET['search'])){
+            $users = $users->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
 
         $orderby = '';
         if(isset($_GET['orderby'])){
@@ -46,16 +56,24 @@ class UserController extends Controller
             $users->orderBy($orderby[0], $orderby[1]);
         }
 
-        $users = $users->get();
+        $users = $users->paginate(10);
 
         return view('admin.users/buyers', compact(['users']));
     }
 
     public function showSellerList(){
 
-       
+        $users = User::whereHas('seller')->whereHas('seller.seller_stalls', function($q){
+            $q->where('status', 'active');
+        });
 
-        $users = User::where('user_type_id', '1');
+        if(isset($_GET['search'])){
+            $users = $users->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
 
         if(session()->has('market')){
 
@@ -99,10 +117,113 @@ class UserController extends Controller
 
 
         
-        $users = $users->get();
-
+        $users = $users->paginate(10);
         
         return view('admin.users/sellers', compact(['users']));
+    }
+
+    public function  showSellerTrash(){
+        $sellers = Seller::with('user')->onlyTrashed()
+        ->select('sellers.*')
+        ->join('users', 'sellers.user_id', '=', 'users.id');
+
+        if(isset($_GET['search'])){
+            $sellers = $sellers->where( function($query){
+                $query->orwhereHas('user', function($q){
+                    $q->where('first_name', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                    $q->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+                });
+                $query->orwhere('gender', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
+
+        if(session()->has('market')){
+
+            $marketOption = session()->get('market');
+
+            $sellers->where('sellers.market_id', $marketOption);
+        
+
+        }
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['users.first_name', 'asc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['users.first_name', 'desc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['sellers.deleted_at', 'desc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['sellers.deleted_at', 'asc'];
+                $sellers->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['users.first_name', 'asc'];
+            $sellers->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $sellers = $sellers->paginate(10);
+
+        return view('admin.users/trash', compact(['sellers']));
+    }
+
+    public function  showBuyerTrash(){
+        
+        $buyers = Buyer::with('user')->onlyTrashed()
+        ->select('buyers.*')->join('users', 'buyers.user_id', '=', 'users.id');
+
+        if(isset($_GET['search'])){
+            $buyers = $buyers->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['users.first_name', 'asc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['users.first_name', 'desc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['buyers.deleted_at', 'desc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['buyers.deleted_at', 'asc'];
+                $buyers->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['users.first_name', 'asc'];
+            $buyers->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $buyers = $buyers->paginate(10);
+
+        return view('admin.users/buyers-trash', compact(['buyers']));
     }
 
     public function showSeller($id){
@@ -148,19 +269,53 @@ class UserController extends Controller
 
     }
 
-    public function delete($id){
+    public function deleteSeller($id){
 
-        $user_type = User::find($id)->user_type_id;
-       $delete =  User::where('id', $id)->delete();
+       
+        $delete =  Seller::where('user_id', $id)->delete();
 
-    //   dd( $delete );
 
-   
+        return redirect(route('admin.show.sellers.list')); 
+        
+    }
 
-        if($user_type == 2){
-            return redirect(route('admin.show.buyers.list'));
-        }else{
-            return redirect(route('admin.show.sellers.list')); 
-        }
+    public function deleteBuyer($id){
+
+       
+        $delete =  Buyer::where('user_id', $id)->delete();
+
+
+        return redirect(route('admin.show.buyers.list')); 
+        
+    }
+
+    public function recoverSeller($id){
+
+        $recover = Seller::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.show.sellers.list'));
+        
+    }
+
+    public function recoverBuyer($id){
+
+        $recover = Buyer::withTrashed()->where('id', $id)->restore();       
+
+
+        return redirect(route('admin.show.buyers.list'));
+        
+    }
+
+    public function SellerForceDelete($id){
+        
+        $delete = Seller::where('id', $id)->forceDelete();
+        return redirect(route('admin.show.sellers.trash'));
+    }
+
+    public function BuyerForceDelete($id){
+        
+        $delete = Buyer::where('id', $id)->forceDelete();
+        return redirect(route('admin.show.buyers.trash'));
     }
 }

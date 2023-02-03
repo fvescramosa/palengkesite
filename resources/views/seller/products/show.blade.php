@@ -25,13 +25,14 @@
                     <td>{{ $seller_product->price }}</td>
                     <td>{{ $seller_product->product->code }}</td>
                     <td>{{ $seller_product->product->category->category }}</td>
-                    <td>{{ $seller_product->product->type }}</td>
+                    <td>{{ $seller_product->type }}</td>
                     <td><a href="{{ route('seller.products.edit', $seller_product->id) }}">Edit</a></td>
 
                 </tr>
             @endforeach
             </tbody>
         </table>
+        <a href="{{ route('seller.products.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>

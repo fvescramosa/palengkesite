@@ -17,7 +17,8 @@ class SellerStall extends Model
         'seller_id',
         'status',
         'contact_of_lease',
-        'type'
+        'type',
+        'name'
     ];
 
 

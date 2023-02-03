@@ -27,14 +27,14 @@
                             <div class="form-group" style="display: flex; flex-flow:  row wrap">
                                 <div class="info-item">
                                     <label for="">Stall</label>
-                                    <select name="stall" id="stall" class="form-control @error('stall') is-invalid @enderror">
+                                    <select name="number" id="number" class="form-control @error('number') is-invalid @enderror">
                                         <option value="">Stall No.</option>
                                         @foreach($stalls as $stall)
                                             <option value="{{ $stall->id }}"> Stall No. {{ $stall->number }}</option>
                                         @endforeach
                                     </select>
 
-                                     @error('stall')
+                                     @error('number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -45,7 +45,7 @@
                                     <label for="">Rental Fee per Month</label>
                                     <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
 
-                                    @error('duration')
+                                    @error('rental_fee')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

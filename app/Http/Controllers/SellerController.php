@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Categories;
 use App\Mail\NewUserWelcomeMail;
 use App\Products;
+use App\Buyer;
 use App\Seller;
 use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
 use App\StallAppointment;
+use App\Notification;
+use function compact;
 use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use function response;
+use function session;
+use function view;
 
 class SellerController extends Controller
 {
@@ -47,10 +52,13 @@ class SellerController extends Controller
 
     public function store(Request $request){
 
+        
         $validate = $request->validate([
             'birthday' => ['required', ''],
             'age' => ['required', 'numeric', 'min:18'],
-            'gender' => ['required', ''],
+            'gender' => ['required'],
+            'market_id' => ['required'],
+            'seller_type' => ['required'],
             'user_id' => '',
         ]);
 
@@ -60,9 +68,26 @@ class SellerController extends Controller
                     'birthday' => $request->birthday,
                     'age' => $request->age,
                     'gender' => $request->gender,
+                    'market_id' => $request->market_id,
+                    'seller_type' => $request->seller_type,
                     'user_id' => auth()->user()->id,
                 ]
             );
+
+            if(auth()->user()->buyer()->exists() == false){
+                $buyer = Buyer::create(
+                    [
+                        'birthday' => $request->birthday,
+                        'age' => $request->age,
+                        'gender' => $request->gender,
+                        'market_id' => $request->market_id,
+                        'seller_type' => $request->seller_type,
+                        'user_id' => auth()->user()->id,
+                    ]
+                );
+
+                $buyer->save();
+            }
 
             if($seller->save()){
                 $data = array('name'=>"Frank Test");
@@ -138,11 +163,46 @@ class SellerController extends Controller
         return response()->json($data);
     }
 
+    public function findProductsByID(Request $request){
+
+        $data = Products::where('id', $request->id)->get();
+
+//        return view('seller/products/list', compact(['products']));
+        return response()->json($data);
+    }
+
     public function productStore(Request $request){
+
+       if($request->new_product !== 'on'){
+
+           $product = Products::findorFail($request->product);
+
+           if ($product->max_price != null){
+               $validate = $request->validate([
+                   'price' => ['numeric', 'lt:'.$product->max_price]
+               ]);
+           }
+
+
+       }else{
+
+           $product = Products::create([
+               'category_id' => $request->category,
+               'product_name'	=> $request->new_product_name,
+               'min_price' => '',
+               'max_price'	=> '',
+               'srp'	=> '',
+               'code'	=> '',
+               'manufacturer'	=> '',
+               'type' => '',
+           ]);
+
+           $product->save();
+       }
 
         $create = SellerProduct::create([
             'seller_id' => auth()->user()->seller->id,
-            'product_id' => $request->product,
+            'product_id' => $product->id,
             'price' => $request->price,
             'type' => $request->type,
             'featured' => $request->featured,
@@ -150,6 +210,17 @@ class SellerController extends Controller
         ]);
 
         $create->save();
+
+        if($request->price > $product->max_price){
+            Notification::create([
+                'title' => 'Overpriced Product',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'user_id' => auth()->user()->id,
+                'status' => 'unread',
+                'product_id' => $product->id,
+                'type' => 'pricing',
+            ]);
+        }
 
         $categories = Categories::all();
         if($create){
@@ -198,65 +269,12 @@ class SellerController extends Controller
 
     }
 
-    /*Has Stall*/
-    public function stallCreate($id){
-
-        $stall = Stall::whereDoesntHave('seller_stall')->findOrFail($id);
-
-
-        return view('seller/stalls/create', compact(['stall']));
-    }
-
-    public function stallStore(Request $request){
-
-
-        $data = [
-            'stall_id' => $request->stall_id ,
-            'status' => 'pending',
-            'seller_id' => auth()->user()->seller->id
-        ];
-
-
-//        dd(auth()->user()->seller()->seller_stalls);
-//
-
-        $create = SellerStall::create($data);
-
-
-        if( $create->save()){
-            $appointment = [
-                'stall_id' => $request->stall_id ,
-                'seller_id' => auth()->user()->seller->id,
-                'seller_stall_id' => $create->id,
-                'date' => $request->appointment_date,
-                'status' => 'pending',
-                'type' => 1,
-            ];
-
-            $createAppointment = StallAppointment::create($appointment);
-        }
-
-//        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
-        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
-
-    }
-
-    /*No Stall*/
-    public function stallCreateDetails(){
-
-        $stalls = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
-            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-        })->get();
-
-
-        return view('seller/stalls/create_details', compact(['stalls']));
-    }
-
     public function stallStoreDetails(Request $request){
 
 
         $data = [
             'stall_id' => $request->stall ,
+            'name' => $request->name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'duration' => $request->duration,
@@ -266,6 +284,7 @@ class SellerController extends Controller
             'type' => 0,
         ];
 
+        
         $validate = $request->validate([
             "stall" => "required",
             "contract_of_lease" => "required|mimes:pdf|max:10000"
@@ -292,6 +311,90 @@ class SellerController extends Controller
 
     }
 
+    /*NO Stall*/
+    public function stallCreate($id){
+
+        $stall = Stall::whereDoesntHave('seller_stall')->findOrFail($id);
+
+        
+        return view('seller/stalls/create', compact(['stall']));
+    }
+
+    public function stallStore(Request $request){
+
+
+        $data = [
+            'stall_id' => $request->stall_id ,
+            'status' => 'pending',
+            'seller_id' => auth()->user()->seller->id,
+            'type' => 1,
+        ];
+
+
+//        dd(auth()->user()->seller()->seller_stalls);
+//
+
+        $create = SellerStall::create($data);
+
+
+        if( $create->save()){
+            $appointment = [
+                'stall_id' => $request->stall_id ,
+                'seller_id' => auth()->user()->seller->id,
+                'seller_stall_id' => $create->id,
+                'date' => $request->appointment_date,
+                'status' => 'pending',
+                
+            ];
+
+            $createAppointment = StallAppointment::create($appointment);
+        }
+
+//        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
+        return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);
+
+    }
+
+    /*HAS Stall*/
+    
+    public function stallHasSelect()
+    {
+
+        $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
+                            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+                        })
+        ->where('market_id', auth()->user()->seller->market_id)
+        ->orderByRaw('CONVERT(number, SIGNED)', 'desc')
+        ->get();
+
+
+        return view('seller.stalls.select-has-stall', compact(['stalls']))->with(['message' => '']);
+
+    }
+
+    public function stallHasCreate($id){
+
+        $stall = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
+            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+        })->findOrFail($id);
+
+        
+        return view('seller/stalls/has-create', compact(['stall']));
+    }
+
+
+    public function stallCreateDetails(){
+
+        $stalls = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
+            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+        })->get();
+
+
+        return view('seller/stalls/create_details', compact(['stalls']));
+    }
+
+    
+
     public function stallShow()
     {
         //$seller_products = SellerProducts::with(['product', 'seller', 'product.category'])->where(['seller_id' => auth()->user()->seller->id])->get();
@@ -315,7 +418,7 @@ class SellerController extends Controller
 
         $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-        })->get();
+        })->where('market_id', auth()->user()->seller->market_id)->get();
 
 
 
@@ -383,6 +486,14 @@ class SellerController extends Controller
 
     }
 
+
+    public function showOrders(){
+
+        $orders = auth()->user()->seller->orders()->get();
+
+        return view('seller.orders.index', compact(['orders']));
+
+    }
     public function display_details(Request $request){
 
         $stall = Stall::findOrFail($request->id);
@@ -392,4 +503,29 @@ class SellerController extends Controller
     }
 
 
+
+    public function switch_as_buyer(){
+
+        if(Auth::user()->user_type_id == 2){
+
+            if(!Auth::user()->buyer()->exists()){
+                $seller_info = Auth::user()->seller;
+
+                $data = [
+                    'birthday' => $seller_info->birthday,
+                    'age' => $seller_info->age,
+                    'gender' => $seller_info->gender,
+                ];
+
+
+                Auth::user()->buyer()->create($data);
+
+            }
+
+        }
+
+            session()->put('user_type', 'buyer');
+
+        return redirect(route('buyer.profile', ['id' => Auth::user()->id]));
+    }
 }

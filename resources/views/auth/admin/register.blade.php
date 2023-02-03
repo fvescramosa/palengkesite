@@ -14,7 +14,7 @@
                 @csrf
 
                  <div class="form-group">
-                    <label for="name" class="col-md-4 col-form-label ">{{ __('First Name') }}</label>
+                    <label for="name" class="col-md-4 col-form-label ">{{ __('Name') }}</label>
 
 
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="row mb-0">
-                    <div class="">
+                    <div class="btn-container">
                         <button type="submit" class="btn btn-secondary">
                             {{ __('Register') }}
                         </button>

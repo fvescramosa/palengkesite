@@ -22,4 +22,8 @@ class SellerProduct extends Model
     public function seller(){
         return $this->belongsTo(Seller::class);
     }
+
+    public function carts(){
+        return $this->hasMany(Cart::class );
+    }
 }
