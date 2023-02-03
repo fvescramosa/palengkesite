@@ -217,13 +217,6 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-<<<<<<< HEAD
-=======
-            "support": {
-                "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/2.13.9"
-            },
->>>>>>> ce57a3418dbb58cef4effa29a902aa78f077254c
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",

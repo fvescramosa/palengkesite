@@ -10,6 +10,7 @@
                 <tr>
 
                     <th>Category</th>
+                    <th>Image</th>
                     <th></th>
                 </tr>
             </thead>
@@ -17,6 +18,7 @@
             @foreach($categories as $category)
                 <tr>
                     <td>{{ $category->category }}</td>
+                    <td><img src="{{ asset('public/Image/'.$category->image)  }}" alt=""></td>
                     <td><a href="{{ route('admin.categories.edit', $category->id) }}">Edit</a></td>
 
                 </tr>

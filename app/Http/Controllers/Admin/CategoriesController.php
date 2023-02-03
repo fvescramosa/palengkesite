@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Categories;
+use function dd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,11 +28,25 @@ class CategoriesController extends Controller
 
 
     public function store( Request $request){
-        $category = Categories::create($request->all());
+
 
         $validate = $request->validate([
             'image' => "required|mimes:jpeg,jpg,png"
         ]);
+
+        $data = [
+            'category' => $request->category
+        ];
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$request->category;
+            $file->move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
+
+        $category = Categories::create($data);
+
+
 
         if($category->save()){
             $message = [
@@ -57,11 +72,18 @@ class CategoriesController extends Controller
 
     public function update($id, Request $request){
 
+        $data = [
+            'category' => $request->category,
+        ];
+        if($request->file('image') != null){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$request->category;
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
+
         $category = Categories::where('id', $id)
-            ->update([ 
-                'category' => $request->category,
-                'image' => $request->image,
-            ]);
+            ->update($data);
 
         if($category){
             $message = ['success' => true, 'message' => 'Update Successful!'];
