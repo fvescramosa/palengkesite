@@ -13,7 +13,7 @@
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('admin.categories.store') }}" method="POST" class="form-">
+                    <form action="{{ route('admin.categories.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 

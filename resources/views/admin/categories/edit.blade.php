@@ -13,7 +13,7 @@
                     @if(isset($message))
                         <div class="alert alert-{{ ($success) ? 'success' : 'danger' }}"><strong>{{ $message  }}</strong></div>
                     @endif
-                    <form action="{{ route('admin.categories.update', [$category->id]) }}" method="POST" class="form-">
+                    <form action="{{ route('admin.categories.update', [$category->id]) }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="info-item long">
-                                <label for="Image">Image Upload</label>
+                                <lsabel for="Image">Image Upload</lsabel>
                                 <input type="file"  class="form-control @error('image') is-invalid @enderror"
                                        id="image"
                                        name="image"
