@@ -39,7 +39,7 @@ class CategoriesController extends Controller
         ];
         if($request->file('image')){
             $file= $request->file('image');
-            $filename= date('YmdHi').$request->category;
+            $filename= date('YmdHi').$request->category.'.'.$request->file('image')->extension();
             $file->move(public_path('public/Image'), $filename);
             $data['image']= $filename;
         }
@@ -77,7 +77,7 @@ class CategoriesController extends Controller
         ];
         if($request->file('image') != null){
             $file= $request->file('image');
-            $filename= date('YmdHi').$request->category;
+            $filename= date('YmdHi').$request->category.'.'.$request->file('image')->extension();
             $file-> move(public_path('public/Image'), $filename);
             $data['image']= $filename;
         }
