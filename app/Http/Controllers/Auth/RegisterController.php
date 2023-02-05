@@ -101,7 +101,16 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
-        return redirect()->intended('admin/users/staff');
+
+
+        if(  $admin->save() ){
+            $message = ['success' => true, 'message' => 'Added Succesful!'];
+        }else{
+            $message = ['success' => false, 'message' => 'Failed to Add!'];
+        }
+
+        return redirect()->intended('admin/users/staff')->with($message);
+
     }
     protected function adminValidator(array $data)
     {

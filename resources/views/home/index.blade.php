@@ -28,7 +28,6 @@
 
             @endforeach
 
-
         </div>
 
     </section>
