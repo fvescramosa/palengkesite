@@ -6,6 +6,7 @@ use App\Categories;
 use function dd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
@@ -39,7 +40,7 @@ class CategoriesController extends Controller
         ];
         if($request->file('image')){
             $file= $request->file('image');
-            $filename= date('YmdHi').$request->category.'.'.$request->file('image')->extension();
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
             $file->move(public_path('public/Image'), $filename);
             $data['image']= $filename;
         }
@@ -77,7 +78,7 @@ class CategoriesController extends Controller
         ];
         if($request->file('image') != null){
             $file= $request->file('image');
-            $filename= date('YmdHi').$request->category.'.'.$request->file('image')->extension();
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
             $file-> move(public_path('public/Image'), $filename);
             $data['image']= $filename;
         }

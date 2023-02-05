@@ -19,38 +19,14 @@
         <h1 class="title">shop by <span>category</span></h1>
 
         <div class="box-container" id="box-container">
+            @foreach($categories as $category)
 
-            <div>
-                 <div class="box-item" style="background-image: url('images/meat.jpg')">
-                    <div class="overlay"></div>
-                     <h3>Meat</h3>
-                </div>
-            </div>
+                     <a href="{{ route('shop.product.category', ['category' => $category->category]) }}" class="box-item" style="background-image: url({{ asset('public/Image/'.$category->image)  }})">
+                        <div class="overlay"></div>
+                         <h3>{{ $category->category }}</h3>
+                    </a>
 
-            <div>
-                 <div class="box-item" style="background-image: url('images/fish.jpg')">
-                    <div class="overlay"></div>
-                     <h3></h3>
-                </div>
-            </div>
-
-            <div>
-                <div class="box-item" style="background-image: url('images/fruits-veggy.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
-
-            <div>
-                 <div class="box-item" style="background-image: url('images/poultry.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
-
-            <div>
-                <div class="box-item" style="background-image: url('images/grocery.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
+            @endforeach
 
 
         </div>
@@ -121,11 +97,14 @@
         const elements = {
             initSlick: function () {
                 $(" .home-category .box-container").slick({
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
+                    slidesToShow:4,
+                    slidesToScroll:1,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
                     infinite: true,
-                    dots: false ,
-                    focusOnSelect: true
+                    slide: 'div',
+                    cssEase: 'linear'
                 });
             }
         }

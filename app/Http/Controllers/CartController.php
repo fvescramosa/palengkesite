@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\DeliveryAddress;
 use App\Order;
 use App\OrderProduct;
+use App\PaymentOption;
 use function auth;
+use function compact;
 use function dd;
 use Illuminate\Http\Request;
 
@@ -17,11 +20,18 @@ class CartController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('cart.index');
+
+        $paymentOptions = PaymentOption::all();
+        return view('cart.index', compact(['paymentOptions']));
     }
     public function checkout(Request $request){
 
-        
+
+        dd($request);
+
+        $deliver_detail = DeliveryAddress::findOrFail($request->delivery_address);
+
+
         $carts = Cart::whereIn('id', $request->cart_ids)->get()->groupBy('seller_id');
 
         foreach ($carts as $cart) {
@@ -55,7 +65,21 @@ class CartController extends Controller
             ]);
 
 
+
             if($order->save()){
+
+                $order->order_delivery_detail()->create(
+                    [
+                        'stnumber' => $deliver_detail->stnumber,
+                        'stname' => $deliver_detail->stname,
+                        'barangay' => $deliver_detail->barangay,
+                        'city' => $deliver_detail->city,
+                        'province' => $deliver_detail->province,
+                        'country' => $deliver_detail->country,
+                        'buyer_id' => auth()->user()->buyer->id
+                    ]
+                );
+
                 foreach ($cart as $item){
                     OrderProduct::create([
                         'order_id' => $order->id,
@@ -71,7 +95,7 @@ class CartController extends Controller
 
         }
 
-        dd(Cart::whereIn('id', $request->cart_ids)->delete());
+        Cart::whereIn('id', $request->cart_ids)->delete();
         return view('cart.index');
     }
 

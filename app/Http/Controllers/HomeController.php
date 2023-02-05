@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
 use App\SellerProduct;
 use function auth;
 use Illuminate\Http\Request;
@@ -21,9 +22,9 @@ class HomeController extends Controller
     public function index(){
 
         $featuredProducts = SellerProduct::where('featured', 1)->limit(6)->get();
+        $categories = Categories::all();
 
-
-        return view('home/index', compact(['featuredProducts']));
+        return view('home/index', compact(['featuredProducts', 'categories']));
     }
     /**
      * Show the application dashboard.
