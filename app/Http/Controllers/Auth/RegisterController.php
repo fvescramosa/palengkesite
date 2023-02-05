@@ -100,6 +100,7 @@ class RegisterController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
+
         return redirect()->intended('admin/users/staff');
     }
     protected function adminValidator(array $data)
