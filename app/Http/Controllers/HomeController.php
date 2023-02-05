@@ -22,9 +22,7 @@ class HomeController extends Controller
     public function index(){
 
         $featuredProducts = SellerProduct::where('featured', 1)->limit(6)->get();
-
         $categories = Categories::all();
-
 
         return view('home/index', compact(['featuredProducts', 'categories']));
     }

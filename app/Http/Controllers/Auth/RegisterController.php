@@ -101,6 +101,8 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
+
+
         if(  $admin->save() ){
             $message = ['success' => true, 'message' => 'Added Succesful!'];
         }else{
@@ -108,6 +110,7 @@ class RegisterController extends Controller
         }
 
         return redirect()->intended('admin/users/staff')->with($message);
+
     }
     protected function adminValidator(array $data)
     {

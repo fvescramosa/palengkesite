@@ -7,6 +7,7 @@ use App\Cart;
 use App\Categories;
 use App\Products;
 use App\SellerProduct;
+use function asset;
 use function auth;
 use function compact;
 use function dd;
@@ -30,14 +31,16 @@ class ProductsController extends Controller
                ->whereHas('seller_products')->whereHas('category', function($q) use ($category){
                    $q->where('category', $category);
                })->get()->groupBy('seller_products.seller_id');*/
+        $categories = Categories::where('category', $category)->first();
 
         $products = SellerProduct::with(['product'])->whereHas('product.category', function($q) use ($category){
               $q->where('category', $category);
           })->get();
 
 
+        $innerPageBanner = asset('public/image/'.$categories->image);
 
-          return view('shop.category', compact(['products']));
+          return view('shop.category', compact(['products' ,'innerPageBanner']));
 
     }
 

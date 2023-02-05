@@ -19,17 +19,15 @@
         <h1 class="title">shop by <span>category</span></h1>
 
         <div class="box-container" id="box-container">
-
             @foreach($categories as $category)
 
-            <div>
-                <div class="box-item"><img src="{{ asset('public/Image/'.$category->image)  }}" style="height: 100%; position: absolute;">
-                    <div class="overlay"></div>
-                    <h3>{{ $category->category }}</h3>
-                </div>
-            </div>
+                     <a href="{{ route('shop.product.category', ['category' => $category->category]) }}" class="box-item" style="background-image: url({{ asset('public/Image/'.$category->image)  }})">
+                        <div class="overlay"></div>
+                         <h3>{{ $category->category }}</h3>
+                    </a>
 
             @endforeach
+
         </div>
 
     </section>
@@ -98,11 +96,14 @@
         const elements = {
             initSlick: function () {
                 $(" .home-category .box-container").slick({
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
+                    slidesToShow:4,
+                    slidesToScroll:1,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
                     infinite: true,
-                    dots: false ,
-                    focusOnSelect: true
+                    slide: 'div',
+                    cssEase: 'linear'
                 });
             }
         }
