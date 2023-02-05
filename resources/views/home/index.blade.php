@@ -20,39 +20,16 @@
 
         <div class="box-container" id="box-container">
 
+            @foreach($categories as $category)
+
             <div>
-                 <div class="box-item" style="background-image: url('images/meat.jpg')">
+                <div class="box-item"><img src="{{ asset('public/Image/'.$category->image)  }}" style="height: 100%; position: absolute;">
                     <div class="overlay"></div>
-                     <h3>Meat</h3>
+                    <h3>{{ $category->category }}</h3>
                 </div>
             </div>
 
-            <div>
-                 <div class="box-item" style="background-image: url('images/fish.jpg')">
-                    <div class="overlay"></div>
-                     <h3></h3>
-                </div>
-            </div>
-
-            <div>
-                <div class="box-item" style="background-image: url('images/fruits-veggy.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
-
-            <div>
-                 <div class="box-item" style="background-image: url('images/poultry.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
-
-            <div>
-                <div class="box-item" style="background-image: url('images/grocery.jpg')">
-                    <div class="overlay"></div>
-                </div>
-            </div>
-
-
+            @endforeach
         </div>
 
     </section>

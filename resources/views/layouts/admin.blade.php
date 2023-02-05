@@ -101,7 +101,7 @@
                                 <li class="collapsed" data-toggle="collapse" data-target="#staff_submenu">
                                     <a href="#"  class="">
                                         <span class="icon"><i class="fa fa-users"></i></span>
-                                        <span class="item">Staffs</span>
+                                        <span class="item">Staff</span>
                                     </a>
                                     <div class="collapse {{ (request()->segment(3) == 'staff') ? 'show' : ''}}" id="staff_submenu" aria-expanded="false">
                                         <ul>

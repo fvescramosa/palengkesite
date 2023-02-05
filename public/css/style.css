@@ -1048,7 +1048,7 @@ span.invalid-feedback {
 }
 .profile .basic-info-body {
    /*padding: 25px 50px;*/
-   padding: 15px 0px;
+   padding: 15px 15px 0;
 }
 .profile .basic-info-body label {
    font-size: 11px;
@@ -1617,12 +1617,14 @@ display: flex;
 }
 
 .btn-container{
-   padding: 5px 18px;
+   padding: 10px 10px;
 }
 
 .btn-container button{
-   padding: 8px;
-   font-size: 12px;
+   padding: 10px;
+   font-size: 13px;
+   text-transform: uppercase;
+   width: 250px;
 }
 
 .info-header-edit{
@@ -1656,3 +1658,10 @@ display: flex;
 .list-header .list-header-fields > div{
    flex: 1 1 auto
 }
+
+.row-btn{
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+ }
