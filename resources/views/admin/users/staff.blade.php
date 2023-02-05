@@ -4,6 +4,9 @@
 <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
+            @if(isset($message))
+                        <strong>{{ $message  }}</strong>
+            @endif
                 <form action="" method="GET"  class="form-group list-header" id="form-header">
                     <h3>Users</h3>
 
