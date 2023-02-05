@@ -109,7 +109,7 @@ class RegisterController extends Controller
             $message = ['success' => false, 'message' => 'Failed to Add!'];
         }
 
-        return redirect()->intended('admin/users/staff')->with($message);
+        return redirect(route('admin.show.staff'))->with($message);
 
     }
     protected function adminValidator(array $data)
