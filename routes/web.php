@@ -30,6 +30,7 @@ use \App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/home', [HomeController::class, 'index'])->name('index');
 
 
 
@@ -40,7 +41,7 @@ Auth::routes();
 
 //Route::get('user/checkpoint', [HomeController::class, 'checkPoint'])->name('user.checkpoint')->middleware('auth');
 Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
-Route::post('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
 Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(function(){

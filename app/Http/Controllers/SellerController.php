@@ -395,49 +395,53 @@ class SellerController extends Controller
 
         $create = SellerStall::create($data);
 
+
+        $appointment = [
+            'stall_id' => $request->stall_id ,
+            'seller_id' => auth()->user()->seller->id,
+            'seller_stall_id' => $create->id,
+            'date' => $request->appointment_date,
+            'status' => 'pending'
+        ];
         if($request->file('application_letter')){
             $file= $request->file('application_letter');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('application_letter')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['application_letter']= $filename;
+            $filename= auth()->user()->seller->id.'_application_letter.'.$request->file('application_letter')->extension();
+           
+            $file->move(public_path('public/Image/'.auth()->user()->seller->id), $filename);
+            $appointment['application_letter']= auth()->user()->seller->id.'/'.$filename;
         }
 
         if($request->file('residency')){
             $file= $request->file('residency');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('residency')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['residency']= $filename;
+            $filename= auth()->user()->seller->id.'_residency.'.$request->file('residency')->extension();
+            $file->move(public_path('public/Image/'.auth()->user()->seller->id), $filename);
+            $appointment['residency']= auth()->user()->seller->id.'/'.$filename;
         }
 
         if($request->file('image')){
             $file= $request->file('image');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            $filename= auth()->user()->seller->id.'_image.'.$request->file('image')->extension();
+            $file->move(public_path('public/Image/'.auth()->user()->seller->id), $filename);
+            $appointment['image']= auth()->user()->seller->id.'/'.$filename;;
         }
 
-        if($request->file('application_letter')){
-            $file= $request->file('application_letter');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('application_letter')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['application_letter']= $filename;
+        if($request->file('id1')){
+            $file= $request->file('id1');
+            $filename= auth()->user()->seller->id.'_id1e.'.$request->file('id1')->extension();
+            $file->move(public_path('public/Image/'.auth()->user()->seller->id), $filename);
+            $appointment['id1']= auth()->user()->seller->id.'/'.$filename;
         }
 
-        if( $create->save()){
-            $appointment = [
-                'stall_id' => $request->stall_id ,
-                'seller_id' => auth()->user()->seller->id,
-                'seller_stall_id' => $create->id,
-                'date' => $request->appointment_date,
-                'status' => 'pending',
-                'application_letter' => $request->application_letter,
-                'residency' => $request->residency,
-                'image' => $request->image,
-                'id1' => $request->id1,
-                'id2' => $request->id2,
-                
-            ];
+        if($request->file('id2')){
+            $file= $request->file('id2');
+            $filename= auth()->user()->seller->id.'_id2.'.$request->file('id2')->extension();
+            $file->move(public_path('public/Image/'.auth()->user()->seller->id), $filename);
+            $appointment['id2']= auth()->user()->seller->id.'/'.$filename;
+        }
 
+
+
+        if( $create->save()){;
             $createAppointment = StallAppointment::create($appointment);
         }
 

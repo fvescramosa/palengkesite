@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+git@extends('layouts.admin')
 
 @section('content')
     <div class="container">
