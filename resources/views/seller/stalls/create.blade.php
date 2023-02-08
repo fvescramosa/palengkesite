@@ -114,7 +114,7 @@
                         @if(isset($message))
                             {{ $message }}
                         @endif
-                        <form action="{{ route('seller.stalls.store') }}" method="POST" class="form-">
+                        <form action="{{ route('seller.stalls.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                             
                         <div class="info-body-flex justify-content-center">
@@ -141,6 +141,7 @@
                                     <h3 style="text-align: center;">Upload the following: </h3>
                                     <label for="application_letter">Application Letter Under Oath</label>
                                     <input type="file"
+                                           enc
                                            class="form-control @error('application_letter') is-invalid @enderror"
                                            id="application_letter"
                                            name="application_letter"
