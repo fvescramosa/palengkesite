@@ -11,7 +11,13 @@ class StallAppointment extends Model
         'seller_id',
         'seller_stall_id',
         'date',
-        'status'];
+        'status',
+        'application_letter',
+        'residency',
+        'image',
+        'id1',
+        'id2'
+    ];
 
     public function seller(){
         return $this->belongsTo( Seller::class);

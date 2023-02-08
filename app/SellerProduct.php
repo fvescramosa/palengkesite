@@ -13,6 +13,12 @@ class SellerProduct extends Model
         'product_id',
         'price',
         'type',
+        'image',
+        'image_1',
+        'image_2',
+        'image_3',
+        'image_4',
+        'image_5',
     ];
 
     public function product(){

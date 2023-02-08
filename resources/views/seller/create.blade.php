@@ -21,7 +21,7 @@
 
                             @if(!auth()->user()->seller()->exists())
                                 <div class="form-group info-item ">
-                                    <label for="email">Birthday</label>
+                                    <label for="birthday">Birthday</label>
                                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday" name="birthday" placeholder="Birthday" value="{{ old('birthday') }}" >
                                     @error('birthday')
                                     <span class="invalid-feedback" role="alert">
@@ -47,7 +47,6 @@
                                     <select  class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" placeholder="Gender" value="" >
                                         <option value="Male" {{ ( old('gender') == 'Male')   ? 'selected' : '' }}>Male</option>
                                         <option value="Female" {{ ( old('gender') == 'Female')  ? 'selected' : '' }}>Female</option>
-                                        <option value="Others" {{ ( old('gender') == 'Others')  ? 'selected' : '' }}>Others</option>
 
                                     </select>
                                     @error('gender')
