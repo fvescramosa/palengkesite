@@ -164,6 +164,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/stalls/store', [\App\Http\Controllers\Admin\StallsController::class, 'store'])->name('stalls.store');
     Route::get('/stalls/edit/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'edit'])->name('stalls.edit');
     Route::post('/stalls/update/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'update'])->name('stalls.update');
+    Route::get('/stalls/trash', [\App\Http\Controllers\Admin\StallsController::class, 'trash'])->name('stalls.trash');
+    Route::get('/stalls/delete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'deleteStall'])->name('stalls.delete');
+    Route::get('/stalls/permanentdelete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'StallForceDelete'])->name('stalls.permanentdelete');
+    Route::get('/stalls/recover/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'recoverStall'])->name('stalls.recover');
 
 
     //categories

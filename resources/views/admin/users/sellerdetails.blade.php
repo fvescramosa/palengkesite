@@ -118,12 +118,26 @@
                                               <td> <p>{{ $user->seller->seller_stalls->stall->sqm }} sqm</p></td>
                                           </tr>
                                           <tr>
-                                              <td class="stall-info-title-container"><p><strong>Amount / Sqm: </strong> </p> </td>
+                                              <td class="stall-info-title-container"><p><strong>Amount per sqm: </strong> </p> </td>
                                               <td> <p>Php {{ $user->seller->seller_stalls->stall->amount_sqm }}</p></td>
                                           </tr>
                                           <tr>
                                               <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
                                               <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
+                                          </tr>
+
+                                          <tr>
+                                              <td class="stall-info-title-container"><p><strong>Rate: </strong></p> </td>
+                                              <td> <p>{{ $user->seller->seller_stalls->stall->rate }}</p></td>
+                                          </tr>
+
+                                          <tr>
+                                              <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>
+                                              <td> <p>{{ $user->seller->seller_stalls->stall->coords }}</p></td>
+                                          </tr>
+                                          <tr>
+                                              <td class="stall-info-title-container"><p><strong>Meter Number: </strong></p> </td>
+                                              <td> <p>{{ $user->seller->seller_stalls->stall->meter_num }}</p></td>
                                           </tr>
 
                                           <tr>

@@ -88,14 +88,11 @@
    color: #a2ecff;
 }
 
-#users_submenu li {
+#users_submenu li,
+#products_submenu li,
+#stalls_submenu li {
    padding-left: 25px;
 }
-
-#products_submenu li {
-   padding-left: 25px;
-}
-
 
 #sortlist,
 #palengke-filter{
@@ -244,7 +241,7 @@
 .col-left,
 .col-right{
    flex: 1 1 50%;
-   padding: 10px;
+   padding: 15px;
    display: flex;
    align-items: center;
    max-width: 50%;
@@ -323,4 +320,16 @@ td img{
    max-width: 180px;
    height: 100%;
    object-fit: cover;
+}
+
+.icon-dashboard{
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: var(--green);
+}
+
+.icon-dashboard .fa{
+   padding-top: 35px;
 }

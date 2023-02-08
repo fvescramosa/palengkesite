@@ -1282,11 +1282,9 @@ span.invalid-feedback {
    background-image: url("/images/palengke.jpg");
 }
 .login-container .bg-area .logo-area {
-   width: 185px;
+   width: 500px;
    height: auto;
    position: absolute;
-   top: -15px;
-   left: 25px;
 }
 .login-container .bg-area .logo-area img {
    -o-object-fit: cover;
@@ -1696,3 +1694,10 @@ display: flex;
    justify-content: center;
  }
 
+.table tr{
+   font-size: 15px;
+}
+
+.table tbody{
+   font-size: 14px;
+}

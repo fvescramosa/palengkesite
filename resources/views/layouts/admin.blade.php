@@ -131,11 +131,27 @@
                             <span class="badge badge-danger" id="notif">0</span>
                         </a>
                     </li> -->
-                    <li>
-                        <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
-                            <span class="icon"><i class="fas fa-store"></i></span>
+                    <li class="collapsed" data-toggle="collapse" data-target="#stalls_submenu">
+                        <a href="#"  class="">
+                            <span class="icon"><i class="fa fa-store"></i></span>
                             <span class="item">Stalls</span>
                         </a>
+                        <div class="collapse {{ (request()->segment(2) == 'stalls') ? 'show' : ''}}" id="stalls_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.stalls.show') }}" class="{{ ( request()->routeIs('admin.stalls.show') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-store"></i></span>
+                                        <span class="item">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.stalls.trash') }}" class="{{ ( request()->routeIs('admin.stalls.trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
@@ -147,7 +163,7 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.appointments.show') }}" class="{{ ( request()->routeIs('admin.appointments.show') ? 'active' : '' )}}">
-                            <span class="icon"><i class="fa fa-clock"></i></span>
+                            <span class="icon"><i class="fa fa-calendar"></i></span>
                             <span class="item">Stall Appointment</span>
 
                             <span class="notif badge badge-danger" id="stall-app-notif">{{ App\StallAppointment::where('status', 'pending')->get()->count() }}</span>
