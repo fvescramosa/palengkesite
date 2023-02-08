@@ -49,7 +49,6 @@
                         <th>Rental Fee</th>
                         <th>Rate</th>
                         <th>Meter Number</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -64,10 +63,9 @@
                             <td>{{ $stall->rental_fee }}</td>
                             <td>{{ $stall->rate }}</td>
                             <td>{{ $stall->meter_num }}</td>
-                            <td>{{ $stall->status }}</td>
                             <td>
-                                <a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a> |
-                                <a href="{{ route('admin.stalls.delete', $stall->id) }}"> Delete</a>
+                                <a href="{{ route('admin.stalls.recover', $stall->id) }}"> Retrieve </a> | 
+                                <a href="{{ route('admin.stalls.permanentdelete', $stall->id) }}" title="Permanent Delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
@@ -81,7 +79,6 @@
                     {{$stalls->links()}}
                 @endif
 
-                <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>

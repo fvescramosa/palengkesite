@@ -54,12 +54,6 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="{{ route('seller.switch.buyer') }}">
-                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
-                                <span class="item">Switch as Buyer</span>
-                            </a>
-                        </li>
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
@@ -106,6 +100,12 @@
                                 <span class="item">Admin</span>
                             </a>
                         </li>--}}
+                        <li>
+                            <a href="{{ route('seller.switch.buyer') }}">
+                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
+                                <span class="item">Switch as Buyer</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <span class="icon"><i class="fas fa-power-off"></i></span>

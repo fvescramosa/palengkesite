@@ -72,7 +72,7 @@ section{
    color:var(--white);
    font-size: 2rem;
    padding:1.3rem 3rem;
-   text-transform: capitalize;
+   text-transform: uppercase;
    cursor: pointer;
    text-align: center;
 }
@@ -86,7 +86,7 @@ section{
    color:var(--white);
    font-size: 1.8rem;
    border-radius: .5rem;
-   text-transform: capitalize;
+   text-transform: uppercase;
 }
 
 .btn,

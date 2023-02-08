@@ -50,12 +50,12 @@
 
                 <div class="row mb-0">
                     <div class="">
-                        <button type="submit" class="btn btn-secondary">
+                        <button type="submit" class="home-btn option-btn">
                             {{ __('Login') }}
                         </button>
 
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            <a class="home-btn" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif

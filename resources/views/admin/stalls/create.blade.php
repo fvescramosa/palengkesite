@@ -10,9 +10,6 @@
                 </div>
                 <div class="basic-info-body">
 
-                    @if(isset($message))
-                        <strong>{{ $message  }}</strong>
-                    @endif
                     <form action="{{ route('admin.stalls.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">

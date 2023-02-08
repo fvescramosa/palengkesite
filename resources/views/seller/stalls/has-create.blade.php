@@ -183,8 +183,15 @@
                                         </span>
                                     @enderror
                                 </div>
+                                
+                                <div class="row-btn" style="width: 100%;">
+                                    <div class="btn-container" style="padding: 0 10px 15px;">
+                                        <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
+                                            Button
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button type="submit"  class="btn btn-primary">Button</button>
                             </div>
 
                         </form>

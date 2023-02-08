@@ -89,9 +89,9 @@ class ProductsController extends Controller
 
        
         if(  $products->save() ){
-            $message = ['success' => true, 'message' => 'Update Succesful!'];
+            $message = ['success' => true, 'message' => 'Added Succesful!'];
         }else{
-            $message = ['success' => false, 'message' => 'Update failed!'];
+            $message = ['success' => false, 'message' => 'Failed to Add!'];
         }
 
         return redirect( route('admin.products.show'))->with($message);
@@ -119,7 +119,7 @@ class ProductsController extends Controller
 
 
         if($products){
-            $message = ['success' => true, 'message' => 'Update Succesful!'];
+            $message = ['success' => true, 'message' => 'Updated Succesfully!'];
         }else{
             $message = ['success' => false, 'message' => 'Update failed!'];
         }

@@ -201,9 +201,9 @@
                                        placeholder="id"
                                        value="{{ $seller_product->id }}" >
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Submit') }}
                                 </button>
                             </div>

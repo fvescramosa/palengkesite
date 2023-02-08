@@ -205,9 +205,60 @@ class SellerController extends Controller
             'product_id' => $product->id,
             'price' => $request->price,
             'type' => $request->type,
+            'image' => $request->image,
+            'image_1' => $request->image_1,
+            'image_2' => $request->image_2,
+            'image_3' => $request->image_3,
+            'image_4' => $request->image_4,
+            'image_5' => $request->image_5,
             'featured' => $request->featured,
             'stock' => $request->stock,
         ]);
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
+
+
+        if($request->file('image_1')){
+            $file= $request->file('image_1');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image_1']= $filename;
+        }
+
+
+        if($request->file('image_2')){
+            $file= $request->file('image_2');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image_2']= $filename;
+        }
+
+
+        if($request->file('image_3')){
+            $file= $request->file('image_3');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image_3']= $filename;
+        }
+
+        if($request->file('image_4')){
+            $file= $request->file('image_4');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image_4']= $filename;
+        }
+
+        if($request->file('image_5')){
+            $file= $request->file('image_5');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image_5']= $filename;
+        }
 
         $create->save();
 
@@ -322,6 +373,14 @@ class SellerController extends Controller
 
     public function stallStore(Request $request){
 
+        $validate = $request->validate([
+            'application_letter' => "required|mimes:jpeg,jpg,png",
+            'residency' => "required|mimes:jpeg,jpg,png",
+            'image' => "required|mimes:jpeg,jpg,png",
+            'id1' => "required|mimes:jpeg,jpg,png",
+            'id2' => "required|mimes:jpeg,jpg,png",
+        ]);
+
 
         $data = [
             'stall_id' => $request->stall_id ,
@@ -344,6 +403,11 @@ class SellerController extends Controller
                 'seller_stall_id' => $create->id,
                 'date' => $request->appointment_date,
                 'status' => 'pending',
+                'application_letter' => $request->application_letter,
+                'residency' => $request->residency,
+                'image' => $request->image,
+                'id1' => $request->id1,
+                'id2' => $request->id2,
                 
             ];
 

@@ -108,4 +108,33 @@
     font-size: 12px;
 }
 
+.have-stall{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.stall-wrapper{
+    width: 500px;
+    height: auto;
+    border: 1px solid #e1e1e1;
+    padding: 50px;
+    box-shadow: 7px 0px 38px -11px rgba(0, 0, 0, 0.58);
+}
+
+.have-stall h2{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 3rem;
+}
+
+.stall-btn-container{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+
+
 

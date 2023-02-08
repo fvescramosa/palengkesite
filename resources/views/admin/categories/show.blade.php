@@ -5,6 +5,13 @@
         <div class="profile">
             <div class="profile-wrapper">
                 <h3>Categories</h3>
+
+                @if (session('message'))
+                    <div class="alert alert-{{ (session('success') ? 'success' : 'danger') }}">
+                        <strong>{{ session('message')  }}</strong>
+                    </div>
+                @endif
+                
                 <table class="table table-bordered">
             <thead>
                 <tr>
