@@ -395,6 +395,33 @@ class SellerController extends Controller
 
         $create = SellerStall::create($data);
 
+        if($request->file('application_letter')){
+            $file= $request->file('application_letter');
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('application_letter')->extension();
+            $file->move(public_path('public/Image'), $filename);
+            $data['application_letter']= $filename;
+        }
+
+        if($request->file('residency')){
+            $file= $request->file('residency');
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('residency')->extension();
+            $file->move(public_path('public/Image'), $filename);
+            $data['residency']= $filename;
+        }
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
+            $file->move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
+
+        if($request->file('application_letter')){
+            $file= $request->file('application_letter');
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('application_letter')->extension();
+            $file->move(public_path('public/Image'), $filename);
+            $data['application_letter']= $filename;
+        }
 
         if( $create->save()){
             $appointment = [
