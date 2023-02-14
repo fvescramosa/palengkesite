@@ -57,26 +57,24 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
-
     Route::get('/create', [SellerController::class, 'create'])->name('create');
     Route::post('/store', [SellerController::class, 'store'])->name('store');
 
     Route::get('/profile/edit/', [ SellerController::class, 'edit'])->name('edit');
     Route::post('/profile/update', [SellerController::class, 'update'])->name('update');
-
     Route::get('/show', [SellerController::class, 'show'])->name('show');
 
+    //products
     Route::get('/products/create', [SellerController::class, 'productsCreate'])->name('products.create');
     Route::post('/products/store', [SellerController::class, 'productStore'])->name('products.store');
-
     Route::get('/products/show', [SellerController::class, 'productShow'])->name('products.show');
-
     Route::get('/products/edit/{id}', [SellerController::class, 'productEdit'])->name('products.edit');
     Route::post('/products/update/', [SellerController::class, 'productUpdate'])->name('products.update');
-
     Route::post('/products/find-by-category', [SellerController::class, 'findProductsByCategory'])->name('products.find.category');
     Route::post('/products/details', [SellerController::class, 'findProductsByID'])->name('products.details');
 
+
+//    Stalls
     /*Has Stall*/
     Route::get('/stalls/has/select', [SellerController::class, 'stallHasSelect'])->name('stalls.has.select');
     Route::get('/stalls/has/create/{id}', [SellerController::class, 'stallHasCreate'])->name('stalls.has.create');
