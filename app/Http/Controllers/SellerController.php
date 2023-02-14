@@ -92,7 +92,8 @@ class SellerController extends Controller
             if($seller->save()){
                 $data = array('name'=>"Frank Test");
 
-                Mail::to(auth()->user()->email)->send(new NewUserWelcomeMail());
+                //dd(Mail::to(auth()->user()->email)->send(new NewUserWelcomeMail()));
+
 
                 echo "Basic Email Sent. Check your inbox.";
             }
@@ -195,6 +196,7 @@ class SellerController extends Controller
                'code'	=> '',
                'manufacturer'	=> '',
                'type' => '',
+               'status' => 'pending'
            ]);
 
            $product->save();
@@ -455,9 +457,10 @@ class SellerController extends Controller
     public function stallHasSelect()
     {
 
-        $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
+        /*$stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
                             $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-                        })
+                        }) */
+        $stalls =  Stall::where('status', 'vacant')
         ->where('market_id', auth()->user()->seller->market_id)
         ->orderByRaw('CONVERT(number, SIGNED)', 'desc')
         ->get();
@@ -469,9 +472,10 @@ class SellerController extends Controller
 
     public function stallHasCreate($id){
 
-        $stall = Stall::where('status', 'vacant')->whereDoesntHave('seller_stall', function ($query){
-            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-        })->findOrFail($id);
+        $stall = Stall::where('status', 'vacant')
+            /*->whereDoesntHave('seller_stall', function ($query){
+                    $query->where('status', '=', 'pending')->orWhere('status', '=', 'active'); })*/
+        ->findOrFail($id);
 
         
         return view('seller/stalls/has-create', compact(['stall']));
@@ -511,9 +515,11 @@ class SellerController extends Controller
     public function stallSelect()
     {
 
-        $stalls =  Stall::whereDoesntHave('seller_stall', function ($query){
-            $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
-        })->where('market_id', auth()->user()->seller->market_id)->get();
+        $stalls =  Stall::where('status', '=', 'vacant')
+              /*  whereDoesntHave('seller_stall', function ($query){
+                    $query->where('status', '=', 'pending')->orWhere('status', '=', 'active');
+        })->*/
+        ->where('market_id', auth()->user()->seller->market_id)->get();
 
 
 
