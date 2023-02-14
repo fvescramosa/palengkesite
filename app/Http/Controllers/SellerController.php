@@ -374,13 +374,13 @@ class SellerController extends Controller
     public function stallStore(Request $request){
 
         $validate = $request->validate([
+            'appointment_date' => "required",
             'application_letter' => "required|mimes:jpeg,jpg,png",
             'residency' => "required|mimes:jpeg,jpg,png",
             'image' => "required|mimes:jpeg,jpg,png",
             'id1' => "required|mimes:jpeg,jpg,png",
             'id2' => "required|mimes:jpeg,jpg,png",
         ]);
-
 
         $data = [
             'stall_id' => $request->stall_id ,

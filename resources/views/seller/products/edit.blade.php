@@ -90,14 +90,14 @@
 
                                 </div>
 
-                                <div class="info-item form-inline short">
+                                <!-- <div class="info-item form-inline short">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" required>
                                         <label class="form-check-label" for="remember">
                                             {{ __('Featured') }}
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="info-item">
                                     <div class="form-group long  stall-image">
                                         <label for="image">Image</label>

@@ -35,7 +35,12 @@
                         <th>Seller</th>
                         <th>Stall No.</th>
                         <th>Market</th>
-                        <th>Date</th>
+                        <th>Date Created</th>
+                        <th>Date of Appointment</th>
+                        <th>Application Letter</th>
+                        <th>Residency</th>
+                        <th>2 x 2 Picture</th>
+                        <th>Valid IDs</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -46,7 +51,31 @@
                             <td>{{ $appointment->seller->user->first_name }} {{ $appointment->seller->user->last_name }}</td>
                             <td> {{ $appointment->stall->number }}</td>
                             <td> {{ $appointment->stall->market->market }}</td>
+                            <td> {{ $appointment->created_at }}</td>
                             <td> {{ $appointment->date }}</td>
+                            <td> 
+                                <a href="{{ asset( 'public/Image/' . $appointment->application_letter )}}"  target="_blank" class="btn option-btn">
+                                    <span class="fa fa-eye"></span> View
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="{{ asset( 'public/Image/' . $appointment->residency )}}"  target="_blank" class="btn option-btn">
+                                    <span class="fa fa-eye"></span> View
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="{{ asset( 'public/Image/' . $appointment->image )}}"  target="_blank" class="btn option-btn">
+                                    <span class="fa fa-eye"></span> View
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="{{ asset( 'public/Image/' . $appointment->id1 )}}"  target="_blank" class="btn option-btn" style="margin-bottom: 10px;">
+                                    <span class="fa fa-eye"></span> Valid ID 1
+                                </a>
+                                <a href="{{ asset( 'public/Image/' . $appointment->id2 )}}"  target="_blank" class="btn option-btn">
+                                    <span class="fa fa-eye"></span> Valid ID 2
+                                </a>
+                            </td>
                             <td> {{ $appointment->status }}</td>
                             <td>
                                 @if($appointment->status == 'pending')

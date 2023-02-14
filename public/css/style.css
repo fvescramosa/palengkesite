@@ -1701,3 +1701,7 @@ display: flex;
 .table tbody{
    font-size: 14px;
 }
+
+#alert{
+   font-size: 14px;
+}
