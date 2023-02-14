@@ -48,6 +48,7 @@
                     <th>Manufacturer</th>
                     <th>Type</th>
                     <th>Pricing</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,6 +65,13 @@
                     <td>
                         <a href="{{ route('admin.products.edit', $product->id) }}">Edit</a>
                         <a href="{{ route('admin.products.delete', $product->id) }}">Delete</a>
+                    </td>
+                    <td>
+                        @if($product->status == 'active')
+                            {{ $product->status }}
+                        @else
+                            <a href="{{ route('admin.products.approve', ['id' => $product->id]) }}"  class="btn btn-primary"> Approve</a>
+                        @endif
                     </td>
                     <td><a href="{{ route('admin.pricing.show', $product->id) }}"><span class="fa fa-eye"> </span> View Pricing</a></td>
 
