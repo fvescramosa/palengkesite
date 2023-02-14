@@ -84,10 +84,11 @@ class ProductsController extends Controller
                 'code'	=> $request->code,
                 'manufacturer'	=> $request->manufacturer,
                 'type' => $request->type,
+                'status' => 'active',
             ]
         );
 
-       
+
         if(  $products->save() ){
             $message = ['success' => true, 'message' => 'Added Succesful!'];
         }else{
@@ -132,7 +133,7 @@ class ProductsController extends Controller
 
     public function trash(){
         $products = Products::with('category')->onlyTrashed();
-        
+
         if(isset($_GET['search'])){
             $products = $products->where( function($query){
                 $query->orwhere('product_name', 'like', '%' . $_GET['search'] . '%');
@@ -163,7 +164,7 @@ class ProductsController extends Controller
                 $orderby = ['created_at', 'asc'];
                 $products->orderBy($orderby[0], $orderby[1]);
             }
-            
+
         }
         else{
             $orderby = ['product_name', 'asc'];
@@ -178,25 +179,25 @@ class ProductsController extends Controller
 
     public function deleteProduct($id){
 
-       
+
         $delete =  Products::where('id', $id)->delete();
 
 
-        return redirect(route('admin.products.show')); 
-        
+        return redirect(route('admin.products.show'));
+
     }
 
     public function recoverProduct($id){
 
-        $recover = Products::withTrashed()->where('id', $id)->restore();       
+        $recover = Products::withTrashed()->where('id', $id)->restore();
 
 
         return redirect(route('admin.products.show'));
-        
+
     }
 
     public function ProductForceDelete($id){
-        
+
         $delete = Products::where('id', $id)->forceDelete();
         return redirect(route('admin.products.trash'));
     }
@@ -208,5 +209,18 @@ class ProductsController extends Controller
         })->get();
 
 
+    }
+
+    public function approve($id){
+
+        $data = ['status' => 'active'];
+
+        $product = Products::findOrFail($id);
+
+        $product->update($data);
+
+        $product->save();
+
+        return redirect(route('admin.products.show'))->with(['message' => 'Product is Approved!']);
     }
 }
