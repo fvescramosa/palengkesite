@@ -150,6 +150,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/products/show', [ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/edit/{id}', [ ProductsController::class, 'edit'])->name('products.edit');
     Route::post('/products/update/{id}', [ProductsController::class, 'update'])->name('products.update');
+    Route::get('/products/approve/{id}', [ProductsController::class, 'approve'])->name('products.approve');
     Route::get('/products/trash', [ProductsController::class, 'trash'])->name('products.trash');
     Route::get('/products/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('products.delete');
     Route::get('/products/permanentdelete/{id}', [ProductsController::class, 'ProductForceDelete'])->name('products.permanentdelete');
