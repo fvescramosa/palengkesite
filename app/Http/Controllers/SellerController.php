@@ -150,12 +150,9 @@ class SellerController extends Controller
 
     }
 
-    public function productsCreate(){
 
-        $categories = Categories::all();
-        return view('seller/products/create', compact(['categories']));
-    }
 
+<<<<<<< HEAD
     public function findProductsByCategory(Request $request){
 
         $data = Products::where('category_id', $request->id)->get();
@@ -602,6 +599,8 @@ class SellerController extends Controller
 
         return response()->json($stall);
     }
+=======
+>>>>>>> 266104d9ccff5ce180b40a4693e50534163b0944
 
 
 
