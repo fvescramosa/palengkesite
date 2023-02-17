@@ -30,42 +30,45 @@
                             @endif
                         </div>
 
-
-
-
-
                 </form>
+
+                @if (session('message'))
+                    <div class="alert alert-{{ (session('success') ? 'success' : 'danger') }}">
+                        <strong>{{ session('message')  }}</strong>
+                    </div>
+                @endif
                 
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Stall No.</th>
-                        <th>Sqm</th>
-                        <th>Section</th>
-                        <th>Market</th>
-                        <th>Amount / Sqm</th>
-                        <th>Rental Fee</th>
-                        <th>Status</th>
-                        <th>Rate</th>
                         <th>Coordinates</th>
+                        <th>Section</th>
+                        <th>Sqm / Area</th>
+                        <th>Amount per sqm</th>
+                        <th>Rental Fee</th>
+                        <th>Rate</th>
                         <th>Meter Number</th>
-                        <th></th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($stalls as $stall)
                         <tr>
                             <td>{{ $stall->number }}</td>
-                            <td>{{ $stall->sqm }}</td>
+                            <td>{{ $stall->coords }}</td>
                             <td>{{ $stall->section }}</td>
-                            <td>{{ $stall->market->market }}</td>
+                            <td>{{ $stall->sqm }}</td>
                             <td>{{ $stall->amount_sqm }}</td>
                             <td>{{ $stall->rental_fee }}</td>
-                            <td>{{ $stall->status }}</td>
                             <td>{{ $stall->rate }}</td>
-                            <td>{{ $stall->coords }}</td>
                             <td>{{ $stall->meter_num }}</td>
-                            <td><a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a></td>
+                            <td>{{ $stall->status }}</td>
+                            <td>
+                                <a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a> |
+                                <a href="{{ route('admin.stalls.delete', $stall->id) }}"> Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

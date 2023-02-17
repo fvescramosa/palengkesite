@@ -36,7 +36,7 @@
 
                             <div class="form-group info-item short">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value=" {{ auth()->user()->email }}" readonly >
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value=" {{ auth()->user()->email }}">
                                 @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -47,8 +47,8 @@
 
                             @if(auth()->user()->seller()->exists())
                             <div class="form-group info-item short">
-                                <label for="email">Birthday</label>
-                                <input type="text" class="form-control @error('birthday') is-invalid @enderror " id="birthday" name="birthday" placeholder="Birthday" value="{{ date('m/d/Y', strtotime(auth()->user()->seller->birthday)) }}" >
+                                <label for="birthday">Birthday</label>
+                                <input type="date" class="form-control @error('birthday') is-invalid @enderror " id="birthday" name="birthday" placeholder="Birthday" value="{{ date(auth()->user()->seller->birthday) }}" >
                                  @error('birthday')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -68,21 +68,22 @@
                             </div>
 
                             <div class="form-group info-item xshort">
-                                <label for="email">Gender</label>
-                                <input type="text" class="form-control @error('gender') is-invalid @enderror " id="gender" name="gender" placeholder="Age" value="{{ auth()->user()->seller->gender }}" >
-                                @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <label for="gender">Gender</label>
+                                
+
+                                <select   class="form-control @error('gender') is-invalid @enderror" id="gender"
+                                         name="gender">
+                                        <option value="Male" {{ ('Male' == auth()->user()->seller->gender) ? 'selected' : '' }}>Male</option>
+                                        <option value="Female" {{ ('Female' == auth()->user()->seller->gender) ? 'selected' : '' }}>Female</option>
+                                </select>
 
                             </div>
 
                         @endif
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Update') }}
                                 </button>
                             </div>

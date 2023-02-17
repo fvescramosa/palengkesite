@@ -13,13 +13,13 @@
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('admin.categories.store') }}" method="POST" class="form-">
+                    <form action="{{ route('admin.categories.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
 
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="Product">Category</label>
                                     <input type="text"  class="form-control @error('category') is-invalid @enderror"
                                                         id="category"
@@ -33,10 +33,24 @@
 
                                 </div>
 
+                                <div class="form-group long">
+                                    <label for="Product">Image Upload</label>
+                                    <input type="file"  class="form-control @error('image') is-invalid @enderror"
+                                                        id="image"
+                                                        name="image"
+                                                        placeholder="" value="" >
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Submit') }}
                                 </button>
                             </div>

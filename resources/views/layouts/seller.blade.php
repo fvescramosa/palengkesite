@@ -23,10 +23,12 @@
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
 
 
     </head>
@@ -54,12 +56,6 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="{{ route('seller.switch.buyer') }}">
-                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
-                                <span class="item">Switch as Buyer</span>
-                            </a>
-                        </li>
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
@@ -107,6 +103,12 @@
                             </a>
                         </li>--}}
                         <li>
+                            <a href="{{ route('seller.switch.buyer') }}">
+                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
+                                <span class="item">Switch as Buyer</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <span class="icon"><i class="fas fa-power-off"></i></span>
                                 <span class="item">Logout</span>
@@ -125,6 +127,7 @@
                             </a>
                         </div>
                     </div>
+
 
                     <main>
                         @yield('content')

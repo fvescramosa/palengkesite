@@ -17,8 +17,8 @@
                         @csrf
                         <div class="info-body-flex">
 
-                                <div class="info-item short">
-                                    <label for="email">Product Categories</label>
+                                <div class="form-group long">
+                                    <label for="category">Product Categories</label>
                                     <select  class="form-control @error('category') is-invalid @enderror" 
                                             id="category" 
                                             name="category" 
@@ -35,7 +35,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="Product">Product</label>
                                     <input type="text"  class="form-control @error('product') is-invalid @enderror" 
                                                         id="product" 
@@ -50,7 +50,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="min_price">Minimum Price</label>
                                     <input type="text"  class="form-control @error('min_price') is-invalid @enderror" 
                                                         id="min_price" 
@@ -66,7 +66,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="max_price">Maximum Price</label>
                                     <input type="text"  class="form-control @error('max_price') is-invalid @enderror" 
                                                         id="max_price" 
@@ -82,7 +82,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="srp">SRP</label>
                                     <input type="text"  class="form-control @error('srp') is-invalid @enderror" 
                                                         id="srp" 
@@ -98,7 +98,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="code">Code</label>
                                     <input type="text"  class="form-control @error('code') is-invalid @enderror" 
                                                         id="code" 
@@ -114,7 +114,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="manufacturer">Manufacturer</label>
                                     <input type="text"  class="form-control @error('manufacturer') is-invalid @enderror" 
                                                         id="manufacturer" 
@@ -130,7 +130,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="type">Type</label>
                                     <input type="text"  class="form-control @error('type') is-invalid @enderror" 
                                                         id="type" 
@@ -148,9 +148,9 @@
 
 
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Submit') }}
                                 </button>
                             </div>

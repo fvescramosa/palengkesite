@@ -1,10 +1,10 @@
-composer require doctrine/dbal<?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameNumberColumn extends Migration
+class CreatePaymentOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class RenameNumberColumn extends Migration
      */
     public function up()
     {
-        Schema::table('stalls', function (Blueprint $table) {
-            //
-            $table->renameColumn('number', 'stall');
+        Schema::create('payment_options', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('payment_option');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ class RenameNumberColumn extends Migration
      */
     public function down()
     {
-        Schema::table('stalls', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('payment_options');
     }
 }

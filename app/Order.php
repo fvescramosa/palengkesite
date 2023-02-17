@@ -27,4 +27,8 @@ class Order extends Model
     public function buyer(){
         return $this->belongsTo(Buyer::class);
     }
+
+    public function order_delivery_detail(){
+        return $this->hasOne(OrderDeliveryDetail::class);
+    }
 }

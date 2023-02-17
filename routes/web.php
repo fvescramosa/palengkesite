@@ -30,6 +30,7 @@ use \App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/home', [HomeController::class, 'index'])->name('index');
 
 
 
@@ -40,7 +41,7 @@ Auth::routes();
 
 //Route::get('user/checkpoint', [HomeController::class, 'checkPoint'])->name('user.checkpoint')->middleware('auth');
 Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
-Route::post('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
 Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(function(){
@@ -56,50 +57,50 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
-
     Route::get('/create', [SellerController::class, 'create'])->name('create');
     Route::post('/store', [SellerController::class, 'store'])->name('store');
 
     Route::get('/profile/edit/', [ SellerController::class, 'edit'])->name('edit');
     Route::post('/profile/update', [SellerController::class, 'update'])->name('update');
-
     Route::get('/show', [SellerController::class, 'show'])->name('show');
 
-    Route::get('/products/create', [SellerController::class, 'productsCreate'])->name('products.create');
-    Route::post('/products/store', [SellerController::class, 'productStore'])->name('products.store');
+    //products
+    Route::get('/products/create', [\App\Http\Controllers\Seller\ProductsController::class, 'create'])->name('products.create');
+    Route::post('/products/store', [\App\Http\Controllers\Seller\ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/show', [\App\Http\Controllers\Seller\ProductsController::class, 'show'])->name('products.show');
+    Route::get('/products/edit/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'edit'])->name('products.edit');
+    Route::post('/products/update/', [\App\Http\Controllers\Seller\ProductsController::class, 'update'])->name('products.update');
+    Route::post('/products/find-by-category', [\App\Http\Controllers\Seller\ProductsController::class, 'findByCategory'])->name('products.find.category');
+    Route::post('/products/details', [\App\Http\Controllers\Seller\ProductsController::class, 'findByID'])->name('products.details');
 
-    Route::get('/products/show', [SellerController::class, 'productShow'])->name('products.show');
 
-    Route::get('/products/edit/{id}', [SellerController::class, 'productEdit'])->name('products.edit');
-    Route::post('/products/update/', [SellerController::class, 'productUpdate'])->name('products.update');
-
-    Route::post('/products/find-by-category', [SellerController::class, 'findProductsByCategory'])->name('products.find.category');
-    Route::post('/products/details', [SellerController::class, 'findProductsByID'])->name('products.details');
-
-    /*Has Stall*/
-    Route::get('/stalls/has/select', [SellerController::class, 'stallHasSelect'])->name('stalls.has.select');
-    Route::get('/stalls/has/create/{id}', [SellerController::class, 'stallHasCreate'])->name('stalls.has.create');
-    //Route::get('/stalls/create/details', [SellerController::class, 'stallCreateDetails'])->name('stalls.create.details');
-    Route::post('/stalls/store/details', [SellerController::class, 'stallStoreDetails'])->name('stalls.store.details');
-
-    /*No Stall*/
-    Route::get('/stalls/create/{id}', [SellerController::class, 'stallCreate'])->name('stalls.create');
-    Route::post('/stalls/store', [SellerController::class, 'stallStore'])->name('stalls.store');
-    Route::get('/stalls/select', [SellerController::class, 'stallSelect'])->name('stalls.select');
-    Route::post('/stalls/upload/contract', [SellerController::class, 'submitContract'])->name('stalls.contract');
-
-    Route::get('/stalls/edit/{id}', [SellerController::class, 'stallEdit'])->name('stalls.edit');
-    Route::post('/stalls/update/', [SellerController::class, 'stallUpdate'])->name('stalls.update');
     Route::get('/stalls/have-any-stalls/', [SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
+//    Stalls
+    /*Has Stall*/
+    Route::get('/stalls/has/select', [\App\Http\Controllers\Seller\StallsController::class, 'hasSelect'])->name('stalls.has.select');
+    Route::get('/stalls/has/create/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'hasCreate'])->name('stalls.has.create');
+    //Route::get('/stalls/create/details', [SellerController::class, 'stallCreateDetails'])->name('stalls.create.details');
+    Route::post('/stalls/store/details', [\App\Http\Controllers\Seller\StallsController::class, 'storeDetails'])->name('stalls.store.details');
+
+    /*No Stall*/
+    Route::get('/stalls/create/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'create'])->name('stalls.create');
+    Route::post('/stalls/store', [\App\Http\Controllers\Seller\StallsController::class, 'store'])->name('stalls.store');
+    Route::get('/stalls/select', [\App\Http\Controllers\Seller\StallsController::class, 'select'])->name('stalls.select');
+    Route::post('/stalls/upload/contract', [\App\Http\Controllers\Seller\StallsController::class, 'submitContract'])->name('stalls.contract');
+
+    Route::get('/stalls/edit/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'edit'])->name('stalls.edit');
+    Route::post('/stalls/update/', [\App\Http\Controllers\Seller\StallsController::class, 'update'])->name('stalls.update');
+
     //My Stalls
-    Route::get('/stalls/show', [SellerController::class, 'stallShow'])->name('stalls.show');
+    Route::get('/stalls/show', [\App\Http\Controllers\Seller\StallsController::class, 'show'])->name('stalls.show');
+
+    Route::post('/stall/display/details/', [\App\Http\Controllers\Seller\StallsController::class, 'displayDetails'])->name('display.details');
 
     //Orders
-    Route::get('/orders/', [SellerController::class, 'showOrders'])->name('orders.show');
+    Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
 
 
-    Route::post('/stall/display/details/', [SellerController::class, 'display_details'])->name('display.details');
     Route::get('/switch/buyer', [SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 });
 
@@ -149,6 +150,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/products/show', [ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/edit/{id}', [ ProductsController::class, 'edit'])->name('products.edit');
     Route::post('/products/update/{id}', [ProductsController::class, 'update'])->name('products.update');
+    Route::get('/products/approve/{id}', [ProductsController::class, 'approve'])->name('products.approve');
     Route::get('/products/trash', [ProductsController::class, 'trash'])->name('products.trash');
     Route::get('/products/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('products.delete');
     Route::get('/products/permanentdelete/{id}', [ProductsController::class, 'ProductForceDelete'])->name('products.permanentdelete');
@@ -163,6 +165,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/stalls/store', [\App\Http\Controllers\Admin\StallsController::class, 'store'])->name('stalls.store');
     Route::get('/stalls/edit/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'edit'])->name('stalls.edit');
     Route::post('/stalls/update/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'update'])->name('stalls.update');
+    Route::get('/stalls/trash', [\App\Http\Controllers\Admin\StallsController::class, 'trash'])->name('stalls.trash');
+    Route::get('/stalls/delete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'deleteStall'])->name('stalls.delete');
+    Route::get('/stalls/permanentdelete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'StallForceDelete'])->name('stalls.permanentdelete');
+    Route::get('/stalls/recover/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'recoverStall'])->name('stalls.recover');
 
 
     //categories
@@ -215,3 +221,8 @@ Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 });
+
+
+Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
+Route::post('paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
+Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));

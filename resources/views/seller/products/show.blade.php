@@ -19,16 +19,17 @@
             </thead>
             <tbody>
             @foreach($seller_products as $seller_product)
-                <tr>
-                    <td>{{ $seller_product->product->product_name }}</td>
-                    <td>{{ $seller_product->product->srp }}</td>
-                    <td>{{ $seller_product->price }}</td>
-                    <td>{{ $seller_product->product->code }}</td>
-                    <td>{{ $seller_product->product->category->category }}</td>
-                    <td>{{ $seller_product->type }}</td>
-                    <td><a href="{{ route('seller.products.edit', $seller_product->id) }}">Edit</a></td>
-
-                </tr>
+                @if($seller_product->product->status == 'active')
+                    <tr>
+                        <td>{{ $seller_product->product->product_name }}</td>
+                        <td>{{ $seller_product->product->srp }}</td>
+                        <td>{{ $seller_product->price }}</td>
+                        <td>{{ $seller_product->product->code }}</td>
+                        <td>{{ $seller_product->product->category->category }}</td>
+                        <td>{{ $seller_product->type }}</td>
+                        <td><a href="{{ route('seller.products.edit', $seller_product->id) }}">Edit</a></td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
         </table>

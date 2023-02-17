@@ -114,13 +114,13 @@
                         @if(isset($message))
                             {{ $message }}
                         @endif
-                        <form action="{{ route('seller.stalls.store') }}" method="POST" class="form-">
+                        <form action="{{ route('seller.stalls.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                             
                         <div class="info-body-flex justify-content-center">
 
                                 <div class="form-group medium">
-                                    <label for="start_date">Appointment Date </label>
+                                    <label for="start_date">Appointment Date</label>
                                     <input type="date"
                                            class="form-control @error('appointment_date') is-invalid @enderror"
                                            id="appointment_date"
@@ -137,10 +137,91 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group medium">
+                                    <h3 style="text-align: center;">Upload the following: </h3>
+                                    <label for="application_letter">Application Letter Under Oath</label>
+                                    <input type="file"
+                                           enc
+                                           class="form-control @error('application_letter') is-invalid @enderror"
+                                           id="application_letter"
+                                           name="application_letter"
+                                           placeholder=""
+                                           value="" >
+
+                                    @error('application_letter')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group medium">
+                                    <label for="residency">Bonifide Resident of Mabini, Batangas</label>
+                                    <input type="file"
+                                           class="form-control @error('residency') is-invalid @enderror"
+                                           id="residency"
+                                           name="residency"
+                                           placeholder=""
+                                           value="" >
+
+                                    @error('residency')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group medium">
+                                    <label for="image">2 X 2 picture</label>
+                                    <input type="file"
+                                           class="form-control @error('image') is-invalid @enderror"
+                                           id="image"
+                                           name="image"
+                                           placeholder=""
+                                           value="" >
+
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group medium">
+                                    <label for="id">2 Valid IDs</label>
+                                    <input type="file"
+                                           class="form-control @error('id1') is-invalid @enderror"
+                                           id="id1"
+                                           name="id1"
+                                           placeholder=""
+                                           value="" >
+                                    
+                                    @error('id1')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group medium">
+                                    <input type="file"
+                                           class="form-control @error('id2') is-invalid @enderror"
+                                           id="id2"
+                                           name="id2"
+                                           placeholder=""
+                                           value="" >
+
+                                    @error('id2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Apply') }}
                                 </button>
                             </div>

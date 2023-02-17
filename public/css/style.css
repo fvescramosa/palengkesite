@@ -1048,7 +1048,7 @@ span.invalid-feedback {
 }
 .profile .basic-info-body {
    /*padding: 25px 50px;*/
-   padding: 15px 0px;
+   padding: 15px 15px 0;
 }
 .profile .basic-info-body label {
    font-size: 11px;
@@ -1282,11 +1282,9 @@ span.invalid-feedback {
    background-image: url("/images/palengke.jpg");
 }
 .login-container .bg-area .logo-area {
-   width: 185px;
+   width: 500px;
    height: auto;
    position: absolute;
-   top: -15px;
-   left: 25px;
 }
 .login-container .bg-area .logo-area img {
    -o-object-fit: cover;
@@ -1550,7 +1548,7 @@ display: flex;
    align-items: center;
 }
 
-.box-container .box-item {
+.box-container a.box-item {
 
    flex: 1 1 20%;
    min-height: 450px;
@@ -1559,12 +1557,20 @@ display: flex;
    background-position: bottom;
    background-repeat: no-repeat;
    height: 100%;
-   padding-bottom: 80px;
+   /* padding-bottom: 80px; */
+   display: flex !important;
    position: relative;
+   justify-content: center;
+   align-items: center;
+   text-decoration: none;
+   transition: all ease-in-out .50s;
 }
 
 
+.box-container a.box-item:hover h3{
+   color: #3e9e14;
 
+}
 
 .box-item .overlay {
 
@@ -1580,14 +1586,14 @@ display: flex;
 .box-item:hover .overlay {
    background-color: transparent;
 }
-.box-item a {
+/*.box-item a {
    position: absolute;
    bottom: 25px;
    left: 0;
    right: 0;
    margin: 0 auto;
    width: 93%;
-}
+}*/
 
 .box-item img{
    width: 100%;
@@ -1596,9 +1602,13 @@ display: flex;
 
 .box-item h3{
    text-transform: uppercase;
-   color:var(--black);
+   color: #fff;
+   font-size: 32px;
+   font-weight: 900;
    padding:1rem 0;
-   font-size: 2rem;
+   text-shadow: 2px 1px #000;
+   z-index: 999;
+   transition: all ease-in-out .50s;
 }
 
 .box-item p{
@@ -1617,12 +1627,14 @@ display: flex;
 }
 
 .btn-container{
-   padding: 5px 18px;
+   padding: 10px 10px;
 }
 
 .btn-container button{
-   padding: 8px;
-   font-size: 12px;
+   padding: 10px;
+   font-size: 13px;
+   text-transform: uppercase;
+   width: 250px;
 }
 
 .info-header-edit{
@@ -1655,4 +1667,37 @@ display: flex;
 }
 .list-header .list-header-fields > div{
    flex: 1 1 auto
+}
+
+.banner{
+   height: 450px;
+   text-align: center;
+   background-size: cover;
+   background-position: bottom;
+   background-repeat: no-repeat;
+   max-width: 100%;
+   position: relative;
+}
+
+.banner .overlay{
+   background: #0000005c;
+   position: absolute;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+
+.row-btn{
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+ }
+
+.table tr{
+   font-size: 15px;
+}
+
+.table tbody{
+   font-size: 14px;
 }

@@ -14,13 +14,21 @@
                 <div class="basic-info-body">
 
                     @if(isset($message))
-                        <strong>{{ $message  }}</strong>
+
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst($response) }}!',
+                                text: '{{ $message  }}',
+                                icon: '{{ $response }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
                     @endif
                     <form action="{{ route('seller.products.store') }}" method="POST" class="form-">
                         @csrf
                         <div class="info-body-flex">
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <label for="email">Product Categories</label>
                                     <select  class="form-control @error('category') is-invalid @enderror" id="category" name="category" placeholder="Category" value="" >
                                             <option value="">{{ 'Category' }}</option>
@@ -36,7 +44,7 @@
 
                                 </div>
 
-                                <div class="info-item long">
+                                <div class="form-group long">
                                     <div class="form-inline">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
@@ -48,7 +56,7 @@
                                     </div>
                                 </div>
 
-                                <div class="info-item long" id="select-product">
+                                <div class="form-group long" id="select-product">
                                     <label for="Product">Product</label>
                                     <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product"  >
                                         <option value=""></option>
@@ -61,7 +69,7 @@
 
                                 </div>
 
-                                <div class="info-item long" id="custom-product-container">
+                                <div class="form-group long" id="custom-product-container">
                                     <label for="Product">Product</label>
                                     <input type="text"  class="form-control @error('new_product_name') is-invalid @enderror" id="custom-product" name="new_product_name" placeholder="Product" value="" >
 
@@ -72,7 +80,104 @@
                                     @enderror
 
                                 </div>
-                                <div class="info-item short">
+
+                                <div class="form-group long  stall-image">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image') is-invalid @enderror"
+                                        id="image"
+                                        name="image"
+                                        placeholder="" value="" >
+
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div id="stall_image_1" class="form-group long  stall-image hide">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image_1') is-invalid @enderror"
+                                        id="image_1"
+                                        name="image_1"
+                                        placeholder="" value="" >
+
+                                    @error('image_1')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div id="stall_image_2" class="form-group long  stall-image hide">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image_2') is-invalid @enderror"
+                                        id="image_2"
+                                        name="image_2"
+                                        placeholder="" value="" >
+
+                                    @error('image_2')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div id="stall_image_3" class="form-group long  stall-image hide">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image_3') is-invalid @enderror"
+                                        id="image_3"
+                                        name="image_3"
+                                        placeholder="" value="" >
+
+                                    @error('image_3')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div id="stall_image_4" class="form-group long  stall-image hide">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image_4') is-invalid @enderror"
+                                        id="image_4"
+                                        name="image_4"
+                                        placeholder="" value="" >
+
+                                    @error('image_4')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div id="stall_image_5" class="form-group long  stall-image hide">
+                                    <label for="image">Image</label>
+                                    <input type="file"  class="form-control @error('image_5') is-invalid @enderror"
+                                        id="image_5"
+                                        name="image_5"
+                                        placeholder="" value="" >
+
+                                    @error('image_5')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+
+
+                                <div class="form-group short">
+                                    <button type="button" id="addImage" class="btn option-btn"><span class="fa fa-plus-circle"> </span> Add Image</button>
+                                </div>
+
+                                <div class="form-group long">
                                     <label for="Product">Price</label>
                                     <input type="text"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Price" value="" >
 
@@ -83,7 +188,12 @@
                                     @enderror
 
                                 </div>
-                                <div class="info-item short">
+
+                                <div class="alert alert-info" role="alert">
+                                    Maximum Price: <input type="text"  id="max_price" name="max_price" placeholder="" value="" style="text-align: center;" readonly>
+                                </div>
+
+                                <div class="form-group long">
                                     <label for="type">Type</label>
                                      <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
                                         <option value=""></option>
@@ -101,9 +211,9 @@
 
 
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
                                     {{ __('Submit') }}
                                 </button>
                             </div>
@@ -161,6 +271,7 @@
                         success:function(data) {
                             console.log(data[0].type);
                             $('#type').val(data[0].type);
+                            $('#max_price').val(data[0].max_price);
                         }
                     });
 

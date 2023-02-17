@@ -4,6 +4,11 @@
 <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
+                @if (session('message'))
+                    <div class="alert alert-{{ (session('success') ? 'success' : 'danger') }}">
+                        <strong>{{ session('message')  }}</strong>
+                    </div>
+                @endif
                 <form action="" method="GET"  class="form-group list-header" id="form-header">
                     <h3>Users</h3>
 

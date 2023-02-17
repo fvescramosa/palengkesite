@@ -100,7 +100,11 @@
         </nav>
 
         <main class="">
-
+                @if(isset($innerPageBanner))
+                    <section class="banner" style="background-image: url({{ $innerPageBanner }})">
+                    <div class="overlay"></div>
+                    </section>
+                @endif
                 @yield('content')
 
         </main>
