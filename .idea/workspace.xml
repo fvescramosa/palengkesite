@@ -6,8 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2a1b217-cf41-4b7f-bf15-af9b749bb386" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/products/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/seller/products/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pricing/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pricing/show.blade.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,20 +24,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="146" column="93" selection-start-line="146" selection-start-column="93" selection-end-line="146" selection-end-column="93" />
+            <state relative-caret-position="393">
+              <caret line="74" column="43" lean-forward="true" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
               <folding>
                 <element signature="e#47#68#0#PHP" expanded="true" />
+                <element signature="e#964#1329#1#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/seller/products/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+            <state relative-caret-position="506">
+              <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/pricing/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -81,8 +91,8 @@
       <find>notifica</find>
       <find>products\show.blade.php</find>
       <find>status</find>
-      <find>store</find>
       <find>show</find>
+      <find>store</find>
     </findStrings>
     <replaceStrings>
       <replace>SellerProduct</replace>
@@ -99,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/resources/views/admin/stalls/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/stalls/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/users/sellers.blade.php" />
@@ -148,8 +157,9 @@
         <option value="$PROJECT_DIR$/resources/views/layouts/seller.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/products/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Products.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/products/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/pricing/show.blade.php" />
       </list>
     </option>
   </component>
@@ -445,7 +455,7 @@
       <workItem from="1675871614608" duration="3651000" />
       <workItem from="1676432111382" duration="320000" />
       <workItem from="1676559444456" duration="794000" />
-      <workItem from="1676641065953" duration="2616000" />
+      <workItem from="1676641065953" duration="3238000" />
     </task>
     <task id="LOCAL-00001" summary="pogi ako">
       <created>1674228112753</created>
@@ -472,7 +482,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183387000" />
+    <option name="totallyTimeSpent" value="184009000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -541,13 +551,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="FIX CONTROLLER SETUP" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/categories/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="34" column="68" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/categories/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -910,18 +913,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="146" column="93" selection-start-line="146" selection-start-column="93" selection-end-line="146" selection-end-column="93" />
+        <state relative-caret-position="393">
+          <caret line="74" column="43" lean-forward="true" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
           <folding>
             <element signature="e#47#68#0#PHP" expanded="true" />
+            <element signature="e#964#1329#1#PHP" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/seller/products/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        <state relative-caret-position="506">
+          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pricing/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
         </state>
       </provider>
     </entry>
