@@ -30,14 +30,19 @@ class ProductsController extends Controller
 
     public function store(Request $request){
 
+
+
         if($request->new_product !== 'on'){
 
             $product = Products::findorFail($request->product);
+
 
             if ($product->max_price != null){
                 $validate = $request->validate([
                     'price' => ['numeric', 'lt:'.$product->max_price]
                 ]);
+
+
             }
 
 
@@ -72,6 +77,8 @@ class ProductsController extends Controller
             'featured' => $request->featured,
             'stock' => $request->stock,
         ]);
+
+
 
         if($request->file('image')){
             $file= $request->file('image');
