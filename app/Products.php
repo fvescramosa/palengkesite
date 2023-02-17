@@ -18,6 +18,7 @@ class Products extends Model
         'code',
         'manufacturer',
         'type',
+        'status',
     ];
 
 
