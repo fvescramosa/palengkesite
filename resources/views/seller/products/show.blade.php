@@ -20,6 +20,7 @@
             <tbody>
             @foreach($seller_products as $seller_product)
 
+
                 @if($seller_product->product->status == 'active')
                     <tr>
                         <td>{{ $seller_product->product->product_name }}</td>

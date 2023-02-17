@@ -14,6 +14,7 @@ use function asset;
 use function auth;
 use function compact;
 use function dd;
+use Illuminate\Support\Facades\Auth;
 use function redirect;
 use function view;
 
@@ -143,7 +144,9 @@ class ProductsController extends Controller
     {
         //$seller_products = SellerProducts::with(['product', 'seller', 'product.category'])->where(['seller_id' => auth()->user()->seller->id])->get();
 
-        $seller_products =  auth()->user()->seller->seller_products;
+        $seller_products =  Auth::user()->seller->seller_products()->with(['product'])->get();
+
+
 
         return view('seller/products/show', compact(['seller_products']))->with(['message' => '']);
 
