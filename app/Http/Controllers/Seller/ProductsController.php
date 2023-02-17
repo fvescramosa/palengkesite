@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Buyer;
@@ -131,9 +132,9 @@ class ProductsController extends Controller
 
         $categories = Categories::all();
         if($create){
-            return view('seller/products/create', compact(['categories']))->with(['message' => 'Product has been added']);
+            return view('seller/products/create', compact(['categories']))->with(['message' => 'Product has been added', 'response'=> 'success']);
         }else{
-            return view('seller/products/create', compact(['categories']))->with(['message' => '']);
+            return view('seller/products/create', compact(['categories']))->with(['message' => '', 'response' => 'error']);
         }
 
     }
