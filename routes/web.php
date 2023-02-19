@@ -40,29 +40,33 @@ Auth::routes();
 
 
 //Route::get('user/checkpoint', [HomeController::class, 'checkPoint'])->name('user.checkpoint')->middleware('auth');
-Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
+//Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
 Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(function(){
-    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+    Route::get('/profile/', [UserController::class, 'profile'])->name('profile');
 });
 
 Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/create', [BuyerController::class, 'create'])->name('create');
     Route::post('/store', [BuyerController::class, 'store'])->name('store');
     Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
+
+
+    Route::get('/delivery/address/create', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'create'])->name('delivery.address.create');
+    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'store'])->name('delivery.address.store');
 });
 
 
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
-    Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
-    Route::get('/create', [SellerController::class, 'create'])->name('create');
-    Route::post('/store', [SellerController::class, 'store'])->name('store');
+    Route::get('/profile', [\App\Http\Controllers\Seller\SellerController::class, 'profile'])->name('profile');
+    Route::get('/create', [\App\Http\Controllers\Seller\SellerController::class, 'create'])->name('create');
+    Route::post('/store', [\App\Http\Controllers\Seller\SellerController::class, 'store'])->name('store');
 
-    Route::get('/profile/edit/', [ SellerController::class, 'edit'])->name('edit');
-    Route::post('/profile/update', [SellerController::class, 'update'])->name('update');
-    Route::get('/show', [SellerController::class, 'show'])->name('show');
+    Route::get('/profile/edit/', [ \App\Http\Controllers\Seller\SellerController::class, 'edit'])->name('edit');
+    Route::post('/profile/update', [\App\Http\Controllers\Seller\SellerController::class, 'update'])->name('update');
+    Route::get('/show', [\App\Http\Controllers\Seller\SellerController::class, 'show'])->name('show');
 
     //products
     Route::get('/products/create', [\App\Http\Controllers\Seller\ProductsController::class, 'create'])->name('products.create');
@@ -101,7 +105,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
 
 
-    Route::get('/switch/buyer', [SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
+    Route::get('/switch/buyer', [\App\Http\Controllers\Seller\SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 });
 
 
@@ -220,6 +224,7 @@ Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+
 });
 
 

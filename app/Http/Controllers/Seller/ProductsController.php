@@ -125,7 +125,7 @@ class ProductsController extends Controller
             $data['image_5']= $filename;
         }
 
-        $create->save();
+
 
         if($request->price > $product->max_price){
             Notification::create([
@@ -139,11 +139,14 @@ class ProductsController extends Controller
         }
 
         $categories = Categories::all();
-        if($create){
-            return view('seller/products/create', compact(['categories']))->with(['message' => 'Product has been added', 'response'=> 'success']);
+        if( $create->save()){
+            $response = ['message' => 'Product has been added', 'response'=> 'success'];
         }else{
-            return view('seller/products/create', compact(['categories']))->with(['message' => '', 'response' => 'error']);
+            $response = ['message' => '', 'response' => 'error'];
+
         }
+
+            return redirect(route('seller.products.create'))->with($response);
 
     }
 
@@ -183,7 +186,14 @@ class ProductsController extends Controller
 
         $seller_products =  auth()->user()->seller->seller_products;
 
-        return view('seller/products/show', compact(['seller_products']))->with(['message' => 'Product has been updated!']);
+        if(  $update ){
+            $response = ['message' => 'Product has been updated', 'response'=> 'success'];
+        }else{
+            $response = ['message' => 'Opps! Something went wrong', 'response' => 'error'];
+
+        }
+
+        return redirect(route('seller.products.show'))->with($response);
 
     }
 

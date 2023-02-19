@@ -2,7 +2,7 @@
 
 @section('content')
 
- {{ auth()->user()->buyer->carts }}
+
 
     <section class="cart">
         <form class="cart-container" action="{{ route('cart.checkout') }}" method="POST">
@@ -63,7 +63,7 @@
 
  <div class="container">
 
-     {{--<div class="row">
+     {<div class="row">
          <div class="col-md-8 col-md-offset-2">
              <h3 class="text-center" style="margin-top: 90px;">How to integrate paypal payment in Laravel - Techsolutionstuff</h3>
              <div class="panel panel-default" style="margin-top: 60px;">
@@ -113,6 +113,6 @@
                  </div>
              </div>
          </div>
-     </div>--}}
+     </div>
  </div>
 @endsection

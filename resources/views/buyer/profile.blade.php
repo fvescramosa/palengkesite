@@ -48,7 +48,7 @@
 
                             <div class="form-group info-item long">
                                 <label for="email">Address</label>
-                                <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->stnumber  .' '. auth()->user()->buyer->stname .', '. auth()->user()->buyer->city .', '.  auth()->user()->buyer->province .', '.  auth()->user()->buyer->country .' '.  auth()->user()->buyer->zip }}" readonly>
+                                <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->stnumber  .' '. auth()->user()->buyer->stname .', '. auth()->user()->buyer->barangay .', '. auth()->user()->buyer->city .', '.  auth()->user()->buyer->province .', '.  auth()->user()->buyer->country .' '.  auth()->user()->buyer->zip }}" readonly>
 
                             </div>
 

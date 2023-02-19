@@ -217,10 +217,15 @@ class ProductsController extends Controller
 
         $product = Products::findOrFail($id);
 
-        $product->update($data);
 
-        $product->save();
 
-        return redirect(route('admin.products.show'))->with(['message' => 'Product is Approved!']);
+        if( $product->update($data)){
+            $response = ['message' => 'Product has been approved!', 'response' => 'success'];
+        }else{
+            $response = ['message' => '', 'response' => 'error'];
+        }
+
+
+        return redirect(route('admin.products.show'))->with($response);
     }
 }
