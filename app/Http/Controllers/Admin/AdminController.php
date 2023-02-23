@@ -11,6 +11,7 @@ use App\StallAppointment;
 use App\SellerStall;
 use App\Buyer;
 use App\Seller;
+use App\Products;
 use App\Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -256,6 +257,13 @@ class AdminController extends Controller
         $approvalnotif = SellerStall::where('status', 'pending')->get();
 
         return response()->json($approvalnotif->count());
+        
+    }
+
+    public function getProductApprovalNotif(){
+        $products = Products::where('status', 'pending')->get();
+
+        return response()->json($products->count());
         
     }
 

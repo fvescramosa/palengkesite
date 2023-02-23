@@ -207,6 +207,7 @@ Route::post('/chat/messages', 'ChatsController@sendMessage');
 
 Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
 Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
+Route::get('/stall/product/pending', [AdminController::class, 'getProductApprovalNotif'])->name('get.product.approval.notif');
 Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.notif');
 
 

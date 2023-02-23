@@ -191,12 +191,11 @@ class StallsController extends Controller
         );
 
         if($stalls->save()){
-            $message = ['success' => true, 'message' => 'Stall added'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Stall has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Stall added failed'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Failed to add', 'response' => 'error']);
         }
 
-        return redirect(route('admin.stalls.show'))->with($message);
     }
 
     public function edit($id){

@@ -19,7 +19,6 @@
                 </div>
             @endif
 
-
                 <div class="form-wrapper">
                     <h3>{{ 'Register' }}</h3>
                     <form method="POST" action="{{ route('admin.store') }}">

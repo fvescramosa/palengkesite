@@ -50,18 +50,11 @@ class CategoriesController extends Controller
 
 
         if($category->save()){
-            $message = [
-                'success' => true,
-                'message' => 'Category added!'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category has been added', 'response' => 'success']);
         }else{
-            $message = [
-                'success' => false,
-                'message' => 'Failed'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category failed to add', 'response' => 'error']);
         }
 
-        return redirect(route('admin.categories.show'))->with($message);
     }
 
 
