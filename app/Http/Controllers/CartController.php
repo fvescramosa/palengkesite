@@ -106,7 +106,7 @@ class CartController extends Controller
 
 
         }
-        return view('cart.index');
+        return redirect(route('cart/'));
     }
 
     public function checkRandomNumber($transaction_id)

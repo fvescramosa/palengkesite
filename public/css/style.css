@@ -1488,6 +1488,7 @@ display: flex;
 .navbar.fixed{
    background:white !important;
    z-index: 999;
+   position: fixed;
 }
 
 .logo-area img{

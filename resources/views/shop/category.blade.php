@@ -20,8 +20,6 @@
                             <img src="{{ $product->product->image }}" alt="">
                         </div>
                         <div class="product-details">
-
-
                             <h4>{{ $product->product->product_name }}</h4>
                             <p>Php {{ number_format($product->price, 2) }}</p>
                             <form action="{{ route('shop.product.addToCart') }}" method="POST">

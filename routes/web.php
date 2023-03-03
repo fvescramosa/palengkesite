@@ -56,6 +56,8 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/delivery/address/create', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'create'])->name('delivery.address.create');
     Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'store'])->name('delivery.address.store');
+
+    Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
 });
 
 
@@ -78,7 +80,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/products/details', [\App\Http\Controllers\Seller\ProductsController::class, 'findByID'])->name('products.details');
 
 
-    Route::get('/stalls/have-any-stalls/', [SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
+    Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
 //    Stalls
     /*Has Stall*/
