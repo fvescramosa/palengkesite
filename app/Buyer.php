@@ -17,6 +17,7 @@ class Buyer extends Model
         'contact',
         'stnumber',
         'stname',
+        'barangay',
         'city',
         'province',
         'country',

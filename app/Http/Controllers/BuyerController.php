@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buyer;
 use App\User;
+use App\DeliveryAddress;
 use function dd;
 use function extract;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class BuyerController extends Controller
             'contact' => ['required', ''],
             'stnumber' => ['required', ''],
             'stname' => [''],
+            'barangay' =>[''],
             'city' => ['required', ''],
             'province' => ['required', ''],
             'country' => ['required', ''],
@@ -49,6 +51,13 @@ class BuyerController extends Controller
                         'age' => $request->age,
                         'gender' => $request->gender,
                         'contact' =>  $request->contact,
+                        'stnumber' =>  $request->stnumber,
+                        'stname' =>  $request->stname,
+                        'barangay' =>  $request->barangay,
+                        'city' =>  $request->city,
+                        'province' =>  $request->province,
+                        'country' =>  $request->country,
+                        'zip' =>  $request->zip,
                         'user_id' => auth()->user()->id,
                     ]
                 );
@@ -81,10 +90,43 @@ class BuyerController extends Controller
 
     public function edit(){
 
+        $buyer = Buyer::findOrFail(auth()->user()->buyer->id);
+        $addresses = DeliveryAddress::all();
+
+        return view('buyer/edit', compact(['buyer', 'addresses']));
+
     }
 
-    public function update(){
+    public function update(Request $request){
+        Auth::user()->update(
+            [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+            ]
+        );
 
+
+       Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
+            'birthday' => $request->birthday,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'stnumber' =>  $request->stnumber,
+            'stname' =>  $request->stname,
+            'barangay' =>  $request->barangay,
+            'city' =>  $request->city,
+            'province' =>  $request->province,
+            'country' =>  $request->country,
+            'zip' =>  $request->zip,
+        ]);
+
+
+        $buyer = Buyer::findOrFail( auth()->user()->buyer->id );
+
+        return redirect(route('buyer.profile', compact(['buyer'])))->with(['message' => 'Buyer info Updated']);
+
+        
     }
 
     public function switch_as_seller(){

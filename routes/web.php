@@ -51,6 +51,8 @@ Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(fu
 Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/create', [BuyerController::class, 'create'])->name('create');
     Route::post('/store', [BuyerController::class, 'store'])->name('store');
+    Route::get('/profile/edit/', [ BuyerController::class, 'edit'])->name('edit');
+    Route::post('/profile/update', [BuyerController::class, 'update'])->name('update');
     Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
 });
 

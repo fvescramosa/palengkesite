@@ -6,6 +6,8 @@
            <div class="card basic-info" style="width: 18rem;">
                <div class="card-header basic-info-header">
                    Basic Information
+
+                   <a href="{{ route('buyer.edit') }}" class="info-header-edit"> <i class="fa fa-edit"></i></a>
                </div>
                 <div class="basic-info-body">
                     <div class="info-body-flex">
@@ -26,29 +28,23 @@
 
                         @if(auth()->user()->buyer()->exists())
                             <div class="form-group info-item short">
-                                <label for="email">Birthday</label>
+                                <label for="birthday">Birthday</label>
                                 <input type="text" class="form-control" id="birthday"  placeholder="Birthday" value="{{ date('m/d/Y', strtotime(auth()->user()->buyer->birthday)) }}" readonly>
                             </div>
 
                             <div class="form-group info-item xshort">
-                                <label for="email">Age</label>
+                                <label for="age">Age</label>
                                 <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->age }}" readonly>
                             </div>
 
                             <div class="form-group info-item xshort">
-                                <label for="email">Gender</label>
+                                <label for="gender">Gender</label>
                                 <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->gender }}" readonly>
                             </div>
 
-                            <div class="form-group info-item xshort">
-                                <label for="email">Gender</label>
-                                <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->gender }}" readonly>
-
-                            </div>
-
-                            <div class="form-group info-item long">
-                                <label for="email">Address</label>
-                                <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->stnumber  .' '. auth()->user()->buyer->stname .', '. auth()->user()->buyer->city .', '.  auth()->user()->buyer->province .', '.  auth()->user()->buyer->country .' '.  auth()->user()->buyer->zip }}" readonly>
+                            <div class="form-group info-item short">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->stnumber  .' '. auth()->user()->buyer->barangay .', '. auth()->user()->buyer->city .', '.  auth()->user()->buyer->province .', '.  auth()->user()->buyer->country .' '.  auth()->user()->buyer->zip }}" readonly>
 
                             </div>
 
