@@ -23,6 +23,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
@@ -261,18 +262,7 @@
                 </form>
             </div>
 
-
-            @if(session()->get('response'))  
-                <script>
-                    Swal.fire({
-                        title: '{{ ucfirst(session()->get('response')) }}!',
-                        text: '{{ session()->get('message')  }}',
-                        icon: '{{ session()->get('response') }}',
-                        confirmButtonText: 'Ok'
-                    })
-                </script>
-                @endif
-                @if(isset($response))
+            @if(isset($response))
                 <script>
                     Swal.fire({
                         title: '{{ ucfirst($response) }}!',
@@ -281,7 +271,19 @@
                         confirmButtonText: 'Ok'
                     })
                 </script>
-                @endif
+            @endif
+
+            @if(  session()->get('response')  )
+
+                <script>
+                    Swal.fire({
+                        title: '{{ ucfirst(session()->get('response')) }}!',
+                        text: '{{ session()->get('message')  }}',
+                        icon: '{{ session()->get('response') }}',
+                        confirmButtonText: 'Ok'
+                    })
+                </script>
+            @endif
 
             <main>
                 @yield('content')

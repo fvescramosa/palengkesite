@@ -12,7 +12,8 @@ class Order extends Model
         'buyer_id',
         'seller_id',
         'transaction_id',
-        'total'
+        'total',
+        'status'
     ];
 
 
@@ -30,5 +31,9 @@ class Order extends Model
 
     public function order_delivery_detail(){
         return $this->hasOne(OrderDeliveryDetail::class);
+    }
+
+    public function order_statuses(){
+        return $this->hasMany(OrderStatus::class);
     }
 }

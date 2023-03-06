@@ -80,7 +80,7 @@ class BuyerController extends Controller
 
 
 
-        return redirect(route('buyer.profile', Auth::user()->id))->with(['message' => 'Seller info added']);
+        return redirect(route('buyer.profile', Auth::user()->id))->with(['response' => 'success', 'message' => 'Seller info added']);
     }
 
 

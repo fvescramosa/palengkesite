@@ -13,17 +13,7 @@
                 </div>
                 <div class="basic-info-body">
 
-                    @if(isset($message))
 
-                        <script>
-                            Swal.fire({
-                                title: '{{ ucfirst($response) }}!',
-                                text: '{{ $message  }}',
-                                icon: '{{ $response }}',
-                                confirmButtonText: 'Ok'
-                            })
-                        </script>
-                    @endif
                     <form action="{{ route('seller.products.store') }}" method="POST" class="form-">
                         @csrf
                         <div class="info-body-flex">

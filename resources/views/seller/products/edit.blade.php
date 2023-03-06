@@ -92,7 +92,7 @@
 
                                 <!-- <div class="info-item form-inline short">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" required>
+                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" >
                                         <label class="form-check-label" for="remember">
                                             {{ __('Featured') }}
                                         </label>

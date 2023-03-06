@@ -128,7 +128,28 @@
                         </div>
                     </div>
 
+                    @if(isset($response))
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst($response) }}!',
+                                text: '{{ $message  }}',
+                                icon: '{{ $response }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
 
+                    @if(  session()->get('response')  )
+
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst(session()->get('response')) }}!',
+                                text: '{{ session()->get('message')  }}',
+                                icon: '{{ session()->get('response') }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
                     <main>
                         @yield('content')
                     </main>
