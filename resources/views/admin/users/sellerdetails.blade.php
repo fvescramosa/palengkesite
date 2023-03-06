@@ -108,50 +108,59 @@
                                           </div>
                                       </div>
                                       @if($user->seller->seller_stalls->status == 'active')
-                                          <table class="table table-bordered">
-                                          <tr>
-                                              <td><p><strong>Section:</strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->section }}</p></td>
-                                          </tr>
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Area: </strong></p></td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->sqm }} sqm</p></td>
-                                          </tr>
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Amount per sqm: </strong> </p> </td>
-                                              <td> <p>Php {{ $user->seller->seller_stalls->stall->amount_sqm }}</p></td>
-                                          </tr>
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
-                                          </tr>
+                                      <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <th></th>
+                                                <th></th>
+                                            </thead>
 
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Rate: </strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->rate }}</p></td>
-                                          </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td><p><strong>Section:</strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->section }}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Area: </strong></p></td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->sqm }} sqm</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Amount per sqm: </strong> </p> </td>
+                                                    <td> <p>Php {{ $user->seller->seller_stalls->stall->amount_sqm }}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
+                                                </tr>
 
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->coords }}</p></td>
-                                          </tr>
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Meter Number: </strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->stall->meter_num }}</p></td>
-                                          </tr>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Rate: </strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->rate }}</p></td>
+                                                </tr>
 
-                                          <tr>
-                                              <td class="stall-info-title-container"><p><strong>Duration: </strong></p> </td>
-                                              <td> <p>{{ $user->seller->seller_stalls->duration }}</p></td>
-                                          </tr>
-                                          <tr>
-                                              <td colspan="2">
-                                                  <a href="{{ asset( 'public/contracts/' . $user->seller->seller_stalls->contact_of_lease )}}"  target="_blank" class="btn option-btn">
-                                                      <span class="fa fa-eye"></span> View Contract
-                                                  </a>
-                                              </td>
-                                          </tr>
-                                      </table>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->coords }}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Meter Number: </strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->stall->meter_num }}</p></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Duration: </strong></p> </td>
+                                                    <td> <p>{{ $user->seller->seller_stalls->duration }}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <a href="{{ asset( 'public/contracts/' . $user->seller->seller_stalls->contact_of_lease )}}"  target="_blank" class="btn option-btn">
+                                                            <span class="fa fa-eye"></span> View Contract
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                       @elseif($user->seller->seller_stalls->status == 'pending')
                                           <h3 class="alert alert-warning">Waiting for Approval</h3>
@@ -163,19 +172,22 @@
 
                                       @if($user->seller->seller_stalls->stall_appointment)
                                           <h4>Appointment Details</h4>
-                                          <table class="table table-bordered">
-                                              <thead>
-                                                  <th>Date of Appointment</th>
-                                                  <th>Status</th>
-                                              </thead>
 
-                                              <tbody>
-                                                  <tr>
-                                                      <td>{{ $user->seller->seller_stalls->stall_appointment->date }}</td>
-                                                      <td>{{ $user->seller->seller_stalls->stall_appointment->status }}</td>
-                                                  </tr>
-                                              </tbody>
-                                          </table>
+                                          <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <th>Date of Appointment</th>
+                                                    <th>Status</th>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ $user->seller->seller_stalls->stall_appointment->date }}</td>
+                                                        <td>{{ $user->seller->seller_stalls->stall_appointment->status }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                       @endif
 
 

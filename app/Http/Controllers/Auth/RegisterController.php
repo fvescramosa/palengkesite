@@ -104,12 +104,10 @@ class RegisterController extends Controller
 
 
         if(  $admin->save() ){
-            $message = ['success' => true, 'message' => 'Added Succesful!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Staff has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Failed to Add!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Failed to Add!', 'response' => 'error']);
         }
-
-        return redirect(route('admin.show.staff'))->with($message);
 
     }
     protected function adminValidator(array $data)

@@ -1030,7 +1030,7 @@ span.invalid-feedback {
    height: auto;
    border: 1px solid #e1e1e1;
    box-shadow: 7px 0px 38px -11px rgba(0, 0, 0, 0.58);
-   padding: 50px;
+   padding: 40px;
    position: relative;
 }
 .profile .basic-info {
@@ -1482,7 +1482,6 @@ display: flex;
    flex-flow: row wrap;
    align-items: center;
    justify-content: space-between;
-   margin-bottom: 15px;
 }
 
 .navbar.fixed{
@@ -1638,6 +1637,27 @@ display: flex;
    width: 250px;
 }
 
+@media only screen and (max-width: 767px){
+   .btn-container button{
+      width: 100%;
+      max-width: 100%;
+      word-wrap: break-word;
+   }
+
+   .form-wrapper h3, 
+   .form-wrapper label{
+      word-wrap: break-word;
+   }
+}
+
+@media only screen and (max-width: 480px){
+   .form-wrapper h3, 
+   .form-wrapper label{
+      font-size: 12px;
+   }
+
+}
+
 .info-header-edit{
    bottom: -28px;
    position: absolute;
@@ -1701,4 +1721,38 @@ display: flex;
 
 .table tbody{
    font-size: 14px;
+}
+
+#alert{
+   font-size: 14px;
+}
+
+.table-bordered{
+   border-collapse: collapse;
+   font-size: 0.9em;
+   min-width: 400px;
+   box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+}
+
+.table-bordered thead tr{
+   background-color: var(--orange);
+   color: #ffffff;
+}
+
+.table-bordered tbody tr{
+   border-bottom: 1px solid #dddddd;
+}
+
+.table-bordered tbody tr:nth-of-type(even) {
+   background-color: #f3f3f3;
+}
+
+/* .stall-approval-row a{
+   color: var(--white);
+   background-color: var(--green);
+} */
+
+.stall-approval-row button{
+   color: var(--white);
+   background-color: var(--green);
 }

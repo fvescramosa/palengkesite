@@ -17,6 +17,19 @@
                         <strong>{{ $message  }}</strong>
                     @endif
 
+                    @if(($errors->any()))
+                        <div class="alert alert-danger alert-dismissible" role="alert" id="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Reminder!</strong>
+                            <ul>
+                            @foreach($errors->all() as $error)
+
+                            <li>{{$error}}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                         <div class="basic-info-body">
                             <div class="info-body-flex">
                                 <div class="info-item short">
@@ -127,10 +140,10 @@
                                            name="appointment_date"
                                            placeholder="Appointment Date"
                                            min="{{ date('Y-m-d', strtotime('+1 day')) }}"
-                                           value="" >
+                                           value="{{ old('appointment_date') }}" >
                                     <input type="hidden" name="stall_id" value="{{ $stall->id }}">
 
-                                    @error('start_date')
+                                    @error('date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

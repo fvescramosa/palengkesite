@@ -34,35 +34,62 @@ class StallsController extends Controller
         }
 
             //->get();
-        $orderby = '';
+        // $orderby = '';
 
+        // if(isset($_GET['orderby'])){
+        //     if($_GET['orderby'] == 'A-Z'){
+        //         $orderby = ['number', 'asc'];
+        //         $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'Z-A'){
+        //         $orderby = ['number', 'desc'];
+        //         $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'recent'){
+        //         $orderby = ['created_at', 'desc'];
+        //         $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'oldest'){
+        //         $orderby = ['created_at', 'asc'];
+        //         $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+        //     }
+            
+        // }
+        // else{
+        //     $orderby = ['number', 'asc'];
+        //     $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        // }
+
+        $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['number', 'asc'];
-                $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+                $stalls->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'Z-A'){
                 $orderby = ['number', 'desc'];
-                $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+                $stalls->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'recent'){
                 $orderby = ['created_at', 'desc'];
-                $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'oldest'){
                 $orderby = ['created_at', 'asc'];
-                $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+                $stalls->orderBy($orderby[0], $orderby[1]);
             }
             
         }
         else{
             $orderby = ['number', 'asc'];
-            $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+            $stalls->orderBy($orderby[0], $orderby[1]);
         }
-
 
 
         $stalls = $stalls->paginate(10);
@@ -85,8 +112,21 @@ class StallsController extends Controller
 
     public function store(Request $request){
 
+        $validate = $request->validate([
+            'stall_number' => 'required',
+            'sqm'	=> 'required',
+            'amount_sqm' => 'required',
+            'rental_fee'	=> 'required',
+            'section'	=> 'required',
+            'rate' => 'required',
+            'coordinates' => 'required',
+            'meter_number' => 'required',
+            'market' => 'required',
+            'image'	=> 'required|mimes:jpeg,jpg,png',
+        ]);
+
         $data = [
-            'number' => $request->number,
+            'number' => $request->stall_number,
             'sqm'	=> $request->sqm,
             'amount_sqm' => $request->amount_sqm,
             'rental_fee'	=> $request->rental_fee,
@@ -95,8 +135,8 @@ class StallsController extends Controller
             'image'	=> $request->image,
             'status' => 'vacant',
             'rate' => $request->rate,
-            'coords' => $request->coords,
-            'meter_num' => $request->meter_num,
+            'coords' => $request->coordinates,
+            'meter_num' => $request->meter_number,
         ];
 
   
@@ -151,12 +191,11 @@ class StallsController extends Controller
         );
 
         if($stalls->save()){
-            $message = ['success' => true, 'message' => 'Stall added'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Stall has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Stall added failed'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Failed to add', 'response' => 'error']);
         }
 
-        return redirect(route('admin.stalls.show'))->with($message);
     }
 
     public function edit($id){

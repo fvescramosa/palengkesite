@@ -19,7 +19,7 @@
                         <div class="info-body-flex">
 
                                 <div class="form-group long">
-                                    <label for="email">Product Categories</label>
+                                    <label for="email">Product Category</label>
                                     <select  class="form-control @error('category') is-invalid @enderror" id="category" name="category" placeholder="Category" value="" >
                                             <option value="">{{ 'Category' }}</option>
                                             @foreach($categories as $category)

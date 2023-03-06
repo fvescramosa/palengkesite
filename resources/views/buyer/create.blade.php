@@ -82,8 +82,8 @@
                                 </div>
 
                                 <div class="info-item short">
-                                    <label for="stname">Sreet Name</label>
-                                    <input type="text" class="form-control @error('stname') is-invalid @enderror" id="stname" name="stname" placeholder="Example: Dalipit East" value="">
+                                    <label for="stname">Street Name</label>
+                                    <input type="text" class="form-control @error('stname') is-invalid @enderror" id="stname" name="stname" placeholder="" value="">
                                     @error('stname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -112,7 +112,7 @@
                                     <select class="form-control @error('barangay') is-invalid @enderror"
                                             id="barangay"
                                             name="barangay"
-                                            placeholder="Example: Alitagtag">
+                                            placeholder="">
                                         <option value="">Please select Barangay</option>
                                     </select>
                                     @error('city')
@@ -146,7 +146,7 @@
 
                                 <div class="info-item short">
                                     <label for="zip">Zip Code</label>
-                                    <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" placeholder="Example: 123" value="" readonly>
+                                    <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" placeholder="" value="" readonly>
                                     @error('zip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

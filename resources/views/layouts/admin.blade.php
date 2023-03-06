@@ -25,6 +25,7 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
@@ -182,6 +183,8 @@
                                     <a href="{{ route('admin.products.show') }}" class="{{ ( request()->routeIs('admin.products.show') ? 'active' : '' )}}">
                                         <span class="icon"><i class="fa fa-cart-plus"></i></span>
                                         <span class="item">List</span>
+
+                                        <span class="notif badge badge-danger" id="product-approval-notif">{{ App\Products::where('status', 'pending')->get()->count() }}</span>
                                     </a>
                                 </li>
                                 <li>
@@ -193,11 +196,27 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
+                    <li class="collapsed" data-toggle="collapse" data-target="#categories_submenu">
+                        <a href="#"  class="">
                             <span class="icon"><i class="fa fa-store-alt"></i></span>
                             <span class="item">Categories</span>
                         </a>
+                        <div class="collapse {{ (request()->segment(2) == 'categories') ? 'show' : ''}}" id="categories_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-store-alt"></i></span>
+                                        <span class="item">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.categories.trash') }}" class="{{ ( request()->routeIs('admin.categories.trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
@@ -242,6 +261,7 @@
                     </select>
                 </form>
             </div>
+
             @if(isset($response))
                 <script>
                     Swal.fire({
@@ -264,6 +284,7 @@
                     })
                 </script>
             @endif
+
             <main>
                 @yield('content')
             </main>
@@ -330,6 +351,24 @@
                         }, 5000);
                     },
 
+                    initNotifProduct: function(){
+
+                        setInterval(function(){
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url:"{{route('get.product.approval.notif')}}",
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                $('#product-approval-notif').text(data); 
+                                }
+                            }); 
+                        }, 5000);
+                    },
+
                     initNotifications: function(){
 
                         setInterval(function(){
@@ -357,7 +396,17 @@
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();
                     app.initNotifStallApproval();
+                    app.initNotifProduct();
                     // app.initNotifications();
+                    $('.hamburger').click(function(){
+                        if($('.sidebar').hasClass('close')){
+                            $('.sidebar').removeClass('close');
+                            $('.admin .wrapper .section').removeClass('open');
+                        }else{
+                            $('.sidebar').addClass('close');
+                            $('.admin .wrapper .section').addClass('open');
+                        }
+                    });
                 });
 
 

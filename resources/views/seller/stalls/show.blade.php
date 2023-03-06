@@ -81,10 +81,6 @@
                                             <td> <p>₱{{ $seller_stall->stall->amount_sqm }}</p></td>
                                         </tr>
                                         <tr>
-                                            <td class="stall-info-title-container"><p><strong>Area </strong> </p> </td>
-                                            <td> <p>{{ $seller_stall->stall->stall_area }}</p></td>
-                                        </tr>
-                                        <tr>
                                             <td class="stall-info-title-container"><p><strong>Rate: </strong> </p> </td>
                                             <td> <p>{{ $seller_stall->stall->rate }}</p></td>
                                         </tr>

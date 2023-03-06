@@ -33,31 +33,33 @@
 
                 </form>
                 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($sellers as $seller)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $seller->user->first_name }}</td>
-                            <td>{{ $seller->user->last_name }}</td>
-                            <td>{{ $seller->user->email }}</td>
-                            <td>{{ $seller->seller_type }}</td>
-                            <td>
-                                <a href="{{ route('admin.sellers.recover', $seller->id) }}"> Retrieve </a> | 
-                                <a href="{{ route('admin.sellers.permanentdelete', $seller->id) }}" title="Permanent Delete">Delete</a>
-                            </td>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Type</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($sellers as $seller)
+                            <tr>
+                                <td>{{ $seller->user->first_name }}</td>
+                                <td>{{ $seller->user->last_name }}</td>
+                                <td>{{ $seller->user->email }}</td>
+                                <td>{{ $seller->seller_type }}</td>
+                                <td>
+                                    <a href="{{ route('admin.sellers.recover', $seller->id) }}"> Retrieve </a> | 
+                                    <a href="{{ route('admin.sellers.permanentdelete', $seller->id) }}" title="Permanent Delete">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 @if( isset($_GET) )
                 {{$sellers->appends($_GET)->links()}}
                 @else
