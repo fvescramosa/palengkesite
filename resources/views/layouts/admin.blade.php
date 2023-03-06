@@ -195,11 +195,27 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
+                    <li class="collapsed" data-toggle="collapse" data-target="#categories_submenu">
+                        <a href="#"  class="">
                             <span class="icon"><i class="fa fa-store-alt"></i></span>
                             <span class="item">Categories</span>
                         </a>
+                        <div class="collapse {{ (request()->segment(2) == 'categories') ? 'show' : ''}}" id="categories_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.categories.show') }}" class="{{ ( request()->routeIs('admin.categories.show') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-store-alt"></i></span>
+                                        <span class="item">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.categories.trash') }}" class="{{ ( request()->routeIs('admin.categories.trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">

@@ -28,8 +28,8 @@
                                 <td>{{ $category->category }}</td>
                                 <td><img src="{{ asset('public/Image/'.$category->image)  }}" alt=""></td>
                                 <td>
-                                    <a href="{{ route('admin.categories.edit', $category->id) }}">Edit</a> |
-                                    <a href="{{ route('admin.categories.delete', $category->id) }}">Delete</a>
+                                  <a href="{{ route('admin.categories.recover', $category->id) }}"> Retrieve </a> | 
+                                  <a href="{{ route('admin.categories.permanentdelete', $category->id) }}" title="Permanent Delete">Delete</a>
                                 </td>
 
                             </tr>
@@ -37,7 +37,6 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="{{ route('admin.categories.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>

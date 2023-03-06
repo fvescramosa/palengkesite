@@ -88,4 +88,32 @@ class CategoriesController extends Controller
         $categories = Categories::all();
         return redirect(route('admin.categories.show'))->with($message);
     }
+
+    public function trash(){
+        $categories = Categories::onlyTrashed();
+
+        return view('admin.categories/trash', compact(['categories']));
+    }
+
+    public function deleteCategory($id){
+
+        $delete =  Categories::where('id', $id)->delete();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function recoverCategory($id){
+
+        $recover = Categories::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function CategoryForceDelete($id){
+
+        $delete = Categories::where('id', $id)->forceDelete();
+        return redirect(route('admin.categories.trash'));
+    }
 }

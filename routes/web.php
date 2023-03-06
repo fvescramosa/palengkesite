@@ -179,6 +179,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/categories/show', [CategoriesController::class, 'show'])->name('categories.show');
     Route::get('/categories/edit/{id}', [ CategoriesController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::get('/categories/trash', [CategoriesController::class, 'trash'])->name('categories.trash');
+    Route::get('/categories/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
+    Route::get('/categories/permanentdelete/{id}', [CategoriesController::class, 'CategoryForceDelete'])->name('categories.permanentdelete');
+    Route::get('/categories/recover/{id}', [CategoriesController::class, 'recoverCategory'])->name('categories.recover');
 
     //seller stalls
     Route::get('/seller/stalls', [SellerStallsController::class, 'index'])->name('seller.stalls.show');
