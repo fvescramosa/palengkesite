@@ -50,18 +50,11 @@ class CategoriesController extends Controller
 
 
         if($category->save()){
-            $message = [
-                'success' => true,
-                'message' => 'Category added!'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category has been added', 'response' => 'success']);
         }else{
-            $message = [
-                'success' => false,
-                'message' => 'Failed'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category failed to add', 'response' => 'error']);
         }
 
-        return redirect(route('admin.categories.show'))->with($message);
     }
 
 
@@ -94,5 +87,33 @@ class CategoriesController extends Controller
 
         $categories = Categories::all();
         return redirect(route('admin.categories.show'))->with($message);
+    }
+
+    public function trash(){
+        $categories = Categories::onlyTrashed();
+
+        return view('admin.categories/trash', compact(['categories']));
+    }
+
+    public function deleteCategory($id){
+
+        $delete =  Categories::where('id', $id)->delete();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function recoverCategory($id){
+
+        $recover = Categories::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function CategoryForceDelete($id){
+
+        $delete = Categories::where('id', $id)->forceDelete();
+        return redirect(route('admin.categories.trash'));
     }
 }

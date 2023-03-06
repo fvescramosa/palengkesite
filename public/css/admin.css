@@ -28,6 +28,13 @@
 .admin .wrapper .sidebar.main {
    background: #3E9E14;
 }
+.admin .wrapper .sidebar.close {
+   width: 0;
+}
+.admin .wrapper .sidebar.close .sidebar-header,
+.admin .wrapper .sidebar.close .sidebar-content{
+   display: none;
+}
 .admin .wrapper .sidebar.main ul li a {
    border-bottom: 0;
 }
@@ -70,6 +77,10 @@
    margin-left: 312px;
    transition: all 0.5s ease;
 }
+.admin .wrapper .section.open {
+   width: 100%;
+   margin: 0;
+}
 .admin .wrapper .section .top_navbar {
    background: #3E9E14;
    height: 50px;
@@ -90,6 +101,7 @@
 
 #users_submenu li,
 #products_submenu li,
+#categories_submenu li,
 #stalls_submenu li {
    padding-left: 25px;
 }
@@ -221,13 +233,13 @@
 }
 
 .dashboard-column{
-   border: 1px solid #e3e3e3;
-   height:  250px;
-   border-radius:25px; 
-   margin: 15px 15px;
+   border: 2px solid #343a40;
+   height: 250px;
+   border-radius: 25px;
+   margin: 25px 11px 0px;
    /* flex 1 occupy row if col is less than assigned count of col  */
-   flex: 1 1 calc(33.3333% - 30px); /*(100% / 3 = 33.3333%) calculate the width of column - total margin left and right of 1 column*/
-   max-width: calc(33.3333% - 30px);
+   flex: 1 1 calc(33.3333% - 22px); /*(100% / 3 = 33.3333%) calculate the width of column - total margin left and right of 1 column*/
+   max-width: calc(33.3333% - 22px);
    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
@@ -235,7 +247,7 @@
    display: flex;
    flex-flow: row wrap; /*row = horizontal, wrap = it will squeeze the container*/
    width:100%;
-   height: 175px;
+   height: 145px;
 }
 
 .col-left,
@@ -292,7 +304,7 @@
    }
 
    .col-left h3 {
-      font-size: 20px;
+      font-size: 22px;
    }
 }
 

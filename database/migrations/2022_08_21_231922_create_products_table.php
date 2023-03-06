@@ -21,8 +21,6 @@ class CreateProductsTable extends Migration
             $table->string('max_price');
             $table->string('srp');
             $table->string('category_id');
-            $table->string('code');
-            $table->string('manufacturer');
             $table->string('type');
             $table->timestamps();
         });

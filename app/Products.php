@@ -15,8 +15,6 @@ class Products extends Model
         'max_price',
         'srp',
         'category_id',
-        'code',
-        'manufacturer',
         'type',
         'status',
     ];

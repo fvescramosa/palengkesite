@@ -51,6 +51,8 @@ Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(fu
 Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/create', [BuyerController::class, 'create'])->name('create');
     Route::post('/store', [BuyerController::class, 'store'])->name('store');
+    Route::get('/profile/edit/', [ BuyerController::class, 'edit'])->name('edit');
+    Route::post('/profile/update', [BuyerController::class, 'update'])->name('update');
     Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
 
 
@@ -183,6 +185,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/categories/show', [CategoriesController::class, 'show'])->name('categories.show');
     Route::get('/categories/edit/{id}', [ CategoriesController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::get('/categories/trash', [CategoriesController::class, 'trash'])->name('categories.trash');
+    Route::get('/categories/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
+    Route::get('/categories/permanentdelete/{id}', [CategoriesController::class, 'CategoryForceDelete'])->name('categories.permanentdelete');
+    Route::get('/categories/recover/{id}', [CategoriesController::class, 'recoverCategory'])->name('categories.recover');
 
     //seller stalls
     Route::get('/seller/stalls', [SellerStallsController::class, 'index'])->name('seller.stalls.show');
@@ -213,6 +219,7 @@ Route::post('/chat/messages', 'ChatsController@sendMessage');
 
 Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
 Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
+Route::get('/stall/product/pending', [AdminController::class, 'getProductApprovalNotif'])->name('get.product.approval.notif');
 Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.notif');
 
 
