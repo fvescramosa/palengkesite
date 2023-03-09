@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Order;
+use App\OrderStatus;
+use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,7 +23,32 @@ class OrdersController extends Controller
     public function find($id){
         $orders = Order::find($id);
 
-        return view('seller.orders.find', compact(['orders']));
+        $statuses = Status::all();
+        return view('seller.orders.find', compact(['orders', 'statuses']));
 
+    }
+
+    public function updateStatus(Request $request){
+
+
+
+        $status = OrderStatus::create([
+           'order_id' => $request->order_id,
+           'status_id' => $request->status,
+        ]);
+
+        if($status){
+            $response = [
+                'response' => 'success',
+                'message' => 'Order status updated!'
+            ];
+        }else{
+            $response = [
+                'response' => 'error',
+                'message' => 'Opps! Something went wrong!'
+            ];
+        }
+
+        return redirect(route('seller.orders.find', ['id' => $request->order_id]))->with($response);
     }
 }
