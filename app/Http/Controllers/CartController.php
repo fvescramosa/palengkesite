@@ -64,7 +64,7 @@ class CartController extends Controller
                 'transaction_id' => $transaction_id,
                 'total' => $total,
                 'status' => 'pending',
-                'payment_option' => $request->payment_method,
+                'payment_option_id' => $request->payment_method,
             ]);
 
 
