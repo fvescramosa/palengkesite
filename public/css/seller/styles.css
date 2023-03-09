@@ -1,5 +1,12 @@
-.seller{
-
+body{
+    height: 100vh;
+}
+.seller,
+.seller .wrapper,
+.seller .wrapper .section,
+.seller main
+{
+    height: 100%;
 }
 
 .seller .seller-wrapper{

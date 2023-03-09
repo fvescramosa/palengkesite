@@ -13,7 +13,8 @@ class Order extends Model
         'seller_id',
         'transaction_id',
         'total',
-        'status'
+        'status',
+        'payment_option'
     ];
 
 
@@ -35,5 +36,9 @@ class Order extends Model
 
     public function order_statuses(){
         return $this->hasMany(OrderStatus::class);
+    }
+
+    public function payment_option(){
+        return $this->belongsTo(PaymentOption::class);
     }
 }

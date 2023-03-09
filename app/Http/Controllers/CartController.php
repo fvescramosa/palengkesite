@@ -24,6 +24,7 @@ class CartController extends Controller
         $paymentOptions = PaymentOption::all();
         return view('cart.index', compact(['paymentOptions']));
     }
+
     public function checkout(Request $request){
 
 
@@ -63,6 +64,7 @@ class CartController extends Controller
                 'transaction_id' => $transaction_id,
                 'total' => $total,
                 'status' => 'pending',
+                'payment_option' => $request->payment_method,
             ]);
 
 
@@ -90,6 +92,8 @@ class CartController extends Controller
                         'seller_product_id' => $item->seller_product_id,
                         'quantity' => $item->quantity,
                         'total' => $item->total,
+                        'status' => 'pending',
+
                     ]);
                 }
 
@@ -107,7 +111,7 @@ class CartController extends Controller
 
 
         }
-        return redirect(route('cart.index'));
+        return redirect(route('buyer.orders.index'));
     }
 
     public function checkRandomNumber($transaction_id)
