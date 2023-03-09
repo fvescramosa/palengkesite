@@ -13,6 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('thirdparty/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link href="{{ asset('thirdparty/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
 
     <link
@@ -26,19 +27,77 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
+     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
 
 
     </head>
     <body id="page-top">
 
-        <div class="seller">
+        <div class="buyer">
             <!-- Page Wrapper -->
             <div class="wrapper">
+                <div class="sidebar buyer">
+                    <div class="sidebar-header">
+                        <h3><i class="fa fa-desktop"></i> Buyer Dashboard</h3>
+                        <hr>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="">
+                                <span class="icon"><i class="fas fa-user"></i></span>
+                                <span class="item">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                <span class="item">My Stall</span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="{{ route('buyer.switch.seller') }}">
+                                <span class="icon"><i class="fas fa-people-arrows"></i></span>
+                                <span class="item">Switch as Seller</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                <span class="icon"><i class="fas fa-power-off"></i></span>
+                                <span class="item">Logout</span>
+                            </a>
+                            <form id="frm-logout" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 <div class="section">
 
 
+                    @if(isset($response))
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst($response) }}!',
+                                text: '{{ $message  }}',
+                                icon: '{{ $response }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
+
+                    @if(  session()->get('response')  )
+
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst(session()->get('response')) }}!',
+                                text: '{{ session()->get('message')  }}',
+                                icon: '{{ session()->get('response') }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
                     <main>
                         @yield('content')
                     </main>

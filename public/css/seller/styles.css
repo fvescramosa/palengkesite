@@ -136,4 +136,110 @@
 
 
 
+.buyer{
+
+}
+
+.buyer .seller-wrapper{
+    max-width: 1600px;
+    margin: 50px auto;
+    height: auto;
+    border: 1px solid #e1e1e1;
+    box-shadow: 7px 0px 38px -11px rgba(0,0,0,0.58);
+    padding: 50px;
+}
+
+.buyer .basic-info{
+    width: 100%;
+
+}
+
+.buyer ul {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.buyer .wrapper .sidebar {
+    box-shadow: 0px 2px 22px 0 rgba(0, 0, 0, 0.2), 0px 2px 30px 0 rgba(0, 0, 0, 0.35);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 312px;
+    height: 100%;
+    transition: all 0.5s ease;
+}
+.buyer .wrapper .sidebar hr {
+    border-top: 3px solid #fff;
+}
+.buyer .wrapper .sidebar.buyer {
+    background: #3E9E14;
+}
+.buyer .wrapper .sidebar.buyer {
+    background: #333;
+}
+.buyer .wrapper .sidebar.main {
+    background: #212121;
+}
+.buyer .wrapper .sidebar.main ul li a {
+    border-bottom: 1px solid #fff !important;
+}
+.buyer .wrapper .sidebar ul li a {
+    display: block;
+    padding: 13px 30px;
+    border-bottom: 1px solid #3E9E14;
+    color: rgb(241, 237, 237);
+    font-size: 16px;
+    position: relative;
+    text-decoration: none;
+}
+.buyer .wrapper .sidebar ul li a .icon {
+    color: #dee4ec;
+    width: 30px;
+    display: inline-block;
+}
+.buyer .wrapper .sidebar ul li a:hover, .buyer .wrapper .sidebar ul li a.active {
+    color: #3E9E14;
+    background: white;
+    border-right: 2px solid #3E9E14;
+}
+.buyer .wrapper .sidebar ul li a:hover .icon, .buyer .wrapper .sidebar ul li a.active .icon {
+    color: #3E9E14;
+}
+.buyer .wrapper .sidebar ul li a:hover:before, .buyer .wrapper .sidebar ul li a.active:before {
+    display: block;
+}
+.buyer .wrapper .sidebar-header {
+    padding: 25px;
+    text-align: center;
+}
+.buyer .wrapper .sidebar-header h3 {
+    font-size: 20px !important;
+    color: #fff;
+    font-weight: 700;
+}
+.buyer .wrapper .section {
+    width: calc(100% - 312px);
+    margin-left: 312px;
+    transition: all 0.5s ease;
+}
+.buyer .wrapper .section .top_navbar {
+    background: #3E9E14;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+}
+.buyer .wrapper .section .top_navbar.main {
+    background: #212121;
+}
+.buyer .wrapper .section .top_navbar .hamburger a {
+    font-size: 28px;
+    color: #f4fbff;
+}
+.buyer .wrapper .section .top_navbar .hamburger a:hover {
+    color: #a2ecff;
+}
+
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Seller;
 
 use App\Categories;
+use App\Http\Controllers\Controller;
 use App\Mail\NewUserWelcomeMail;
 use App\Products;
 use App\Buyer;
@@ -93,15 +94,19 @@ class SellerController extends Controller
                 $data = array('name'=>"Frank Test");
 
                 //dd(Mail::to(auth()->user()->email)->send(new NewUserWelcomeMail()));
-
-
-                echo "Basic Email Sent. Check your inbox.";
+                //echo "Basic Email Sent. Check your inbox.";
+                $response = [
+                    'response' => 'success',
+                    'message' => 'Seller info added',
+                ];
             }
+
+        }else{
 
         }
 
 
-        return redirect(route('seller.stalls.haveany'))->with(['message' => 'Seller info added']);
+        return redirect(route('seller.stalls.haveany'))->with($response);
     }
 
     public function haveAnyStalls(){
@@ -120,7 +125,7 @@ class SellerController extends Controller
 
 
 
-        Auth::user()->update(
+        $user = Auth::user()->update(
             [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -128,7 +133,7 @@ class SellerController extends Controller
         );
 
 
-        Seller::where(['id' => auth()->user()->seller->id]) -> update([
+        $sellerUpdate = Seller::where(['id' => auth()->user()->seller->id]) ->update([
             'birthday' => $request->birthday,
             'age' => $request->age,
             'gender' => $request->gender,
@@ -136,7 +141,14 @@ class SellerController extends Controller
 
         $seller = Seller::findOrFail( auth()->user()->seller->id );
 
-        return redirect(route('seller.profile'))->with(['message' => 'Seller info Updated']);
+        if ($sellerUpdate || $user){
+            $response = ['response' => 'success', 'message' => 'Profile has been updated!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Opps! Something went wrong'];
+        }
+
+
+        return redirect(route('seller.profile'))->with($response);
     }
 
     public function profile(){
@@ -157,6 +169,7 @@ class SellerController extends Controller
 
     public function switch_as_buyer(){
 
+
         if(Auth::user()->user_type_id == 2){
 
             if(!Auth::user()->buyer()->exists()){
@@ -175,8 +188,10 @@ class SellerController extends Controller
 
         }
 
-            session()->put('user_type', 'buyer');
+        session()->put('user_type', 'buyer');
 
-        return redirect(route('buyer.profile', ['id' => Auth::user()->id]));
+        $response = ['response' => 'success', 'message' => 'Profile switch successful!'];
+
+        return redirect(route('buyer.profile', ['id' => Auth::user()->id]))->with($response);
     }
 }

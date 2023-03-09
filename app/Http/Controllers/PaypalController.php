@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Order;
 use Illuminate\Http\Request;
 use Validator;
 use URL;
@@ -92,6 +93,9 @@ class PaypalController extends Controller
         }
 
         Session::put('paypal_payment_id', $payment->getId());
+
+
+        Order::where('id', $request->order_id)->update(['status' => 'paid']);
 
         if(isset($redirect_url)) {
             return Redirect::away($redirect_url);

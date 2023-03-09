@@ -27,9 +27,9 @@ class CartController extends Controller
     public function checkout(Request $request){
 
 
-        dd($request);
 
         $deliver_detail = DeliveryAddress::findOrFail($request->delivery_address);
+
 
 
         $carts = Cart::whereIn('id', $request->cart_ids)->get()->groupBy('seller_id');
@@ -62,6 +62,7 @@ class CartController extends Controller
                 'seller_id' => $cart->first()->seller_id,
                 'transaction_id' => $transaction_id,
                 'total' => $total,
+                'status' => 'pending',
             ]);
 
 
@@ -91,12 +92,22 @@ class CartController extends Controller
                         'total' => $item->total,
                     ]);
                 }
+
+
             }
 
         }
 
         Cart::whereIn('id', $request->cart_ids)->delete();
-        return view('cart.index');
+
+        if($request->payment_method == 1){
+            //paypal
+
+        }else{
+
+
+        }
+        return redirect(route('cart.index'));
     }
 
     public function checkRandomNumber($transaction_id)
@@ -108,4 +119,13 @@ class CartController extends Controller
         }
 
     }
+
+    public function delivery_address_create(){
+        return view('cart.delivery_address_create',compact([]));
+    }
+
+    public function delivery_address_store(){
+
+    }
+
 }

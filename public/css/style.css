@@ -877,7 +877,7 @@ section{
 .navbar{
    min-height: 0 !important;
    margin-bottom: 0 !important;
-   position: fixed;
+   /*position: fixed;*/
    width: 100%;
    height: 100px;
    background-color: transparent !important;
@@ -1487,6 +1487,7 @@ display: flex;
 .navbar.fixed{
    background:white !important;
    z-index: 999;
+   position: fixed;
 }
 
 .logo-area img{
