@@ -40,6 +40,7 @@ class BuyerController extends Controller
             'province' => ['required', ''],
             'country' => ['required', ''],
             'user_id' => '',
+            'image'	=> 'required|mimes:jpeg,jpg,png',
         ]);
 
         if (!Auth::user()->buyer()->exists()){
@@ -59,8 +60,16 @@ class BuyerController extends Controller
                         'country' =>  $request->country,
                         'zip' =>  $request->zip,
                         'user_id' => auth()->user()->id,
+                        'image' => $request->image,
                     ]
                 );
+
+                if($request->file('image')){
+                    $file= $request->file('image');
+                    $filename= date('YmdHi').'.'.$request->file('image')->extension();
+                    $file-> move(public_path('public/Image'), $filename);
+                    $data['image']= $filename;
+                }
 
                 if($buyer->save()){
                     $buyer->user->delivery_addresses()->create([
@@ -119,7 +128,15 @@ class BuyerController extends Controller
             'province' =>  $request->province,
             'country' =>  $request->country,
             'zip' =>  $request->zip,
+            'image'	=> $request->image,
         ]);
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').'.'.$request->file('image')->extension();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
 
 
         $buyer = Buyer::findOrFail( auth()->user()->buyer->id );

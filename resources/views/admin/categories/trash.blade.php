@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
+                          @foreach($categories as $category)
                             <tr>
                                 <td>{{ $category->category }}</td>
                                 <td><img src="{{ asset('public/Image/'.$category->image)  }}" alt=""></td>
@@ -33,7 +33,7 @@
                                 </td>
 
                             </tr>
-                        @endforeach
+                          @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -153,7 +153,7 @@
 
                             <div class="form-group info-item short">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" placeholder="Example: Philippines" value="">
+                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" placeholder="Example: Philippines" value="{{ auth()->user()->buyer->country }}" readonly>
                                     @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -164,7 +164,7 @@
 
                                 <div class="form-group info-item short">
                                     <label for="zip">Zip Code</label>
-                                    <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" placeholder="Example: 123" value="" readonly>
+                                    <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" placeholder="Example: 123" value="{{ auth()->user()->buyer->zip }}" readonly>
                                     @error('zip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

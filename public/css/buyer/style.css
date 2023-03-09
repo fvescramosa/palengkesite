@@ -1,0 +1,9 @@
+#buyer-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#buyer-info{
+  width: 70% !important;
+}
