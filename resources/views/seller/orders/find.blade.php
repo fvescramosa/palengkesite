@@ -6,12 +6,18 @@
             <div class="orders-details-wrapper-left">
                 <h3>Order ID: {{ $orders->transaction_id }}</h3>
                 <div class="order-details-box order-status">
-                    <h1>{{ $orders->status }}</h1>
+                    <h2>{{ $orders->status }}</h2>
                 </div>
                 <div class="order-details-box order-updates">
-                    {{ $orders->order_statuses }}
-                    <form action="{{ route('seller.orders.status.update') }}">
-                        <select name="" id=""></select>
+                    <h2>{{ $orders->order_statuses->last()->status->status }}</h2>
+                    <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" method="POST">
+                        @csrf
+                        <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                        <select name="status" id="orderStatus">
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}>{{ $status->status }}</option>
+                            @endforeach
+                        </select>
                     </form>
                 </div>
                 <div class="order-details-box order-customer-info">
@@ -97,4 +103,28 @@
         </div>
     </div>
 
+    <script>
+
+        var doc = $(document);
+        const order = {
+            init: function(){
+                console.log('A script has been loaded');
+                order.updateStatus($('#orderStatus'));
+            },
+            updateStatus: function(trigger){
+                trigger.change(function(e){
+                    $('#updateStatus').submit();
+                });
+            },
+
+        };
+
+        doc.ready(function () {
+            order.init();
+        });
+
+        $(window).on('load', function(){
+
+        });
+    </script>
 @endsection
