@@ -24,6 +24,8 @@
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/buyer.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/orders.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
@@ -50,9 +52,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('buyer.orders.index') }}">
                                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                                <span class="item">My Stall</span>
+                                <span class="item">My Orders</span>
                             </a>
                         </li>
 

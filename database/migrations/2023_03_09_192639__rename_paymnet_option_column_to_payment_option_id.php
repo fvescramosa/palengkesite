@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPaymentOptionColumnToOrdersTable extends Migration
+class RenamePaymnetOptionColumnToPaymentOptionId extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class AddPaymentOptionColumnToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('payment_option')->after('total')->nullable();
-            $table->string('status')->after('payment_option');
+
+            $table->renameColumn('payment_option', 'payment_option_id');
         });
     }
 
