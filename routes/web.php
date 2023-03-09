@@ -237,6 +237,6 @@ Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group
 });
 
 
-Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
-Route::post('paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
-Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));
+Route::get('/paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
+Route::post('/paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
+Route::get('/paypal'    , array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));

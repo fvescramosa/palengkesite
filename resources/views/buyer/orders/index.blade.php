@@ -50,6 +50,7 @@
 
                                                <div class="col-md-6">
                                                    <input id="amount" type="text" class="form-control" name="amount" value="{{ $order->total }}" readonly>
+                                                   <input id="order_id" type="hidden" class="form-control" name="order_id" value="{{ $order->id }}" readonly>
 
                                                    @if ($errors->has('amount'))
                                                        <span class="help-block">

@@ -62,6 +62,7 @@ class CartController extends Controller
                 'seller_id' => $cart->first()->seller_id,
                 'transaction_id' => $transaction_id,
                 'total' => $total,
+                'status' => 'pending',
             ]);
 
 
@@ -106,7 +107,7 @@ class CartController extends Controller
 
 
         }
-        return redirect(route('cart/'));
+        return redirect(route('cart.index'));
     }
 
     public function checkRandomNumber($transaction_id)
