@@ -92,6 +92,8 @@ class CategoriesController extends Controller
     public function trash(){
         $categories = Categories::onlyTrashed();
 
+        $categories = $categories->paginate(10);
+
         return view('admin.categories/trash', compact(['categories']));
     }
 

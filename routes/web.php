@@ -60,6 +60,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
     Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'store'])->name('delivery.address.store');
 
     Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');
 });
 
 
@@ -84,6 +85,9 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
 
     Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
+
+
+
 //    Stalls
     /*Has Stall*/
     Route::get('/stalls/has/select', [\App\Http\Controllers\Seller\StallsController::class, 'hasSelect'])->name('stalls.has.select');
@@ -107,7 +111,8 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
 
     //Orders
     Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
-
+    Route::get('/orders/{id}', [\App\Http\Controllers\Seller\OrdersController::class, 'find'])->name('orders.find');
+    Route::post('/order/status/update', [\App\Http\Controllers\Seller\OrdersController::class, 'updateStatus'])->name('orders.status.update');
 
     Route::get('/switch/buyer', [\App\Http\Controllers\Seller\SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 });

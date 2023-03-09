@@ -95,13 +95,15 @@ class PaypalController extends Controller
         Session::put('paypal_payment_id', $payment->getId());
 
 
-        Order::where('id', $request->order_id)->update(['status' => 'paid']);
+
+        $is_confirmed =  Order::where('id', $request->order_id)->update(['status' => 'confirmed']);
 
         if(isset($redirect_url)) {
             return Redirect::away($redirect_url);
         }
 
         \Session::put('error','Unknown error occurred');
+
         return Redirect::route('paywithpaypal');
     }
 
@@ -121,10 +123,12 @@ class PaypalController extends Controller
 
         if ($result->getState() == 'approved') {
             \Session::put('success','Payment success !!');
-            return Redirect::route('paywithpaypal');
+//            return Redirect::route('paywithpaypal');
+            return Redirect::route('buyer.orders.index')->with(['response' => 'success', 'message' => 'Payment success! Your order is Confirmed']);
         }
 
         \Session::put('error','Payment failed !!');
-        return Redirect::route('paywithpaypal');
+//        return Redirect::route('paywithpaypal');
+        return Redirect::route('buyer.orders.index')->with(['response' => 'error', 'message' => 'Payment failed!']);
     }
 }

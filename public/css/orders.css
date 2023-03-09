@@ -1,0 +1,149 @@
+
+
+.orders{
+   height: 100%;
+   display: flex;
+   align-items: baseline;
+   justify-content: center;
+   width: 100%;
+
+}
+.orders-wrapper{
+   width: 100%;
+   max-width: 1400px;
+   margin:60px auto;
+   height: auto;
+   border: 1px solid #090909;
+   /*box-shadow: 7px 0px 38px -11px rgb(0 0 0 / 58%);*/
+   padding: 40px;
+   position: relative;
+}
+
+.my-order-list{
+
+}
+
+
+.my-order-list .my-order-item{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 25px;
+   padding: 25px;
+   display: flex;
+   justify-content: space-between;
+}
+
+
+.my-order-details {
+   flex: 1 1 45%;
+   max-width: 45%;
+}
+
+.my-order-item .my-order-details .details-up{
+   display: flex;
+   flex-flow: row wrap;
+   align-items: baseline;
+   justify-content: flex-start;
+}
+
+.details-up > div{
+   flex:  1 1 50%;
+   max-width: 50%;
+}
+
+.details-up p.order-date{
+   color: #787878;
+   font-size: 16px;
+}
+
+.details-up p.order-total,
+.details-up p.order-no{
+   font-weight: 700;
+   color: #000;
+   font-size: 16px;
+}
+.details-up p.order-total-label{
+   color: #000;
+   font-size: 16px;
+}
+
+
+.details-thumbnail img{
+   max-width: 128px;
+}
+
+.my-orders-actions{
+   flex: 1 1 15%;
+   max-width: 15%;
+   text-align: center;
+}
+
+.my-orders-actions > *{
+   width:  100%;
+   margin: 20px 0 ;
+   font-size: 18px;
+}
+
+
+.orders-details-wrapper{
+   display: flex;
+   flex-flow: row wrap;
+   width: 100%;
+   margin: 0 auto;
+   height: 100%;
+}
+
+.orders-details-wrapper .orders-details-wrapper-left{
+   flex: 1 1 55%;
+   max-width: 55%;
+   border-right: 1px solid #e3e3e3 ;
+   padding: 25px;
+}
+.orders-details-wrapper .orders-details-wrapper-right{
+   flex: 1 1 45%;
+   max-width: 45%;
+   background-color: #e7e8eb;
+   padding: 25px 10px;
+}
+.orders-details-wrapper .order-status{
+
+}
+
+.order-details-box{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 15px;
+   padding: 25px;
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
+}
+
+.order-items td{
+   vertical-align: middle;
+}
+.order-items td.td-left{
+   width: 30%;
+}
+.order-items td.td-center{
+   width: 40%;
+}
+
+.order-items td.td-right{
+   width: 30%;
+   text-align: right;
+}
+
+.order-items  img{
+   width: 64px;
+   height: 64px;
+}
+
+.order-customer-info h3{
+   font-size: 15px;
+}
+
+.order-customer-info p{
+   font-size: 13px;
+   margin: 10px 0 15px;
+}
