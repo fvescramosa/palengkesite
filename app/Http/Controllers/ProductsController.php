@@ -6,6 +6,7 @@ use App\Buyer;
 use App\Cart;
 use App\Categories;
 use App\Products;
+use App\Seller;
 use App\SellerProduct;
 use function asset;
 use function auth;
@@ -83,6 +84,17 @@ class ProductsController extends Controller
 
 //        dd(auth()->user()->buyer->carts);
         return redirect(url()->previous())->with($response);
+
+    }
+
+    public function find($id){
+
+        //take note ID ay SellerProductID hindi Product ID
+        $sellerProduct = SellerProduct::findOrFail($id);
+
+        $related_product = Products::with(['seller_products'])->where('id', $sellerProduct->product->id)->get();
+
+        return view('shop.product.index', compact(['sellerProduct' ,'related_product']));
 
     }
 }

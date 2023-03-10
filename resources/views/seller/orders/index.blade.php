@@ -1,4 +1,4 @@
-@extends('layouts.buyer')
+@extends('layouts.seller')
 
 @section('content')
     <div class="orders">

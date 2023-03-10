@@ -1,5 +1,16 @@
 @import url('components.css');
 
+body{
+   font-size: 15px;
+}
+
+.wrapper{
+   height: 100%;
+}
+
+.wrapper .section{
+   height: 100%;
+}
 section{
    padding: 60px 0 !important;
 }
@@ -818,6 +829,31 @@ section{
 
 
 
+
+@media (max-width:991px){
+   p{
+      font-size: 11px;
+   }
+   .buyer .wrapper .section .top_navbar {
+
+      justify-content: flex-end;
+   }
+
+   .buyer .wrapper .sidebar,
+   .seller .wrapper .sidebar,
+   .admin .wrapper .sidebar{
+      left: -312px !important;
+
+   }
+
+   /*.buyer .wrapper .section,*/
+   .admin .wrapper .section,
+   .seller .wrapper .section{
+      margin-left: 0 !important;
+      width: 100% !important;
+   }
+
+}
 
 @media (max-width:768px){
 

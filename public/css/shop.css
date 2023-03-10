@@ -127,3 +127,32 @@
    background-color: #fff;
    color: #3e9e14;
 }
+
+.product{
+
+}
+
+.product-wrapper{
+
+}
+
+.product-top-area{
+   display: flex;
+   flex-flow: row wrap;
+   height: 600px;
+   width: 100%;
+}
+
+.product-img-area{
+   flex: 1 1 50%;
+   max-width: 50%;
+}
+
+.product-details-area{
+   flex: 1 1 50%;
+   max-width: 50%;
+}
+
+.product-bottom-area{
+
+}

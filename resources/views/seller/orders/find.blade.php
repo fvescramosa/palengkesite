@@ -10,12 +10,26 @@
                 </div>
                 <div class="order-details-box order-updates">
                     <h2>{{ $orders->order_statuses->last()->status->status }}</h2>
+
+                    @php $arr_status = [] @endphp
+
+                    @foreach($orders->order_statuses as $order_status)
+                        @php $arr_status[] =$order_status->status_id @endphp
+                    @endforeach
+
+
                     <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" method="POST">
                         @csrf
                         <input type="hidden" name="order_id" value="{{ $orders->id }}">
                         <select name="status" id="orderStatus">
                             @foreach($statuses as $status)
-                                <option value="{{ $status->id }}" {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}>{{ $status->status }}</option>
+
+
+                                <option value="{{ $status->id }}"
+                                        {{ (in_array($status->id, $arr_status) ? 'disabled' : '') }}
+                                        {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}
+
+                                >{{ $status->status }}</option>
                             @endforeach
                         </select>
                     </form>

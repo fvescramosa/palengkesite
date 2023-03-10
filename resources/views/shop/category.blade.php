@@ -14,26 +14,26 @@
 
                 @foreach($products as $product)
 
-                        <div class="product-item">
+                    <a class="product-item" href="{{ route('shop.products.find', ['id' => $product->product->id]) }}">
 
-                        <div class="product-image">
-                            <img src="{{ $product->product->image }}" alt="">
-                        </div>
-                        <div class="product-details">
-                            <h4>{{ $product->product->product_name }}</h4>
-                            <p>Php {{ number_format($product->price, 2) }}</p>
-                            <form action="{{ route('shop.product.addToCart') }}" method="POST">
+                            <div class="product-image">
+                                <img src="{{ $product->product->image }}" alt="">
+                            </div>
+                            <div class="product-details">
+                                <h4>{{ $product->product->product_name }}</h4>
+                                <p>Php {{ number_format($product->price, 2) }}</p>
+                                <form action="{{ route('shop.product.addToCart') }}" method="POST">
 
-                                @csrf
-                                <input type="hidden" name="seller_id" id="seller_id" value="{{ $product->seller_id }}">
-                                <input type="hidden" name="product_id" id="product_id" value="{{ $product->product_id }}">
-                                <input type="hidden" name="price" id="price" value="{{ $product->price }}">
-                                <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $product->id }}">
-                                <input type="number" name="quantity" id="quantity" value="" max="{{ $product->stock }}">
-                                <button type="submit" {{ ($product->stock ? '' : 'disabled') }}>Add to Cart</button>
-                            </form>
-                        </div>
-                    </div>
+                                    @csrf
+                                    <input type="hidden" name="seller_id" id="seller_id" value="{{ $product->seller_id }}">
+                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->product_id }}">
+                                    <input type="hidden" name="price" id="price" value="{{ $product->price }}">
+                                    <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $product->id }}">
+                                    <input type="number" name="quantity" id="quantity" value="" max="{{ $product->stock }}">
+                                    <button type="submit" {{ ($product->stock ? '' : 'disabled') }}>Add to Cart</button>
+                                </form>
+                            </div>
+                    </a>
 
                 @endforeach
 

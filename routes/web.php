@@ -214,6 +214,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
 });
 
 Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
+
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
 });
@@ -233,6 +234,7 @@ Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.no
 Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
     Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
+    Route::get('/product/{id}', [ \App\Http\Controllers\ProductsController::class, 'find'])->name('products.find');
 });
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
