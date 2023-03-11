@@ -63,8 +63,11 @@ class AdminController extends Controller
             $stallapproval = SellerStall::where('status', 'pending')->get()->count();
         }
 
+        $staff = Admin::where('is_super', 0)->count();
 
-        return view('admin.index', compact(['sellers', 'buyers', 'stallappointments', 'stallapproval']));
+        $products = Products::where('status', 'pending')->count();
+
+        return view('admin.index', compact(['sellers', 'buyers', 'staff', 'stallappointments', 'stallapproval', 'products']));
     }
 
     public function logout(Request $request)
