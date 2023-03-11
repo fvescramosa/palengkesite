@@ -1,5 +1,4 @@
 @extends('layouts.buyer')
-
 @section('content')
     <div class="profile">
        <div class="profile-wrapper">

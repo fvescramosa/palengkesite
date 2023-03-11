@@ -68,7 +68,7 @@ class BuyerController extends Controller
                     $file= $request->file('image');
                     $filename= date('YmdHi').'.'.$request->file('image')->extension();
                     $file-> move(public_path('public/Image'), $filename);
-                    $data['image']= $filename;
+                    $buyer['image']= $filename;
                 }
 
                 if($buyer->save()){
@@ -116,7 +116,7 @@ class BuyerController extends Controller
         );
 
 
-       Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
+       $buyer = Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
             'birthday' => $request->birthday,
             'age' => $request->age,
             'gender' => $request->gender,
@@ -135,7 +135,7 @@ class BuyerController extends Controller
             $file= $request->file('image');
             $filename= date('YmdHi').'.'.$request->file('image')->extension();
             $file-> move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            $buyer['image']= $filename;
         }
 
 

@@ -155,7 +155,7 @@
                                 </div>
 
                                 <div class="info-item long">
-                                    <label for="Product">Image Upload</label>
+                                    <label for="image">Image Upload</label>
                                     <input type="file"  class="form-control @error('image') is-invalid @enderror"
                                                         id="image"
                                                         name="image"
