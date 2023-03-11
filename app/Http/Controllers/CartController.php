@@ -45,7 +45,6 @@ class CartController extends Controller
                 $transaction_id = random_int(100000, 999999);
             }
 
-            $transaction_id;
 
             //get_price
 

@@ -30,11 +30,17 @@ class UserController extends Controller
 
         $user = auth()->user();
 
-        if(!$user->buyer()->exists()){
-            return redirect(route('buyer.create'));
-        }else{
-            return view('buyer.profile', compact(['user']));
+        if(session('user_type') == 'seller'){
+            return redirect(route('seller.profile'));
+
+        }else if(session('user_type') == 'buyer'){
+            if(!$user->buyer()->exists()){
+                return redirect(route('buyer.create'));
+            }else{
+                return view('buyer.profile', compact(['user']));
+            }
         }
+
     }
 
 

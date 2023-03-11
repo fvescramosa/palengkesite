@@ -103,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <a href="{{ asset( 'public/contracts/' . $seller_stall->contact_of_lease )}}"  target="_blank" class="btn option-btn">
+                                                <a href="{{ asset( $seller_stall->contact_of_lease )}}"  target="_blank" class="btn option-btn">
                                                     <span class="fa fa-eye"></span> View Contract
                                                 </a>
                                             </td>

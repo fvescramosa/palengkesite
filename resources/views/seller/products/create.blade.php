@@ -14,7 +14,7 @@
                 <div class="basic-info-body">
 
 
-                    <form action="{{ route('seller.products.store') }}" method="POST" class="form-">
+                    <form action="{{ route('seller.products.store') }}" method="POST" class="form-"  enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 

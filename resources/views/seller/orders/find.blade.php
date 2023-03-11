@@ -77,7 +77,7 @@
                 <table class="table table-borderless order-items">
                     @foreach($orders->order_products as $product)
                         <tr>
-                            <td class="td-left"><img src="{{ $product->seller_product->image }}" alt=""></td>
+                            <td class="td-left"><img src="{{ asset($product->seller_product->image) }}" alt=""></td>
                             <td class="td-center"><strong>{{ $product->product->product_name }} </strong>x {{  $product->quantity }}</td>
                             <td class="td-right"><p>₱ {{ number_format($product->seller_product->price * $product->quantity, 2) }}</p></td>
                         </tr>

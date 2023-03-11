@@ -153,12 +153,19 @@ class SellerController extends Controller
 
     public function profile(){
 
-        if(auth()->user()->seller()->exists()){
-            $seller = auth()->user()->seller;
-            return view('seller/profile', compact(['seller']));
-        }else{
-            return redirect(route('seller.create'));
+
+        if(session('user_type') == 'buyer') {
+            return redirect(route('buyer.profile'));
         }
+        else {
+            if(auth()->user()->seller()->exists()){
+                $seller = auth()->user()->seller;
+                return view('seller/profile', compact(['seller']));
+            }else{
+                return redirect(route('seller.create'));
+            }
+        }
+
 
     }
 

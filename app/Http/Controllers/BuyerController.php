@@ -9,6 +9,7 @@ use function dd;
 use function extract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use function json_decode;
 use function json_encode;
 use const JSON_PRETTY_PRINT;
@@ -40,6 +41,8 @@ class BuyerController extends Controller
             'province' => ['required', ''],
             'country' => ['required', ''],
             'user_id' => '',
+            'profile_image' => '',
+
         ]);
 
         if (!Auth::user()->buyer()->exists()){
@@ -62,7 +65,30 @@ class BuyerController extends Controller
                     ]
                 );
 
+                /*if($request->file('image')){
+                    $file= $request->file('image');
+                    $filename= date('YmdHi').$file->getClientOriginalName();
+                    $file-> move(public_path('public/Image'), $filename);
+                    $data['image']= $filename;
+                }*/
+
+
+                if ($request->file('profile_image')){
+
+                    $image = $request->profile_image;
+                    $fileName = $image->getClientOriginalName();
+                    $directory = auth()->user()->id . "/profile";
+                    $imageStoreResult = Storage::disk('public')->put($directory, $image);
+                    $data['profile_image']= $imageStoreResult;
+
+                    $buyer->user()->update($data);
+
+                }
+
                 if($buyer->save()){
+
+
+
                     $buyer->user->delivery_addresses()->create([
                         'stnumber' =>  $request->stnumber,
                         'stname' =>  $request->stname,
@@ -98,13 +124,17 @@ class BuyerController extends Controller
     }
 
     public function update(Request $request){
-        Auth::user()->update(
-            [
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-            ]
-        );
+
+
+
+
+
+
+        $userData = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+        ];
 
 
        Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
@@ -121,6 +151,23 @@ class BuyerController extends Controller
             'zip' =>  $request->zip,
         ]);
 
+
+        if ($request->file('profile_image')){
+            $validate = $request->validate(
+                [
+                    'profile_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000' // max 10000kb
+                ]
+            );
+            $file= $request->file('profile_image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/profile/'.auth()->user()->id.'/';
+            $file->move(public_path($directory), $filename);
+            $userData['profile_image']= $directory.$filename;
+
+        }
+
+
+        Auth::user()->update($userData);
 
         $buyer = Buyer::findOrFail( auth()->user()->buyer->id );
 

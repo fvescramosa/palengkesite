@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
-     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
 
 
@@ -40,73 +40,7 @@
             <!-- Page Wrapper -->
 
 
-                    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                        <div class="container">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <div class="bg-area" style="">
-                                    <div class="logo-area">
-                                        <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
-                                    </div>
-                                </div>
-                            </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <!-- Left Side Of Navbar -->
-                                <ul class="navbar-nav">
-
-
-                                    <!-- Authentication Links -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Categories</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Products</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Stores</a>
-                                    </li>
-
-                                    @guest
-                                        @if (Route::has('login'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                            </li>
-                                        @endif
-
-                                        @if (Route::has('register'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                            </li>
-                                        @endif
-                                    @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->first_name }}  {{ Auth::user()->last_name }}
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="{{ route('user.logout') }}"
-                                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
-
-                                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
-                                    @endguest
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart "></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
+            @include('layouts.navigation')
                     @if(isset($response))
                         <script>
                             Swal.fire({
@@ -132,10 +66,41 @@
                     <main>
                         <div class="dashboard">
                             <div class="dashboard-box">
-                                <div class="profile"></div>
+                                <div class="profile">
+                                    <img src="{{ asset(auth()->user()->profile_image)  }}" alt="" id="profileImg">
+                                    <div class="hi-profile">
+                                        <h1>Hi, <span>{{ auth()->user()->first_name }}!</span></h1>
+                                    </div>
+
+                                </div>
                                 <ul>
                                     <li>
-                                        <a href="#"> Orders </a>
+                                        <a href="">
+                                            <span class="icon"><i class="fas fa-user"></i></span>
+                                            <span class="item">Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('buyer.orders.index') }}">
+                                            <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                            <span class="item">My Orders</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('buyer.switch.seller') }}">
+                                            <span class="icon"><i class="fas fa-people-arrows"></i></span>
+                                            <span class="item">Switch as Seller</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                            <span class="icon"><i class="fas fa-power-off"></i></span>
+                                            <span class="item">Logout</span>
+                                        </a>
+                                        <form id="frm-logout" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                                     </li>
                                 </ul>
                             </div>
@@ -170,8 +135,8 @@
 
 
                     </script>
-                    <footer></footer>
-                </div>
 
+        </div>
+        @include('layouts.footer')
     </body>
 </html>

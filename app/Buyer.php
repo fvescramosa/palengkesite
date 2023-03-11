@@ -40,4 +40,8 @@ class Buyer extends Model
     public function order_products(){
         return $this->hasMany(OrderProduct::class );
     }
+
+    public function comments(){
+        return $this->hasMany(Comments::class );
+    }
 }
