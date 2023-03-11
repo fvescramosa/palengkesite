@@ -12,7 +12,7 @@
                      @if(isset($message))
                          <strong>{{ $message  }}</strong>
                      @endif
-                    <form action="{{ route('buyer.update') }}" method="POST" class="form-">
+                    <form action="{{ route('buyer.update') }}" method="POST" class="form-control" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
                             <div class="form-group info-item short">
@@ -79,7 +79,7 @@
 
                             </div>
 
-                            <div class="form-group info-item xshort">
+                            <div class="form-group info-item short">
                                 <label for="contact">Contact Number</label>
                                 <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="Enter your contact number" value="{{ auth()->user()->buyer->contact }}">
                                 @error('contact')
@@ -99,7 +99,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group info-item short">
+                            <div class="form-group info-item medium">
                                 <label for="stname">Street Name</label>
                                 <input type="text" class="form-control @error('stname') is-invalid @enderror" id="stname" name="stname" placeholder="" value="{{ auth()->user()->buyer->stname }}">
                                 @error('stname')
@@ -116,7 +116,7 @@
                                             name="city"
                                             data-city="{{ auth()->user()->buyer->city }}"
                                             placeholder="Example: Alitagtag">
-                                            <option value="{{ auth()->user()->buyer->city }}">{{ auth()->user()->buyer->city }}</option>
+                                            {{--<option value="{{ auth()->user()->buyer->city }}">{{ auth()->user()->buyer->city }}</option>--}}
                                     </select>
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -153,7 +153,9 @@
 
                             <div class="form-group info-item short">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" placeholder="Example: Philippines" value="{{ auth()->user()->buyer->country }}" readonly>
+
+                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country"  placeholder="Example: Philippines" value="Philippines" readonly>
+
                                     @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -166,6 +168,17 @@
                                     <label for="zip">Zip Code</label>
                                     <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" placeholder="Example: 123" value="{{ auth()->user()->buyer->zip }}" readonly>
                                     @error('zip')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="form-group info-item short">
+                                    <label for="profile_image">Profile Image</label>
+                                    <input type="file" class="form-control @error('profile_image') is-invalid @enderror" id="profile_image" name="profile_image" placeholder="Example: 123" value="" readonly>
+                                    @error('profile_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -208,9 +221,12 @@
         const support = {
             init: function () {
                 support.loadCities();
-                support.loadBarangays($('#city'));
+                support.loadBarangays('{{ auth()->user()->buyer->city }}');
+                support.previewProfileImage($('#profile_image'));
                // support.initJsonFunction();
             },
+
+
             loadCities: function () {
                 $.ajax({
                     type:'GET',
@@ -222,25 +238,27 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success:function(data) {
-                        var options = '<option value="">{{ auth()->user()->buyer->city }}</option>';
-                       var cities = data[0].CITY;
+                        var options = '';
+                        var user_city = '{{ auth()->user()->buyer->city }}';
+                        var cities = data[0].CITY;
 
 
-                       for(var i = 0; i < cities.length; i++){
-                           options += '<option value="'+ cities[i].CITY +'">' + cities[i].CITY + '</option>';
-                       }
+                        for(var i = 0; i < cities.length; i++){
+                            options += '<option value="'+ cities[i].CITY +'"' + ( user_city == cities[i].CITY ? 'selected' : '') +'>' + cities[i].CITY + '</option>';
+                        }
 
                        $('#city').html(options);
 
+                        support.loadBarangays($('#city').val());
                     },
                 });
             },
-            loadBarangays: function (trigger) {
-                trigger.change(function (e) {
+            loadBarangays: function (city) {
+
                     $.ajax({
                         type:'GET',
                         dataType:"jsonp",
-                        url:'https://tools.gabc.biz/address_finder.php?PROVINCE='+$('#province').val()+'&CITY='+trigger.val()+'&callback=Barangays&_=1673020893849',
+                        url:'https://tools.gabc.biz/address_finder.php?PROVINCE='+$('#province').val()+'&CITY='+city+'&callback=Barangays&_=1673020893849',
                         jsonpCallback:"Barangays",
                         crossDomain:true,
                         data: {
@@ -250,19 +268,36 @@
 
                             var options = '<option value="">Please Select Barangay</option>';
 
+                            var user_barangay = '{{ auth()->user()->buyer->barangay }}';
                             var barangays = data[0].CITY[0].BARANGAY;
                             var zipcode = barangays[0].ZIP;
                             for(var i = 0; i < barangays.length; i++){
-                                options += '<option value="'+ barangays[i].BARANGAY +'">' + barangays[i].BARANGAY + '</option>';
+                                options += '<option value="'+ barangays[i].BARANGAY +'"' + ( user_barangay == barangays[i].BARANGAY ? 'selected': '' ) + ' >' + barangays[i].BARANGAY + '</option>';
                             }
 
                             $('#barangay').html(options);
                             $('#zip').val(zipcode);
                         },
                     });
-                });
+
 
             },
+            previewProfileImage: function (trigger) {
+                trigger.change(function () {
+                    const file = $(this).get(0).files[0];
+                    const image = $('#profileImg');
+                    if (file) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(){
+                            image.attr("src", reader.result);
+                        };
+
+                        reader.readAsDataURL(file);
+
+                    }
+                });
+            }
 
             // get
         
@@ -274,8 +309,7 @@
             support.init();
         })
 
-        $(window).load(function(){
-        });
+
     </script>
 
 @endsection

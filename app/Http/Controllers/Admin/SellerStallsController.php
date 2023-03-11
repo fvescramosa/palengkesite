@@ -97,7 +97,8 @@ class SellerStallsController extends Controller
             if($seller_stalls->update($data)){
 
                 $seller_stalls->stall->update(['status' => 'occupied']);
-                return redirect(route('admin.seller.stalls.show'))->with(['message'. '']);
+                $response = ['message', 'Success!', 'response' => 'success'];
+                return redirect(route('admin.seller.stalls.show'))->with($response);
             }
 
 
@@ -129,9 +130,10 @@ class SellerStallsController extends Controller
 
             if($request->file('contract_of_lease')){
                 $file= $request->file('contract_of_lease');
+                $directory = 'public/contracts/sellers/'.$request->seller_stall_id.'/';
                 $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/contracts'), $filename);
-                $data['contact_of_lease']= $filename;
+                $file-> move($directory, $filename);
+                $data['contact_of_lease']= $directory.$filename;
                 $data['status']= 'active';
 
 
@@ -139,13 +141,22 @@ class SellerStallsController extends Controller
 
                 $seller_stall->update($data);
 
-                $seller_stall->stall()->update(['status' => 'occupied']);
+                $update = $seller_stall->stall()->update(['status' => 'occupied']);
+
+                if($update){
+                    $response = ['message', 'Done!', 'response' => 'success'];
+                }else{
+                    $response = ['message', 'Something went wrong.', 'response' => 'error'];
+                }
+            }else{
+                $response = '';
             }
 
 
         }
 
-        return redirect(route('admin.seller.stalls.show'))->with('message', 'Done!');
+
+        return redirect(route('admin.seller.stalls.show'))->with($response);
 
     }
 }

@@ -75,15 +75,17 @@ class CategoriesController extends Controller
         $data = [
             'category' => $request->category
         ];
-        if($request->file('image')){
-            $file= $request->file('image');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
-        }
+
 
         $category = Categories::create($data);
 
+        if($request->file('image')){
+            $file= $request->file('image');
+            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
+            $file->move($directory, $filename);
+            $data['image']= $directory.$filename;
+        }
 
 
         if($category->save()){
@@ -108,9 +110,10 @@ class CategoriesController extends Controller
         ];
         if($request->file('image') != null){
             $file= $request->file('image');
+            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
             $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            $file-> move($directory, $filename);
+            $data['image']= $directory.$filename;
         }
 
         $category = Categories::where('id', $id)

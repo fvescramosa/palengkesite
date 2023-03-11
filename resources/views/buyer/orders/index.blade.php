@@ -27,7 +27,7 @@
                                {{ $order->seller->seller_stalls->name }}
                                @foreach( $order->order_products as $product)
                                    {{ $product->product->product_name }}
-                                   <img src="{!! asset('public/Image/'.$product->seller_product->image)  !!}" alt="">
+                                   {{--<img src="{!! asset($product->seller_product->image)  !!}" alt="">--}}
                                    {{ $product->seller_product->price }} x {{ $product->quantity }} =  {{ $product->seller_product->price * $product->quantity }}
                                @endforeach
                            </div>
@@ -35,8 +35,8 @@
                        <div class="my-orders-actions">
                            <div class="alert alert-success">{{ $order->status }}</div>
 
-                           @if( $order->status == 'pending' && $order->payament_option == '1')
-                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#order{{ $order->transaction_id }}">{{ $order->total }}</a>
+                           @if( $order->status == 'pending' && $order->payment_option_id == '1')
+                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#order{{ $order->transaction_id }}">₱ {{ number_format($order->total, 2) }}</a>
                            @endif
                            <a class="btn" href="{{ route('buyer.orders.find', ['id' => $order->transaction_id]) }}">View Order</a>
                        </div>

@@ -1,4 +1,4 @@
-@extends('layouts.buyer')
+@extends('layouts.seller')
 
 @section('content')
     <div class="orders">
@@ -27,7 +27,7 @@
                                {{ $order->seller->seller_stalls->name }}
                                @foreach( $order->order_products as $product)
                                    {{ $product->product->product_name }}
-                                   <img src="{!! asset('public/Image/'.$product->seller_product->image)  !!}" alt="">
+                                  {{-- <img src="{!! asset($product->seller_product->image)  !!}" alt="" width="60" height="60">--}}
                                    {{ $product->seller_product->price }} x {{ $product->quantity }} =  {{ $product->seller_product->price * $product->quantity }}
                                @endforeach
                            </div>

@@ -8,8 +8,15 @@
                 <div class="order-details-box order-status">
                     <h1>{{ $orders->status }}</h1>
                 </div>
-                <div class="order-details-box order-updates">
-                    {{ $orders->order_statuses }}
+                <div class="order-updates">
+                    @foreach($orders->order_statuses  as $order_status)
+                        <div class="status-update">
+                            <div class="status-update-fl">
+                                <p>{{ $order_status->status->status }}</p>
+                                <p>{{ date('F d, Y h:i:s a', strtotime($order_status->created_at)) }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="order-details-box order-customer-info">
                     <div class="order-info-section-1">
@@ -54,7 +61,7 @@
                 <table class="table table-borderless order-items">
                     @foreach($orders->order_products as $product)
                         <tr>
-                            <td class="td-left"><img src="{{ $product->seller_product->image }}" alt=""></td>
+                            <td class="td-left"><img src="{{ asset($product->seller_product->image) }}" alt=""></td>
                             <td class="td-center"><strong>{{ $product->product->product_name }} </strong>x {{  $product->quantity }}</td>
                             <td class="td-right"><p>₱ {{ number_format($product->seller_product->price * $product->quantity, 2) }}</p></td>
                         </tr>

@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/landing';
 
     /**
      * Create a new controller instance.
@@ -74,6 +74,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        if($data['user_type_id'] == 1){
+            session('user_type','buyer');
+        }else{
+            session('user_type','seller');
+        }
 
         return User::create([
             'first_name' => $data['first_name'],

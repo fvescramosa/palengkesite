@@ -14,7 +14,7 @@ class Order extends Model
         'transaction_id',
         'total',
         'status',
-        'payment_option'
+        'payment_option_id'
     ];
 
 

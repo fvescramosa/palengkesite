@@ -6,6 +6,7 @@ use App\Buyer;
 use App\Cart;
 use App\Categories;
 use App\Products;
+use App\Seller;
 use App\SellerProduct;
 use function asset;
 use function auth;
@@ -21,7 +22,35 @@ class ProductsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only(['addToCart']);
+        $this->middleware('auth')->only(['addToCart' , 'postComment']);
+
+    }
+
+    public function index(){
+
+         /* $products =  Products::with(['category', 'seller_products'])
+               ->whereHas('seller_products')->whereHas('category', function($q) use ($category){
+                   $q->where('category', $category);
+               })->get()->groupBy('seller_products.seller_id');*/
+
+
+        $products = SellerProduct::with(['product']);
+
+        if(session()->has('shop_at_market')){
+            $products = $products->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+
+
+
+        $products = $products->get();
+
+
+        $innerPageBanner = '';
+
+          return view('shop.category', compact(['products' ,'innerPageBanner']));
 
     }
 
@@ -47,6 +76,7 @@ class ProductsController extends Controller
     public function addToCart(Request $request){
 
 
+
         $response = [];
         //find exsiting item from your cart
         $findCart = Cart::where([
@@ -63,7 +93,7 @@ class ProductsController extends Controller
                 'total' =>  ($findCart->quantity + $request->quantity) *  $request->price,
             ]);
 
-            $response = ['message' => 'An item from your cart was updated', 'success' => true];
+            $response = ['message' => 'An item from your cart was updated', 'response' => 'success'];
         }
         else{
 
@@ -78,11 +108,46 @@ class ProductsController extends Controller
                 'total' =>  $request->quantity *  $request->price,
             ]);
 
-            $response = ['message' => 'Product was added to your cart', 'success' => true];
+            $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
         }
 
 //        dd(auth()->user()->buyer->carts);
         return redirect(url()->previous())->with($response);
 
+    }
+
+    public function find($id){
+
+
+        //take note ID ay SellerProductID hindi Product ID
+        $sellerProduct = SellerProduct::findOrFail($id);
+
+        $related_product = Products::with(['seller_products'])->where('id', $sellerProduct->product->id)->get();
+
+        return view('shop.product.index', compact(['sellerProduct' ,'related_product']));
+
+    }
+
+    public function postComment($id, Request $request){
+
+
+        $product = SellerProduct::findOrFail($id);
+
+
+        $comment = $product->comments()->create([
+            'product_id' => $product->product->id,
+            'is_anonymous' => (isset($request->anonymous)) ? 1 : 0,
+            'comment' => $request->comment,
+            'ratings' => $request->ratings,
+            'buyer_id' => auth()->user()->buyer->id,
+        ]);
+
+        if($comment->save()){
+            $response = ['message' => 'Comment Posted!', 'response' => 'success'];
+        }else{
+            $response = ['message' => 'Something went wrong. Please try again later!', 'response' => 'error'];
+        }
+
+        return redirect(route('shop.products.find', ['id' => $id]))->with($response);
     }
 }

@@ -165,6 +165,15 @@
 
                         $(document).ready(function () {
                             app.initCollapse();
+                            $('.hamburger').click(function(){
+                                if($('.sidebar').hasClass('close')){
+                                    $('.sidebar').removeClass('close');
+                                    $('.wrapper .section').removeClass('open');
+                                }else{
+                                    $('.sidebar').addClass('close');
+                                    $('.wrapper .section').addClass('open');
+                                }
+                            });
                         });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
+use App\StallAppointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
