@@ -176,6 +176,8 @@
                         <a href="#"  class="">
                             <span class="icon"><i class="fa fa-cart-plus"></i></span>
                             <span class="item">Products</span>
+
+                            <span class="notif badge badge-danger" id="product-approval-notif">{{ App\Products::where('status', 'pending')->get()->count() }}</span>
                         </a>
                         <div class="collapse {{ (request()->segment(2) == 'products') ? 'show' : ''}}" id="products_submenu" aria-expanded="false">
                             <ul>

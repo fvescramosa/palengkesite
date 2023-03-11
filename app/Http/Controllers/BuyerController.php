@@ -41,8 +41,7 @@ class BuyerController extends Controller
             'province' => ['required', ''],
             'country' => ['required', ''],
             'user_id' => '',
-            'profile_image' => '',
-
+            'profile_image' => 'required|mimes:jpeg,jpg,png',
         ]);
 
         if (!Auth::user()->buyer()->exists()){
@@ -62,6 +61,7 @@ class BuyerController extends Controller
                         'country' =>  $request->country,
                         'zip' =>  $request->zip,
                         'user_id' => auth()->user()->id,
+                        'image' => $request->image,
                     ]
                 );
 
@@ -137,7 +137,7 @@ class BuyerController extends Controller
         ];
 
 
-       Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
+       $buyer = Buyer::where(['id' => auth()->user()->buyer->id]) -> update([
             'birthday' => $request->birthday,
             'age' => $request->age,
             'gender' => $request->gender,
@@ -149,7 +149,15 @@ class BuyerController extends Controller
             'province' =>  $request->province,
             'country' =>  $request->country,
             'zip' =>  $request->zip,
+            'image'	=> $request->image,
         ]);
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').'.'.$request->file('image')->extension();
+            $file-> move(public_path('public/Image'), $filename);
+            $buyer['image']= $filename;
+        }
 
 
         if ($request->file('profile_image')){

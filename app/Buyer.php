@@ -23,6 +23,7 @@ class Buyer extends Model
         'country',
         'zip',
         'user_id',
+        'image',
     ];
 
     public function user(){

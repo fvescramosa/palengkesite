@@ -18,7 +18,44 @@ class CategoriesController extends Controller
     }
 
     public function show(){
-        $categories = Categories::all();
+        $categories = new Categories();
+
+        if(isset($_GET['search'])){
+            $categories = $categories->where(function ($query){
+                $query->orWhere('category', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['category', 'asc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['category', 'desc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['category', 'asc'];
+            $categories->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $categories = $categories->get();
+
         return view('admin.categories.show', compact(['categories']));
     }
 
@@ -93,9 +130,9 @@ class CategoriesController extends Controller
     }
 
     public function trash(){
-        $categories = Categories::onlyTrashed();
+        $categories = Categories::onlyTrashed()->get();
 
-        $categories = $categories->paginate(10);
+
 
         return view('admin.categories/trash', compact(['categories']));
     }

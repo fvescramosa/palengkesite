@@ -1,13 +1,12 @@
 @extends('layouts.buyer')
-
 @section('content')
 
 
     {{$message ?? ''}}
 
     <div class="profile">
-        <div class="profile-wrapper">
-            <div class="card basic-info" style="width: 18rem;">
+        <div class="profile-wrapper" id="buyer-wrapper">
+            <div class="card basic-info" id="buyer-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
                     Buyer Information
                 </div>
@@ -15,13 +14,13 @@
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('buyer.store') }}" method="POST" class="form-">
+                    <form action="{{ route('buyer.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
                             {{--@if(!auth()->user()->buyer()->exists())--}}
 
-                            <div class="info-item short">
+                            <div class="info-item xshort">
                                     <label for="email">Birthday</label>
                                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday" name="birthday" placeholder="Birthday" value="{{ old('birthday') }}" >
                                     @error('birthday')
@@ -43,7 +42,7 @@
 
                                 </div>
 
-                                <div class="info-item xshort">
+                                <div class="info-item short">
                                     <label for="email">Gender</label>
                                     <select  class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" placeholder="Gender" value="" >
                                         <option value="Male" {{ ( old('gender') == 'Male')   ? 'selected' : '' }}>Male</option>
@@ -92,7 +91,7 @@
 
                                 </div>
 
-                                <div class="info-item short">
+                                <div class="info-item xshort">
                                     <label for="city">City/Municipality</label>
                                     <select class="form-control @error('city') is-invalid @enderror"
                                             id="city"
@@ -107,7 +106,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="info-item short">
+                                <div class="info-item xshort">
                                     <label for="city">Barangay</label>
                                     <select class="form-control @error('barangay') is-invalid @enderror"
                                             id="barangay"
@@ -122,7 +121,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="info-item short">
+                                <div class="info-item xshort">
                                     <label for="province">Province</label>
                                     <input type="text" class="form-control @error('province') is-invalid @enderror" id="province" name="province" placeholder="Example: Batangas" value="Batangas" readonly>
                                     @error('province')
@@ -133,9 +132,9 @@
 
                                 </div>
 
-                                <div class="info-item short">
+                                <div class="info-item xshort">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" placeholder="Example: Philippines" value="">
+                                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" placeholder="Example: Philippines" value="Philippines" readonly>
                                     @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -155,12 +154,26 @@
 
                                 </div>
 
+                                <div class="info-item long">
+                                    <label for="image">Image Upload</label>
+                                    <input type="file"  class="form-control @error('image') is-invalid @enderror"
+                                                        id="image"
+                                                        name="image"
+                                                        placeholder="" value="" >
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
                             {{--@endif--}}
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update') }}
+                        <div class="row-btn">
+                            <div class="btn-container" style="padding: 0 10px 15px;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 11px; padding: 8px;">
+                                    {{ __('Save') }}
                                 </button>
                             </div>
                         </div>
