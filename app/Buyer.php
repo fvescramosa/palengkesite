@@ -22,6 +22,8 @@ class Buyer extends Model
         'province',
         'country',
         'zip',
+        'longitude',
+        'latitude',
         'user_id',
         'image',
     ];
@@ -45,4 +47,9 @@ class Buyer extends Model
     public function comments(){
         return $this->hasMany(Comments::class );
     }
+/*
+    public function delivery_addresses(){
+        return $this->hasMany(DeliveryAddress::class );
+    }*/
+
 }

@@ -13,7 +13,16 @@ body{
 }
 section{
    padding: 60px 0 !important;
+   /*max-width: unset !important;*/
 }
+
+.footer > section{
+   max-width: 1600px !important;
+}
+.container{
+   max-width: 1600px !important;
+}
+
 .home-bg{
    background: url(../images/home.png) no-repeat;
    background-size: cover;
@@ -40,6 +49,7 @@ section{
    height: 100%;
    position: relative;
    z-index: 998;
+   max-width: 1200px !important;
 }
 
 .home-bg .home .content{
@@ -917,7 +927,50 @@ section{
    width: 100%;
    height: 100px;
    background-color: transparent !important;
+   /*background-color: #fff;*/
    z-index: 999;
+}
+
+
+.navbar.fixed{
+   background:white !important;
+   z-index: 999;
+   position: fixed;
+}
+
+.logo-area img{
+   width: 150px;
+   height: 100%;
+   object-fit: cover;
+}
+
+.navbar ul{
+   justify-content: flex-end;
+   width: 65%;
+   margin-left: auto !important;
+}
+
+.navbar .nav-item a{
+   color: #fff !important;
+   /*color: #000 !important;*/
+   font-size: 18px !important;
+   padding: 0 25px;
+   text-shadow: 1px 1px black;
+}
+
+.navbar.fixed .nav-item a{
+   color: #000 !important;
+   text-shadow: unset;
+
+}
+
+.navbar-nav{
+   width: 100%;
+   text-align: center;
+}
+
+.nav-item{
+   flex: 1 1 auto;
 }
 
 .table-products{
@@ -1520,45 +1573,6 @@ display: flex;
    justify-content: space-between;
 }
 
-.navbar.fixed{
-   background:white !important;
-   z-index: 999;
-   position: fixed;
-}
-
-.logo-area img{
-   width: 150px;
-   height: 100%;
-   object-fit: cover;
-}
-
-.navbar ul{
-   justify-content: flex-end;
-   width: 65%;
-   margin-left: auto;
-}
-
-.navbar .nav-item a{
-   color: #fff !important;
-   font-size: 18px !important;
-   padding: 0 25px;
-   text-shadow: 1px 1px black;
-}
-
-.navbar.fixed .nav-item a{
-   color: #000 !important;
-   text-shadow: unset;
-
-}
-
-.navbar-nav{
-   width: 100%;
-   text-align: center;
-}
-
-.nav-item{
-   flex: 1 1 auto;
-}
 
 
 
@@ -1797,6 +1811,10 @@ display: flex;
 .longbar{
    width: 100%;
    height: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 19px;
 }
 .longbar.green-bar{
    background-color: var(--green);
@@ -1834,4 +1852,16 @@ button.btn-green{
 button.btn-orange{
    background-color: var(--orange);
    color: #fff;
+}
+
+#select-market label{
+   color: #fff;
+}
+#select-market select{
+   width: 200px;
+   font-weight: 700;
+   color: #fff;
+   background-color: var(--green);
+   border: 1px solid var(--green);
+
 }

@@ -1,15 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="shop">
-        <div class="container">
+    <div class="shop">
 
-            @if(session('message'))
-                <div class="alert alert-{{ ( session('success') ? 'success' : 'danger')}}">
-                    {{ session('message') }}
+
+        <div class="container shop-wrapper">
+
+            <div class="filter-wrapper">
+
+                    <form action="" id="filter" method="GET">
+                        <div class="by-categories">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="" for="">Product Name</label>
+                                    <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') ?? $_GET['product_name'] ?? '' }}">
+                                </div>
+                            </div>
+
+                                @foreach($categories as $category)
+                                    <div class="form-check">
+                                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="form-check-input" {{ ( isset( $_GET['categories']) && in_array($category->id, $_GET['categories']) ? 'checked' : '')}}>
+                                        <label class="form-check-label" for="">
+                                            {{ $category->category }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+
+
+                        <div class="by-price">
+                            <div class="form-group">
+
+                                <label for="">Min. Price</label>
+                                <input type="number" class="form-control" name="min_price" id="min_price" value="{{ old('min_price') ?? $_GET['min_price'] ?? '' }}">
+
+                                <label for="">Max Price</label>
+                                <input type="number" class="form-control" name="max_price" id="max_price" value="{{ old('max_price') ?? $_GET['max_price'] ?? '' }}">
+                            </div>
+                        </div>
+                        <div class="by-ratings">
+                            @for($i=1; $i <= 5; $i++)
+                                <div class="form-check">
+                                    <input type="checkbox" name="ratings[]" value="{{ $i }}" class="form-check-input" {{ ( isset( $_GET['ratings']) && in_array($i, $_GET['ratings']) ? 'checked' : '')}}>
+                                    <label class="form-check-label" for=""> {{ $i }} Star Rating(s)
+                                       @php $n = 1; @endphp
+                                        @while($n <= 5)
+                                            <span class="product-rating @if($i >= $n) active @endif fa fa-star" data-rating=""> </span>
+                                            @php $n++; @endphp
+                                        @endwhile
+                                    </label>
+                                </div>
+                            @endfor
+                        </div>
+
+
+                    </form>
                 </div>
-            @endif
-
             <div class="products-grid">
 
                 @foreach($products as $product)
@@ -38,4 +84,23 @@
 
             </div>
         </div>
+
+        <script>
+
+            let doc = $(document);
+            var shop = {
+                onInit: function () {
+                    shop.submitFilter($('#filter input'));
+                },
+                submitFilter: function (trigger) {
+                    trigger.change(function () {
+                        $('#filter').submit();
+                    });
+                }
+            };
+
+            doc.ready(function () {
+                shop.onInit()
+            })
+        </script>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImgColumnToBuyersTable extends Migration
+class AddGoogleColumnsToBuyersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class AddImgColumnToBuyersTable extends Migration
     {
         Schema::table('buyers', function (Blueprint $table) {
             //
-            $table->string('image')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
         });
     }
 

@@ -9,6 +9,13 @@ class DeliveryAddressController extends Controller
 {
     //
 
+    public function index(){
+
+        $addresses = auth()->user()->delivery_addresses;
+
+        return view('buyer.delivery_address.index', compact(['addresses']));
+    }
+
     public function create(){
         return view('buyer.delivery_address.create');
     }
@@ -34,6 +41,8 @@ class DeliveryAddressController extends Controller
                 'province' =>  $request->province,
                 'country' =>  $request->country,
                 'zip' =>  $request->zip,
+                'longitude' =>  $request->longitude,
+                'latitude' =>  $request->latitude,
             ]);
        /* }*/
 

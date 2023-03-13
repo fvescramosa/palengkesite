@@ -63,9 +63,31 @@
                 <section class="banner" style="background-image: url({{ $innerPageBanner }})">
                     <div class="overlay"></div>
                 </section>
-            @endif
 
-            <div class="longbar green-bar">
+            @else
+                    @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+                        <section class="banner" style="background-image: url({{ asset('public/images/202209101722author-4.jpg') }})">
+                            <div class="overlay"></div>
+                        </section>
+                    @endif
+            @endif
+            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+                <div class="longbar green-bar">
+                    <div class="">
+                        <form action="{{ route('select.market') }}" method="POST" id="select-market">
+                            @csrf
+                            <label for="">Mabini Public Market - </label>
+                            <select name="market_option"  class="" id="market-option">
+                                @foreach(\App\Market::all() as $market)
+                                    <option value="{{ $market->id }}" {{ session()->get('shop_at_market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
+                                @endforeach
+                            </select>
+
+                        </form>
+                    </div>
+                </div>
+            @endif
+            {{--<div class="longbar green-bar">
                 <form action="{{ route('select.market') }}" method="POST" id="select-market">
                     @csrf
                     <select name="market_option" id="market-option">
@@ -75,7 +97,7 @@
                     </select>
 
                 </form>
-            </div>
+            </div>--}}
             @yield('content')
 
         </main>

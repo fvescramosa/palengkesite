@@ -60,6 +60,11 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/delivery/address/create', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'create'])->name('delivery.address.create');
     Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'store'])->name('delivery.address.store');
+    Route::get('/delivery/address/index/', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.index');
+    Route::get('/delivery/address/find/{id}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'find'])->name('delivery.address.find');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.edit');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.update');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.delete');
 
     Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');

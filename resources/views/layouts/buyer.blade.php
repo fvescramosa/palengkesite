@@ -35,7 +35,6 @@
     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
 
-
     </head>
     <body id="page-top">
 
@@ -89,7 +88,12 @@
                                             <span class="item">My Orders</span>
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ route('buyer.delivery.address.index') }}">
+                                            <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                            <span class="item">Delivery Address</span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('buyer.switch.seller') }}">
                                             <span class="icon"><i class="fas fa-people-arrows"></i></span>

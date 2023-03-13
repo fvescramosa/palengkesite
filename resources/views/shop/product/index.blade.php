@@ -2,6 +2,7 @@
 
 @section('content')
     <section class="product container">
+
         <div class="product-wrapper ">
             <div class="product-top-area">
                 <div class="product-img-area">
@@ -45,6 +46,28 @@
                 </div>
                 <div class="product-details-area">
                     <div class="details-top">
+
+                        <div class="average-ratings">
+                            @if($sellerProduct->average_ratings)
+
+                                @php list($whole, $decimal) = explode('.', $sellerProduct->average_ratings) @endphp
+
+                                <h3>
+                                    @for($i=1; $i <= 5; $i++)
+                                        @if($i <= $whole)
+                                            <span class="product-rating active fa fa-star" data-rating="" style="position: relative; overflow: hidden"> </span>
+                                        @else
+                                            <span class="product-rating fa fa-star" data-rating="" style="position: relative; overflow: hidden"> </span>
+                                        @endif
+                                    @endfor
+                                    {{  $sellerProduct->average_ratings}}
+                                </h3>
+
+                            @else
+                                No Ratings yet.
+                            @endif
+                        </div>
+
                         <h4 class="product-name">{{  $sellerProduct->product->product_name }}</h4>
                         <p class="seller-name"><i class="fa fa-store"></i> <span class="stall-name">{{  $sellerProduct->seller->seller_stalls->name }} </span> - <span class="seller-name">{{  $sellerProduct->seller->user->first_name }}</span></p>
                     </div>

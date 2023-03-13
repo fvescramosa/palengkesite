@@ -78,6 +78,9 @@ class CartController extends Controller
                         'city' => $deliver_detail->city,
                         'province' => $deliver_detail->province,
                         'country' => $deliver_detail->country,
+                        'zip' => $deliver_detail->zip,
+                        'longitude' => $deliver_detail->longitude,
+                        'latitude' => $deliver_detail->latitude,
                         'buyer_id' => auth()->user()->buyer->id
                     ]
                 );

@@ -158,7 +158,7 @@
                                     <label for="image">Image Upload</label>
                                     <input type="file"  class="form-control @error('image') is-invalid @enderror"
                                                         id="image"
-                                                        name="image"
+                                                        name="profile_image"
                                                         placeholder="" value="" >
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -167,7 +167,119 @@
                                     @enderror
 
                                 </div>
+                                <div class="form-group info-item hidden">
+                                    <input type="hidden" class="form-control " id="longitude" name="longitude" placeholder="Example: 123" value="{{ old('longitude') }}" readonly>
+                                    <input type="hidden" class="form-control " id="latitude" name="latitude" placeholder="Example: 123" value="{{  old('latitude') }}" readonly>
+                                </div>
+                                <div class="info-item long">
+                                    <div id="map" style="width: 100%; height: 480px"></div>
 
+                                    {{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>--}}
+                                    <script
+                                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUVOvhQu7XJKFy44pAjgW4q1GcxHGCon0&callback=initMap&v=weekly"
+                                            defer
+                                    ></script>
+                                    <script>
+                                        let map, activeInfoWindow, markers = [];
+                                        let marker;
+                                        let defaultPosition = {
+                                            lat: {{ old('latitude') ?? 13.749684 }},
+                                            lng: {{ old('longitude') ?? 120.9395233 }}
+                                        };
+                                        /* ----------------------------- Initialize Map ----------------------------- */
+                                        function initMap() {
+                                            map = new google.maps.Map(document.getElementById("map"), {
+                                                center: defaultPosition,
+                                                zoom: 15
+                                            });
+
+                                            marker =  new google.maps.Marker({
+                                                position: defaultPosition,
+                                                label:'{{ auth()->user()->first_name }}',
+                                                map: map,
+                                            });
+
+
+                                            map.addListener("click", function(event) {
+                                                addMarker(event.latLng, map)
+                                            });
+
+                                        }
+
+
+                                        /* --------------------------- Initialize Markers --------------------------- */
+                                        function addMarker(location, map) {
+                                            // Add the marker at the clicked location, and add the next-available label
+                                            // from the array of alphabetical characters.
+
+
+
+
+                                            if ( marker ) {
+                                                marker.setPosition(location);
+                                            } else {
+                                                marker =  new google.maps.Marker({
+                                                    position: location,
+                                                    label: 'A',
+                                                    map: map,
+                                                });
+                                            }
+
+                                            markerClicked(marker)
+                                        }
+                                        /* ------------------------- Handle Map Click Event ------------------------- */
+                                        function mapClicked(event) {
+                                            console.log(map);
+                                            console.log(event.latLng.lat(), event.latLng.lng());
+                                        }
+
+                                        /* ------------------------ Handle Marker Click Event ----------------------- */
+                                        function markerClicked(marker, index) {
+                                            console.log(map);
+                                            console.log(marker);
+                                            console.log(marker.position.lat());
+                                            console.log(marker.position.lng());
+
+
+                                            $('#longitude').val(marker.position.lng());
+                                            $('#latitude').val(marker.position.lat());
+                                            $.ajax({
+                                                type:'GET',
+                                                dataType:"json",
+                                                url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.position.lat()+','+marker.position.lng()+'&sensor=true&key=AIzaSyBUVOvhQu7XJKFy44pAjgW4q1GcxHGCon0',
+                                                crossDomain:true,
+                                                data: {
+                                                    _token: "{{ csrf_token() }}"
+                                                },
+                                                success:function(data) {
+
+
+                                                    $('#city').val(data.results[1].address_components[2].long_name);
+                                                    support.loadBarangaysByCity($('#city').val());
+
+                                                    $('#barangay').val(data.results[6].address_components[0].long_name);
+                                                    console.log(data.results);
+                                                },
+                                            });
+                                        }
+
+                                        /* ----------------------- Handle Marker DragEnd Event ---------------------- */
+                                        function markerDragEnd(event, index) {
+                                            console.log(map);
+                                            console.log(event.latLng.lat());
+                                            console.log(event.latLng.lng());
+                                        }
+                                    </script>
+
+                                    <!--
+                                      The `defer` attribute causes the callback to execute after the full HTML
+                                      document has been parsed. For non-blocking uses, avoiding race conditions,
+                                      and consistent behavior across browsers, consider loading using Promises
+                                      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+                                      -->
+
+
+                                </div>
                             {{--@endif--}}
                         </div>
                         <div class="row-btn">
@@ -259,6 +371,36 @@
                         },
                     });
                 });
+
+            },
+
+            loadBarangaysByCity: function (city) {
+
+                $.ajax({
+                    type:'GET',
+                    dataType:"jsonp",
+                    url:'https://tools.gabc.biz/address_finder.php?PROVINCE='+$('#province').val()+'&CITY='+city+'&callback=Barangays&_=1673020893849',
+                    jsonpCallback:"Barangays",
+                    crossDomain:true,
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success:function(data) {
+
+                        var options = '<option value="">Please Select Barangay</option>';
+
+                        var user_barangay = '';
+                        var barangays = data[0].CITY[0].BARANGAY;
+                        var zipcode = barangays[0].ZIP;
+                        for(var i = 0; i < barangays.length; i++){
+                            options += '<option value="'+ barangays[i].BARANGAY +'"' + ( user_barangay == barangays[i].BARANGAY ? 'selected': '' ) + ' >' + barangays[i].BARANGAY + '</option>';
+                        }
+
+                        $('#barangay').html(options);
+                        $('#zip').val(zipcode);
+                    },
+                });
+
 
             },
 
