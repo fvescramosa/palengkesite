@@ -116,7 +116,7 @@
 
                                 {{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>--}}
                                 <script
-                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUVOvhQu7XJKFy44pAjgW4q1GcxHGCon0&callback=initMap&v=weekly"
+                                        src="https://maps.googleapis.com/maps/api/js?{{ config('apikeys.keys') }}&callback=initMap&v=weekly"
                                         defer
                                 ></script>
                                 <script>
@@ -186,7 +186,7 @@
                                         $.ajax({
                                             type:'GET',
                                             dataType:"json",
-                                            url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.position.lat()+','+marker.position.lng()+'&sensor=true&key=AIzaSyBUVOvhQu7XJKFy44pAjgW4q1GcxHGCon0',
+                                            url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.position.lat()+','+marker.position.lng()+'&sensor=true&{{ config('apikeys.keys') }}',
                                             crossDomain:true,
                                             data: {
                                                 _token: "{{ csrf_token() }}"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SellerStallsController;
 use App\Http\Controllers\Admin\StallAppointmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\APIKeysController;
 // use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -145,6 +146,15 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/set/market', [AdminController::class, 'setMarket'])->name('set.market');
     Route::get('/settings/', [AdminController::class, 'settings'])->name('settings');
     Route::post('/settings/update/password', [AdminController::class, 'updatePassword'])->name('update.password');
+
+
+
+    Route::get('/settings/api/index', [APIKeysController::class, 'index'])->name('api.index');
+    Route::get('/settings/api/create', [APIKeysController::class, 'create'])->name('api.create');
+    Route::post('/settings/api/store', [APIKeysController::class, 'store'])->name('api.store');
+    Route::get('/settings/api/edit', [APIKeysController::class, 'edit'])->name('api.edit');
+    Route::post('/settings/api/update', [APIKeysController::class, 'update'])->name('api.update');
+
 
     //users
     Route::get('/users/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
