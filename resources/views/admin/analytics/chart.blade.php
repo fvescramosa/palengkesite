@@ -13,7 +13,9 @@
 
                 const data = {
                     labels: labels,
+
                     datasets: [{
+                        fill: false,
                         label: '{{ ucwords( $product->product_name ) }}',
                         backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 99, 111)'],
                         borderColor: 'rgb(255, 99, 132)',
@@ -22,8 +24,9 @@
                 };
 
                 const config = {
-                    type: 'pie',
+                    type: 'line',
                     data: data,
+
                     options: {}
                 };
 

@@ -68,7 +68,7 @@
     <script>    
         const elements = {
             initSlick: function () {
-                $(" .home-category .box-container").slick({
+                $(".home-category .box-container").slick({
                     slidesToShow:4,
                     slidesToScroll:1,
                     dots: false,
