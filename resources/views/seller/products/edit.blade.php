@@ -90,9 +90,9 @@
 
                                 </div>
 
-                                <div class="info-item form-inline short">
+                                <div class="info-item form-check-inline short">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" required>
+                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="{{ $seller_product->featured }}" {{ ($seller_product->featured) ? 'selected' : '' }}>
                                         <label class="form-check-label" for="remember">
                                             {{ __('Featured') }}
                                         </label>
@@ -100,8 +100,9 @@
                                 </div>
                                 <div class="info-item">
                                     <div class="form-group long  stall-image">
-                                        <label for="image">Image</label>
-                                        <input type="file"  class="form-control @error('image') is-invalid @enderror"
+
+                                        <label class=" " for="image">Image</label>
+                                        <input type="file"  class="@error('image') is-invalid @enderror"
                                                id="image"
                                                name="image"
                                                placeholder="" value="" >

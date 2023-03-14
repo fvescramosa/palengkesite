@@ -14,6 +14,9 @@ class DeliveryAddress extends Model
         'city',
         'province',
         'country',
+        'zip',
+        'longitude',
+        'latitude',
     ];
 
     public function user(){

@@ -81,10 +81,6 @@
                                             <td> <p>₱{{ $seller_stall->stall->amount_sqm }}</p></td>
                                         </tr>
                                         <tr>
-                                            <td class="stall-info-title-container"><p><strong>Area </strong> </p> </td>
-                                            <td> <p>{{ $seller_stall->stall->stall_area }}</p></td>
-                                        </tr>
-                                        <tr>
                                             <td class="stall-info-title-container"><p><strong>Rate: </strong> </p> </td>
                                             <td> <p>{{ $seller_stall->stall->rate }}</p></td>
                                         </tr>
@@ -107,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <a href="{{ asset( 'public/contracts/' . $seller_stall->contact_of_lease )}}"  target="_blank" class="btn option-btn">
+                                                <a href="{{ asset( $seller_stall->contact_of_lease )}}"  target="_blank" class="btn option-btn">
                                                     <span class="fa fa-eye"></span> View Contract
                                                 </a>
                                             </td>

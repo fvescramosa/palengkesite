@@ -16,6 +16,9 @@ class OrderDeliveryDetail extends Model
         'country',
         'buyer_id',
         'order_id',
+        'zip',
+        'longitude',
+        'latitude',
     ];
 
     public function order(){

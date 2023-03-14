@@ -9,24 +9,28 @@
                     Stall Information
                 </div>
                 <div class="basic-info-body">
+                    @if(($errors->any()))
+                        <div class="alert alert-danger alert-dismissible" role="alert" id="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Reminder!</strong>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                     <form action="{{ route('admin.stalls.store') }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
-
                             <div class="form-group long">
-                                <label for="number">Stall No.</label>
-                                <input type="text"  class="form-control @error('number') is-invalid @enderror"
-                                                    id="number"
-                                                    name ="number"
-                                                    placeholder="" value="" >
-
-                                @error('number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <label for="stall_number">Stall No.</label>
+                                <input type="text"  class="form-control @error('stall_number') is-invalid @enderror"
+                                                    id="stall_number"
+                                                    name ="stall_number"
+                                                    placeholder="" value="{{ old('stall_number') }}" >
 
                             </div>
                             <div class="form-group long">
@@ -34,30 +38,19 @@
                                 <input type="text"  class="form-control @error('sqm') is-invalid @enderror"
                                                     id="sqm"
                                                     name="sqm"
-                                                    placeholder="" value="" >
+                                                    placeholder="" value="{{ old('sqm') }}" >
 
 
-                                @error('sqm')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
 
                             </div>
 
                             <div class="form-group long">
-                                <label for="Amount_Sqm">Amount/Sqm</label>
+                                <label for="Amount_Sqm">Amount Per Sqm</label>
                                 <input type="text"  class="form-control @error('amount_sqm') is-invalid @enderror"
                                                     id="amount_sqm"
                                                     name="amount_sqm"
-                                                    placeholder="" value="" >
+                                                    placeholder="" value="{{ old('amount_sqm') }}" >
 
-
-                                @error('amount_sqm')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
 
                             </div>
 
@@ -66,14 +59,9 @@
                                 <input type="text"  class="form-control @error('rental_fee') is-invalid @enderror"
                                                     id="rental_fee"
                                                     name="rental_fee"
-                                                    placeholder="" value="" >
+                                                    placeholder="" value="{{ old('rental_fee') }}" >
 
 
-                                @error('rental_fee')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
 
                             </div>
 
@@ -86,16 +74,11 @@
                                             placeholder="Section">
                                             <option value=""></option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                                <option value="{{ $category->category }}" {{ ( old('section') == $category->category)   ? 'selected' : '' }}>{{ $category->category }}</option>
                                             @endforeach
                                 </select>
 
 
-                                @error('section')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
 
                             </div>
 
@@ -104,43 +87,25 @@
                                 <input type="text"  class="form-control @error('rate') is-invalid @enderror"
                                                     id="rate"
                                                     name="rate"
-                                                    placeholder="" value="" >
-
-                                @error('rate')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                                    placeholder="" value="{{ old('rate') }}" >
 
                             </div>
 
                             <div class="form-group long">
-                                <label for="Coords">Coordinates</label>
-                                <input type="text"  class="form-control @error('coords') is-invalid @enderror"
-                                                    id="coords"
-                                                    name="coords"
-                                                    placeholder="" value="" >
-
-                                @error('coords')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <label for="coordinates">Coordinates</label>
+                                <input type="text"  class="form-control @error('coordinates') is-invalid @enderror"
+                                                    id="coordinates"
+                                                    name="coordinates"
+                                                    placeholder="" value="{{ old('coordinates') }}" >
 
                             </div>
 
                             <div class="form-group long">
                                 <label for="Meter Number">Meter Number</label>
-                                <input type="text"  class="form-control @error('meter_num') is-invalid @enderror"
-                                                    id="meter_num"
-                                                    name="meter_num"
-                                                    placeholder="" value="" >
-
-                                @error('meter_num')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <input type="text"  class="form-control @error('meter_number') is-invalid @enderror"
+                                                    id="meter_number"
+                                                    name="meter_number"
+                                                    placeholder="" value="{{ old('meter_number') }}" >
 
                             </div>
 
@@ -152,15 +117,9 @@
                                             placeholder="Market">
                                             <option value=""></option>
                                             @foreach($markets as $market)
-                                                <option value="{{ $market->id }}">{{ $market->market }}</option>
+                                                <option value="{{ $market->id }}" {{ ( old('market') == $market->id ) ? 'selected' : '' }}>{{ $market->market }}</option>
                                             @endforeach
                                 </select>
-
-                                @error('market')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
 
                             </div>
 
@@ -171,12 +130,6 @@
                                        name="image"
                                        placeholder="" value="" >
 
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
                             </div>
 
                             <div id="stall_image_1" class="form-group long  stall-image hide">
@@ -185,12 +138,6 @@
                                        id="image_1"
                                        name="image_1"
                                        placeholder="" value="" >
-
-                                @error('image_1')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
 
                             </div>
 
@@ -201,12 +148,6 @@
                                        name="image_2"
                                        placeholder="" value="" >
 
-                                @error('image_2')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
                             </div>
 
                             <div id="stall_image_3" class="form-group long  stall-image hide">
@@ -216,11 +157,7 @@
                                        name="image_3"
                                        placeholder="" value="" >
 
-                                @error('image_3')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        
 
                             </div>
 
@@ -231,11 +168,7 @@
                                        name="image_4"
                                        placeholder="" value="" >
 
-                                @error('image_4')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        
 
                             </div>
 
@@ -244,13 +177,7 @@
                                 <input type="file"  class="form-control @error('image_5') is-invalid @enderror"
                                        id="image_5"
                                        name="image_5"
-                                       placeholder="" value="" >
-
-                                @error('image_5')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                       placeholder="" value="">
 
                             </div>
 
@@ -261,11 +188,6 @@
                             </div>
 
                             </select>
-                            @error('status')
-                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
 
                         </div>
 

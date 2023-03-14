@@ -13,23 +13,13 @@
                 </div>
                 <div class="basic-info-body">
 
-                    @if(isset($message))
 
-                        <script>
-                            Swal.fire({
-                                title: '{{ ucfirst($response) }}!',
-                                text: '{{ $message  }}',
-                                icon: '{{ $response }}',
-                                confirmButtonText: 'Ok'
-                            })
-                        </script>
-                    @endif
-                    <form action="{{ route('seller.products.store') }}" method="POST" class="form-">
+                    <form action="{{ route('seller.products.store') }}" method="POST" class="form-"  enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
                                 <div class="form-group long">
-                                    <label for="email">Product Categories</label>
+                                    <label for="email">Product Category</label>
                                     <select  class="form-control @error('category') is-invalid @enderror" id="category" name="category" placeholder="Category" value="" >
                                             <option value="">{{ 'Category' }}</option>
                                             @foreach($categories as $category)

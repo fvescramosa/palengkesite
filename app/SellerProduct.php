@@ -19,6 +19,7 @@ class SellerProduct extends Model
         'image_3',
         'image_4',
         'image_5',
+        'average_ratings',
     ];
 
     public function product(){
@@ -31,5 +32,9 @@ class SellerProduct extends Model
 
     public function carts(){
         return $this->hasMany(Cart::class );
+    }
+
+    public function comments(){
+        return $this->hasMany(Comments::class );
     }
 }

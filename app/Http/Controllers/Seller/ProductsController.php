@@ -15,6 +15,7 @@ use function auth;
 use function compact;
 use function dd;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use function redirect;
 use function view;
 
@@ -28,29 +29,34 @@ class ProductsController extends Controller
         return view('seller/products/create', compact(['categories']));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        if($request->new_product !== 'on'){
+        $data = [];
+        if ($request->new_product !== 'on') {
 
             $product = Products::findorFail($request->product);
 
-            if ($product->max_price != null){
+
+            if ($product->max_price != null) {
                 $validate = $request->validate([
-                    'price' => ['numeric', 'lt:'.$product->max_price]
+                    'price' => ['numeric', 'lt:' . $product->max_price]
                 ]);
+
+
             }
 
 
-        }else{
+        } else {
 
             $product = Products::create([
                 'category_id' => $request->category,
-                'product_name'	=> $request->new_product_name,
+                'product_name' => $request->new_product_name,
                 'min_price' => '',
-                'max_price'	=> '',
-                'srp'	=> '',
-                'code'	=> '',
-                'manufacturer'	=> '',
+                'max_price' => '',
+                'srp' => '',
+                'code' => '',
+                'manufacturer' => '',
                 'type' => '',
                 'status' => 'pending'
             ]);
@@ -64,16 +70,64 @@ class ProductsController extends Controller
             'price' => $request->price,
             'type' => $request->type,
             'image' => $request->image,
-            'image_1' => $request->image_1,
-            'image_2' => $request->image_2,
-            'image_3' => $request->image_3,
-            'image_4' => $request->image_4,
-            'image_5' => $request->image_5,
             'featured' => $request->featured,
             'stock' => $request->stock,
         ]);
 
-        if($request->file('image')){
+
+        if ($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image']= $directory.$filename;
+        }
+
+
+
+        if ($request->file('image_1')){
+            $file= $request->file('image_1');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_1']= $directory.$filename;
+        }
+
+        if ($request->file('image_2')){
+            $file= $request->file('image_2');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_2']= $directory.$filename;
+        }
+
+        if ($request->file('image_3')){
+            $file= $request->file('image_3');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_3']= $directory.$filename;
+        }
+
+        if ($request->file('image_4')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_4']= $directory.$filename;
+        }
+
+        if ($request->file('image_5')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'public/images/products/'.$create->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_5']= $directory.$filename;
+        }
+
+        $create->update($data);
+
+        /*if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('public/Image'), $filename);
@@ -84,7 +138,7 @@ class ProductsController extends Controller
         if($request->file('image_1')){
             $file= $request->file('image_1');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
+            $file->move(public_path('public/Image'), $filename);
             $data['image_1']= $filename;
         }
 
@@ -116,9 +170,9 @@ class ProductsController extends Controller
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('public/Image'), $filename);
             $data['image_5']= $filename;
-        }
+        }*/
 
-        $create->save();
+
 
         if($request->price > $product->max_price){
             Notification::create([
@@ -132,11 +186,14 @@ class ProductsController extends Controller
         }
 
         $categories = Categories::all();
-        if($create){
-            return view('seller/products/create', compact(['categories']))->with(['message' => 'Product has been added', 'response'=> 'success']);
+        if( $create->save()){
+            $response = ['message' => 'Product has been added', 'response'=> 'success'];
         }else{
-            return view('seller/products/create', compact(['categories']))->with(['message' => '', 'response' => 'error']);
+            $response = ['message' => '', 'response' => 'error'];
+
         }
+
+            return redirect(route('seller.products.create'))->with($response);
 
     }
 
@@ -176,7 +233,14 @@ class ProductsController extends Controller
 
         $seller_products =  auth()->user()->seller->seller_products;
 
-        return view('seller/products/show', compact(['seller_products']))->with(['message' => 'Product has been updated!']);
+        if(  $update ){
+            $response = ['message' => 'Product has been updated', 'response'=> 'success'];
+        }else{
+            $response = ['message' => 'Opps! Something went wrong', 'response' => 'error'];
+
+        }
+
+        return redirect(route('seller.products.show'))->with($response);
 
     }
 

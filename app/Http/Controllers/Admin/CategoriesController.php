@@ -18,7 +18,44 @@ class CategoriesController extends Controller
     }
 
     public function show(){
-        $categories = Categories::all();
+        $categories = new Categories();
+
+        if(isset($_GET['search'])){
+            $categories = $categories->where(function ($query){
+                $query->orWhere('category', 'like', '%' . $_GET['search'] . '%');
+            });
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['category', 'asc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['category', 'desc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $categories->orderBy($orderby[0], $orderby[1]);
+            }
+            
+        }
+        else{
+            $orderby = ['category', 'asc'];
+            $categories->orderBy($orderby[0], $orderby[1]);
+        }
+
+        $categories = $categories->get();
+
         return view('admin.categories.show', compact(['categories']));
     }
 
@@ -38,30 +75,25 @@ class CategoriesController extends Controller
         $data = [
             'category' => $request->category
         ];
-        if($request->file('image')){
-            $file= $request->file('image');
-            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
-            $file->move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
-        }
+
 
         $category = Categories::create($data);
 
+        if($request->file('image')){
+            $file= $request->file('image');
+            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
+            $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
+            $file->move($directory, $filename);
+            $data['image']= $directory.$filename;
+        }
 
 
         if($category->save()){
-            $message = [
-                'success' => true,
-                'message' => 'Category added!'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category has been added', 'response' => 'success']);
         }else{
-            $message = [
-                'success' => false,
-                'message' => 'Failed'
-            ];
+            return redirect(route('admin.categories.show'))->with(['message' => 'Category failed to add', 'response' => 'error']);
         }
 
-        return redirect(route('admin.categories.show'))->with($message);
     }
 
 
@@ -78,9 +110,10 @@ class CategoriesController extends Controller
         ];
         if($request->file('image') != null){
             $file= $request->file('image');
+            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
             $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            $file-> move($directory, $filename);
+            $data['image']= $directory.$filename;
         }
 
         $category = Categories::where('id', $id)
@@ -94,5 +127,35 @@ class CategoriesController extends Controller
 
         $categories = Categories::all();
         return redirect(route('admin.categories.show'))->with($message);
+    }
+
+    public function trash(){
+        $categories = Categories::onlyTrashed()->get();
+
+
+
+        return view('admin.categories/trash', compact(['categories']));
+    }
+
+    public function deleteCategory($id){
+
+        $delete =  Categories::where('id', $id)->delete();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function recoverCategory($id){
+
+        $recover = Categories::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('admin.categories.show'));
+
+    }
+
+    public function CategoryForceDelete($id){
+
+        $delete = Categories::where('id', $id)->forceDelete();
+        return redirect(route('admin.categories.trash'));
     }
 }

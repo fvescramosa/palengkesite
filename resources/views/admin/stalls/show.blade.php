@@ -31,48 +31,44 @@
                         </div>
 
                 </form>
-
-                @if (session('message'))
-                    <div class="alert alert-{{ (session('success') ? 'success' : 'danger') }}">
-                        <strong>{{ session('message')  }}</strong>
-                    </div>
-                @endif
                 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Stall No.</th>
-                        <th>Coordinates</th>
-                        <th>Section</th>
-                        <th>Sqm / Area</th>
-                        <th>Amount per sqm</th>
-                        <th>Rental Fee</th>
-                        <th>Rate</th>
-                        <th>Meter Number</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($stalls as $stall)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $stall->number }}</td>
-                            <td>{{ $stall->coords }}</td>
-                            <td>{{ $stall->section }}</td>
-                            <td>{{ $stall->sqm }}</td>
-                            <td>{{ $stall->amount_sqm }}</td>
-                            <td>{{ $stall->rental_fee }}</td>
-                            <td>{{ $stall->rate }}</td>
-                            <td>{{ $stall->meter_num }}</td>
-                            <td>{{ $stall->status }}</td>
-                            <td>
-                                <a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a> |
-                                <a href="{{ route('admin.stalls.delete', $stall->id) }}"> Delete</a>
-                            </td>
+                            <th>Stall No.</th>
+                            <th>Coordinates</th>
+                            <th>Section</th>
+                            <th>Sqm / Area</th>
+                            <th>Amount per sqm</th>
+                            <th>Rental Fee</th>
+                            <th>Rate</th>
+                            <th>Meter Number</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($stalls as $stall)
+                            <tr>
+                                <td>{{ $stall->number }}</td>
+                                <td>{{ $stall->coords }}</td>
+                                <td>{{ $stall->section }}</td>
+                                <td>{{ $stall->sqm }}</td>
+                                <td>{{ $stall->amount_sqm }}</td>
+                                <td>{{ $stall->rental_fee }}</td>
+                                <td>{{ $stall->rate }}</td>
+                                <td>{{ $stall->meter_num }}</td>
+                                <td>{{ $stall->status }}</td>
+                                <td>
+                                    <a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a> |
+                                    <a href="{{ route('admin.stalls.delete', $stall->id) }}"> Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 @if( isset($_GET ) )
                 {{$stalls->appends($_GET)->links()}}

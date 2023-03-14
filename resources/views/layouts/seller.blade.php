@@ -22,6 +22,7 @@
     <!-- Custom styles for this template-->
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/orders.css') }}" rel="stylesheet">
     <link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
@@ -29,6 +30,7 @@
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/chart.min.js') }}"></script>
 
 
     </head>
@@ -128,7 +130,28 @@
                         </div>
                     </div>
 
+                    @if(isset($response))
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst($response) }}!',
+                                text: '{{ $message  }}',
+                                icon: '{{ $response }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
 
+                    @if(  session()->get('response')  )
+
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst(session()->get('response')) }}!',
+                                text: '{{ session()->get('message')  }}',
+                                icon: '{{ session()->get('response') }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
                     <main>
                         @yield('content')
                     </main>
@@ -143,6 +166,15 @@
 
                         $(document).ready(function () {
                             app.initCollapse();
+                            $('.hamburger').click(function(){
+                                if($('.sidebar').hasClass('close')){
+                                    $('.sidebar').removeClass('close');
+                                    $('.wrapper .section').removeClass('open');
+                                }else{
+                                    $('.sidebar').addClass('close');
+                                    $('.wrapper .section').addClass('open');
+                                }
+                            });
                         });
 
 

@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/landing';
 
     /**
      * Create a new controller instance.
@@ -75,6 +75,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+        if($data['user_type_id'] == 1){
+            session('user_type','buyer');
+        }else{
+            session('user_type','seller');
+        }
+
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -104,12 +110,10 @@ class RegisterController extends Controller
 
 
         if(  $admin->save() ){
-            $message = ['success' => true, 'message' => 'Added Succesful!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Staff has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Failed to Add!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Failed to Add!', 'response' => 'error']);
         }
-
-        return redirect(route('admin.show.staff'))->with($message);
 
     }
     protected function adminValidator(array $data)

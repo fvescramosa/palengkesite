@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use App\Market;
 use App\SellerProduct;
 use function auth;
 use Illuminate\Http\Request;
@@ -44,6 +45,28 @@ class HomeController extends Controller
     }
 
     public function profile(){
+        if(auth()->user()->user_type_id == '1'){
+            return redirect( route('buyer.profile',  ['id' => auth()->user()->id]) );
+        }elseif(auth()->user()->user_type_id == '2'){
+            return redirect( route('seller.create') );
+        }
+    }
+
+    public function selectPalengke(Request $request){
+        session()->forget('shop_at_market');
+        session(['shop_at_market' => $request->market_option]);
+
+        // session()->put('market', $request->marketOtion);
+        $market = Market::find($request->market_option);
+        $response = [
+            'response' => 'success',
+            'message' => 'You have selected '. ucwords( $market->market  ) .'!'
+        ];
+        return redirect( url()->previous() )->with($response);
+    }
+
+    public function landingAfterRegistration()
+    {
         if(auth()->user()->user_type_id == '1'){
             return redirect( route('buyer.profile',  ['id' => auth()->user()->id]) );
         }elseif(auth()->user()->user_type_id == '2'){

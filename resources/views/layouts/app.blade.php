@@ -22,133 +22,134 @@
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('thirdparty/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/buyer/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/shop.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
     <script type="text/javascript" src="{{ asset('thirdparty/js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
-    <!-- <script type="text/javascript" src="{{ asset('js/app.js') }}" defer ></script> -->
+
+
+    <style>
+        .chat {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat li {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #B3A9A9;
+        }
+
+        .chat li .chat-body p {
+            margin: 0;
+            color: #777777;
+        }
+
+        .panel-body {
+            overflow-y: scroll;
+            height: 350px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
     <div >
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <div class="bg-area" style="">
-                        <div class="logo-area">
-                            <img src="{{ asset('images/logo-palengkesite.png') }}" alt="Palengkesite">
-                        </div>
-                    </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav">
-
-                    
-                        <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Stores</a>
-                        </li>
-                        
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart "></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        @include('layouts.navigation')
+        <script>
+            window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'pusherKey' => config('broadcasting.connections.pusher.key'),
+            'pusherCluster' => config('broadcasting.connections.pusher.options.cluster')
+        ]) !!};
+        </script>
         <main class="">
-                @if(isset($innerPageBanner))
-                    <section class="banner" style="background-image: url({{ $innerPageBanner }})">
+            @if(isset($response))
+                <script>
+                    Swal.fire({
+                        title: '{{ ucfirst($response) }}!',
+                        text: '{{ $message  }}',
+                        icon: '{{ $response }}',
+                        confirmButtonText: 'Ok'
+                    })
+                </script>
+            @endif
+
+            @if(  session()->get('response')  )
+
+                <script>
+                    Swal.fire({
+                        title: '{{ ucfirst(session()->get('response')) }}!',
+                        text: '{{ session()->get('message')  }}',
+                        icon: '{{ session()->get('response') }}',
+                        confirmButtonText: 'Ok'
+                    })
+                </script>
+            @endif
+            @if(isset($innerPageBanner))
+                <section class="banner" style="background-image: url({{ $innerPageBanner }})">
                     <div class="overlay"></div>
-                    </section>
-                @endif
-                @yield('content')
+                </section>
+
+            @else
+                    @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+                        <section class="banner" style="background-image: url({{ asset('public/images/202209101722author-4.jpg') }})">
+                            <div class="overlay"></div>
+                        </section>
+                    @endif
+            @endif
+            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+                <div class="longbar green-bar">
+                    <div class="">
+                        <form action="{{ route('select.market') }}" method="POST" id="select-market">
+                            @csrf
+                            <label for="">Mabini Public Market - </label>
+                            <select name="market_option"  class="" id="market-option">
+                                @foreach(\App\Market::all() as $market)
+                                    <option value="{{ $market->id }}" {{ session()->get('shop_at_market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
+                                @endforeach
+                            </select>
+
+                        </form>
+                    </div>
+                </div>
+            @endif
+            {{--<div class="longbar green-bar">
+                <form action="{{ route('select.market') }}" method="POST" id="select-market">
+                    @csrf
+                    <select name="market_option" id="market-option">
+                        @foreach(\App\Market::all() as $market)
+                            <option value="{{ $market->id }}" {{ session()->get('shop_at_market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
+                        @endforeach
+                    </select>
+
+                </form>
+            </div>--}}
+            @yield('content')
 
         </main>
-        <footer class="footer">
 
-            <section class="box-container">
 
-                <div class="box">
-                    <h3>quick links</h3>
-                    <a href="home.php"> <i class="fas fa-angle-right"></i> Home</a>
-                    <a href="products.php"> <i class="fas fa-angle-right"></i> Products</a>
-                    <a href="about.php"> <i class="fas fa-angle-right"></i> About Us</a>
-                    <a href="contact.php"> <i class="fas fa-angle-right"></i> Contact Us</a>
-                </div>
+        @include('layouts.footer')
 
-                <div class="box">
-                    <h3>extra links</h3>
-                    <a href="cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
-                    <a href="wishlist.php"> <i class="fas fa-angle-right"></i> Wishlist</a>
-                    <a href="orders.php"> <i class="fas fa-angle-right"></i> Orders</a>
-                    <a href="register.php"> <i class="fas fa-angle-right"></i> Register</a>
-                </div>
-
-                <div class="box">
-                    <h3>contact info</h3>
-                    <p> <i class="fas fa-phone"></i> +123-456-7890 </p>
-                    <p> <i class="fas fa-phone"></i> +111-222-3333 </p>
-                    <p> <i class="fas fa-envelope"></i> teamjarl@gmail.com </p>
-                    <p> <i class="fas fa-map-marker-alt"></i> University of Batangas </p>
-                </div>
-
-                <div class="box">
-                    <h3>follow us</h3>
-                    <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
-                    <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
-                    <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
-                    <a href="#"> <i class="fab fa-linkedin"></i> LinkedIn </a>
-                </div>
-
-            </section>
-
-            <p class="credit"> &copy; Copyright @ <?= date('Y'); ?> by <span>Team JARL</span> | All Rights Reserved! </p>
-
-        </footer>
     </div>
 
     <script>
@@ -161,6 +162,13 @@
                     } else {
                         $('.navbar').removeClass('fixed');
                     }
+            },
+            changeMarket: function(trigger){
+
+                trigger.change(function () {
+                    $('#select-market').submit();
+                });
+
             },
             initSlick: function(){
                 // $('#box-container').slick({
@@ -180,8 +188,9 @@
 
        $(window).on('load', function(){
             el.initSlick();
+            el.changeMarket($('#market-option'));
         });
     </script>
-
+    {{--<script type="text/javascript" src="{{ asset('js/app.js') }}"  ></script>--}}
 </body>
 </html>

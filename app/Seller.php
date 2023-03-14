@@ -18,6 +18,7 @@ class Seller extends Model
         'user_id',
         'seller_type',
         'market_id',
+        'category_id',
     ];
 
     public function user(){
@@ -48,5 +49,11 @@ class Seller extends Model
         return $this->hasMany(Order::class );
     }
 
+    public function category(){
+        return $this->belongsTo(Categories::class );
+    }
 
+    public function messages(){
+        return $this->hasMany(Message::class );
+    }
 }
