@@ -17,4 +17,12 @@ class Categories extends Model
     public function products(){
         return $this->hasMany(Products::class);
     }
+
+    public function stalls(){
+        return $this->hasMany(Stall::class );
+    }
+
+    public function sellers(){
+        return $this->hasMany(Seller::class );
+    }
 }

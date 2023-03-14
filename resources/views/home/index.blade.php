@@ -14,24 +14,21 @@
 
         </section>
     </div>
-    <section class="home-category">
+    <section class="home-category ">
 
         <h1 class="title">shop by <span>category</span></h1>
 
         <div class="box-container" id="box-container">
             @foreach($categories as $category)
-
                      <a href="{{ route('shop.product.category', ['category' => $category->category]) }}" class="box-item" style="background-image: url({{ asset($category->image)  }})">
                         <div class="overlay"></div>
                          <h3>{{ $category->category }}</h3>
                     </a>
-
             @endforeach
-
         </div>
 
     </section>
-    <section class="home-products products">
+    <section class="home-products products container">
 
         <h1 class="title">Featured <span>Products</span></h1>
 

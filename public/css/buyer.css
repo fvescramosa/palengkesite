@@ -4,10 +4,27 @@ body{
 .buyer,
 .buyer main
 {
-   height: 100%;
+   height: auto;
    width: 100%;
    display: flex;
    flex-flow:  row wrap;
+}
+.buyer main{
+
+   padding: 60px 0;
+}
+
+.buyer .navbar{
+   position: relative;
+   background-color: #fff !important;
+}
+
+.buyer .navbar .nav-item a {
+color: #000 !important;
+/* color: #000 !important; */
+   font-size: 18px !important;
+   padding: 0 25px;
+   text-shadow: unset !important;
 }
 
 
@@ -26,6 +43,10 @@ body{
    width: 35%;
    /*display: flex;*/
    /*align-items: center;*/
+}
+
+.dashboard-content{
+   width: 65%;
 }
 
 .dashboard-box{
@@ -219,3 +240,199 @@ section.content{
 .buyer .wrapper .section .top_navbar .hamburger a:hover {
    color: #a2ecff;
 }*/
+
+
+
+
+.delivery-address{
+   /* height: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    width: 100%;*/
+
+}
+.delivery-address-wrapper{
+   width: 100%;
+   max-width: 1400px;
+   margin:60px auto;
+   height: auto;
+   /*border: 1px solid #090909;*/
+   /*box-shadow: 7px 0px 38px -11px rgb(0 0 0 / 58%);*/
+   padding: 40px;
+   position: relative;
+}
+
+.my-delivery-address-list{
+
+}
+
+
+.my-delivery-address-list .my-delivery-address-item{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 25px;
+   padding: 25px;
+   display: flex;
+   justify-content: space-between;
+}
+
+
+.my-delivery-address-details {
+   flex: 1 1 45%;
+   max-width: 45%;
+}
+
+.my-delivery-address-item .my-delivery-address-details .details-up{
+   display: flex;
+   flex-flow: row wrap;
+   align-items: baseline;
+   justify-content: flex-start;
+}
+
+.my-delivery-address-item .details-up > div{
+   flex:  1 1 50%;
+   max-width: 50%;
+}
+
+.my-delivery-address-item .details-up p.order-date{
+   color: #787878;
+   font-size: 16px;
+}
+
+.my-delivery-address-item .details-up p.order-total,
+.my-delivery-address-item .details-up p.order-no{
+   font-weight: 700;
+   color: #000;
+   font-size: 16px;
+}
+.my-delivery-address-item .details-up p.order-total-label{
+   color: #000;
+   font-size: 16px;
+}
+
+
+.my-delivery-address-item .details-thumbnail img{
+   max-width: 128px;
+}
+
+.my-delivery-address-actions{
+   flex: 1 1 15%;
+   max-width: 15%;
+   text-align: center;
+}
+
+.my-delivery-address-actions > *{
+   width:  100%;
+   margin: 20px 0 ;
+   font-size: 18px;
+}
+
+
+/*.delivery-address-wrapper{
+   display: flex;
+   flex-flow: row wrap;
+   width: 100%;
+   margin: 0 auto;
+   height: 100%;
+}*/
+
+.delivery-address-wrapper .delivery-address-wrapper-left{
+   flex: 1 1 55%;
+   max-width: 55%;
+   border-right: 1px solid #e3e3e3 ;
+   padding: 25px;
+}
+.delivery-address-wrapper .delivery-address-wrapper-right{
+   flex: 1 1 45%;
+   max-width: 45%;
+   background-color: #e7e8eb;
+   padding: 50px;
+}
+.delivery-address-wrapper .order-status{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 15px;
+   padding: 25px;
+   display: flex;
+   width: 100%;
+   height: auto;
+   justify-content: space-between;
+}
+
+.delivery-address-box{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 15px;
+   padding: 25px;
+
+   width: 100%;
+   height: auto;
+
+}
+
+.delivery-address-items td{
+   vertical-align: middle;
+}
+.delivery-address-items td.td-left{
+   width: 30%;
+}
+.delivery-address-items td.td-center{
+   width: 40%;
+}
+
+.order-items td.td-right{
+   width: 30%;
+   text-align: right;
+}
+
+.delivery-address-items  img{
+   width: 64px;
+   height: 64px;
+}
+
+.delivery-address-customer-info {
+   display: flex;
+   justify-content: space-between;
+   flex-flow: row wrap;
+}
+.delivery-address-customer-info h3{
+   font-size: 15px;
+}
+
+.delivery-address-customer-info p{
+   font-size: 13px;
+   margin: 10px 0 15px;
+}
+
+.delivery-address-updates{
+   margin: 25px auto;
+   border: 1px solid #d2d4da;
+   border-radius: 15px;
+   padding: 25px;
+   width: 100%;
+   height: auto;
+
+}
+
+
+.status-update-fl{
+   display: flex;
+   justify-content: space-between;
+}
+
+@media (max-width:991px){
+   .delivery-address-wrapper .delivery-address-wrapper-left,
+   .delivery-address-wrapper .delivery-address-wrapper-right{
+      flex: 1 1 100%;
+      max-width: 100%;
+   }
+
+   .delivery-address-info-section-1,
+   .delivery-address-info-section-2{
+      flex: 1 1 100%;
+      max-width: 100%;
+   }
+
+
+}

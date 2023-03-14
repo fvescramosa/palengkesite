@@ -172,8 +172,9 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-
                                 </div>
+
+
 
                                 <div class="form-group info-item short">
                                     <label for="profile_image">Profile Image</label>
@@ -185,8 +186,124 @@
                                     @enderror
 
                                 </div>
-
+                                <div class="form-group info-item hidden">
+                                    <input type="hidden" class="form-control " id="longitude" name="longitude" placeholder="Example: 123" value="{{ auth()->user()->buyer->longitude }}" readonly>
+                                    <input type="hidden" class="form-control " id="latitude" name="latitude" placeholder="Example: 123" value="{{ auth()->user()->buyer->latitude }}" readonly>
+                                </div>
                         @endif
+                        </div>
+                        <div class="info-item long">
+                            <div id="map" style="width: 100%; height: 480px"></div>
+
+                            {{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>--}}
+                            <script
+                                    src="https://maps.googleapis.com/maps/api/js?key={{ config('apikeys.keys') }}&callback=initMap&v=weekly"
+                                    defer
+                            ></script>
+                            <script>
+                                let map, activeInfoWindow, markers = [];
+                                let marker;
+                                let defaultPosition = {
+                                        lat: {{ ( auth()->user()->buyer->latitude  ? auth()->user()->buyer->latitude : '13.749684') }},
+                                        lng: {{ ( auth()->user()->buyer->latitude  ? auth()->user()->buyer->longitude : '120.9395233') }},
+                                    };
+                                    /* ----------------------------- Initialize Map ----------------------------- */
+                                function initMap() {
+                                    map = new google.maps.Map(document.getElementById("map"), {
+                                        center: {
+                                            lat: {{ ( auth()->user()->buyer->latitude  ? auth()->user()->buyer->latitude : '13.749684') }},
+                                            lng: {{ ( auth()->user()->buyer->latitude  ? auth()->user()->buyer->longitude : '120.9395233') }},
+                                        },
+                                        zoom: 15
+                                    });
+
+                                    marker =  new google.maps.Marker({
+                                        position: defaultPosition,
+                                        label:'{{ auth()->user()->first_name }}',
+                                        map: map,
+                                    });
+
+
+                                    map.addListener("click", function(event) {
+
+                                        addMarker(event.latLng, map)
+                                    });
+
+                                }
+
+
+                                /* --------------------------- Initialize Markers --------------------------- */
+                                function addMarker(location, map) {
+                                    // Add the marker at the clicked location, and add the next-available label
+                                    // from the array of alphabetical characters.
+
+
+
+
+                                    if ( marker ) {
+                                        marker.setPosition(location);
+                                    } else {
+                                        marker =  new google.maps.Marker({
+                                            position: location,
+                                            label: 'A',
+                                            map: map,
+                                        });
+                                    }
+
+                                    markerClicked(marker)
+                                }
+                                /* ------------------------- Handle Map Click Event ------------------------- */
+                                function mapClicked(event) {
+                                    console.log(map);
+                                    console.log(event.latLng.lat(), event.latLng.lng());
+                                }
+
+                                /* ------------------------ Handle Marker Click Event ----------------------- */
+                                function markerClicked(marker, index) {
+                                    console.log(map);
+                                    console.log(marker);
+                                    console.log(marker.position.lat());
+                                    console.log(marker.position.lng());
+
+
+                                    $('#longitude').val(marker.position.lng());
+                                    $('#latitude').val(marker.position.lat());
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.position.lat()+','+marker.position.lng()+'&sensor=true&key={{ config('apikeys.keys') }}',
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+
+
+                                           $('#city').val(data.results[1].address_components[2].long_name);
+                                            support.loadBarangays($('#city').val());
+
+                                            $('#barangay').val(data.results[6].address_components[0].long_name);
+                                            console.log(data.results);
+                                        },
+                                    });
+                                }
+
+                                /* ----------------------- Handle Marker DragEnd Event ---------------------- */
+                                function markerDragEnd(event, index) {
+                                    console.log(map);
+                                    console.log(event.latLng.lat());
+                                    console.log(event.latLng.lng());
+                                }
+                            </script>
+
+                            <!--
+                              The `defer` attribute causes the callback to execute after the full HTML
+                              document has been parsed. For non-blocking uses, avoiding race conditions,
+                              and consistent behavior across browsers, consider loading using Promises
+                              with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+                              -->
+
+
                         </div>
                         <div class="row-btn">
                             <div class="btn-container" style="padding: 0 10px 15px;">
@@ -223,6 +340,7 @@
                 support.loadCities();
                 support.loadBarangays('{{ auth()->user()->buyer->city }}');
                 support.previewProfileImage($('#profile_image'));
+                support.loadMaps();
                // support.initJsonFunction();
             },
 
@@ -250,6 +368,7 @@
                        $('#city').html(options);
 
                         support.loadBarangays($('#city').val());
+
                     },
                 });
             },
@@ -297,6 +416,12 @@
 
                     }
                 });
+            },
+
+            loadMaps: function () {
+
+
+
             }
 
             // get
@@ -307,7 +432,13 @@
         $(document).ready(function () {
             $('#city').val( $('#city').attr('data-city')) ;
             support.init();
+
+
+            $('#city').change(function () {
+                support.loadBarangays($('#city').val())
+            })
         })
+
 
 
     </script>

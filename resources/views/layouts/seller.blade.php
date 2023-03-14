@@ -30,6 +30,7 @@
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/chart.min.js') }}"></script>
 
 
     </head>

@@ -19,6 +19,7 @@ class SellerProduct extends Model
         'image_3',
         'image_4',
         'image_5',
+        'average_ratings',
     ];
 
     public function product(){

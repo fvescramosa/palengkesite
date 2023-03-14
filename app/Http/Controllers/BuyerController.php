@@ -29,6 +29,7 @@ class BuyerController extends Controller
     public function store(Request $request){
 
 
+
         $validate = $request->validate([
             'birthday' => ['required', ''],
             'age' => ['required', 'numeric', 'min:18'],
@@ -60,8 +61,10 @@ class BuyerController extends Controller
                         'province' =>  $request->province,
                         'country' =>  $request->country,
                         'zip' =>  $request->zip,
+                        'longitude' =>  $request->longitude,
+                        'latitude' =>  $request->latitude,
                         'user_id' => auth()->user()->id,
-                        'image' => $request->image,
+                        'profile_image' => $request->profile_image,
                     ]
                 );
 
@@ -149,6 +152,8 @@ class BuyerController extends Controller
             'province' =>  $request->province,
             'country' =>  $request->country,
             'zip' =>  $request->zip,
+            'longitude' =>  $request->longitude,
+            'latitude' =>  $request->latitude,
             'image'	=> $request->image,
         ]);
 
@@ -179,7 +184,7 @@ class BuyerController extends Controller
 
         $buyer = Buyer::findOrFail( auth()->user()->buyer->id );
 
-        return redirect(route('buyer.profile', compact(['buyer'])))->with(['message' => 'Buyer info Updated']);
+        return redirect(route('buyer.profile', compact(['buyer'])))->with(['message' => 'Buyer info Updated', 'response' => 'success']);
 
         
     }
