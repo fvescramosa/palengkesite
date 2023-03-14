@@ -58,7 +58,7 @@
 
                         {{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>--}}
                         <script
-                                src="https://maps.googleapis.com/maps/api/js?{{ config('apikeys.keys') }}&callback=initMap&v=weekly"
+                                src="https://maps.googleapis.com/maps/api/js?key={{ config('apikeys.keys') }}&callback=initMap&v=weekly"
                                 defer
                         ></script>
                         <script>

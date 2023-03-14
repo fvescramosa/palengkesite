@@ -9,82 +9,101 @@
         <div class="profile-wrapper">
             <div class="card basic-info" style="width: 18rem;">
                 <div class="card-header basic-info-header">
-                    Product Information
+                    Stall Information
                 </div>
                 <div class="basic-info-body">
 
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('seller.products.update') }}" method="POST" class="form-">
+
+                    <div class="basic-info-body">
+
+
+                    </div>
+
+                    <form action="{{ route('seller.stalls.update', ['id' =>  $seller_stall->id]) }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
-                        <div class="info-body-flex">
+                        <div class="form-group" style="display: flex; flex-flow:  row wrap">
+                            <div class="info-item">
+                                <label for="">Stall</label>
+                                <select name="number" id="number" class="form-control @error('number') is-invalid @enderror" readonly="">
+                                    <option value="{{ $seller_stall->stall->id }}"> Stall No. {{ $seller_stall->stall->number }}</option>
+                                </select>
 
-                                <div class="info-item short">
-                                    <label for="email">Product Categories</label>
-                                    <select  class="form-control @error('category') is-invalid @enderror" id="category" name="category" placeholder="Category">
-                                        <option value="{{ $seller_product->product->category->id }}">{{ $seller_product->product->category->category }}</option>
-                                    </select>
-                                    @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-                                <div class="info-item short">
-                                    <label for="Product">Product</label>
-                                    <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product" value="" >
-                                        <option value="{{ $seller_product->product->id }}">{{ $seller_product->product->product_name }}</option>
-                                    </select>
-                                    @error('product')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-                                <div class="info-item short">
-                                    <label for="Product">Price</label>
-                                    <input type="text"
-                                           class="form-control @error('price') is-invalid @enderror"
-                                           id="price" name="price"
-                                           placeholder="Price"
-                                           value="{{ $seller_product->price }}" >
-
-                                    @error('price')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-                                <div class="info-item short">
-                                    <label for="type">Type</label>
-                                    <select  class="form-control @error('type') is-invalid @enderror" id="type" name="type" placeholder="Type"  >
-                                        <option value="Retail" {{ ( $seller_product->type == 'Retail' ) ? 'selected' : '' }}>Retail</option>
-                                        <option value="Wholesale" {{ ($seller_product->type == 'Wholesale' ) ? 'selected' : '' }}>Wholesale</option>
-                                    </select>
-                                    @error('type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-                            <input type="hidden"
-                                   class="form-control @error('id') is-invalid @enderror"
-                                   id="id" name="id"
-                                   placeholder="id"
-                                   value="{{ $seller_product->id }}" >
-                        </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
-                                </button>
+                                @error('number')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
+
+                            <div class="info-item">
+                                <label for="">Rental Fee per Month</label>
+                                <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
+
+                                @error('rental_fee')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+
+                            <div class="info-item short">
+                                <label for="">Start Date</label>
+                                <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date">
+
+                                @error('start_date')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                            <div class="info-item short">
+                                <label for="">End Date</label>
+                                <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" id="end_date">
+
+                                @error('end_date')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+
+                            <div class="info-item">
+                                <label for="">Duration (Months)</label>
+                                <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration" readonly>
+
+                                @error('duration')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+
+                            <div class="info-item">
+                                <label for="">Contract Lease</label>
+                                <input type="file" class="form-control @error('contract_of_lease') is-invalid @enderror" name="contract_of_lease" id="contract_of_lease">
+
+                                @error('contract_of_lease')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+
+
+                            <label for="">Image</label>
+                            <input type="file" name="image" id="" value="{{ $seller_stall->stall->image }}" class="form-control" >
+
+                            @for($i = 1; $i<=5; $i++)
+                                <label for="">Image {{ $i }}</label>
+                                <input type="file" name="image_{{$seller_stall->stall->image}}" id="" class="form-control" >
+                            @endfor
+
+                            <button type="submit"  class="btn btn-primary">Submit</button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -93,42 +112,79 @@
     <script>
         const products = {
             init: function(  ){
-                products.initCategories($('#category'));
-            },
-            initCategories: function( trigger ){
+                products.initStallDetails($('#stall'));
+                products.initDuration( $('input[type="date"]'));
 
+            },
+            initStallDetails: function( trigger ){
+                trigger.load(function () {
                     var options = '';
-                    console.log($('#category').val());
+
                     $.ajax({
                         type:'POST',
                         dataType: 'JSON',
-                        url:'{{ route('seller.products.find.category') }}',
+                        url:'{{ route('seller.display.details') }}',
                         data: {
-                            id: $('#category').val(),
+                            id: this.value,
                             _token: "{{ csrf_token() }}"
                         },
                         success:function(data) {
 
+                            $('#rental_fee').val(data.rental_fee);
 
-                            for( i = 0; i < data.length; i++){
-
-                                options += '<option value="'+ data[i].id +'">' + data[i].product_name + '</option>';
-
-                            }
-
-                            $('#product').append(options);
                         }
                     });
+                })
+            },
+            initDuration: function( trigger ){
+                trigger.change(function () {
+                    let date_1 = new Date($('#end_date').val());
+                    let date_2 = new Date($('#start_date').val());
 
+                    // let difference = date_1.getTime() - date_2.getTime();
+                    // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    // $('#duration').val(TotalDays);
+
+
+                    var months;
+                    var result;
+                    months = (date_1.getFullYear() - date_2.getFullYear()) * 12;
+                    months -= date_2.getMonth();
+                    months += date_1.getMonth();
+
+                    result = months <= 0  ? 0 : months;
+                    $('#duration').val(result);
+
+                });
+            },
+            initPreviewSlick: function () {
+                $('#slide-for').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '#slide-nav'
+                });
+
+                $('#slide-nav').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    asNavFor: '#slide-for',
+                    dots: false ,
+                    centerMode: true,
+                    focusOnSelect: true
+                });
             }
         };
 
         $(window).on('load', function(){
             products.init();
+            products.initPreviewSlick();
+
+
         });
 
     </script>
-
 
 
 

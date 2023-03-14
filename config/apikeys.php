@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'keys' => 123,
+    'keys' => env('GOOGLE_API_KEY', ''),
 ];

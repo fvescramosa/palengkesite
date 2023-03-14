@@ -29,9 +29,12 @@ class CartController extends Controller
 
 
 
-        $deliver_detail = DeliveryAddress::findOrFail($request->delivery_address);
+        $deliver_detail = DeliveryAddress::find($request->delivery_address);
 
 
+        if (!$deliver_detail){
+            return redirect(route('buyer.delivery.address.create'));
+        }
 
         $carts = Cart::whereIn('id', $request->cart_ids)->get()->groupBy('seller_id');
 

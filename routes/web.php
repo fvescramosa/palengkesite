@@ -69,6 +69,13 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');
+
+
+    //buyer to seller only
+    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
+    Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
+    Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 });
 
 
@@ -94,7 +101,10 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
 
-
+    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/seller/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'seller'])->name('chat.buyer');
+    Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
+    Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 
 //    Stalls
     /*Has Stall*/
@@ -110,7 +120,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/stalls/upload/contract', [\App\Http\Controllers\Seller\StallsController::class, 'submitContract'])->name('stalls.contract');
 
     Route::get('/stalls/edit/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'edit'])->name('stalls.edit');
-    Route::post('/stalls/update/', [\App\Http\Controllers\Seller\StallsController::class, 'update'])->name('stalls.update');
+    Route::post('/stalls/update/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'update'])->name('stalls.update');
 
     //My Stalls
     Route::get('/stalls/show', [\App\Http\Controllers\Seller\StallsController::class, 'show'])->name('stalls.show');
@@ -228,6 +238,9 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/notif/show', [NotificationController::class, 'show'])->name('notifications.show');
 
 
+    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Admin\AnalyticsController::class, 'salesByProducts'])->name('analytics.products');
+
+
 });
 
 Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
@@ -235,10 +248,10 @@ Route::get('/products/category/{category}', [ ProductsController::class, 'showBy
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
 });
-
+/*
 Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
-Route::post('/chat/messages', 'ChatsController@sendMessage');
+Route::post('/chat/messages', 'ChatsController@sendMessage');*/
 
 Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
 Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
@@ -249,11 +262,14 @@ Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.no
 //displaybycategory
 
 Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/categories/', [\App\Http\Controllers\ProductsController::class, 'categories'])->name('categories');
     Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
     Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
     Route::get('/products/', [ \App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
     Route::get('/product/{id}', [ \App\Http\Controllers\ProductsController::class, 'find'])->name('products.find');
     Route::post('/product/post/comment/{id}', [ \App\Http\Controllers\ProductsController::class, 'postComment'])->name('products.post.comment');
+    Route::get('/stores', [ \App\Http\Controllers\ProductsController::class, 'sellers'])->name('stores');
+    Route::get('/store/{id}', [ \App\Http\Controllers\ProductsController::class, 'findStore'])->name('store.find');
 });
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){

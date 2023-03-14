@@ -7,7 +7,7 @@
         <div class="container shop-wrapper">
 
             <div class="filter-wrapper">
-
+                    <h3>Filter</h3>
                     <form action="" id="filter" method="GET">
                         <div class="by-categories">
                             <div class="form-group">
@@ -45,14 +45,16 @@
                                     <label class="form-check-label" for=""> {{ $i }} Star Rating(s)
                                        @php $n = 1; @endphp
                                         @while($n <= 5)
-                                            <span class="product-rating @if($i >= $n) active @endif fa fa-star" data-rating=""> </span>
+                                            <span class="product-rating @if($i >= $n) active @else hide @endif fa fa-star" data-rating=""> </span>
                                             @php $n++; @endphp
                                         @endwhile
                                     </label>
                                 </div>
                             @endfor
                         </div>
-
+                        <div class="row-btn">
+                            <button class="btn home-btn option-btn" type="submit">Apply Filter</button>
+                        </div>
 
                     </form>
                 </div>
@@ -74,8 +76,14 @@
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product->product_id }}">
                                     <input type="hidden" name="price" id="price" value="{{ $product->price }}">
                                     <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $product->id }}">
+
+                                    <span class="out-of-stock">{{ ($product->stock) ? '' : 'Out of Stock' }}</span>
+                                    <hr>
+                                    <label for="">Quantity</label>
                                     <input type="number" name="quantity" id="quantity" value="" max="{{ $product->stock }}">
-                                    <button type="submit" {{ ($product->stock ? '' : 'disabled') }}>Add to Cart</button>
+                                    <button class="btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
+                                        <span class="fa fa-shopping-cart"></span>
+                                        Add to Cart</button>
                                 </form>
                             </div>
                     </div>
@@ -90,7 +98,7 @@
             let doc = $(document);
             var shop = {
                 onInit: function () {
-                    shop.submitFilter($('#filter input'));
+                    // shop.submitFilter($('#filter input'));
                 },
                 submitFilter: function (trigger) {
                     trigger.change(function () {

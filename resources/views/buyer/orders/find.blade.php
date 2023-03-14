@@ -61,16 +61,17 @@
                     <div id="map" style="width: 100%; height: 480px"></div>
 
                     {{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>--}}
+
                     <script
-                            src="https://maps.googleapis.com/maps/api/js?{{ config('apikeys.keys') }}&callback=initMap&v=weekly"
+                            src="https://maps.googleapis.com/maps/api/js?key={{ config('apikeys.keys') }}&callback=initMap&v=weekly"
                             defer
                     ></script>
                     <script>
                         let map, activeInfoWindow, markers = [];
                         let marker;
                         let defaultPosition = {
-                            lat: {{ ( $orders->order_delivery_detail->latitude  ? auth()->user()->buyer->latitude : '13.749684') }},
-                            lng: {{ ( $orders->order_delivery_detail->latitude  ? auth()->user()->buyer->longitude : '120.9395233') }},
+                            lat: {{ ( $orders->order_delivery_detail->latitude  ? $orders->order_delivery_detail->latitude : '13.749684') }},
+                            lng: {{ ( $orders->order_delivery_detail->longitude  ? $orders->order_delivery_detail->longitude : '120.9395233') }},
                         };
                         /* ----------------------------- Initialize Map ----------------------------- */
                         function initMap() {

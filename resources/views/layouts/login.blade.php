@@ -42,7 +42,7 @@
             </div>
         @endif
         <main>
-            <div class="container login-container">
+            <div class=" login-container">
                 <div class="bg-area" style="">
                     <div class="logo-area">
                         <a href="{{ url('/') }}">

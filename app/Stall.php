@@ -26,6 +26,7 @@ class Stall extends Model
         'rate',
         'coords',
         'meter_num',
+        'category_id',
     ];
 
     public function seller_stall(){
@@ -34,5 +35,9 @@ class Stall extends Model
 
     public function market(){
         return $this->belongsTo( Market::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Categories::class );
     }
 }

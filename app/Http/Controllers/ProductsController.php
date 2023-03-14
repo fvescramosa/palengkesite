@@ -9,10 +9,12 @@ use App\Comments;
 use App\Products;
 use App\Seller;
 use App\SellerProduct;
+use App\SellerStall;
 use function asset;
 use function auth;
 use function compact;
 use function dd;
+use function foo\func;
 use Illuminate\Http\Request;
 use function redirect;
 use function view;
@@ -217,4 +219,116 @@ class ProductsController extends Controller
 
         return redirect(route('shop.products.find', ['id' => $id]))->with($response);
     }
+
+    public function categories(){
+        $categories = Categories::all();
+
+        return view('shop.categories', compact(['categories']));
+    }
+
+    public function sellers(Request $request){
+
+
+
+
+        /* $products =  Products::with(['category', 'seller_products'])
+              ->whereHas('seller_products')->whereHas('category', function($q) use ($category){
+                  $q->where('category', $category);
+              })->get()->groupBy('seller_products.seller_id');*/
+
+
+        $stores = SellerStall::with(['stall'])->where('status', 'active')
+            ->whereHas('seller', function($q){
+                $q->whereHas('user');
+            })
+            ->whereHas( 'stall', function($q){
+                $q->where('status', 'occupied');
+            });
+
+        if(session()->has('shop_at_market')){
+            $stores = $stores->whereHas('stall', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+        if($request->categories){
+            $filter_categories = $request->categories;
+            $products = $stores->whereHas('stall', function ($query) use ($filter_categories){
+                $query->whereIn('category_id', $filter_categories);
+            });
+        }
+
+
+        $categories = Categories::all();
+
+
+        $stores = $stores->get();
+
+
+        $innerPageBanner = '';
+
+        return view('shop.stalls.index', compact(['stores' ,'innerPageBanner', 'categories']));
+
+    }
+
+    public function findStore($id, Request $request){
+
+
+        //take note ID ay SellerProductID hindi Product ID
+        $sellerStall = SellerStall::findOrFail($id);
+        $categories = Categories::all();
+
+        $products = SellerProduct::with(['product'])->where('seller_id', $sellerStall->seller->id);
+
+        if($request->product_name){
+            $product_name = $request->product_name;
+            $products = $products->whereHas('product', function ($query) use ($product_name) {
+                $query->where('product_name', 'LIKE', '%'.$product_name.'%');
+            });
+        }
+
+        if($request->categories){
+
+            $filter_categories = $request->categories;
+            $products = $products->whereHas('product', function ($query) use ($filter_categories){
+                $query->whereIn('category_id', $filter_categories);
+            });
+        }
+
+        if($request->ratings){
+            $filter_ratings = $request->ratings;
+
+
+            $products = $products->where( function($q) use ($filter_ratings) {
+                foreach ($filter_ratings as $key => $value){
+
+                    $q->orWhereRaw('CONVERT(average_ratings, UNSIGNED )', '=', (int)$value );
+                }
+
+            });
+//            dd($products->toSql());
+
+
+
+        }
+
+
+        if(!is_null($request->min_price) && !is_null($request->max_price)){
+            $products= $products->whereBetween('price', [(int)$request->min_price, (int)$request->max_price]);
+        }
+
+        else if(!is_null($request->min_price)){
+            $products = $products->where('price', '>=', (int)$request->min_price);
+        }
+
+        else if(!is_null($request->max_price)){
+            $products = $products->where('price', '<=', (int)$request->max_price);
+        }
+
+        $products = $products->get();
+
+        return view('shop.stalls.find', compact(['sellerStall', 'categories', 'products']));
+
+    }
+
 }

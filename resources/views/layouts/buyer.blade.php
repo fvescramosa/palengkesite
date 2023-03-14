@@ -34,7 +34,9 @@
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
+        <style>
 
+        </style>
     </head>
     <body id="page-top">
 
@@ -77,7 +79,7 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="{{ route('buyer.profile') }}">
                                             <span class="icon"><i class="fas fa-user"></i></span>
                                             <span class="item">Profile</span>
                                         </a>
@@ -112,9 +114,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <section class="content">
+                        <div class="dashboard-content">
                             @yield('content')
-                        </section>
+                        </div>
 
 
                     </main>

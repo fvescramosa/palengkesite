@@ -56,7 +56,7 @@
                                 <td> {{ $stall->stall->rental_fee }}</td>
                                 <td>
                                     @if($stall->contact_of_lease)
-                                        <a href="{{ asset( 'public/contracts/' . $stall->contact_of_lease )}}"  target="_blank"><span class="fa fa-eye"></span> View Contract</a>
+                                        <a href="{{ asset( $stall->contact_of_lease )}}"  target="_blank"><span class="fa fa-eye"></span> View Contract</a>
                                     @else
                                         <button  class="btn option-btn" data-toggle="modal" data-target="#uploadContract{{$stall->id}}" >  <span class="fa fa-upload"></span> Upload Contract</button>
                                     @endif
