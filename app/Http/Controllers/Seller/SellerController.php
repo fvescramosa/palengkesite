@@ -93,7 +93,7 @@ class SellerController extends Controller
             if($seller->save()){
                 $data = array('name'=>"Frank Test");
 
-                Mail::to(auth()->user()->email)->send(new NewUserWelcomeMail());
+//                Mail::to(auth()->user()->email)->send(new NewUserWelcomeMail());
                 //echo "Basic Email Sent. Check your inbox.";
                 $response = [
                     'response' => 'success',

@@ -40,7 +40,9 @@ class ProductsController extends Controller
                })->get()->groupBy('seller_products.seller_id');*/
 
 
-        $products = SellerProduct::with(['product']);
+        $products = SellerProduct::with(['product'])->whereHas('seller', function ($q){
+            $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+        });
 
         if(session()->has('shop_at_market')){
             $products = $products->whereHas('seller', function ($query){

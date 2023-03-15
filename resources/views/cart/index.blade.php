@@ -10,6 +10,14 @@
             @csrf
             <div class="delivery-addresses">
                 <h3>Address</h3>
+
+              {{--  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="delivery_address" value="{{ auth()->user()->id }}">
+                    <label class="form-check-label">
+                        {{ auth()->user()->stnumber }} {{ auth()->user()->stname }} {{ auth()->user()->barangay }}, {{ auth()->user()->city }} {{ auth()->user()->province }}
+                    </label>
+                </div>--}}
+
                 @foreach( auth()->user()->delivery_addresses as $address)
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="delivery_address" value="{{ $address->id }}">
@@ -46,12 +54,17 @@
             </div>
             <div class="payment-options">
                 @foreach($paymentOptions as $paymentOption)
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_method" value="{{ $paymentOption->id }}">
-                        <label class="form-check-label">
-                            {{ $paymentOption->payment_option }}
-                        </label>
+                    <div class="form-inline">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" value="{{ $paymentOption->id }}">
+                            <label class="col-md-9 form-check-label" for="remember">
+                                {{ $paymentOption->payment_option }}
+                            </label>
+
+                        </div>
                     </div>
+
                 @endforeach
             </div>
 

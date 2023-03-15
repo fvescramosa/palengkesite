@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Categories;
 use App\Market;
 use App\SellerProduct;
+use App\User;
+use App\Verification;
 use function auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Twilio\Rest\Client;
 
 class HomeController extends Controller
@@ -85,7 +88,7 @@ class HomeController extends Controller
             $auth_token = env("TWILIO_TOKEN");
             $twilio_number = env("TWILIO_FROM");
 
-            $client = new Client($account_sid, $auth_token);
+            $client = new Client(   $account_sid, $auth_token);
             $client->messages->create($receiverNumber, [
                 'from' => $twilio_number,
                 'body' => $message]);
@@ -95,5 +98,34 @@ class HomeController extends Controller
         } catch (Exception $e) {
             dd("Error: ". $e->getMessage());
         }
+    }
+
+    public function verification($email, $code){
+
+        $user = User::where(['email'=> $email, 'status' => 'inactive'])->firstOrFail();
+
+        $checkCode  =  Verification::where(['user_id' => $user->id, 'code' => $code])->firstOrFail();
+
+
+
+        $checkCode->update(['status' => 'done']);
+
+        if($user->update(['status' => 'active'])){
+            $response = ['response' => 'success', 'message' => 'Your Account has been Verified!'];
+        }else{
+
+            $response = ['response' => 'error', 'message' => 'Something went wrong!'];
+        }
+
+
+        return view('verify');
+
+//        return redirect(route(''))->with($response);
+
+    }
+
+    public function registrationDone(){
+
+        return view('registration-successful');
     }
 }

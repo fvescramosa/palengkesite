@@ -6,7 +6,7 @@
         <div class="form-wrapper">
 
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('user.login') }}">
             @csrf
 
             <div class="form-group">

@@ -35,6 +35,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('index');
 Route::post('/change-market', [HomeController::class, 'selectPalengke'])->name('select.market');
 Route::get('/landing', [HomeController::class, 'landingAfterRegistration']);
 Route::get('/test-sms', [HomeController::class, 'testSMS']);
+Route::get('/thank-you-for-signing-up', [HomeController::class, 'thankyouForSigningUp']);
+
+Route::post('/user/login', [LoginController::class, 'userLogin'])->name('user.login');
+
+
+Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->name('user.verify');
+Route::get('/registration/done', [HomeController::class, 'registrationDone'])->name('user.registration.success');
+//Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->name('user.verify');
 
 
 

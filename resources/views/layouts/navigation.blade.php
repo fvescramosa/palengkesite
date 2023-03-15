@@ -78,9 +78,15 @@
                                     @endif
 
                                 @else
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
-                                    </a>
+                                    @if(auth()->user()->user_type_id == 1)
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('buyer.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                        </a>
+                                    @else
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('seller.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                        </a>
+                                    @endif
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('user.logout') }}"
                                            onclick="event.preventDefault();

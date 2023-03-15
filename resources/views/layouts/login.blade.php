@@ -12,8 +12,12 @@
     {{--<link href="{{ asset('thirdparty/css/bootstrap.css') }}" rel="stylesheet" type="text/css">--}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
+
+
     <script type="text/javascript" src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>--}}
     <!-- Styles -->
     <style>
@@ -25,9 +29,32 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+
 </head>
 <body>
 <div class="login">
+    @if(isset($response))
+        <script>
+            Swal.fire({
+                title: '{{ ucfirst($response) }}!',
+                text: '{{ $message  }}',
+                icon: '{{ $response }}',
+                confirmButtonText: 'Ok'
+            })
+        </script>
+    @endif
+
+    @if(  session()->get('response')  )
+
+        <script>
+            Swal.fire({
+                title: '{{ ucfirst(session()->get('response')) }}!',
+                text: '{{ session()->get('message')  }}',
+                icon: '{{ session()->get('response') }}',
+                confirmButtonText: 'Ok'
+            })
+        </script>
+    @endif
         @if (Route::has('login'))
             <div class="nav-section">
                 @auth

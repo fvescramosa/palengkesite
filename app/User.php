@@ -27,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type_id',
-        'profile_image'
+        'profile_image',
+        'status'
     ];
 
     /**
@@ -68,5 +69,9 @@ class User extends Authenticatable
 
     public function delivery_addresses(){
         return $this->hasMany(DeliveryAddress::class);
+    }
+
+    public function verifications(){
+        return $this->hasMany(Verification::class);
     }
 }

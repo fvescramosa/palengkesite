@@ -20,6 +20,12 @@ use function response;
 class BuyerController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create(){
 
 
@@ -44,6 +50,7 @@ class BuyerController extends Controller
             'user_id' => '',
             'profile_image' => 'required|mimes:jpeg,jpg,png',
         ]);
+
 
         if (!Auth::user()->buyer()->exists()){
 

@@ -38,7 +38,7 @@
                            @if( $order->status == 'pending' && $order->payment_option_id == '1')
                              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#order{{ $order->transaction_id }}">₱ {{ number_format($order->total, 2) }}</a>
                            @endif
-                           <a class="btn" href="{{ route('buyer.orders.find', ['id' => $order->transaction_id]) }}">View Order</a>
+                           <a class="pal-button btn-orange" href="{{ route('buyer.orders.find', ['id' => $order->transaction_id]) }}">View Order</a>
                        </div>
                    </div>
                </div>
