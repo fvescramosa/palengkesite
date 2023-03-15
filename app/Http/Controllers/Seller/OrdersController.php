@@ -37,11 +37,14 @@ class OrdersController extends Controller
            'status_id' => $request->status,
         ]);
 
+
         if($status){
             $response = [
                 'response' => 'success',
                 'message' => 'Order status updated!'
             ];
+
+            $status->order->where(['status' => 'In Progress']);
         }else{
             $response = [
                 'response' => 'error',

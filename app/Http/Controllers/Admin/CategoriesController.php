@@ -77,7 +77,7 @@ class CategoriesController extends Controller
         ];
 
 
-        $category = Categories::create($data);
+
 
         if($request->file('image')){
             $file= $request->file('image');
@@ -85,11 +85,13 @@ class CategoriesController extends Controller
             $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
             $file->move($directory, $filename);
             $data['image']= $directory.$filename;
-        }
 
+        }
+        $category = Categories::create($data);
 
         if($category->save()){
             return redirect(route('admin.categories.show'))->with(['message' => 'Category has been added', 'response' => 'success']);
+
         }else{
             return redirect(route('admin.categories.show'))->with(['message' => 'Category failed to add', 'response' => 'error']);
         }

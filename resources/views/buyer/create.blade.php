@@ -156,11 +156,11 @@
 
                                 <div class="info-item long">
                                     <label for="image">Image Upload</label>
-                                    <input type="file"  class="form-control @error('image') is-invalid @enderror"
+                                    <input type="file"  class="form-control @error('profile_image') is-invalid @enderror"
                                                         id="image"
                                                         name="profile_image"
                                                         placeholder="" value="" >
-                                    @error('image')
+                                    @error('profile_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

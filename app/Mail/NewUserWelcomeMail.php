@@ -9,6 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewUserWelcomeMail extends Mailable
 {
+
+
     use Queueable, SerializesModels;
 
     /**
@@ -16,9 +18,13 @@ class NewUserWelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    public $data;
+
+    public function __construct($data)
     {
         //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +34,9 @@ class NewUserWelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome-email')->subject('Welcome Email');
+
+
+
+        return $this->markdown('emails.welcome-email')->subject('Welcome to PalengkeSite')->with('data', $this->data);
     }
 }
