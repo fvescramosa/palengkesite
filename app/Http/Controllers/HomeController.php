@@ -7,6 +7,7 @@ use App\Market;
 use App\SellerProduct;
 use function auth;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 
 class HomeController extends Controller
 {
@@ -71,6 +72,28 @@ class HomeController extends Controller
             return redirect( route('buyer.profile',  ['id' => auth()->user()->id]) );
         }elseif(auth()->user()->user_type_id == '2'){
             return redirect( route('seller.create') );
+        }
+    }
+
+    public function testSMS(){
+        $receiverNumber = "+639178402141";
+        $message = "This is testing from FRANK!";
+
+        try {
+
+            $account_sid = env("TWILIO_SID");
+            $auth_token = env("TWILIO_TOKEN");
+            $twilio_number = env("TWILIO_FROM");
+
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiverNumber, [
+                'from' => $twilio_number,
+                'body' => $message]);
+
+            dd('SMS Sent Successfully.');
+
+        } catch (Exception $e) {
+            dd("Error: ". $e->getMessage());
         }
     }
 }

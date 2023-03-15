@@ -34,6 +34,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/home', [HomeController::class, 'index'])->name('index');
 Route::post('/change-market', [HomeController::class, 'selectPalengke'])->name('select.market');
 Route::get('/landing', [HomeController::class, 'landingAfterRegistration']);
+Route::get('/test-sms', [HomeController::class, 'testSMS']);
 
 
 
