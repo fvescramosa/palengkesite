@@ -37,4 +37,8 @@ class SellerProduct extends Model
     public function comments(){
         return $this->hasMany(Comments::class );
     }
+
+    public function order_products(){
+        return $this->hasMany(OrderProduct::class );
+    }
 }

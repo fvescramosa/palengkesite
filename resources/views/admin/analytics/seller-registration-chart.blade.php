@@ -16,7 +16,7 @@
 
                     datasets: [{
                         fill: false,
-                        label: '{{ ucwords( $product->product_name ) }}',
+                        label: 'Seller Registration by Month',
                         backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 99, 111)'],
                         borderColor: 'rgb(255, 99, 132)',
                         data: sales,
@@ -24,7 +24,7 @@
                 };
 
                 const config = {
-                    type: 'line',
+                    type: 'bar',
                     data: data,
 
                     options: {}

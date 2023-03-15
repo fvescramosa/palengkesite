@@ -77,7 +77,8 @@
                     infinite: true,
                     slide: 'div',
                     cssEase: 'linear',
-
+                    prevArrow: null,
+                    nextArrow: null,
                 });
             },
             initFeaturedProducts: function () {
