@@ -203,7 +203,10 @@ class BuyerController extends Controller
 
             Auth::user()->update(['user_type_id' => 2]);
 
-            if(!Auth::user()->seller()->exists()){
+            if(!Auth::user()->buyer()->exists()){
+                return redirect(route('seller.create'));
+            }
+            else if(!Auth::user()->seller()->exists()){
                 $buyer_info = Auth::user()->buyer;
 
                 $data = [

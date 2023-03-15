@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
 <section class="verification-acct" style="margin-top: 120px; margin-bottom: 120px;">

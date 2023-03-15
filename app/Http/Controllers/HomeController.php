@@ -111,14 +111,14 @@ class HomeController extends Controller
         $checkCode->update(['status' => 'done']);
 
         if($user->update(['status' => 'active'])){
-            $response = ['response' => 'success', 'message' => 'Your Account has been Verified!'];
+            $result = ['response' => 'success', 'message' => 'Your Account has been Verified!'];
         }else{
 
-            $response = ['response' => 'error', 'message' => 'Something went wrong!'];
+            $result = ['response' => 'error', 'message' => 'Something went wrong!'];
         }
 
 
-        return view('verify');
+        return view('verify', compact(['result', 'email']));
 
 //        return redirect(route(''))->with($response);
 

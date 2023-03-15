@@ -42,7 +42,7 @@ Route::post('/user/login', [LoginController::class, 'userLogin'])->name('user.lo
 
 Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->name('user.verify');
 Route::get('/registration/done', [HomeController::class, 'registrationDone'])->name('user.registration.success');
-//Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->name('user.verify');
+Route::get('/verification/{email}/resend', [HomeController::class, 'verification'])->name('user.verification.resend');
 
 
 
