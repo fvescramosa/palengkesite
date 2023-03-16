@@ -92,7 +92,7 @@
 
                                 <div class="info-item form-check-inline short">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="{{ $seller_product->featured }}" {{ ($seller_product->featured) ? 'selected' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" {{ ($seller_product->featured) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="remember">
                                             {{ __('Featured') }}
                                         </label>

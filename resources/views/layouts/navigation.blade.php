@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
+<nav class="navbar navbar-expand-md navbar-light  shadow-sm ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <div class="bg-area" style="">
@@ -8,7 +8,7 @@
                         </div>
                     </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -45,15 +45,20 @@
 
                                 @if(session('user_type'))
                                     @if(session('user_type') == 'buyer')
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('buyer.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Profile
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                                <a class="nav-link dropdown-item" href="{{ route('buyer.profile') }}" >
+                                                    <span class="fa fa-user"></span> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                                </a>
                                                 <a class="dropdown-item" href="{{ route('user.logout') }}"
                                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
+                                                    <span class="fa fa-power-off"></span>  {{ __('Logout') }}
                                                 </a>
+
 
                                                 <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
                                                     @csrf

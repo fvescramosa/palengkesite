@@ -834,108 +834,23 @@ section{
 
 
 
-
-
-
-
-
-
-@media (max-width:991px){
-   p{
-      font-size: 11px;
-   }
-   .buyer .wrapper .section .top_navbar {
-
-      justify-content: flex-end;
-   }
-
-   .buyer .wrapper .sidebar,
-   .seller .wrapper .sidebar,
-   .admin .wrapper .sidebar{
-      left: -312px !important;
-
-   }
-
-   /*.buyer .wrapper .section,*/
-   .admin .wrapper .section,
-   .seller .wrapper .section{
-      margin-left: 0 !important;
-      width: 100% !important;
-   }
-
-}
-
-@media (max-width:768px){
-
-   .home-bg{
-      background-position: left;
-   }
-
-   .home-bg .home{
-      justify-content: center;
-      text-align: center;
-   }
-
-   .checkout-orders form .flex .inputBox{
-      width: 100%;
-   }
-
-}
-
-@media (max-width:450px){
-
-   .box-container{
-      grid-template-columns: 1fr;
-   }
-
-   .products .box-container{
-      grid-template-columns: 1fr;
-   }
-
-   .authors .box-container{
-      grid-template-columns: 1fr;
-   }
-
-   .seller .box-container{
-      grid-template-columns: 1fr;
-   }
-
-   .quick-view .box img{
-      height: auto;
-      width: 100%;
-   }
-
-   .about .row .box img{
-      width: 100%;
-      height: auto;
-   }   
-
-   .shopping-cart .box-container{
-      grid-template-columns: 1fr;
-   }
-
-   .wishlist .box-container{
-      grid-template-columns: 1fr;
-   }
-
-}
-
 .navbar{
    min-height: 0 !important;
    margin-bottom: 0 !important;
    position: fixed;
    width: 100%;
    height: 100px;
-   background-color: transparent !important;
+   background-color: transparent;
    /*background-color: #fff;*/
    z-index: 999;
 }
 
 
 .navbar.fixed{
-   background:white !important;
+
    z-index: 999;
    position: fixed;
+   background-color: #fff;
 }
 
 .logo-area img{
@@ -1154,13 +1069,13 @@ span.invalid-feedback {
    margin-bottom: 10px;
 }
 .profile .basic-info .info-item.xshort {
-   width: calc(25% - 25px) !important;
+   width: calc(25% - 25px);
 }
 .profile .basic-info .info-item.short {
-   width: calc(50% - 25px) !important;
+   width: calc(50% - 25px);
 }
 .profile .basic-info .info-item.medium {
-   width: calc(75% - 25px) !important;
+   width: calc(75% - 25px);
 }
 .profile .basic-info .info-header-edit {
    float: right;
@@ -1870,7 +1785,7 @@ a.pal-button{
    color: #fff;
 }
 #select-market select{
-   width: 200px;
+   width: 120px;
    font-weight: 700;
    color: #fff;
    background-color: var(--green);
@@ -2017,4 +1932,210 @@ a.pal-button{
 ::-webkit-scrollbar-thumb {
    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
    background-color: #555;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:991px){
+
+   .navbar{
+      padding: 0;
+      background-color: #fff !important;
+      height: 70px !important;
+   }
+
+   .navbar .container{
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .navbar button{
+      margin: 10px 0px;
+   }
+
+   .logo-area img{
+      width: 64px !important;
+   }
+
+   .box-container a.box-item {
+      height: 250px !important;
+      min-height: 250px !important;
+      padding: 35px;
+   }
+
+   .box-item h3{
+      font-size: 16px !important;
+   }
+   p{
+      font-size: 11px;
+   }
+   .buyer .wrapper .section .top_navbar {
+
+      justify-content: flex-end;
+   }
+
+   .buyer .wrapper .sidebar,
+   .seller .wrapper .sidebar,
+   .admin .wrapper .sidebar{
+      left: -312px !important;
+
+   }
+
+   /*.buyer .wrapper .section,*/
+   .admin .wrapper .section,
+   .seller .wrapper .section{
+      margin-left: 0 !important;
+      width: 100% !important;
+   }
+
+   .banner{
+      height: 250px !important;
+   }
+
+   .categories a.item-category {
+      flex: 50% !important;
+      max-width: 50% !important;
+      min-height: 150px !important;
+   }
+
+   .item-category h3{
+      font-size: 11px !important;
+   }
+
+   .categories > .container{
+      max-width: 1600px !important;
+      padding: 0;
+      margin: 0;
+   }
+
+   .profile .basic-info .info-item.xshort,
+   .profile .basic-info .info-item.short,
+   .profile .basic-info .info-item.medium {
+      width: 100% !important;
+   }
+
+   .bg-area{
+      display: none !important;
+   }
+
+   .login-container .form-area {
+      flex: 1 1 100%;
+      max-width: 100%;
+   }
+
+   .stall-gallery-container{
+      width: 100%;
+   }
+   .stall-info-container {
+      width: 100%;
+      padding: 0;
+      padding: 25px 0;
+   }
+
+   .profile-wrapper{
+      padding: 0;
+   }
+
+   .stall-main-img {
+      width: 100%;
+      /*height: 150px;*/
+      /* margin: 0 15px; */
+      border: 1px solid #fff;
+   }
+   .buyer .wrapper .sidebar.opened,
+   .seller .wrapper .sidebar.opened,
+   .admin .wrapper .sidebar.opened {
+       left: 0 !important;
+      z-index: 9999;
+      opacity: 1;
+   }
+
+   .buyer .wrapper .section.opened .top_navbar ,
+   .seller .wrapper .section.opened .top_navbar ,
+   .admin .wrapper .section.opened .top_navbar  {
+      justify-content: flex-end !important;
+   }
+
+   .seller main,
+   .admin main,
+   .buyer main {
+      padding: 10px 40px;
+   }
+
+   .dashboard-content {
+      width: 100% !important;
+   }
+
+   .profile .basic-info .info-item{
+      margin: 0 !important;
+   }
+
+   .dashboard-box{
+      padding: 0px !important;
+      margin: 30px auto !important;
+   }
+}
+
+@media (max-width:768px){
+
+   .home-bg{
+      background-position: left;
+   }
+
+   .home-bg .home{
+      justify-content: center;
+      text-align: center;
+   }
+
+   .checkout-orders form .flex .inputBox{
+      width: 100%;
+   }
+
+}
+
+@media (max-width:450px){
+
+   .longbar.green-bar{
+      font-size: 11px;
+   }
+   .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .products .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .authors .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .seller .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .quick-view .box img{
+      height: auto;
+      width: 100%;
+   }
+
+   .about .row .box img{
+      width: 100%;
+      height: auto;
+   }
+
+   .shopping-cart .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .wishlist .box-container{
+      grid-template-columns: 1fr;
+   }
+
 }

@@ -39,7 +39,7 @@
         <div class="seller">
             <!-- Page Wrapper -->
             <div class="wrapper">
-                <div class="sidebar seller">
+                <div class="sidebar seller ">
                     <div class="sidebar-header">
                         <h3><i class="fa fa-desktop"></i> Seller Dashboard</h3>
                         <hr>
@@ -153,7 +153,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="section">
+                <div class="section ">
                     <div class="top_navbar">
                         <div class="hamburger">
                             <a href="#">
@@ -199,12 +199,15 @@
                         $(document).ready(function () {
                             app.initCollapse();
                             $('.hamburger').click(function(){
-                                if($('.sidebar').hasClass('close')){
-                                    $('.sidebar').removeClass('close');
-                                    $('.wrapper .section').removeClass('open');
+                                if($('.sidebar').hasClass('opened')){
+
+                                    $('.sidebar').removeClass('opened');
+                                    $('.wrapper .section').addClass('opened');
+
                                 }else{
-                                    $('.sidebar').addClass('close');
-                                    $('.wrapper .section').addClass('open');
+
+                                    $('.sidebar').addClass('opened');
+                                    $('.wrapper .section').addClass('opened');
                                 }
                             });
                         });
