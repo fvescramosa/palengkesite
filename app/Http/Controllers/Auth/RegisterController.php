@@ -86,7 +86,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => 'inactive',
-            'user_type_id' =>  $data['user_type_id'] 
+            'user_type_id' => $data['user_type_id'] ?? 1
         ]);
 
         if($create->save()){

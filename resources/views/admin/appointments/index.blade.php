@@ -55,17 +55,17 @@
                                 <td> {{ $appointment->created_at }}</td>
                                 <td> {{ $appointment->date }}</td>
                                 <td> 
-                                    <a href="{{ asset( 'public/Image/' . $appointment->application_letter )}}"  target="_blank">View</a>
+                                    <a href="{{ asset(  $appointment->application_letter )}}"  target="_blank">View</a>
                                 </td>
                                 <td> 
-                                    <a href="{{ asset( 'public/Image/' . $appointment->residency )}}"  target="_blank">View</a>
+                                    <a href="{{ asset(  $appointment->residency )}}"  target="_blank">View</a>
                                 </td>
                                 <td> 
-                                    <a href="{{ asset( 'public/Image/' . $appointment->image )}}"  target="_blank">View</a>
+                                    <a href="{{ asset(  $appointment->image )}}"  target="_blank">View</a>
                                 </td>
                                 <td> 
-                                    <a href="{{ asset( 'public/Image/' . $appointment->id1 )}}"  target="_blank">Valid ID 1</a><br>
-                                    <a href="{{ asset( 'public/Image/' . $appointment->id2 )}}"  target="_blank">Valid ID 2</a>
+                                    <a href="{{ asset(  $appointment->id1 )}}"  target="_blank">Valid ID 1</a><br>
+                                    <a href="{{ asset(  $appointment->id2 )}}"  target="_blank">Valid ID 2</a>
                                 </td>
                                 <td> {{ $appointment->status }}</td>
                                 <td>

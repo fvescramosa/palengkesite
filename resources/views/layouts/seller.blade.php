@@ -78,11 +78,24 @@
                                         <span class="item">Messages</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
+
+
+                                <li class="collapsed" data-toggle="collapse" data-target="#sellers_submenu">
+                                    <a href="#"  class="">
                                         <span class="icon"><i class="fas fa-chart-bar"></i></span>
                                         <span class="item">Sales</span>
                                     </a>
+                                    <div class="collapse {{ (request()->segment(3) == 'sales') ? 'show' : ''}}" id="sellers_submenu" aria-expanded="false">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('seller.analytics.product.sales') }}" class="{{ ( request()->routeIs('seller.analytics.product.sales') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-users"></i></span>
+                                                    <span class="item">Products</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </li>
                             @endif
                         @endif

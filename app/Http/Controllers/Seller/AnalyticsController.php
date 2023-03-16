@@ -32,12 +32,19 @@ class AnalyticsController extends Controller
             ->groupBy(DB::raw("product_id"))
             ->pluck('count', 'products');*/
 
+
         $sales = SellerProduct::with('order_products')
                 ->whereHas('order_products')
-                ->select(DB::raw('COUNT(*) as count'), DB::raw("products.product_name as products"))
-                ->join('products', 'seller_products.product_id', '=', 'products.id')
-                ->groupBy(DB::raw("seller_products.product_id"))
-                ->pluck('count', 'products');
+                ->select(DB::raw('COUNT(*) as count'), DB::raw("products.product_name as products"), DB::raw("MONTHNAME(created_at) as month_name"))
+                ->join('products', 'seller_products.product_id', '=', 'products.id');
+
+/*
+        if(isset($_GET['productOption'])){
+            $sales .= $sales->where('month_name', $_GET['productOption']);
+        }*/
+
+        $sales .= $sales->groupBy(DB::raw("seller_products.product_id"))
+            ->pluck('count', 'products');
 
         $labels = [];
         foreach ($sales->keys() as $key){

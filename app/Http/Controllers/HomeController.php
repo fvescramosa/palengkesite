@@ -9,6 +9,7 @@ use App\User;
 use App\Verification;
 use function auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Twilio\Rest\Client;
 
@@ -117,6 +118,7 @@ class HomeController extends Controller
             $result = ['response' => 'error', 'message' => 'Something went wrong!'];
         }
 
+        Auth::loginUsingId($user->id);
 
         return view('verify', compact(['result', 'email']));
 
