@@ -15,7 +15,7 @@ class RemoveColumnFromStallTable extends Migration
     {
         Schema::table('stalls', function (Blueprint $table) {
             //
-            $table->dropColumn('market');
+//            $table->dropColumn('market');
         });
     }
 
@@ -28,7 +28,7 @@ class RemoveColumnFromStallTable extends Migration
     {
         Schema::table('stalls', function (Blueprint $table) {
             //
-            $table->dropColumn('market');
+            $table->dropColumn('market_id');
         });
     }
 }

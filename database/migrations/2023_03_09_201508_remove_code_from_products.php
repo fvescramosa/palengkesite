@@ -15,7 +15,7 @@ class RemoveCodeFromProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->string('code')->nullable()->change();
+//            $table->string('code')->nullable()->change();
 
         });
     }
