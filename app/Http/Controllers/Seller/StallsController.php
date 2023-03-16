@@ -105,7 +105,7 @@ class StallsController extends Controller
         if( $create->save()){;
             $createAppointment = StallAppointment::create($appointment);
 
-            $sendEmail = Mail::to($data['email'])->send(new NewStallAppointmentEmail($createAppointment));
+//            $sendEmail = Mail::to($data['email'])->send(new NewStallAppointmentEmail($createAppointment));
         }
 
 
