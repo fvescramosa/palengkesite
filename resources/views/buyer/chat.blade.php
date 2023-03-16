@@ -8,12 +8,20 @@
        <div class="chat-wrapper">
            <div class="chat-list">
 
+
                 <ul class="chat">
-                    @foreach($messages as $message)
+
+                    @foreach($titles as $title)
                             {{--It means buyer talking to seller--}}
-                            <li class="left clearfix">
-                                <a href="{{ route('buyer.chat.seller', ['id' => $message->last()->seller->id]) }}">{{ $message->last()->seller->seller_stalls->name  }}</a>
+                           <li class="left clearfix">
+                                <a href="{{ route('buyer.chat.seller', ['id' => $title->seller->seller_stalls['id']]) }}"> {{ $title->seller->seller_stalls['name'] }}</a>
                             </li>
+
+
+
+                         {{--   <li class="left clearfix">
+                                <a href="{{ route('buyer.chat.seller', ['id' => $stall->id]) }}">{{ $stall->name }}</a>
+                            </li>--}}
 
                     @endforeach
                 </ul>
@@ -25,7 +33,8 @@
                        <h3 ></h3>
                    </div>
                    <div class="panel-body">
-
+                            <h3><strong>{{ \App\Seller::find($seller_id)->seller_stalls->name }}</strong></h3>
+                       <hr>
                            <ul class="chat" id="chatboard" data-action="{{ route('buyer.chat.fetchAllMessages', ['id' => $seller_id]) }}">
                                    @foreach($chats as $chat)
                                         <li class="left clearfix {{ ($chat->sender == 'buyer' ? 'user' : '') }}">

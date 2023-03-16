@@ -33,6 +33,7 @@ class AnalyticsController extends Controller
             ->pluck('count', 'products');*/
 
 
+
         $sales = SellerProduct::with('order_products')
                 ->whereHas('order_products')
                 ->select(DB::raw('COUNT(*) as count'), DB::raw("products.product_name as products"), DB::raw("MONTHNAME(created_at) as month_name"))

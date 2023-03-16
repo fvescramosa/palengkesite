@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Mail\NewStallAppointmentEmail;
 use App\SellerProduct;
 use App\SellerStall;
 use App\Stall;
@@ -9,6 +10,7 @@ use App\StallAppointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class StallsController extends Controller
 {
@@ -56,6 +58,7 @@ class StallsController extends Controller
             'date' => $request->appointment_date,
             'status' => 'pending'
         ];
+
         if($request->file('application_letter')){
             $file= $request->file('application_letter');
             $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
@@ -101,7 +104,10 @@ class StallsController extends Controller
 
         if( $create->save()){;
             $createAppointment = StallAppointment::create($appointment);
+
+            $sendEmail = Mail::to($data['email'])->send(new NewStallAppointmentEmail($createAppointment));
         }
+
 
 //        $stall = Stalls::with(['seller_stall'])->findOrFail($request->stall_id);
         return redirect(route('seller.stalls.show'))->with(['message' => 'Stall application sent!']);

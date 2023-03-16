@@ -9,6 +9,7 @@
             <div class="chat-list">
 
                 <ul class="chat">
+
                     @foreach($messages as $message)
                         {{--It means buyer talking to seller--}}
                         <li class="left clearfix">

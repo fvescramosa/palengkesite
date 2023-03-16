@@ -30,7 +30,7 @@ class ChatsController extends Controller
     }
 
 
-    public function seller($id)
+    public function buyer($id)
     {
 
         $buyer_id = $id;
