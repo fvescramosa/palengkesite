@@ -65,6 +65,79 @@
 
 
     </section>
+
+
+    <section class="home-products products container">
+
+        <h1 class="title">Most <span>Popular Items</span></h1>
+
+        <div class="products-grid">
+
+            @foreach($popularProducts as $popularProduct)
+
+                <div class="product-item">
+
+                    <div class="product-image">
+                        <img src="{{ asset($popularProduct->seller_product->image) }}" alt="">
+                    </div>
+                    <div class="product-details">
+
+
+                        <h4 class="product-name">{{ $popularProduct->product->product_name }}</h4>
+                        <p>Php {{ number_format($popularProduct->seller_product->price, 2) }}</p>
+                        <form action="{{ route('shop.product.addToCart') }}" method="POST">
+
+                            @csrf
+                            <input type="hidden" name="seller_id" id="seller_id" value="{{ $popularProduct->seller_id }}">
+                            <input type="hidden" name="product_id" id="product_id" value="{{ $popularProduct->product_id }}">
+                            <input type="hidden" name="price" id="price" value="{{ $popularProduct->seller_product->price }}">
+                            <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $popularProduct->seller_product->id }}">
+                            <input type="number" name="quantity" id="quantity" value="" max="{{ $popularProduct->seller_product->stock }}">
+                            <button class="btn-green" type="submit" {{ ($popularProduct->seller_product->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+
+            @endforeach
+
+        </div>
+
+
+    </section>
+
+    <section class="home-products products container">
+
+        <h1 class="title">Stores <span></span></h1>
+
+        <div class="products-grid">
+
+            @foreach($stores as $store)
+
+                <div class="product-item" >
+
+                    <a class="product-image" href="{{ route('shop.store.find', ['id' => $store->id]) }}">
+                        <img src="{{ asset($store->image) }}" alt="">
+                    </a>
+                    <div class="product-details">
+                        <h4>{{ $store->name }}</h4>
+
+
+                        <a class="btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
+                            <span class="fa fa-store"></span>
+                            View
+                        </a>
+
+                    </div>
+                </div>
+
+            @endforeach
+
+        </div>
+
+
+    </section>
+
+
     <script>    
         const elements = {
             initSlick: function () {
@@ -77,8 +150,20 @@
                     infinite: true,
                     slide: 'div',
                     cssEase: 'linear',
-                    prevArrow: null,
-                    nextArrow: null,
+                    nextArrow: false,
+                    prevArrow: false,
+                    responsive: [
+                        {
+                            breakpoint: 991,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll:1,
+                                infinite: false,
+                                dots: false
+                            }
+                        },
+
+                    ]
                 });
             },
             initFeaturedProducts: function () {

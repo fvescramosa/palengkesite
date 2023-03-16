@@ -221,6 +221,7 @@ class ProductsController extends Controller
 
     public function update(Request $request)
     {
+
         $update = SellerProduct::where(['seller_id' => auth()->user()->seller->id, 'id' => $request->id])
             ->update([
                 'product_id' => $request->product,

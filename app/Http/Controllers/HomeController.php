@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Categories;
 use App\Market;
+use App\OrderProduct;
 use App\SellerProduct;
+use App\SellerStall;
 use App\User;
 use App\Verification;
 use function auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Twilio\Rest\Client;
 
@@ -28,9 +31,21 @@ class HomeController extends Controller
     public function index(){
 
         $featuredProducts = SellerProduct::where('featured', 1)->limit(6)->get();
+        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->with(['seller', 'product', 'seller_product'])
+            ->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(5)->get();
         $categories = Categories::all();
 
-        return view('home/index', compact(['featuredProducts', 'categories']));
+        $stores = SellerStall::with(['stall'])->where('status', 'active')
+            ->whereHas('seller', function($q){
+                $q->whereHas('user');
+            })
+            ->whereHas( 'stall', function($q){
+                $q->where('status', 'occupied');
+            })->limit(5)->get();
+
+
+//        dd($popularProducts);
+        return view('home/index', compact(['featuredProducts', 'categories'  , 'popularProducts' ,'stores']));
     }
     /**
      * Show the application dashboard.
