@@ -9,14 +9,16 @@
                     <h1>{{ $orders->status }}</h1>
                 </div>
                 <div class="order-updates">
-                    @foreach($orders->order_statuses  as $order_status)
-                        <div class="status-update">
-                            <div class="status-update-fl">
-                                <p>{{ $order_status->status->status }}</p>
-                                <p>{{ date('F d, Y h:i:s a', strtotime($order_status->created_at)) }}</p>
+                    @if($orders->order_statuses()->exists())
+                        @foreach($orders->order_statuses  as $order_status)
+                            <div class="status-update">
+                                <div class="status-update-fl">
+                                    <p>{{ $order_status->status->status }}</p>
+                                    <p>{{ date('F d, Y h:i:s a', strtotime($order_status->created_at)) }}</p>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
                 <div class="order-details-box order-customer-info">
                     <div class="order-info-section-1">

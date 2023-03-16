@@ -49,7 +49,7 @@
                         <h4 class="product-name">{{  $sellerStall->name }}</h4>
                         <p class="seller-name"><i class="fa fa-store"></i> By:  <span class="seller-name">{{  $sellerStall->seller->user->first_name }}</span></p>
                     </div>
-
+                    <a href="{{ route('buyer.chat.seller', ['id' => $sellerStall->id]) }}" class="pal-button btn-orange"><span class="fa fa-envelope" ></span> Messages</a>
                     <hr>
 
                     <div class="details-middle">

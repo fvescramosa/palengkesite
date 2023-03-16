@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Buyer;
 
+use App\Buyer;
 use App\Http\Controllers\Controller;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChatsController extends Controller
 {
@@ -35,12 +37,22 @@ class ChatsController extends Controller
 
         $seller_id = $id;
         //left side
+
+        $titles =  Message::where('buyer_id', auth()->user()->buyer->id)
+            ->with(['seller', 'seller.seller_stalls'])
+            ->select(DB::raw('COUNT(*) as count'), DB::raw('seller_id'))
+
+            ->groupBy('seller_id')->get();
+
+
         $messages = Auth::user()->buyer->messages->groupBy('seller_id');
+
+
 
         //main panel
         $chats = Auth::user()->buyer->messages->where('seller_id', $id);
 
-        return view('buyer.chat', compact(['messages', 'chats', 'seller_id']));
+        return view('buyer.chat', compact(['messages', 'chats', 'seller_id', 'titles']));
     }
 
     public function sendMessage(Request $request, $id)

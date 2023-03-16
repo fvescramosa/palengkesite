@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCategoryIdToStallsTable extends Migration
+class RemoveMarketColumnFromStallTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class AddCategoryIdToStallsTable extends Migration
     {
         Schema::table('stalls', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('category_id')->default(1);;
+
+            $table->dropColumn('market');
         });
     }
 
@@ -28,7 +29,6 @@ class AddCategoryIdToStallsTable extends Migration
     {
         Schema::table('stalls', function (Blueprint $table) {
             //
-
         });
     }
 }

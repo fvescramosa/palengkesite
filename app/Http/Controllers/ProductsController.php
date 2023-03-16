@@ -130,47 +130,55 @@ class ProductsController extends Controller
 
     public function addToCart(Request $request){
 
+
+
         $validate = $request->validate([
             'quantity' => ['required','numeric']
         ]);
 
+        if( !auth()->user()->buyer()->exists() ){
+            $response = ['message' => 'Please complete your Profile', 'response' => 'error'];
+        }
+       else{
+           $response = [];
+           //find exsiting item from your cart
+           $findCart = Cart::where([
+               'product_id' => $request->product_id,
+               'buyer_id' => auth()->user()->buyer->id,
+               'seller_id' => $request->seller_id,
+               'seller_product_id' => $request->seller_product_id,
+           ])->get()->last();
 
 
 
-            $response = [];
-            //find exsiting item from your cart
-            $findCart = Cart::where([
-                'product_id' => $request->product_id,
-                'buyer_id' => auth()->user()->buyer->id,
-                'seller_id' => $request->seller_id,
-                'seller_product_id' => $request->seller_product_id,
-            ])->get()->last();
 
-            if($findCart){
+           if($findCart){
 
-                //update the quantity
-                $findCart->update([
-                    'quantity' => $findCart->quantity + $request->quantity,
-                    'total' =>  ($findCart->quantity + $request->quantity) *  $request->price,
-                ]);
+               //update the quantity
+               $findCart->update([
+                   'quantity' => $findCart->quantity + $request->quantity,
+                   'total' =>  ($findCart->quantity + $request->quantity) *  $request->price,
+               ]);
 
-                $response = ['message' => 'An item from your cart was updated', 'response' => 'success'];
-            }
-            else{
+               $response = ['message' => 'An item from your cart was updated', 'response' => 'success'];
+           }
+           else{
 
-                //Insert new product to cart
-                $cart = Cart::create([
-                    'product_id' => $request->product_id,
-                    'seller_id' => $request->seller_id,
-                    'buyer_id' => auth()->user()->buyer->id,
-                    'price' => $request->price,
-                    'seller_product_id' =>  $request->seller_product_id,
-                    'quantity' =>  $request->quantity,
-                    'total' =>  $request->quantity *  $request->price,
-                ]);
+               //Insert new product to cart
+               $cart = Cart::create([
+                   'product_id' => $request->product_id,
+                   'seller_id' => $request->seller_id,
+                   'buyer_id' => auth()->user()->buyer->id,
+                   'price' => $request->price,
+                   'seller_product_id' =>  $request->seller_product_id,
+                   'quantity' =>  $request->quantity,
+                   'total' =>  $request->quantity *  $request->price,
+               ]);
 
-                $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
-            }
+               $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
+           }
+       }
+
 
 
 

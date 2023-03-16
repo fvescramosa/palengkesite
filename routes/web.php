@@ -110,8 +110,8 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
 
-    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('.chats');
-    Route::get('chats/seller/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'seller'])->name('chat.buyer');
+    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('chats');
+    Route::get('chats/buyer/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'buyer'])->name('chat.buyer');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 

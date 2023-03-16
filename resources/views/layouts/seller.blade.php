@@ -51,6 +51,8 @@
                                 <span class="item">Profile</span>
                             </a>
                         </li>
+
+                        @if(auth()->user()->seller()->exists())
                         <li>
                             <a href="{{ route('seller.stalls.show') }}">
                                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
@@ -58,6 +60,23 @@
                             </a>
                         </li>
 
+
+                            <li>
+                                <a href="{{ route('seller.chats') }}">
+                                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                                    <span class="item">Messages</span>
+                                </a>
+                            </li>
+
+                        <li>
+                            <a href="{{ route('seller.analytics.product.sales') }}">
+                                <span class="icon"><i class="fas fa-chart-line"></i></span>
+                                <span class="item">Analytics</span>
+                            </a>
+                        </li>
+
+
+                        @endif
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
