@@ -22,6 +22,7 @@
     <!-- Custom styles for this template-->
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/orders.css') }}" rel="stylesheet">
     <link href="{{ asset('css/seller/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('thirdparty/slick-1.8.1/slick/slick.css') }}" />
@@ -29,8 +30,9 @@
     <script type="text/javascript" src="{{ asset('thirdparty/slick-1.8.1/slick/slick.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('thirdparty/sweetalert2/package/dist/sweetalert2.js') }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('thirdparty/chart.min.js') }}"></script>--}}
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
     </head>
     <body id="page-top">
 
@@ -76,11 +78,24 @@
                                         <span class="item">Messages</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
+
+
+                                <li class="collapsed" data-toggle="collapse" data-target="#sellers_submenu">
+                                    <a href="#"  class="">
                                         <span class="icon"><i class="fas fa-chart-bar"></i></span>
                                         <span class="item">Sales</span>
                                     </a>
+                                    <div class="collapse {{ (request()->segment(3) == 'sales') ? 'show' : ''}}" id="sellers_submenu" aria-expanded="false">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('seller.analytics.product.sales') }}" class="{{ ( request()->routeIs('seller.analytics.product.sales') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-users"></i></span>
+                                                    <span class="item">Products</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </li>
                             @endif
                         @endif
@@ -128,7 +143,28 @@
                         </div>
                     </div>
 
+                    @if(isset($response))
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst($response) }}!',
+                                text: '{{ $message  }}',
+                                icon: '{{ $response }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
 
+                    @if(  session()->get('response')  )
+
+                        <script>
+                            Swal.fire({
+                                title: '{{ ucfirst(session()->get('response')) }}!',
+                                text: '{{ session()->get('message')  }}',
+                                icon: '{{ session()->get('response') }}',
+                                confirmButtonText: 'Ok'
+                            })
+                        </script>
+                    @endif
                     <main>
                         @yield('content')
                     </main>
@@ -143,6 +179,15 @@
 
                         $(document).ready(function () {
                             app.initCollapse();
+                            $('.hamburger').click(function(){
+                                if($('.sidebar').hasClass('close')){
+                                    $('.sidebar').removeClass('close');
+                                    $('.wrapper .section').removeClass('open');
+                                }else{
+                                    $('.sidebar').addClass('close');
+                                    $('.wrapper .section').addClass('open');
+                                }
+                            });
                         });
 
 

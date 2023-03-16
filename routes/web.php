@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SellerStallsController;
 use App\Http\Controllers\Admin\StallAppointmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\APIKeysController;
 // use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -31,6 +32,17 @@ use \App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::post('/change-market', [HomeController::class, 'selectPalengke'])->name('select.market');
+Route::get('/landing', [HomeController::class, 'landingAfterRegistration']);
+Route::get('/test-sms', [HomeController::class, 'testSMS']);
+Route::get('/thank-you-for-signing-up', [HomeController::class, 'thankyouForSigningUp']);
+
+Route::post('/user/login', [LoginController::class, 'userLogin'])->name('user.login');
+
+
+Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->name('user.verify');
+Route::get('/registration/done', [HomeController::class, 'registrationDone'])->name('user.registration.success');
+Route::get('/verification/{email}/resend', [HomeController::class, 'verification'])->name('user.verification.resend');
 
 
 
@@ -40,29 +52,50 @@ Auth::routes();
 
 
 //Route::get('user/checkpoint', [HomeController::class, 'checkPoint'])->name('user.checkpoint')->middleware('auth');
-Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
+//Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile')->middleware('auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
 Route::name('buyer.')->prefix('/')->namespace('\App\Http\Controllers')->group(function(){
-    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+    Route::get('/profile/', [UserController::class, 'profile'])->name('profile');
 });
 
 Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/create', [BuyerController::class, 'create'])->name('create');
     Route::post('/store', [BuyerController::class, 'store'])->name('store');
+    Route::get('/profile/edit/', [ BuyerController::class, 'edit'])->name('edit');
+    Route::post('/profile/update', [BuyerController::class, 'update'])->name('update');
     Route::get('/switch/seller', [BuyerController::class, 'switch_as_seller'])->name('switch.seller');
+
+
+    Route::get('/delivery/address/create', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'create'])->name('delivery.address.create');
+    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'store'])->name('delivery.address.store');
+    Route::get('/delivery/address/index/', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.index');
+    Route::get('/delivery/address/find/{id}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'find'])->name('delivery.address.find');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.edit');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.update');
+//    Route::post('/delivery/address/store/{type?}', [\App\Http\Controllers\Buyer\DeliveryAddressController::class, 'index'])->name('delivery.address.delete');
+
+    Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');
+
+
+    //buyer to seller only
+    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
+    Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
+    Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 });
 
 
 Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->group(function(){
-    Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
-    Route::get('/create', [SellerController::class, 'create'])->name('create');
-    Route::post('/store', [SellerController::class, 'store'])->name('store');
+    Route::get('/profile', [\App\Http\Controllers\Seller\SellerController::class, 'profile'])->name('profile');
+    Route::get('/create', [\App\Http\Controllers\Seller\SellerController::class, 'create'])->name('create');
+    Route::post('/store', [\App\Http\Controllers\Seller\SellerController::class, 'store'])->name('store');
 
-    Route::get('/profile/edit/', [ SellerController::class, 'edit'])->name('edit');
-    Route::post('/profile/update', [SellerController::class, 'update'])->name('update');
-    Route::get('/show', [SellerController::class, 'show'])->name('show');
+    Route::get('/profile/edit/', [ \App\Http\Controllers\Seller\SellerController::class, 'edit'])->name('edit');
+    Route::post('/profile/update', [\App\Http\Controllers\Seller\SellerController::class, 'update'])->name('update');
+    Route::get('/show', [\App\Http\Controllers\Seller\SellerController::class, 'show'])->name('show');
 
     //products
     Route::get('/products/create', [\App\Http\Controllers\Seller\ProductsController::class, 'create'])->name('products.create');
@@ -74,7 +107,13 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/products/details', [\App\Http\Controllers\Seller\ProductsController::class, 'findByID'])->name('products.details');
 
 
-    Route::get('/stalls/have-any-stalls/', [SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
+    Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
+
+
+    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/seller/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'seller'])->name('chat.buyer');
+    Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
+    Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 
 //    Stalls
     /*Has Stall*/
@@ -90,7 +129,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::post('/stalls/upload/contract', [\App\Http\Controllers\Seller\StallsController::class, 'submitContract'])->name('stalls.contract');
 
     Route::get('/stalls/edit/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'edit'])->name('stalls.edit');
-    Route::post('/stalls/update/', [\App\Http\Controllers\Seller\StallsController::class, 'update'])->name('stalls.update');
+    Route::post('/stalls/update/{id}', [\App\Http\Controllers\Seller\StallsController::class, 'update'])->name('stalls.update');
 
     //My Stalls
     Route::get('/stalls/show', [\App\Http\Controllers\Seller\StallsController::class, 'show'])->name('stalls.show');
@@ -99,9 +138,15 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
 
     //Orders
     Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
+    Route::get('/orders/{id}', [\App\Http\Controllers\Seller\OrdersController::class, 'find'])->name('orders.find');
+    Route::post('/order/status/update', [\App\Http\Controllers\Seller\OrdersController::class, 'updateStatus'])->name('orders.status.update');
 
+    Route::get('/switch/buyer', [\App\Http\Controllers\Seller\SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 
-    Route::get('/switch/buyer', [SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
+    Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
+//    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
+//    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
+//    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
 });
 
 
@@ -125,6 +170,15 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/set/market', [AdminController::class, 'setMarket'])->name('set.market');
     Route::get('/settings/', [AdminController::class, 'settings'])->name('settings');
     Route::post('/settings/update/password', [AdminController::class, 'updatePassword'])->name('update.password');
+
+
+
+    Route::get('/settings/api/index', [APIKeysController::class, 'index'])->name('api.index');
+    Route::get('/settings/api/create', [APIKeysController::class, 'create'])->name('api.create');
+    Route::post('/settings/api/store', [APIKeysController::class, 'store'])->name('api.store');
+    Route::get('/settings/api/edit', [APIKeysController::class, 'edit'])->name('api.edit');
+    Route::post('/settings/api/update', [APIKeysController::class, 'update'])->name('api.update');
+
 
     //users
     Route::get('/users/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
@@ -177,6 +231,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/categories/show', [CategoriesController::class, 'show'])->name('categories.show');
     Route::get('/categories/edit/{id}', [ CategoriesController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::get('/categories/trash', [CategoriesController::class, 'trash'])->name('categories.trash');
+    Route::get('/categories/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
+    Route::get('/categories/permanentdelete/{id}', [CategoriesController::class, 'CategoryForceDelete'])->name('categories.permanentdelete');
+    Route::get('/categories/recover/{id}', [CategoriesController::class, 'recoverCategory'])->name('categories.recover');
 
     //seller stalls
     Route::get('/seller/stalls', [SellerStallsController::class, 'index'])->name('seller.stalls.show');
@@ -194,35 +252,49 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/notif/show', [NotificationController::class, 'show'])->name('notifications.show');
 
 
+    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Admin\AnalyticsController::class, 'salesByProducts'])->name('analytics.products');
+    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
+    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
+
+
 });
 
 Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
+
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
 });
-
+/*
 Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
-Route::post('/chat/messages', 'ChatsController@sendMessage');
+Route::post('/chat/messages', 'ChatsController@sendMessage');*/
 
 Route::get('/stall/appointment/pending', [AdminController::class, 'getStallAppointmentNotif'])->name('get.stall.appointment.notif');
 Route::get('/stall/approval/pending', [AdminController::class, 'getStallApprovalNotif'])->name('get.stall.approval.notif');
+Route::get('/stall/product/pending', [AdminController::class, 'getProductApprovalNotif'])->name('get.product.approval.notif');
 Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.notif');
 
 
 //displaybycategory
 
 Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
+    Route::get('/categories/', [\App\Http\Controllers\ProductsController::class, 'categories'])->name('categories');
     Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
     Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
+    Route::get('/products/', [ \App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+    Route::get('/product/{id}', [ \App\Http\Controllers\ProductsController::class, 'find'])->name('products.find');
+    Route::post('/product/post/comment/{id}', [ \App\Http\Controllers\ProductsController::class, 'postComment'])->name('products.post.comment');
+    Route::get('/stores', [ \App\Http\Controllers\ProductsController::class, 'sellers'])->name('stores');
+    Route::get('/store/{id}', [ \App\Http\Controllers\ProductsController::class, 'findStore'])->name('store.find');
 });
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+
 });
 
 
-Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
-Route::post('paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
-Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));
+Route::get('/paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
+Route::post('/paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
+Route::get('/paypal'    , array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));

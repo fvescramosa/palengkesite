@@ -24,13 +24,17 @@ class CartController extends Controller
         $paymentOptions = PaymentOption::all();
         return view('cart.index', compact(['paymentOptions']));
     }
+
     public function checkout(Request $request){
 
 
-        dd($request);
 
-        $deliver_detail = DeliveryAddress::findOrFail($request->delivery_address);
+        $deliver_detail = DeliveryAddress::find($request->delivery_address);
 
+
+        if (!$deliver_detail){
+            return redirect(route('buyer.delivery.address.create'));
+        }
 
         $carts = Cart::whereIn('id', $request->cart_ids)->get()->groupBy('seller_id');
 
@@ -44,7 +48,6 @@ class CartController extends Controller
                 $transaction_id = random_int(100000, 999999);
             }
 
-            $transaction_id;
 
             //get_price
 
@@ -62,6 +65,8 @@ class CartController extends Controller
                 'seller_id' => $cart->first()->seller_id,
                 'transaction_id' => $transaction_id,
                 'total' => $total,
+                'status' => 'pending',
+                'payment_option_id' => $request->payment_method,
             ]);
 
 
@@ -76,10 +81,16 @@ class CartController extends Controller
                         'city' => $deliver_detail->city,
                         'province' => $deliver_detail->province,
                         'country' => $deliver_detail->country,
+                        'zip' => $deliver_detail->zip,
+                        'longitude' => $deliver_detail->longitude,
+                        'latitude' => $deliver_detail->latitude,
                         'buyer_id' => auth()->user()->buyer->id
                     ]
                 );
 
+                $order->order_statuses()->create( [
+                    'status_id' => 1
+                 ]);
                 foreach ($cart as $item){
                     OrderProduct::create([
                         'order_id' => $order->id,
@@ -89,14 +100,26 @@ class CartController extends Controller
                         'seller_product_id' => $item->seller_product_id,
                         'quantity' => $item->quantity,
                         'total' => $item->total,
+                        'status' => 'pending',
+
                     ]);
                 }
+
+
             }
 
         }
 
         Cart::whereIn('id', $request->cart_ids)->delete();
-        return view('cart.index');
+
+        if($request->payment_method == 1){
+            //paypal
+
+        }else{
+
+
+        }
+        return redirect(route('buyer.orders.index'));
     }
 
     public function checkRandomNumber($transaction_id)
@@ -108,4 +131,13 @@ class CartController extends Controller
         }
 
     }
+
+    public function delivery_address_create(){
+        return view('cart.delivery_address_create',compact([]));
+    }
+
+    public function delivery_address_store(){
+
+    }
+
 }

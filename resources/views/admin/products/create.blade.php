@@ -100,38 +100,6 @@
                                 </div>
 
                                 <div class="form-group long">
-                                    <label for="code">Code</label>
-                                    <input type="text"  class="form-control @error('code') is-invalid @enderror" 
-                                                        id="code" 
-                                                        name="code" 
-                                                        placeholder="" value="" >
-
-                                    </select>
-                                    @error('product')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-
-                                <div class="form-group long">
-                                    <label for="manufacturer">Manufacturer</label>
-                                    <input type="text"  class="form-control @error('manufacturer') is-invalid @enderror" 
-                                                        id="manufacturer" 
-                                                        name="manufacturer" 
-                                                        placeholder="" value="" >
-
-                                    </select>
-                                    @error('product')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
-
-                                <div class="form-group long">
                                     <label for="type">Type</label>
                                     <select  class="form-control" id="type" name="type" placeholder=""  >
                                         <option value="Wholesale">Wholesale</option>

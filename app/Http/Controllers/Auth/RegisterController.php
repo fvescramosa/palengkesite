@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Admin;
+use App\Mail\NewUserWelcomeMail;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Verification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -30,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+//    protected $redirectTo = '/landing';
 
     /**
      * Create a new controller instance.
@@ -53,7 +56,13 @@ class RegisterController extends Controller
     {
 
 
-        return Validator::make($data, [
+    }
+
+
+    protected function register(Request $data)
+    {
+
+        $data->validate( [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -64,24 +73,44 @@ class RegisterController extends Controller
                 'password.regex' => 'Password must contain at least one number, one uppercase and one lowercase letter, and a special character.'
             ]
         );
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
+        if($data['user_type_id'] == 1){
+            session('user_type','buyer');
+        }else{
+            session('user_type','seller');
+        }
 
-        return User::create([
+        $create =  User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_type_id' =>  $data['user_type_id'] 
+            'status' => 'inactive',
+            'user_type_id' => $data['user_type_id'] ?? 1
         ]);
+
+        if($create->save()){
+
+            $code = rand(1000, 9999);
+
+            $verification = Verification::create([
+                'user_id' => $create->id,
+                'status' => 'active',
+                'code' => $code,
+            ]);
+
+
+            $content = [
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'code' => $code,
+            ];
+
+            Mail::to($data['email'])->send(new NewUserWelcomeMail($content));
+
+            return redirect(route('user.registration.success'));
+        }
 
 
     }
@@ -104,12 +133,10 @@ class RegisterController extends Controller
 
 
         if(  $admin->save() ){
-            $message = ['success' => true, 'message' => 'Added Succesful!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Staff has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Failed to Add!'];
+            return redirect(route('admin.show.staff'))->with(['message' => 'Failed to Add!', 'response' => 'error']);
         }
-
-        return redirect(route('admin.show.staff'))->with($message);
 
     }
     protected function adminValidator(array $data)

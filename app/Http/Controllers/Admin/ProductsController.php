@@ -81,8 +81,6 @@ class ProductsController extends Controller
                 'min_price' => $request->min_price,
                 'max_price'	=> $request->max_price,
                 'srp'	=> $request->srp,
-                'code'	=> $request->code,
-                'manufacturer'	=> $request->manufacturer,
                 'type' => $request->type,
                 'status' => 'active',
             ]
@@ -90,12 +88,10 @@ class ProductsController extends Controller
 
 
         if(  $products->save() ){
-            $message = ['success' => true, 'message' => 'Added Succesful!'];
+            return redirect( route('admin.products.show'))->with(['message' => 'Product has been added', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Failed to Add!'];
+            return redirect( route('admin.products.show'))->with(['message' => 'Failed to add the product', 'response' => 'error']);
         }
-
-        return redirect( route('admin.products.show'))->with($message);
     }
 
     public function edit($id){
@@ -113,8 +109,6 @@ class ProductsController extends Controller
                 'min_price' => $request->min_price,
                 'max_price'	=> $request->max_price,
                 'srp'	=> $request->srp,
-                'code'	=> $request->code,
-                'manufacturer'	=> $request->manufacturer,
                 'type' => $request->type,
             ]);
 
@@ -217,10 +211,15 @@ class ProductsController extends Controller
 
         $product = Products::findOrFail($id);
 
-        $product->update($data);
 
-        $product->save();
+        if( $product->update($data)){
+            $response = ['message' => 'Product is Approved!', 'response' => 'success'];
+        }else{
+            $response = ['message' => '', 'response' => 'error'];
+        }
 
-        return redirect(route('admin.products.show'))->with(['message' => 'Product is Approved!']);
+
+        return redirect(route('admin.products.show'))->with($response);
+
     }
 }

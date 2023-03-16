@@ -40,7 +40,7 @@
         </div>
         
         <div class="dashboard-column" id="staff-col">
-        <span class="icon-dashboard">
+            <span class="icon-dashboard">
                 <i class="fa fa-users"></i>
             </span>
             <div class="column-content">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-right">
                     <span class="badge badge-danger">
-                         0
+                    {{ $staff }}
                     </span>
                 </div>
 
@@ -69,9 +69,9 @@
                         {{ $stallappointments }}
                     </span>
             </div>
+        </div>
 
     </div>
-</div>
 
         <div class="dashboard-column" id="approval-col">
             <span class="icon-dashboard">
@@ -84,6 +84,23 @@
                     <div class="col-right">
                         <span class="badge badge-danger">
                             {{ $stallapproval }}
+                        </span>
+                    </div>
+
+            </div>
+        </div>
+
+        <div class="dashboard-column" id="approval-col">
+            <span class="icon-dashboard">
+                <i class="fa fa-cart-plus"></i>
+            </span>
+            <div class="column-content">
+                    <div class="col-left">
+                        <h3>Product Approval</h3>
+                    </div>
+                    <div class="col-right">
+                        <span class="badge badge-danger">
+                           {{ $products }}
                         </span>
                     </div>
 

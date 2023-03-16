@@ -29,57 +29,57 @@
             </form>
 
                 {{ session()->get('market') }}
-                <table class="table table-group-divider">
-                    <thead>
-                    <tr>
-                        <th>Seller</th>
-                        <th>Stall No.</th>
-                        <th>Section</th>
-                        <th>Sqm</th>
-                        <th>Location</th>
-                        <th>Amount / sqm</th>
-                        <th>Rental Fee</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($stalls as $stall)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td> {{ $stall->seller->user->first_name }} {{ $stall->seller->user->last_name }}</td>
-                            <td> {{ $stall->stall->number }}</td>
-                            <td> {{ $stall->stall->section }}</td>
-                            <td> {{ $stall->stall->sqm }}</td>
-                            <td> {{ $stall->stall->market->market }}</td>
-                            <td> {{ $stall->stall->amount_sqm }}</td>
-                            <td> {{ $stall->stall->rental_fee }}</td>
-                            <td>
-                                @if($stall->contact_of_lease)
-                                    <a href="{{ asset( 'public/contracts/' . $stall->contact_of_lease )}}"  target="_blank" class="btn option-btn">
-                                        <span class="fa fa-eye"></span> View Contract
-                                    </a>
-                                @else
-                                    <button  class="btn option-btn" data-toggle="modal" data-target="#uploadContract{{$stall->id}}" >  <span class="fa fa-upload"></span> Upload Contract</button>
-                                @endif
-                            </td>
-                            <td>
-
-                                @if( $stall->status == 'pending' &&  $stall->type == 0 )
-                                    <form action="{{ route('admin.seller.stalls.approve') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="seller_id" value="{{  $stall->seller->user->id   }}">
-                                        <input type="hidden" name="seller_stall_id" value="{{  $stall->id   }}">
-                                        <button type="submit" target="_blank" class="btn btn-primary"> Approve</button>
-                                    </form>
-                                @else
-                                    <div>{{ $stall->status }}</div>
-                                @endif
-
-                            </td>
+                            <th>Seller</th>
+                            <th>Stall No.</th>
+                            <th>Section</th>
+                            <th>Sqm</th>
+                            <th>Location</th>
+                            <th>Amount per sqm</th>
+                            <th>Rental Fee</th>
+                            <th>Contract</th>
+                            <th>Status</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($stalls as $stall)
+                            <tr class="stall-approval-row">
+                                <td> {{ $stall->seller->user->first_name }} {{ $stall->seller->user->last_name }}</td>
+                                <td> {{ $stall->stall->number }}</td>
+                                <td> {{ $stall->stall->section }}</td>
+                                <td> {{ $stall->stall->sqm }}</td>
+                                <td> {{ $stall->stall->market->market }}</td>
+                                <td> {{ $stall->stall->amount_sqm }}</td>
+                                <td> {{ $stall->stall->rental_fee }}</td>
+                                <td>
+                                    @if($stall->contact_of_lease)
+                                        <a href="{{ asset( $stall->contact_of_lease )}}"  target="_blank"><span class="fa fa-eye"></span> View Contract</a>
+                                    @else
+                                        <button  class="btn option-btn" data-toggle="modal" data-target="#uploadContract{{$stall->id}}" >  <span class="fa fa-upload"></span> Upload Contract</button>
+                                    @endif
+                                </td>
+                                <td>
+
+                                    @if( $stall->status == 'pending' &&  $stall->type == 0 )
+                                        <form action="{{ route('admin.seller.stalls.approve') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="seller_id" value="{{  $stall->seller->user->id   }}">
+                                            <input type="hidden" name="seller_stall_id" value="{{  $stall->id   }}">
+                                            <button type="submit" target="_blank" class="btn btn-primary">Approve</button>
+                                        </form>
+                                    @else
+                                        <div>{{ $stall->status }}</div>
+                                    @endif
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 @if( isset($_GET) )
                 {{$stalls->appends($_GET)->links()}}
                 @else

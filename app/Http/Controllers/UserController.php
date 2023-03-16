@@ -24,15 +24,17 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function profile($id){
+    public function profile(){
 
-        $user = User::findOrFail($id);
+        $user = auth()->user();
+//        if(session('user_type') == 'buyer'){
+            if(!$user->buyer()->exists()){
+                return redirect(route('buyer.create'));
+            }else{
+                return view('buyer.profile', compact(['user']));
+            }
+//        }
 
-        if(!$user->buyer()->exists()){
-            return redirect(route('buyer.create'));
-        }else{
-            return view('buyer.profile', compact(['user']));
-        }
     }
 
 

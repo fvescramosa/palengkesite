@@ -45,6 +45,27 @@ class LoginController extends Controller
         return view('auth.admin.login', compact([]));
     }
 
+    public function userLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+//        dd(Auth::guard('web')->attempt(['email' => $request->email_address,'password' => $request->password,'status' => 'active']));
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'], $request->get('remember'))) {
+
+            if(Auth::user()->user_type_id == 2){
+                return redirect()->intended(route('seller.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
+            }else{
+
+                return redirect()->intended(route('buyer.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
+            }
+        }
+        return back()->withInput($request->only('email', 'remember'))->with(['response' => 'error', 'message' => 'Login Failed!']);
+    }
+
     public function adminLogin(Request $request)
     {
         $this->validate($request, [

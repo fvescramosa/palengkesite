@@ -4,11 +4,8 @@
 <div class="container">
         <div class="profile">
             <div class="profile-wrapper">
-                @if (session('message'))
-                    <div class="alert alert-{{ (session('success') ? 'success' : 'danger') }}">
-                        <strong>{{ session('message')  }}</strong>
-                    </div>
-                @endif
+
+               
                 <form action="" method="GET"  class="form-group list-header" id="form-header">
                     <h3>Users</h3>
 
@@ -34,29 +31,31 @@
                     </div>
                 </form>
                 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($staffs as $staff)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->email }}</td>
-                            <td>
-                                <a href="{{ route('admin.edit.staff', $staff->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
-                            
-                            </td>
-                            
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($staffs as $staff)
+                            <tr>
+                                <td>{{ $staff->name }}</td>
+                                <td>{{ $staff->email }}</td>
+                                <td>
+                                    <a href="{{ route('admin.edit.staff', $staff->id) }}">Edit</a> | 
+                                    <a href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
+                                
+                                </td>
+                                
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 @if( isset($_GET) )
                 {{$staffs->appends($_GET)->links()}}
                 @else

@@ -29,31 +29,33 @@
                     </div>
                 </form>
                 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($users as $user)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
-                                <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                <a href="{{ route('admin.buyers.delete', $user->id) }}"> Delete </a>
-                            
-                            </td>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{ $user->first_name }}</td>
+                                <td>{{ $user->last_name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
+                                    <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
+                                    <a href="{{ route('admin.buyers.delete', $user->id) }}"> Delete </a>
+                                
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
                 
                 @if( isset($_GET) )

@@ -17,11 +17,15 @@ class Buyer extends Model
         'contact',
         'stnumber',
         'stname',
+        'barangay',
         'city',
         'province',
         'country',
         'zip',
+        'longitude',
+        'latitude',
         'user_id',
+        'image',
     ];
 
     public function user(){
@@ -39,4 +43,17 @@ class Buyer extends Model
     public function order_products(){
         return $this->hasMany(OrderProduct::class );
     }
+
+    public function comments(){
+        return $this->hasMany(Comments::class );
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class );
+    }
+/*
+    public function delivery_addresses(){
+        return $this->hasMany(DeliveryAddress::class );
+    }*/
+
 }

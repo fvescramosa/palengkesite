@@ -38,8 +38,6 @@
                         <th>Max Price</th>
                         <th>SRP</th>
                         <th>Category</th>
-                        <th>Code</th>
-                        <th>Manufacturer</th>
                         <th>Type</th>
                         <th>Pricing</th>
                     </tr>
@@ -52,8 +50,6 @@
                             <td>{{ $product->max_price }}</td>
                             <td>{{ $product->srp }}</td>
                             <td>{{ $product->category->category }}</td>
-                            <td>{{ $product->code }}</td>
-                            <td>{{ $product->manufacturer }}</td>
                             <td>{{ $product->type }}</td>
                             <td>
                                 <a href="{{ route('admin.products.recover', $product->id) }}"> Retrieve </a> | 

@@ -33,27 +33,29 @@
 
                 </form>
                 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($staffs as $staff)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->email }}</td>
-                            <td>
-                                <a href="{{ route('admin.staffs.recover', $staff->id) }}"> Retrieve </a> | 
-                                <a href="{{ route('admin.staffs.permanentdelete', $staff->id) }}" title="Permanent Delete">Delete</a>
-                            </td>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($staffs as $staff)
+                            <tr>
+                                <td>{{ $staff->name }}</td>
+                                <td>{{ $staff->email }}</td>
+                                <td>
+                                    <a href="{{ route('admin.staffs.recover', $staff->id) }}"> Retrieve </a> | 
+                                    <a href="{{ route('admin.staffs.permanentdelete', $staff->id) }}" title="Permanent Delete">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 @if( isset($_GET) )
                 {{$staffs->appends($_GET)->links()}}
                 @else
