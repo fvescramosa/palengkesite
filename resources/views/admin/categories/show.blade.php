@@ -47,7 +47,7 @@
                             @foreach($categories as $category)
                             <tr>
                                 <td>{{ $category->category }}</td>
-                                <td><img src="{{ asset('public/Image/'.$category->image)  }}" alt=""></td>
+                                <td><img src="{{ asset($category->image)  }}" alt=""></td>
                                 <td>
                                     <a href="{{ route('admin.categories.edit', $category->id) }}">Edit</a> |
                                     <a href="{{ route('admin.categories.delete', $category->id) }}">Delete</a>

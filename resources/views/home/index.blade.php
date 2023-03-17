@@ -9,7 +9,7 @@
                 <span>Buy Now, Deliver Later</span>
                 <h3>Fresh and Quality Products</h3>
                 <p>To serve your Palengke needs right in your front door</p>
-                <a href="products.php" class="home-btn white-btn">Products</a>
+                <a href="{{ route('shop.products.index') }}" class="home-btn white-btn">Products</a>
             </div>
 
         </section>
@@ -20,7 +20,7 @@
 
         <div class="box-container" id="box-container">
             @foreach($categories as $category)
-                     <a href="{{ route('shop.product.category', ['category' => $category->category]) }}" class="box-item" style="background-image: url({{ asset($category->image)  }})">
+                     <a href="{{ route('shop.product.category', ['slug' => $category->slug]) }}" class="box-item" style="background-image: url({{ asset($category->image)  }})">
                         <div class="overlay"></div>
                          <h3>{{ $category->category }}</h3>
                     </a>
@@ -54,7 +54,7 @@
                             <input type="hidden" name="price" id="price" value="{{ $featuredProduct->price }}">
                             <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $featuredProduct->id }}">
                             <input type="number" name="quantity" id="quantity" value="" max="{{ $featuredProduct->stock }}">
-                            <button class="btn-green" type="submit" {{ ($featuredProduct->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
+                            <button class="add-to-cart btn btn-green" type="submit" {{ ($featuredProduct->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
                         </form>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             <input type="hidden" name="price" id="price" value="{{ $popularProduct->seller_product->price }}">
                             <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $popularProduct->seller_product->id }}">
                             <input type="number" name="quantity" id="quantity" value="" max="{{ $popularProduct->seller_product->stock }}">
-                            <button class="btn-green" type="submit" {{ ($popularProduct->seller_product->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
+                            <button class="add-to-cart btn btn-green" type="submit" {{ ($popularProduct->seller_product->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
                         </form>
                     </div>
                 </div>
@@ -116,13 +116,17 @@
                 <div class="product-item" >
 
                     <a class="product-image" href="{{ route('shop.store.find', ['id' => $store->id]) }}">
-                        <img src="{{ asset($store->image) }}" alt="">
+                        @if( $store->seller_stall_images()->exists())
+                            <img src="{{ asset( $store->seller_stall_images->first()->image ) }}" alt="">
+                        @else
+                            <img src="{{ asset( $store->stall->image ) }}" alt="">
+                        @endif
                     </a>
                     <div class="product-details">
                         <h4>{{ $store->name }}</h4>
 
 
-                        <a class="btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
+                        <a class="view-store-btn btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
                             <span class="fa fa-store"></span>
                             View
                         </a>

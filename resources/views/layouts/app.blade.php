@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $pageTitle ?? 'Palengkesite' }}</title>
 
     <!-- Scripts -->
     {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
@@ -107,22 +107,39 @@
                 </script>
             @endif
 
+            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+                @if(isset($innerPageBanner))
 
-            @if(isset($innerPageBanner))
-                    {{--@php dd(asset('public/inner-page-banner.jpg'))@endphp--}}
-                <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
-                    <div class="overlay"></div>
-                </section>
 
-            @else
+                        @if($innerPageBanner != '')
+                            <section class="banner" style="background-image: url(<?= asset($innerPageBanner) ?>)">
+                                <div class="overlay"></div>
+                                <h1>{{ $pageTitle ?? '' }}</h1>
+                            </section>
+                         @else
+                                <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                                    <div class="overlay"></div>
+                                    <h1>{{ $pageTitle ?? '' }}</h1>
+                                </section>
+                       @endif
+                        {{-- @else
 
-                    @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
 
-                        <section class="banner" style="background-image: url({{ $innerPage ?? asset('public/inner-page-banner.jpg') }})">
-                            <div class="overlay"></div>
-                        </section>
-                    @endif
+                                @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+
+                                    <section class="banner" style="background-image: url({{ $innerPage ?? asset('public/inner-page-banner.jpg') }})">
+                                        <div class="overlay"></div>
+                                    </section>
+                                @endif--}}
+                @else
+                    <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                        <div class="overlay"></div>
+                    </section>
+
+                @endif
             @endif
+
+
             @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
                 <div class="longbar green-bar">
                     <div class="">

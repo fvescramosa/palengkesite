@@ -170,6 +170,7 @@
    flex-flow: row wrap;
    height: 600px;
    width: 100%;
+   padding: 60px;
 }
 
 .product-img-area{

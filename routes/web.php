@@ -78,6 +78,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');
+    Route::POST('/orders/{order_id}/cancel', [\App\Http\Controllers\Buyer\OrdersController::class, 'cancel'])->name('orders.cancel');
 
 
     //buyer to seller only
@@ -259,7 +260,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
 
 });
 
-Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
+Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');
 
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
@@ -279,13 +280,14 @@ Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.no
 
 Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/categories/', [\App\Http\Controllers\ProductsController::class, 'categories'])->name('categories');
-    Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
+    Route::get('/category/{slug}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
     Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
     Route::get('/products/', [ \App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
     Route::get('/product/{id}', [ \App\Http\Controllers\ProductsController::class, 'find'])->name('products.find');
     Route::post('/product/post/comment/{id}', [ \App\Http\Controllers\ProductsController::class, 'postComment'])->name('products.post.comment');
     Route::get('/stores', [ \App\Http\Controllers\ProductsController::class, 'sellers'])->name('stores');
     Route::get('/store/{id}', [ \App\Http\Controllers\ProductsController::class, 'findStore'])->name('store.find');
+
 });
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){

@@ -109,22 +109,72 @@ class ProductsController extends Controller
 
     }
 
-    public function showByCategory($category){
+    public function showByCategory($slug, Request $request){
 
          /* $products =  Products::with(['category', 'seller_products'])
                ->whereHas('seller_products')->whereHas('category', function($q) use ($category){
                    $q->where('category', $category);
                })->get()->groupBy('seller_products.seller_id');*/
-        $categories = Categories::where('category', $category)->first();
+        $categories = Categories::where('slug', $slug)->first();
 
-        $products = SellerProduct::with(['product'])->whereHas('product.category', function($q) use ($category){
-              $q->where('category', $category);
-          })->get();
+        $products = SellerProduct::with(['product'])
+                    ->whereHas('product.category', function($q) use ($categories){
+                        $q->where('category', $categories->category);
+                    })
+                    ->whereHas('seller', function ($q){
+                        $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+                    });
+
+        if(session()->has('shop_at_market')){
+            $products = $products->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+        if($request->product_name){
+            $product_name = $request->product_name;
+            $products = $products->whereHas('product', function ($query) use ($product_name) {
+                $query->where('product_name', 'LIKE', '%'.$product_name.'%');
+            });
+        }
+
+        if($request->ratings){
+            $filter_ratings = $request->ratings;
 
 
-        $innerPageBanner = asset('public/image/'.$categories->image);
+            $products = $products->where( function($q) use ($filter_ratings) {
+                foreach ($filter_ratings as $key => $value){
 
-          return view('shop.category', compact(['products' ,'innerPageBanner']));
+                    $q->orWhereRaw('CONVERT(average_ratings, UNSIGNED )', '=', (int)$value );
+                }
+
+            });
+//            dd($products->toSql());
+
+
+
+        }
+
+
+        if(!is_null($request->min_price) && !is_null($request->max_price)){
+            $products= $products->whereBetween('price', [(int)$request->min_price, (int)$request->max_price]);
+        }
+
+        else if(!is_null($request->min_price)){
+            $products = $products->where('price', '>=', (int)$request->min_price);
+        }
+
+        else if(!is_null($request->max_price)){
+            $products = $products->where('price', '<=', (int)$request->max_price);
+        }
+
+        $products    = $products->get();
+
+        $innerPageBanner = $categories->image;
+        $pageTitle = $categories->category;
+
+
+          return view('shop.category', compact(['products' ,'innerPageBanner' ,'pageTitle']));
 
     }
 
@@ -175,8 +225,16 @@ class ProductsController extends Controller
                    'total' =>  $request->quantity *  $request->price,
                ]);
 
+
+
+
                $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
            }
+           $seller_product = SellerProduct::find($request->seller_product_id);
+
+           $seller_product->update(['stock', $seller_product->stock - $request->quantity]);
+
+
        }
 
 

@@ -73,7 +73,8 @@ class CategoriesController extends Controller
         ]);
 
         $data = [
-            'category' => $request->category
+            'category' => $request->category,
+            'slug' => Str::slug($request->category)
         ];
 
 
@@ -109,6 +110,7 @@ class CategoriesController extends Controller
 
         $data = [
             'category' => $request->category,
+            'slug' => Str::slug($request->category)
         ];
         if($request->file('image') != null){
             $file= $request->file('image');

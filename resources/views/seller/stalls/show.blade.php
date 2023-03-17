@@ -16,50 +16,74 @@
 
 
                     <div class="basic-info-body">
-
-
                         <div class="stall">
                             <div class="stall-info">
                                 <div class="stall-gallery-container">
-                                    <div id="slide-for">
-                                        <div>
-                                            <div class="stall-main-img">
-                                                <img src="{{ asset('public/Image/' . $seller_stall->stall->image) }}" alt="">
-                                            </div>
+
+                                    @if($seller_stall->seller_stall_images()->exists())
+
+                                        <div id="slide-for">
+                                            @foreach($seller_stall->seller_stall_images as $image)
+                                                    <div>
+                                                        <div class="stall-img">
+                                                            <img src="{{ asset( $image->image ) }}" alt="">
+                                                        </div>
+                                                    </div>
+                                            @endforeach
                                         </div>
-                                        @for($i=1; $i<=5; $i++)
-                                            @php $imagekey = 'image_'.$i; @endphp
-                                            @if($seller_stall->stall[$imagekey])
+                                        <div id="slide-nav" class="">
+                                           @foreach($seller_stall->seller_stall_images as $image)
                                                 <div>
                                                     <div class="stall-img">
-                                                        <img src="{{ asset('public/Image') .'/'. $seller_stall->stall[$imagekey] }}" alt="">
+                                                        <img src="{{ asset($image->image) }}" alt="">
                                                     </div>
                                                 </div>
-                                            @endif
-                                        @endfor
-                                    </div>
-                                    <div id="slide-nav" class="">
-                                        <div>
-                                            <div class="stall-img">
-                                                <img src="{{ asset('public/Image/' . $seller_stall->stall->image) }}" alt="">
-                                            </div>
+                                          @endforeach
                                         </div>
-                                        @for($i=1; $i<=5; $i++)
-                                            @php $imagekey = 'image_'.$i; @endphp
-                                            @if($seller_stall->stall[$imagekey])
-                                                <div>
-                                                    <div class="stall-img">
-                                                        <img src="{{ asset('public/Image') .'/'. $seller_stall->stall[$imagekey] }}" alt="">
-                                                    </div>
+                                    @else
+                                        <div id="slide-for">
+                                            <div>
+                                                <div class="stall-main-img">
+                                                    <img src="{{ asset($seller_stall->stall->image) }}" alt="">
                                                 </div>
-                                            @endif
-                                        @endfor
-                                    </div>
+                                            </div>
+                                            @for($i=1; $i<=5; $i++)
+                                                @php $imagekey = 'image_'.$i; @endphp
+                                                @if($seller_stall->stall[$imagekey])
+                                                    <div>
+                                                        <div class="stall-img">
+                                                            <img src="{{ asset($seller_stall->stall[$imagekey]) }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <div id="slide-nav" class="">
+                                            <div>
+                                                <div class="stall-img">
+                                                    <img src="{{ asset($seller_stall->stall->image) }}" alt="">
+                                                </div>
+                                            </div>
+                                            @for($i=1; $i<=5; $i++)
+                                                @php $imagekey = 'image_'.$i; @endphp
+                                                @if($seller_stall->stall[$imagekey])
+                                                    <div>
+                                                        <div class="stall-img">
+                                                            <img src="{{ asset($seller_stall->stall[$imagekey]) }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                    @endif
+
                                 </div>
                                 <div class="stall-info-container">
                                     <div class="info-body-flex">
                                         <div class="info-item short">
                                             <h3>Stall No: {{ $seller_stall->stall->number }}</h3>
+
+                                            <a href="{{ route('seller.stalls.edit', ['id' => $seller_stall->id]) }}" class=""><span class="fa fa-edit"></span> Edit</a>
                                         </div>
 
                                         <div class="info-item short">

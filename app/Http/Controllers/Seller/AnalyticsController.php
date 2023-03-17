@@ -10,6 +10,7 @@ use App\OrderProduct;
 use App\Products;
 use App\Seller;
 use App\SellerProduct;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,37 +25,26 @@ class AnalyticsController extends Controller
     }
     public function productSales(){
 
-       /* $sales = SellerProduct::select(DB::raw("COUNT(*) as count"), DB::raw("product_id as products"))
-//            ->where('seller_id', \auth()->user()->seller->id)
-                ->join('seller')
-            ->whereHas('order_products')
-            ->groupBy(DB::raw("product_id"))
-            ->pluck('count', 'products');*/
 
-
-
-        $sales = OrderProduct::select(DB::raw("COUNT(*) as count"), 'product_id')
+        $sales = OrderProduct::select(DB::raw("SUM(quantity) as count"), 'product_id')
             ->whereHas('product')
             ->whereHas('order', function ($q){
 //                $q->where('status', '<>', 'pending');
             })
+            ->whereHas('product', function($q){
+
+                if(isset($_GET['category']) && $_GET['category'] != ''){
+                    $q->whereHas('category', function ($query){
+                        $query->where('category', $_GET['category']);
+                    });
+                }
+            })
             ->where('seller_id', auth()->user()->seller->id)
-            ->whereYear('created_at', date('Y'))
-            ->whereMonth('created_at',  ( isset($_GET['productOption']) ? date('m' ,  strtotime( $_GET['productOption'])) : date('m') ))
+            ->whereYear('created_at', ( isset($_GET['YEAR']) && $_GET['YEAR'] ? date('Y' ,  strtotime( $_GET['YEAR'])) : date('Y') ) )
+            ->whereMonth('created_at',  ( isset($_GET['productOption']) && $_GET['productOption'] ? date('m' ,  strtotime( $_GET['productOption'])) : date('m') ))
             ->groupBy([DB::raw("MONTHNAME(created_at)"), 'product_id'])
             ->pluck('count', 'product_id');
-       /* $sales = SellerProduct::with('order_products')
-                ->whereHas('order_products')
-                ->select(DB::raw('COUNT(*) as count'), DB::raw("products.product_name as products"), DB::raw("MONTHNAME(created_at) as month_name"))
-                ->join('products', 'seller_products.product_id', '=', 'products.id');
 
-
-       /* if(isset($_GET['productOption'])){
-            $sales .= $sales->where('month_name', $_GET['productOption'] ?? date('F'));
-        }*/
-
-        /*$sales .= $sales->groupBy(DB::raw("seller_products.product_id"))
-            ->pluck('count', 'products');*/
 
         $labels = [];
         foreach ($sales->keys() as $key){
@@ -67,6 +57,8 @@ class AnalyticsController extends Controller
         }
 
 
+//        dd([$labels, $data ]);
+
 
         return view('seller.analytics.order-by-products', compact('labels', 'data'));
     }
@@ -75,9 +67,10 @@ class AnalyticsController extends Controller
 
         $sales = OrderProduct::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
             ->whereYear('created_at', date('Y'))
-            ->whereHas('order', function ($q){
+            /*->whereHas('order', function ($q){
                 $q->where('status', '=', 'pending');
-            })->where('product_id', $id)
+            })*/
+            ->where('product_id', $id)
             ->groupBy(DB::raw("MONTHNAME(created_at)"))
             ->pluck('count', 'month_name');
 

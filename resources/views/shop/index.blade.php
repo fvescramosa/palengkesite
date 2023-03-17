@@ -68,7 +68,7 @@
                                 <img src="{{ asset($product->image) }}" alt="">
                             </a>
                             <div class="product-details">
-                                <h4>{{ $product->product->product_name }}</h4>
+                                <h4>{{ ($product->custom_title != '' ? $product->custom_title : $product->product->product_name) }}</h4>
                                 <p>Php {{ number_format($product->price, 2) }}</p>
                                 <form action="{{ route('shop.product.addToCart') }}" method="POST">
                                     @csrf
@@ -81,7 +81,7 @@
                                     <hr>
                                     <label for="">Quantity</label>
                                     <input type="number" name="quantity" min="1" id="quantity" value="" max="{{ $product->stock }}">
-                                    <button class="btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
+                                    <button class="add-to-cart btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
                                         <span class="fa fa-shopping-cart"></span>
                                         Add to Cart</button>
                                 </form>
