@@ -311,7 +311,7 @@ h4.product-price {
    }
 
    .products-grid {
-      width: 100%;
+      width: 65%
    }
 }
 @media screen and (max-width: 991px){

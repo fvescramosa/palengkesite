@@ -81,7 +81,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
 
     //buyer to seller only
-    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('chats');
     Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');

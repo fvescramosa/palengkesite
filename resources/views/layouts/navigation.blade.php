@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md navbar-light  shadow-sm ">
+<nav class="navbar navbar-expand-md navbar-light ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <div class="bg-area" style="">
@@ -16,7 +16,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav">
 
-                    
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shop.categories') }}">Categories</a>

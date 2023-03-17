@@ -40,14 +40,15 @@ class ProductsController extends Controller
 
             if ($product->max_price != null) {
                 $validate = $request->validate([
-                    'price' => ['numeric', 'lt:' . $product->max_price]
+                    'price' => ['numeric', 'lte:' . $product->max_price]
                 ]);
 
 
             }
 
 
-        } else {
+        }
+        else {
 
             $product = Products::create([
                 'category_id' => $request->category,

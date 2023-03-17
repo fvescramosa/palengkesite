@@ -61,20 +61,6 @@
                         </li>
 
 
-                            <li>
-                                <a href="{{ route('seller.chats') }}">
-                                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                                    <span class="item">Messages</span>
-                                </a>
-                            </li>
-
-                        <li>
-                            <a href="{{ route('seller.analytics.product.sales') }}">
-                                <span class="icon"><i class="fas fa-chart-line"></i></span>
-                                <span class="item">Analytics</span>
-                            </a>
-                        </li>
-
 
                         @endif
                         @if(auth()->user()->seller()->exists())
@@ -91,8 +77,9 @@
                                         <span class="item">Orders</span>
                                     </a>
                                 </li>
+
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('seller.chats') }}">
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
                                     </a>

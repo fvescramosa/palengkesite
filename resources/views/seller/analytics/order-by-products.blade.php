@@ -4,7 +4,9 @@
     <div class="profile" style="padding: 60px;">
         <div class="profile-wrapper" >
 
-            <form action="" method="GET" id="sale-filter">
+
+            <form action="" class="form-group col-5" method="GET" id="sale-filter">
+                <label for="">Filter by Month</label>
                 <select  class="form-control" id="productOption" name="productOption" placeholder="Order By"  >
                    @for($i=1; $i<=12; $i++)
 
@@ -13,7 +15,20 @@
                             $monthName = $dateObj->format('F'); // March
 
                        @endphp
-                        <option value="{{ $monthName }}" {{ (isset($_GET['productOption']) && $_GET['productOption'] == $monthName  ? 'selected' : '')  }}>{{ $monthName }}</option>
+
+                        @php
+
+                            $selected = '';
+                            if(isset($_GET['productOption'])){
+                                if($_GET['productOption'] == $monthName){
+                                $selected = 'selected';
+                                }
+                            } else if($monthName == date('F')){
+                                $selected = 'selected';
+                            }
+
+                        @endphp
+                        <option value="{{ $monthName }}" {{ $selected }}>{{ $monthName }}</option>
                    @endfor
                 </select>
             </form>

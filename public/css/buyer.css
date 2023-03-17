@@ -55,8 +55,8 @@ color: #000 !important;
    border-radius: 15px;
    padding: 25px;
    width: 85%;
-   margin: 60px auto;
-   height: 400px;
+   margin: 0px auto;
+   height: auto;
 }
 
 .dashboard-box .profile{

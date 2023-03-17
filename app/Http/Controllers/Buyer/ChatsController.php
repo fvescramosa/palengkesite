@@ -22,13 +22,17 @@ class ChatsController extends Controller
     {
 
 
-            $messages = Auth::user()->buyer->messages->groupBy('seller_id');
+        $titles =  Message::where('buyer_id', auth()->user()->buyer->id)
+            ->with(['seller', 'seller.seller_stalls'])
+            ->select(DB::raw('COUNT(*) as count'), DB::raw('seller_id'))
+
+            ->groupBy('seller_id')->get();
 
 
 //        $messages = Message::where('buyer_id', auth()->user()->buyer->id)->groupBy('seller_id')->distinct()->get();
 
 
-        return view('buyer.chat', compact(['messages']));
+        return view('buyer.chat', compact(['titles']));
     }
 
 
