@@ -75,6 +75,8 @@ class BuyerController extends Controller
                     ]
                 );
 
+
+
                 /*if($request->file('image')){
                     $file= $request->file('image');
                     $filename= date('YmdHi').$file->getClientOriginalName();

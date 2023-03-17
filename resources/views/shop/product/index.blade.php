@@ -138,6 +138,8 @@
 
             <div class="comment-form-area">
                 @if(session('user_type') == 'buyer')
+
+                    
                     <form action="{{ route('shop.products.post.comment', ['id' => $sellerProduct->id]) }}" id="post-comment" method="POST">
 
 

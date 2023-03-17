@@ -92,8 +92,14 @@
                                     </li>
                                     <li>
                                         <a href="{{ route('buyer.delivery.address.index') }}">
-                                            <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                            <span class="icon"><i class="fas fa-location-arrow"></i></span>
                                             <span class="item">Delivery Address</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('buyer.chats') }}">
+                                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                                            <span class="item">Messages</span>
                                         </a>
                                     </li>
                                     <li>

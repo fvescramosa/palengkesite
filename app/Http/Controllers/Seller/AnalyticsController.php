@@ -19,10 +19,9 @@ class AnalyticsController extends Controller
     //
     public function __construct()
     {
+        $this->middleware(['auth', 'complete.seller.info']);
 
     }
-
-
     public function productSales(){
 
        /* $sales = SellerProduct::select(DB::raw("COUNT(*) as count"), DB::raw("product_id as products"))
@@ -34,28 +33,39 @@ class AnalyticsController extends Controller
 
 
 
-        $sales = SellerProduct::with('order_products')
+        $sales = OrderProduct::select(DB::raw("COUNT(*) as count"), 'product_id')
+            ->whereHas('product')
+            ->whereHas('order', function ($q){
+//                $q->where('status', '<>', 'pending');
+            })
+            ->where('seller_id', auth()->user()->seller->id)
+            ->whereYear('created_at', date('Y'))
+            ->whereMonth('created_at',  ( isset($_GET['productOption']) ? date('m' ,  strtotime( $_GET['productOption'])) : date('m') ))
+            ->groupBy([DB::raw("MONTHNAME(created_at)"), 'product_id'])
+            ->pluck('count', 'product_id');
+       /* $sales = SellerProduct::with('order_products')
                 ->whereHas('order_products')
                 ->select(DB::raw('COUNT(*) as count'), DB::raw("products.product_name as products"), DB::raw("MONTHNAME(created_at) as month_name"))
                 ->join('products', 'seller_products.product_id', '=', 'products.id');
 
-/*
-        if(isset($_GET['productOption'])){
-            $sales .= $sales->where('month_name', $_GET['productOption']);
+
+       /* if(isset($_GET['productOption'])){
+            $sales .= $sales->where('month_name', $_GET['productOption'] ?? date('F'));
         }*/
 
-        $sales .= $sales->groupBy(DB::raw("seller_products.product_id"))
-            ->pluck('count', 'products');
+        /*$sales .= $sales->groupBy(DB::raw("seller_products.product_id"))
+            ->pluck('count', 'products');*/
 
         $labels = [];
         foreach ($sales->keys() as $key){
-            $labels[] = $key;
+            $labels[] = Products::find($key)->product_name;
         }
 
         $data = [];
         foreach ($sales->values() as $value){
             $data[] = $value;
         }
+
 
 
         return view('seller.analytics.order-by-products', compact('labels', 'data'));

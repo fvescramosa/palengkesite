@@ -31,6 +31,7 @@ class SellerController extends Controller
         $this->middleware('auth');
         $this->middleware('complete.seller.info')->except(['create', 'store', 'haveAnyStalls']);
         $this->middleware('sellerHasStall')->only(['haveAnyStalls']);
+//        $this->middleware(['auth', 'auth.seller'])->except(['create', 'store', 'haveAnyStalls']);
     }
 
     //
