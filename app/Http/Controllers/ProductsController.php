@@ -288,7 +288,10 @@ class ProductsController extends Controller
         $sellerStall = SellerStall::findOrFail($id);
         $categories = Categories::all();
 
-        $products = SellerProduct::with(['product'])->where('seller_id', $sellerStall->seller->id);
+        $products = SellerProduct::with(['PRODUCT'])->where('seller_id', $sellerStall->seller->id)
+        ->whereHas('seller', function($q){
+            $q->whereHas('seller_stalls');
+        });
 
         if($request->product_name){
             $product_name = $request->product_name;
