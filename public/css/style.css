@@ -1729,6 +1729,14 @@ display: flex;
    background-color: var(--orange);
 }
 
+.add-to-cart, .view-store-btn{
+   width: 90%;
+   margin: 20px auto;
+   padding: 4px;
+   color: #fff;
+   font-size: 15px;
+}
+
 button{
    display: inline-block;
    /*font-weight: 400;*/
@@ -1949,7 +1957,18 @@ a.pal-button{
 }
 
 
-
+.banner h1{
+   color: #fff;
+   position: relative;
+   z-index: 99;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-shadow: 2px 2px #000;
+   text-transform: uppercase;
+   font-size: 40px;
+}
 
 
 

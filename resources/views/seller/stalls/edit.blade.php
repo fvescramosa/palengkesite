@@ -28,13 +28,24 @@
                             <div class="info-item">
                                 <label for="">Stall</label>
                                 <select name="number" id="number" class="form-control @error('number') is-invalid @enderror" readonly="">
-                                    <option value="{{ $seller_stall->stall->id }}"> Stall No. {{ $seller_stall->stall->number }}</option>
+                                    <option value="{{ $seller_stall->stall->id }}" selected> Stall No. {{ $seller_stall->stall->number }}</option>
                                 </select>
 
                                 @error('number')
                                 <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
+                                @enderror
+                            </div>
+
+                            <div class="info-item">
+                                <label for="">Stall Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $seller_stall->name }}">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -51,7 +62,9 @@
 
                             <div class="info-item short">
                                 <label for="">Start Date</label>
-                                <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date">
+
+
+                                <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date" value="{{ $seller_stall->start_date->format('Y-m-d') }}">
 
                                 @error('start_date')
                                 <span class="invalid-feedback" role="alert">
@@ -61,7 +74,7 @@
                             </div>
                             <div class="info-item short">
                                 <label for="">End Date</label>
-                                <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" id="end_date">
+                                <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" id="end_date" value="{{ $seller_stall->end_date->format('Y-m-d') }}">
 
                                 @error('end_date')
                                 <span class="invalid-feedback" role="alert">
@@ -93,13 +106,19 @@
                             </div>
 
 
-                            <label for="">Image</label>
-                            <input type="file" name="image" id="" value="{{ $seller_stall->stall->image }}" class="form-control" >
+                            <div class="info-item" id="image-container">
+                                <label for="">Image</label>
+                                <input type="file" name="image[]" id="stall-mage" class="form-control form-control-file" >
 
-                            @for($i = 1; $i<=5; $i++)
-                                <label for="">Image {{ $i }}</label>
-                                <input type="file" name="image_{{$seller_stall->stall->image}}" id="" class="form-control" >
-                            @endfor
+
+                            </div>
+                           {{-- <div class="info-item" id="">
+                                <div class="form-group short">
+                                    <button type="button" id="addImage" class="btn option-btn"><span class="fa fa-plus-circle"> </span> Add Image</button>
+                                </div>
+                            </div>--}}
+
+
 
                             <button type="submit"  class="btn btn-primary">Submit</button>
                         </div>
@@ -117,7 +136,7 @@
 
             },
             initStallDetails: function( trigger ){
-                trigger.load(function () {
+                trigger.change(function () {
                     var options = '';
 
                     $.ajax({
@@ -136,7 +155,32 @@
                     });
                 })
             },
+
+            initStallDetailsOnLoad: function(  ){
+
+                    var options = '';
+
+                    $.ajax({
+                        type:'POST',
+                        dataType: 'JSON',
+                        url:'{{ route('seller.display.details') }}',
+                        data: {
+                            id: $('#number').val(),
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success:function(data) {
+
+                            $('#rental_fee').val(data.rental_fee);
+
+                        }
+                    });
+
+            },
+
+
             initDuration: function( trigger ){
+
+
                 trigger.change(function () {
                     let date_1 = new Date($('#end_date').val());
                     let date_2 = new Date($('#start_date').val());
@@ -157,6 +201,27 @@
 
                 });
             },
+            initDurationOnLoad: function(  ){
+
+
+                    let date_1 = new Date($('#end_date').val());
+                    let date_2 = new Date($('#start_date').val());
+
+                    // let difference = date_1.getTime() - date_2.getTime();
+                    // let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+                    // $('#duration').val(TotalDays);
+
+
+                    var months;
+                    var result;
+                    months = (date_1.getFullYear() - date_2.getFullYear()) * 12;
+                    months -= date_2.getMonth();
+                    months += date_1.getMonth();
+
+                    result = months <= 0  ? 0 : months;
+                    $('#duration').val(result);
+
+            },
             initPreviewSlick: function () {
                 $('#slide-for').slick({
                     slidesToShow: 1,
@@ -174,9 +239,43 @@
                     centerMode: true,
                     focusOnSelect: true
                 });
-            }
+            },
+            initDisableWeekends: function(){
+                const picker = document.getElementById('appointment_date');
+                picker.addEventListener('input', function(e){
+                    var day = new Date(this.value).getUTCDay();
+                    if([6,0].includes(day)){
+                        e.preventDefault();
+                        this.value = '';
+                        alert('Weekends not allowed');
+                    }
+                });
+            },
+
+            addImage: function (trigger) {
+                trigger.click(function () {
+
+                    var self = $('#stall-image');
+                    var clonedItem = self.clone();
+
+                    /*clonedItem.find('button').attr('data-action', 'removeVideoURL');
+                    clonedItem.find('button').find('.plus-icon').removeClass('plus-icon');
+                    clonedItem.find('button').find('div').addClass('fa fa-trash');*/
+                    clonedItem.appendTo('#image-container');
+                    // $('button[data-action="removeVideo"]').prop('disabled', false);
+
+
+
+                })
+            },
         };
 
+        $(document).ready(function(){
+            products.initDurationOnLoad();
+            products.initStallDetailsOnLoad();
+            products.addImage($('#addImage'));
+
+        });
         $(window).on('load', function(){
             products.init();
             products.initPreviewSlick();

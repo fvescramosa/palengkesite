@@ -44,6 +44,38 @@
                                     @enderror
 
                                 </div>
+
+                                <div class="info-item form-group short">
+                                    <label for="Product">Custom Name</label>
+                                    <input type="text"
+                                           class="form-control @error('custom_title') is-invalid @enderror"
+                                           id="custom_title" name="custom_title"
+                                           placeholder=""
+                                           value="{{ $seller_product->custom_title }}" >
+
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="info-item form-group short">
+                                    <label for="Product">Description</label>
+                                    <textarea type="text"
+                                           class="form-control @error('description') is-invalid @enderror"
+                                           id="description" name="description" rows="10"
+                                           placeholder=""
+                                              value="" >{{ $seller_product->description }}</textarea>
+
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+
+                                </div>
                                 <div class="info-item form-group xshort">
                                     <label for="Product">Price</label>
                                     <input type="text"

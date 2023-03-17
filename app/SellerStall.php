@@ -21,6 +21,8 @@ class SellerStall extends Model
         'name'
     ];
 
+    protected $dates = ['start_date', 'end_date'];
+
 
     public function seller(){
         return $this->belongsTo( Seller::class);
@@ -32,5 +34,9 @@ class SellerStall extends Model
 
     public function stall_appointment(){
         return $this->hasOne( StallAppointment::class, 'seller_stall_id');
+    }
+
+    public function seller_stall_images(){
+        return $this->hasMany(SellerStallImage::class);
     }
 }

@@ -40,7 +40,7 @@ class ProductsController extends Controller
 
             if ($product->max_price != null) {
                 $validate = $request->validate([
-                    'price' => ['numeric', 'lte:' . $product->max_price]
+//                    'price' => ['numeric', 'lte:' . $product->max_price]
                 ]);
 
 
@@ -50,9 +50,12 @@ class ProductsController extends Controller
         }
         else {
 
+
             $product = Products::create([
                 'category_id' => $request->category,
                 'product_name' => $request->new_product_name,
+                'custom_title' => $request->custom_title,
+                'description' => $request->description,
                 'min_price' => '',
                 'max_price' => '',
                 'srp' => '',
@@ -73,6 +76,7 @@ class ProductsController extends Controller
             'image' => $request->image,
             'featured' => $request->featured,
             'stock' => $request->stock,
+
         ]);
 
 
@@ -230,6 +234,8 @@ class ProductsController extends Controller
                 'type' => $request->type,
                 'featured' => $request->featured,
                 'stock' => $request->stock,
+                'custom_title' => $request->custom_title,
+                'description' => $request->description,
             ]);
 
 

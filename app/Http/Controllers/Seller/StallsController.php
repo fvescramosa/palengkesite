@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\Mail\NewStallAppointmentEmail;
 use App\SellerProduct;
 use App\SellerStall;
+use App\SellerStallImage;
 use App\Stall;
 use App\StallAppointment;
 use Illuminate\Http\Request;
@@ -267,41 +268,72 @@ class StallsController extends Controller
     public function update(Request $request, $id)
     {
 
+
+        $seller_stall = SellerStall::where(['seller_id' => auth()->user()->seller->id])->find($id);
         $data = [
-            'stall_id' => $request->stall ,
+            'stall_id' => $request->number,
             'name' => $request->name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'duration' => $request->duration,
             'occupancy_fee' => $request->occupancy_fee,
-            'seller_id' => auth()->user()->seller->id,
-            'status' => 'pending',
             'type' => 0,
         ];
 
 
+
         $validate = $request->validate([
-            "stall" => "required",
-            "contract_of_lease" => "required|mimes:pdf|max:10000"
+//            "stall" => "required",
+//            "contract_of_lease" => "required|mimes:pdf|max:10000"
         ]);
 
-        if($validate) {
 
-            if ($request->file('contract_of_lease')) {
-                $file = $request->file('contract_of_lease');
-                $directory = 'public/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
-                $filename = date('YmdHi') . $file->getClientOriginalName();
-                $file->move($directory, $filename);
-                $data['contact_of_lease'] = $directory.$filename;
 
-                $create = SellerStall::create($data);
-                $create->save();
+        if ($request->file('contract_of_lease')) {
+            $file = $request->file('contract_of_lease');
+            $directory = 'public/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move($directory, $filename);
+            $data['contact_of_lease'] = $directory.$filename;
 
-            }
+        }
+
+        if($seller_stall->update($data)){
+            $response = ['response' => 'success', 'message' => 'Stall Details Updated!'];
+        }else{
+            $response = ['response' => 'success', 'message' => 'No Changes applied'];
         }
 
 
-        return view('seller/stalls/show', compact(['seller_products']))->with(['message' => 'Product has been updated!']);
+
+        if ($request->file('image')) {
+
+
+                foreach ($request->image as $key => $value){
+
+                    $file = $request->file('image.'.$key);
+
+
+                    $directory = 'public/seller/'.auth()->user()->seller->id.'/stall/'.$id.'/';
+                    $filename = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move($directory, $filename);
+                    $sellerDate =[
+                        'image' => $directory.$filename,
+                        'seller_stall_id' => $id
+                    ];
+
+                    //create Image
+                    $createImage = SellerStallImage::create($sellerDate);
+
+                    $response['message'] = $response['message'] .' Image uploaded';
+                }
+
+
+
+        }
+
+
+        return view('seller/stalls/show', compact(['seller_stall']))->with($response);
 
     }
 
@@ -312,5 +344,7 @@ class StallsController extends Controller
 
         return response()->json($stall);
     }
+
+ 
 
 }

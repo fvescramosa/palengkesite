@@ -10,6 +10,9 @@ class SellerProduct extends Model
 
     protected $fillable = [
         'seller_id',
+        'custom_title',
+        'description',
+        'seller_id',
         'product_id',
         'price',
         'type',

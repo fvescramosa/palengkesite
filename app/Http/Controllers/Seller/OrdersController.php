@@ -44,7 +44,16 @@ class OrdersController extends Controller
                 'message' => 'Order status updated!'
             ];
 
-            $status->order->where(['status' => 'In Progress']);
+            if( in_array($request->status, [1,2]) ){
+                $status->order->update(['status' => 'Shipping']);
+
+            }else if (in_array($request->status, [3, 4, 5])){
+                $status->order->update(['status' => 'In Progress']);
+            }
+            else if (in_array($request->status, [6])){
+                $status->order->update(['status' => 'Cancelled']);
+            }
+
         }else{
             $response = [
                 'response' => 'error',

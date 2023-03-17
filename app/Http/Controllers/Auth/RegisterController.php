@@ -91,7 +91,7 @@ class RegisterController extends Controller
 
         if($create->save()){
 
-            $code = rand(1000, 9999);
+            $code = uniqid();
 
             $verification = Verification::create([
                 'user_id' => $create->id,

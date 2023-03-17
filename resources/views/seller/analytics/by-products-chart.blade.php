@@ -17,7 +17,7 @@
                     datasets: [{
                         fill: false,
                         label: '{{ ucwords( $product->product_name ) }}',
-                        // backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 99, 111)'],
+                        backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 99, 111)'],
                         borderColor: 'rgb(255, 99, 132)',
                         data: sales,
                     }]
