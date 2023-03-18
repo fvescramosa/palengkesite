@@ -238,10 +238,12 @@ class ProductsController extends Controller
         ];
 
 
+
         if ($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $directory = 'public/images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+
             $file->move(public_path($directory), $filename);
             $data['image']= $directory.$filename;
         }

@@ -16,7 +16,7 @@
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('seller.products.update') }}" method="POST" class="form-"  enctype="multipart/form-data">
+                    <form action="{{ route('seller.products.update') }}" method="POST" enctype="multipart/form-data" class="form-group">
                         @csrf
                         <div class="info-body-flex">
 
