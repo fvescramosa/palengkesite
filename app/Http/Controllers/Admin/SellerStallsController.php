@@ -130,7 +130,7 @@ class SellerStallsController extends Controller
 
             if($request->file('contract_of_lease')){
                 $file= $request->file('contract_of_lease');
-                $directory = 'public/contracts/sellers/'.$request->seller_stall_id.'/';
+                $directory = 'data/contracts/sellers/'.$request->seller_stall_id.'/';
                 $filename= date('YmdHi').$file->getClientOriginalName();
                 $file-> move($directory, $filename);
                 $data['contact_of_lease']= $directory.$filename;

@@ -182,7 +182,7 @@ class BuyerController extends Controller
             );
             $file= $request->file('profile_image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/profile/'.auth()->user()->id.'/';
+            $directory = 'images/profile/'.auth()->user()->id.'/';
             $file->move(public_path($directory), $filename);
             $userData['profile_image']= $directory.$filename;
 

@@ -26,7 +26,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shop.stores') }}">Stores</a>
                         </li>
-                        
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -107,6 +107,7 @@
 
                             </li>
                         @endguest
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart "></i></a>
                         </li>
