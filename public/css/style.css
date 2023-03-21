@@ -81,7 +81,57 @@ section{
    width: auto;
 }
 
+.home-products .products-grid{
+   width: 100%;
+}
+.home-products .products-grid .product-item{
+   flex: 1 1 calc(20% - 30px);
+   max-width: calc(20% - 30px);
+}
 
+@media screen and (max-width: 1024px){
+   .home-products .products-grid .product-item,
+   .products-grid .product-item
+   {
+      flex: 1 1 calc(33.333% - 30px);
+      max-width: calc(33.333% - 30px);
+      margin: 20px auto;
+   }
+}
+
+@media screen and (max-width: 991px){
+   .home-products .products-grid .product-item,
+   .products-grid .product-item
+   {
+      flex: 1 1 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+      margin: 20px auto;
+   }
+}
+
+@media screen and (max-width: 767px){
+   .home-products .products-grid .product-item,
+   .products-grid .product-item
+   {
+      flex: 1 1 calc(70% - 30px);
+      max-width: calc(70% - 30px);
+      margin: 20px auto;
+   }
+}
+
+@media screen and (max-width: 480px){
+   .home-products .products-grid .product-item,
+   .products-grid .product-item
+   {
+      flex: 1 1 calc(90% - 30px);
+      max-width: calc(90% - 30px);
+      margin: 20px auto;
+   }
+}
+
+.contact-us .container{
+   max-width: 911px !important;
+}
 .products .box-container{
    display: grid;
    grid-template-columns: repeat(auto-fit, 35rem);
@@ -2206,4 +2256,189 @@ a.pal-button{
       grid-template-columns: 1fr;
    }
 
+}
+
+.about-us{
+   background-color: #fff;
+}
+.about-us-flex{
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: space-between;
+   padding: 60px;
+   align-items: center;
+}
+
+.about-us-left{
+   flex: 1 1 50%;
+   max-width: 50%;
+   padding: 25px;
+}
+
+.about-us-left img{
+   width: 100%;
+   height: 520px;
+   object-fit: cover;
+}
+
+
+.about-us-right{
+   flex: 1 1 50%;
+   max-width: 50%;
+   padding: 0 25px;
+}
+
+.about-us-right h3{
+   font-size: 35px;
+   margin-bottom: 20px;
+}
+
+.about-us-right p{
+   margin-bottom: 20px;
+}
+
+
+.about-developers{
+   background-color: #e3e3e3;
+}
+
+.about-developers h3{
+   margin: 0 auto;
+   font-size: 35px;
+   text-transform: uppercase;
+   text-align: center;
+}
+
+.developers-grid{
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   padding: 60px;
+   align-items: center;
+}
+
+.developer{
+   flex: 1 1 calc(20% - 30px);
+   max-width: calc(20% - 30px); ;
+   border: 2px solid #000;
+   background: #fff;
+   position: relative;
+   margin: 0 15px;
+   box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)
+}
+
+.developer .img-section{
+   position: relative;
+   height: 250px;
+   border-bottom: 2px solid #000;
+}
+.developer .img-section img{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.developer .img-section ul {
+   position: absolute;
+   left: 4%;
+   list-style: none;
+   /*z-index: 999;*/
+   top: 5%;
+   opacity: 0;
+   transition: all ease-in .2s;
+}
+.developer:hover .img-section ul {
+   opacity: 1;
+}
+
+.developer .img-section li {
+   border: 1px solid #000;
+   padding: 0 8px;
+   background: #fff;
+   margin-bottom: 10px;
+   box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)
+}
+
+
+.developer .img-section li  a {
+   color: #000;
+   font-size: 25px;
+   text-align: center;
+}
+
+.developer .img-section li:hover {
+
+   background: var(--green);
+
+}
+.developer .img-section li:hover a {
+   color: #fff;
+}
+.developer .name-section{
+   height: 50px;
+   background: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.developer .name-section p {
+   font-weight: 800;
+   text-align: center;
+}
+
+@media screen and (max-width: 991px){
+
+   section.about-us{
+      padding: 0 !important;
+   }
+   .about-us-left,
+   .about-us-right {
+      flex: 1 1 100%;
+      max-width: 100%;
+   }
+
+   .developer {
+      flex: 1 1 calc(33.333% - 30px);
+      max-width: calc(33.333% - 30px);
+      margin: 0 auto;
+   }
+}
+
+@media screen and (max-width: 767px){
+   .about-us-flex{
+      padding: 30px;
+   }
+   .about-us-left,
+   .about-us-right {
+      flex: 1 1 100%;
+      max-width: 100%;
+   }
+
+   .developer {
+      flex: 1 1 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+      margin: 0 auto;
+   }
+}
+
+@media screen and (max-width: 480px){
+   .about-us-flex{
+      padding: 20px;
+   }
+   .developer {
+      flex: 1 1 calc(90% - 30px);
+      max-width: calc(90% - 30px);
+      margin: 0 auto;
+   }
+}
+
+@media screen and (max-width: 320px){
+   .about-us-flex{
+      padding: 20px;
+   }
+   .developer {
+      flex: 1 1 calc(95% - 30px);
+      max-width: calc(95% - 30px);
+      margin: 0 auto;
+   }
 }
