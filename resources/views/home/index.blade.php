@@ -14,6 +14,20 @@
 
         </section>
     </div>
+    <div class="longbar green-bar">
+        <div class="">
+            <form action="{{ route('select.market') }}" method="POST" id="select-market">
+                @csrf
+                <label for="">Mabini Public Market - </label>
+                <select name="market_option"  class="" id="market-option">
+                    @foreach(\App\Market::all() as $market)
+                        <option value="{{ $market->id }}" {{ session()->get('shop_at_market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
+                    @endforeach
+                </select>
+
+            </form>
+        </div>
+    </div>
     <section class="home-category ">
 
         <h1 class="title">shop by <span>category</span></h1>
@@ -28,6 +42,7 @@
         </div>
 
     </section>
+
     <section class="home-products products container">
 
         <h1 class="title">Featured <span>Products</span></h1>
