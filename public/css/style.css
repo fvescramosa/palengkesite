@@ -891,6 +891,17 @@ section{
    z-index: 999;
 }
 
+.navbar .navbar-nav{
+    align-items: center;
+}
+
+.navbar-nav .profileImage{
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50% ;
+}
 
 .navbar.fixed{
 

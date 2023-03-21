@@ -45,7 +45,8 @@
                                 @if(session('user_type'))
                                     @if(session('user_type') == 'buyer')
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Profile
+                                                <img class="profileImage" src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
+
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
@@ -65,7 +66,9 @@
                                             </div>
                                     @else
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('seller.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                           {{-- {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
+                                            <img class="profileImage" src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
+
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item" href="{{ route('user.logout') }}"
@@ -84,11 +87,13 @@
                                 @else
                                     @if(auth()->user()->user_type_id == 1)
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('buyer.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                            {{--{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
+                                            <img class="profileImage"  src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
                                         </a>
                                     @else
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('seller.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                            <img class="profileImage"  src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
+                                            {{--{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
                                         </a>
                                     @endif
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
