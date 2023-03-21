@@ -31,6 +31,8 @@ use \App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'show'])->name('contact-us');
+Route::post('/contact-us/submit', [\App\Http\Controllers\ContactUsController::class, 'create'])->name('contact-us.submit');
 Route::get('/home', [HomeController::class, 'index'])->name('index');
 Route::post('/change-market', [HomeController::class, 'selectPalengke'])->name('select.market');
 Route::get('/landing', [HomeController::class, 'landingAfterRegistration']);
@@ -44,7 +46,7 @@ Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->n
 Route::get('/registration/done', [HomeController::class, 'registrationDone'])->name('user.registration.success');
 Route::get('/verification/{email}/resend', [HomeController::class, 'verification'])->name('user.verification.resend');
 
-
+Route::get('/about-us/', [\App\Http\Controllers\AboutUsController::class, 'index'])->name('about-us');
 
 
 
@@ -258,7 +260,14 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/analytics/seller/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
     Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
 
+    Route::get('/contact-us/', [\App\Http\Controllers\Admin\ContactUsController::class, 'index'])->name('contact-us');
+    Route::get('/contact-us/{id}', [\App\Http\Controllers\Admin\ContactUsController::class, 'find'])->name('contact-us.find');
 
+    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us');
+    Route::get('/about-us/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'create'])->name('developers.create');
+    Route::post('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('developers.store');
+    Route::get('/about-us/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('developers.edit');
+    Route::post('/about-us/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('developers.update');
 });
 
 Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');
