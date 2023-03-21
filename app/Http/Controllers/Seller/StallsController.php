@@ -62,7 +62,7 @@ class StallsController extends Controller
 
         if($request->file('application_letter')){
             $file= $request->file('application_letter');
-            $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename= auth()->user()->seller->id.'_application_letter.'.$request->file('application_letter')->extension();
 
             $file->move($directory, $filename);
@@ -71,7 +71,7 @@ class StallsController extends Controller
 
         if($request->file('residency')){
             $file= $request->file('residency');
-            $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename= auth()->user()->seller->id.'_residency.'.$request->file('residency')->extension();
             $file->move($directory, $filename);
             $appointment['residency'] = $directory.$filename;
@@ -79,7 +79,7 @@ class StallsController extends Controller
 
         if($request->file('image')){
             $file= $request->file('image');
-            $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename= auth()->user()->seller->id.'_image.'.$request->file('image')->extension();
             $file->move($directory, $filename);
             $appointment['image'] = $directory.$filename;
@@ -87,7 +87,7 @@ class StallsController extends Controller
 
         if($request->file('id1')){
             $file= $request->file('id1');
-            $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename= auth()->user()->seller->id.'_id1e.'.$request->file('id1')->extension();
             $file->move($directory, $filename);
             $appointment['id1'] = $directory.$filename;
@@ -95,7 +95,7 @@ class StallsController extends Controller
 
         if($request->file('id2')){
             $file= $request->file('id2');
-            $directory = 'public/files/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename= auth()->user()->seller->id.'_id2.'.$request->file('id2')->extension();
             $file->move($directory, $filename);
             $appointment['id2'] = $directory.$filename;
@@ -142,7 +142,7 @@ class StallsController extends Controller
 
             if($request->file('contract_of_lease')){
                 $file= $request->file('contract_of_lease');
-                $directory = 'public/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
+                $directory = 'data/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
                 $filename= date('YmdHi').$file->getClientOriginalName();
                 $file->move($directory, $filename);
                 $data['contact_of_lease']= $directory.$filename;
@@ -208,7 +208,7 @@ class StallsController extends Controller
 
             if ($request->file('contract_of_lease')) {
                 $file = $request->file('contract_of_lease');
-                $directory = 'public/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
+                $directory = 'data/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
                 $filename = date('YmdHi') . $file->getClientOriginalName();
                 $file->move($directory, $filename);
                 $data['contact_of_lease'] = $directory.$filename;
@@ -291,7 +291,7 @@ class StallsController extends Controller
 
         if ($request->file('contract_of_lease')) {
             $file = $request->file('contract_of_lease');
-            $directory = 'public/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
+            $directory = 'data/contracts/sellers/'.auth()->user()->seller->id.'/stall/';
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move($directory, $filename);
             $data['contact_of_lease'] = $directory.$filename;
@@ -314,7 +314,7 @@ class StallsController extends Controller
                     $file = $request->file('image.'.$key);
 
 
-                    $directory = 'public/seller/'.auth()->user()->seller->id.'/stall/'.$id.'/';
+                    $directory = 'seller/'.auth()->user()->seller->id.'/stall/'.$id.'/';
                     $filename = date('YmdHi') . $file->getClientOriginalName();
                     $file->move($directory, $filename);
                     $sellerDate =[

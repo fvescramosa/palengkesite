@@ -82,7 +82,7 @@ class CategoriesController extends Controller
 
         if($request->file('image')){
             $file= $request->file('image');
-            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
+            $directory = 'images/admin/categories/'.Str::slug($request->category).'/';
             $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
             $file->move($directory, $filename);
             $data['image']= $directory.$filename;
@@ -114,7 +114,7 @@ class CategoriesController extends Controller
         ];
         if($request->file('image') != null){
             $file= $request->file('image');
-            $directory = 'public/images/admin/categories/'.Str::slug($request->category).'/';
+            $directory = 'images/admin/categories/'.Str::slug($request->category).'/';
             $filename= date('YmdHi').Str::slug($request->category).'.'.$request->file('image')->extension();
             $file-> move($directory, $filename);
             $data['image']= $directory.$filename;

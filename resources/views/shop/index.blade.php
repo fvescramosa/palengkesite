@@ -65,7 +65,7 @@
                     <div class="product-item" >
 
                             <a class="product-image" href="{{ route('shop.products.find', ['id' => $product->id]) }}">
-                                <img src="{{ asset($product->image) }}" alt="">
+                                <img src="{!!   asset($product->image)  !!}" alt="">
                             </a>
                             <div class="product-details">
                                 <h4>{{ ($product->custom_title != '' ? $product->custom_title : $product->product->product_name) }}</h4>

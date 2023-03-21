@@ -63,6 +63,8 @@
 
 
             <canvas id="myChart" height="100px"></canvas>
+
+            <button id="downloadCSV">Download </button>
             <script>
                 var labels =   @json($labels) ;
                 var sales =  @json($data) ;
@@ -74,11 +76,6 @@
                 function getRandomColor() {
                     var letters = '0123456789ABCDEF'.split('');
                     var color = '#';
-
-
-
-
-
 
                     for (var i = 1; i <= count; i++ ) {
                         let maxVal = 0xFFFFFF; // 16777215
@@ -135,6 +132,8 @@
                     document.getElementById('myChart'),
                     config
                 );
+
+
 
                 const filter = {
                     onInit: function () {

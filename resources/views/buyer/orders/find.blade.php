@@ -11,6 +11,7 @@
                 <div class="order-updates">
                     @if($orders->order_statuses()->exists())
                         @foreach($orders->order_statuses  as $order_status)
+
                             <div class="status-update">
                                 <div class="status-update-fl">
                                     <p>{{ $order_status->status->status }}</p>
@@ -59,7 +60,7 @@
                     </div>
                 </div>
 
-                @if($orders->status !== 'cancelled')
+              {{--  @if($orders->status !== 'cancelled')--}}
                 <div class="info-item long">
                     <div id="map" style="width: 100%; height: 480px"></div>
 
@@ -129,7 +130,7 @@
 
 
                 </div>
-                @endif
+               {{-- @endif--}}
             </div>
             <div class="orders-details-wrapper-right">
                 <table class="table table-borderless order-items">
@@ -175,7 +176,7 @@
                 <hr>
 
 
-                @if($orders->order_statuses->last()->status->status == 'Placed')
+                {{--@if($orders->order_statuses->last()->status->status == 'Placed')
 
                     @if(!isset($_GET['cancel']))
 
@@ -208,7 +209,7 @@
                             </div>
                         </form>
                     @endif
-                @endif
+                @endif--}}
             </div>
        </div>
    </div>
