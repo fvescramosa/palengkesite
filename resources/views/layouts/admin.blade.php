@@ -157,14 +157,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
-                            <span class="icon"><i class="fa fa-user-shield"></i></span>
-                            <span class="item">Stall Approval</span>
 
-                            <span class="notif badge badge-danger" id="stall-approval-notif">{{ App\SellerStall::where('status', 'pending')->get()->count()  }}</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-user-shield"></i></span>
@@ -241,6 +234,13 @@
                         <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-cog"></i></span>
                             <span class="item">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.about-us') }}" class="{{ ( request()->routeIs('admin.about-us') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-user-shield"></i></span>
+                            <span class="item">About Us</span>
+
                         </a>
                     </li>
                     <li>

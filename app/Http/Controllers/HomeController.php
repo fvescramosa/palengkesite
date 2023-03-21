@@ -30,9 +30,9 @@ class HomeController extends Controller
 
     public function index(){
 
-        $featuredProducts = SellerProduct::where('featured', 1)->limit(6)->get();
-        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->with(['seller', 'product', 'seller_product'])
-            ->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(5)->get();
+        $featuredProducts = SellerProduct::where('featured', 1);
+        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->with(['seller', 'product', 'seller_product']);
+
         $categories = Categories::all();
 
         $stores = SellerStall::with(['stall'])->where('status', 'active')
@@ -41,8 +41,27 @@ class HomeController extends Controller
             })
             ->whereHas( 'stall', function($q){
                 $q->where('status', 'occupied');
-            })->limit(5)->get();
+            });
 
+
+        if(session()->has('shop_at_market')){
+
+            $featuredProducts = $featuredProducts->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+
+            $popularProducts = $popularProducts->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+
+            $stores = $stores->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+        $featuredProducts = $featuredProducts->limit(5)->get();
+        $popularProducts = $popularProducts->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(5)->get();
+        $stores = $stores->limit(5)->get();
 
 //        dd($popularProducts);
         return view('home/index', compact(['featuredProducts', 'categories'  , 'popularProducts' ,'stores']));
