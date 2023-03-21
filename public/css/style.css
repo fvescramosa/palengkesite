@@ -840,7 +840,7 @@ section{
    width: 100%;
    z-index: 999;
 }
-/*
+
 
 .navbar.fixed{
 
@@ -848,7 +848,7 @@ section{
    position: fixed;
    background-color: #fff;
 }
-
+/*
 */
 .logo-area img{
    width: 150px;
