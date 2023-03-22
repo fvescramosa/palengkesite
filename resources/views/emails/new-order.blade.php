@@ -1,25 +1,8 @@
 @component('mail::message')
+# New ORDER!
 
-@if( $order->order_statuses->last()->status->id == '1' )
-
-    #Order {{ $order->order_statuses->last()->status->status }}
-
-@elseif( $order->order_statuses->last()->status->id == '2' )
-    #Preparing to Ship
-
-@elseif( $order->order_statuses->last()->status->id == '3' )
-    #Out for Delivery
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Delivered
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Order Cancelled
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Order Completed
-@endif
-
+<br>
+<p>Hi, <strong>{{ $order->seller->seller_stalls->name }}</strong>! New Order has been received.</p>
 
 <table class="table table-bordered" style="width: 100%; text-align: left">
     <tr>
@@ -61,8 +44,8 @@
     <tr>
 </table>
 
-@component('mail::button', ['url' => route('buyer.orders.find', ['order_id' => $order->transaction_id])])
-    View Order
+@component('mail::button', ['url' => route('seller.orders.find', ['id' => $order->id])])
+   View Order
 @endcomponent
 
 <br>

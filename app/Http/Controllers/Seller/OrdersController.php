@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Mail\NewOrderStatus;
 use App\Order;
 use App\OrderStatus;
 use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -22,6 +24,7 @@ class OrdersController extends Controller
 
     public function find($id){
         $orders = Order::find($id);
+
 
         $statuses = Status::all();
         return view('seller.orders.find', compact(['orders', 'statuses']));
@@ -60,6 +63,10 @@ class OrdersController extends Controller
                 'message' => 'Opps! Something went wrong!'
             ];
         }
+
+        $order = Order::find($request->order_id);
+
+        Mail::to($order->buyer->user->email)->send(new NewOrderStatus($order));
 
         return redirect(route('seller.orders.find', ['id' => $request->order_id]))->with($response);
     }

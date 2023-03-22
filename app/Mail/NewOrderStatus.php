@@ -17,10 +17,12 @@ class NewOrderStatus extends Mailable
      * @return void
      */
     public $order;
+//    public $order_status;
     public function __construct($order)
     {
 
         $this->order = $order;
+//        $this->order_status = $order_status;
         //
     }
 
@@ -31,9 +33,9 @@ class NewOrderStatus extends Mailable
      */
 
 
-    public function build($order)
+    public function build()
     {
-        return $this->markdown('emails.welcome-email')
+        return $this->markdown('emails.order-status')
             ->subject('Order Status')
             ->with('order', $this->order);
     }
