@@ -109,68 +109,134 @@ class ProductsController extends Controller
 
     }
 
-    public function showByCategory($category){
+    public function showByCategory($slug, Request $request){
 
          /* $products =  Products::with(['category', 'seller_products'])
                ->whereHas('seller_products')->whereHas('category', function($q) use ($category){
                    $q->where('category', $category);
                })->get()->groupBy('seller_products.seller_id');*/
-        $categories = Categories::where('category', $category)->first();
+        $categories = Categories::where('slug', $slug)->first();
 
-        $products = SellerProduct::with(['product'])->whereHas('product.category', function($q) use ($category){
-              $q->where('category', $category);
-          })->get();
+        $products = SellerProduct::with(['product'])
+                    ->whereHas('product.category', function($q) use ($categories){
+                        $q->where('category', $categories->category);
+                    })
+                    ->whereHas('seller', function ($q){
+                        $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+                    });
+
+        if(session()->has('shop_at_market')){
+            $products = $products->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+        if($request->product_name){
+            $product_name = $request->product_name;
+            $products = $products->whereHas('product', function ($query) use ($product_name) {
+                $query->where('product_name', 'LIKE', '%'.$product_name.'%');
+            });
+        }
+
+        if($request->ratings){
+            $filter_ratings = $request->ratings;
 
 
-        $innerPageBanner = asset('public/image/'.$categories->image);
+            $products = $products->where( function($q) use ($filter_ratings) {
+                foreach ($filter_ratings as $key => $value){
 
-          return view('shop.category', compact(['products' ,'innerPageBanner']));
+                    $q->orWhereRaw('CONVERT(average_ratings, UNSIGNED )', '=', (int)$value );
+                }
+
+            });
+//            dd($products->toSql());
+
+
+
+        }
+
+
+        if(!is_null($request->min_price) && !is_null($request->max_price)){
+            $products= $products->whereBetween('price', [(int)$request->min_price, (int)$request->max_price]);
+        }
+
+        else if(!is_null($request->min_price)){
+            $products = $products->where('price', '>=', (int)$request->min_price);
+        }
+
+        else if(!is_null($request->max_price)){
+            $products = $products->where('price', '<=', (int)$request->max_price);
+        }
+
+        $products    = $products->get();
+
+        $innerPageBanner = $categories->image;
+        $pageTitle = $categories->category;
+
+
+          return view('shop.category', compact(['products' ,'innerPageBanner' ,'pageTitle']));
 
     }
 
     public function addToCart(Request $request){
 
+
+
         $validate = $request->validate([
             'quantity' => ['required','numeric']
         ]);
 
+        if( !auth()->user()->buyer()->exists() ){
+            $response = ['message' => 'Please complete your Profile', 'response' => 'error'];
+        }
+       else{
+           $response = [];
+           //find exsiting item from your cart
+           $findCart = Cart::where([
+               'product_id' => $request->product_id,
+               'buyer_id' => auth()->user()->buyer->id,
+               'seller_id' => $request->seller_id,
+               'seller_product_id' => $request->seller_product_id,
+           ])->get()->last();
 
 
 
-            $response = [];
-            //find exsiting item from your cart
-            $findCart = Cart::where([
-                'product_id' => $request->product_id,
-                'buyer_id' => auth()->user()->buyer->id,
-                'seller_id' => $request->seller_id,
-                'seller_product_id' => $request->seller_product_id,
-            ])->get()->last();
 
-            if($findCart){
+           if($findCart){
 
-                //update the quantity
-                $findCart->update([
-                    'quantity' => $findCart->quantity + $request->quantity,
-                    'total' =>  ($findCart->quantity + $request->quantity) *  $request->price,
-                ]);
+               //update the quantity
+               $findCart->update([
+                   'quantity' => $findCart->quantity + $request->quantity,
+                   'total' =>  ($findCart->quantity + $request->quantity) *  $request->price,
+               ]);
 
-                $response = ['message' => 'An item from your cart was updated', 'response' => 'success'];
-            }
-            else{
+               $response = ['message' => 'An item from your cart was updated', 'response' => 'success'];
+           }
+           else{
 
-                //Insert new product to cart
-                $cart = Cart::create([
-                    'product_id' => $request->product_id,
-                    'seller_id' => $request->seller_id,
-                    'buyer_id' => auth()->user()->buyer->id,
-                    'price' => $request->price,
-                    'seller_product_id' =>  $request->seller_product_id,
-                    'quantity' =>  $request->quantity,
-                    'total' =>  $request->quantity *  $request->price,
-                ]);
+               //Insert new product to cart
+               $cart = Cart::create([
+                   'product_id' => $request->product_id,
+                   'seller_id' => $request->seller_id,
+                   'buyer_id' => auth()->user()->buyer->id,
+                   'price' => $request->price,
+                   'seller_product_id' =>  $request->seller_product_id,
+                   'quantity' =>  $request->quantity,
+                   'total' =>  $request->quantity *  $request->price,
+               ]);
 
-                $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
-            }
+
+
+
+               $response = ['message' => 'Product was added to your cart', 'response' => 'success'];
+           }
+           $seller_product = SellerProduct::find($request->seller_product_id);
+
+           $seller_product->update(['stock', $seller_product->stock - $request->quantity]);
+
+
+       }
+
 
 
 
@@ -280,7 +346,10 @@ class ProductsController extends Controller
         $sellerStall = SellerStall::findOrFail($id);
         $categories = Categories::all();
 
-        $products = SellerProduct::with(['product'])->where('seller_id', $sellerStall->seller->id);
+        $products = SellerProduct::with(['PRODUCT'])->where('seller_id', $sellerStall->seller->id)
+        ->whereHas('seller', function($q){
+            $q->whereHas('seller_stalls');
+        });
 
         if($request->product_name){
             $product_name = $request->product_name;

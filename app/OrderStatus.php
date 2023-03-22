@@ -10,6 +10,7 @@ class OrderStatus extends Model
     protected $fillable = [
         'order_id',
         'status_id',
+        'reason',
     ];
     public function order(){
         return $this->belongsTo(Order::class);

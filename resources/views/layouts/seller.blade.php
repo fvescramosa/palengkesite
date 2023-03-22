@@ -39,7 +39,7 @@
         <div class="seller">
             <!-- Page Wrapper -->
             <div class="wrapper">
-                <div class="sidebar seller">
+                <div class="sidebar seller ">
                     <div class="sidebar-header">
                         <h3><i class="fa fa-desktop"></i> Seller Dashboard</h3>
                         <hr>
@@ -51,6 +51,8 @@
                                 <span class="item">Profile</span>
                             </a>
                         </li>
+
+                        @if(auth()->user()->seller()->exists())
                         <li>
                             <a href="{{ route('seller.stalls.show') }}">
                                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
@@ -58,6 +60,9 @@
                             </a>
                         </li>
 
+
+
+                        @endif
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
@@ -72,8 +77,9 @@
                                         <span class="item">Orders</span>
                                     </a>
                                 </li>
+
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('seller.chats') }}">
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
                                     </a>
@@ -123,6 +129,13 @@
                                 <span class="item">Switch as Buyer</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('index') }}">
+                                <span class="icon"><i class="fas fa-home"></i></span>
+                                <span class="item">Back to Site</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <span class="icon"><i class="fas fa-power-off"></i></span>
@@ -134,7 +147,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="section">
+                <div class="section ">
                     <div class="top_navbar">
                         <div class="hamburger">
                             <a href="#">
@@ -180,12 +193,15 @@
                         $(document).ready(function () {
                             app.initCollapse();
                             $('.hamburger').click(function(){
-                                if($('.sidebar').hasClass('close')){
-                                    $('.sidebar').removeClass('close');
-                                    $('.wrapper .section').removeClass('open');
+                                if($('.sidebar').hasClass('opened')){
+
+                                    $('.sidebar').removeClass('opened');
+                                    $('.wrapper .section').addClass('opened');
+
                                 }else{
-                                    $('.sidebar').addClass('close');
-                                    $('.wrapper .section').addClass('open');
+
+                                    $('.sidebar').addClass('opened');
+                                    $('.wrapper .section').addClass('opened');
                                 }
                             });
                         });

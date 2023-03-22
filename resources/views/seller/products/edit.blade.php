@@ -16,7 +16,7 @@
                     @if(isset($message))
                         <strong>{{ $message  }}</strong>
                     @endif
-                    <form action="{{ route('seller.products.update') }}" method="POST" class="form-">
+                    <form action="{{ route('seller.products.update') }}" method="POST" enctype="multipart/form-data" class="form-group">
                         @csrf
                         <div class="info-body-flex">
 
@@ -41,6 +41,38 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="info-item form-group short">
+                                    <label for="Product">Custom Name</label>
+                                    <input type="text"
+                                           class="form-control @error('custom_title') is-invalid @enderror"
+                                           id="custom_title" name="custom_title"
+                                           placeholder=""
+                                           value="{{ $seller_product->custom_title }}" >
+
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="info-item form-group short">
+                                    <label for="Product">Description</label>
+                                    <textarea type="text"
+                                           class="form-control @error('description') is-invalid @enderror"
+                                           id="description" name="description" rows="10"
+                                           placeholder=""
+                                              value="" >{{ $seller_product->description }}</textarea>
+
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                     @enderror
 
                                 </div>
@@ -92,7 +124,7 @@
 
                                 <div class="info-item form-check-inline short">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="{{ $seller_product->featured }}" {{ ($seller_product->featured) ? 'selected' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1" {{ ($seller_product->featured) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="remember">
                                             {{ __('Featured') }}
                                         </label>

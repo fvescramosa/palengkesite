@@ -37,11 +37,16 @@
             <div class="products-grid">
 
                 @foreach($stores as $store)
-
+                    {{ $store }}
                     <div class="product-item" >
 
+
                             <a class="product-image" href="{{ route('shop.products.find', ['id' => '']) }}">
-                                <img src="{{ asset($store->image) }}" alt="">
+                                @if( $store->seller_stall_images()->exists())
+                                    <img src="{{ asset( $store->seller_stall_images->first()->image ) }}" alt="">
+                                @else
+                                    <img src="{{ asset( $store->stall->image ) }}" alt="">
+                                @endif
                             </a>
                             <div class="product-details">
                                 <h4>{{ $store->name }}</h4>

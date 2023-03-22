@@ -12,8 +12,6 @@
                     Product Information
                 </div>
                 <div class="basic-info-body">
-
-
                     <form action="{{ route('seller.products.store') }}" method="POST" class="form-"  enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
@@ -67,6 +65,30 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="form-group long" id="description-container">
+                                    <label for="Product">Custom Product Name</label>
+                                    <input type="text"  class="form-control @error('custom_title') is-invalid @enderror" id="custom-title" name="custom_title" placeholder="Product" value="" >
+
+                                    @error('custom_title')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="form-group long" id="description-container">
+                                    <label for="Product">Description</label>
+                                    <textarea  class="form-control @error('description') is-invalid @enderror" id="description" rows="10" name="description" placeholder="Product" ></textarea>
+
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                     @enderror
 
                                 </div>

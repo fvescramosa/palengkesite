@@ -31,6 +31,8 @@ use \App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'show'])->name('contact-us');
+Route::post('/contact-us/submit', [\App\Http\Controllers\ContactUsController::class, 'create'])->name('contact-us.submit');
 Route::get('/home', [HomeController::class, 'index'])->name('index');
 Route::post('/change-market', [HomeController::class, 'selectPalengke'])->name('select.market');
 Route::get('/landing', [HomeController::class, 'landingAfterRegistration']);
@@ -44,7 +46,7 @@ Route::get('/verify/{email}/{code}', [HomeController::class, 'verification'])->n
 Route::get('/registration/done', [HomeController::class, 'registrationDone'])->name('user.registration.success');
 Route::get('/verification/{email}/resend', [HomeController::class, 'verification'])->name('user.verification.resend');
 
-
+Route::get('/about-us/', [\App\Http\Controllers\AboutUsController::class, 'index'])->name('about-us');
 
 
 
@@ -78,10 +80,11 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/orders', [\App\Http\Controllers\Buyer\OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order_id}', [\App\Http\Controllers\Buyer\OrdersController::class, 'find'])->name('orders.find');
+    Route::POST('/orders/{order_id}/cancel', [\App\Http\Controllers\Buyer\OrdersController::class, 'cancel'])->name('orders.cancel');
 
 
     //buyer to seller only
-    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('.chats');
+    Route::get('chats/', [\App\Http\Controllers\Buyer\ChatsController::class, 'index'])->name('chats');
     Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
@@ -110,8 +113,8 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/stalls/have-any-stalls/', [\App\Http\Controllers\Seller\SellerController::class, 'haveAnyStalls'])->name('stalls.haveany');
 
 
-    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('.chats');
-    Route::get('chats/seller/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'seller'])->name('chat.buyer');
+    Route::get('chats/', [\App\Http\Controllers\Seller\ChatsController::class, 'index'])->name('chats');
+    Route::get('chats/buyer/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'buyer'])->name('chat.buyer');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Seller\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
 
@@ -144,6 +147,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/switch/buyer', [\App\Http\Controllers\Seller\SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
+    Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
 //    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
 //    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
 //    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
@@ -256,10 +260,17 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/analytics/seller/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
     Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Admin\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
 
+    Route::get('/contact-us/', [\App\Http\Controllers\Admin\ContactUsController::class, 'index'])->name('contact-us');
+    Route::get('/contact-us/{id}', [\App\Http\Controllers\Admin\ContactUsController::class, 'find'])->name('contact-us.find');
 
+    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us');
+    Route::get('/about-us/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'create'])->name('developers.create');
+    Route::post('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('developers.store');
+    Route::get('/about-us/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('developers.edit');
+    Route::post('/about-us/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('developers.update');
 });
 
-Route::get('/products/category/{category}', [ ProductsController::class, 'showByCategory'])->name('products.category');
+Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');
 
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
@@ -279,13 +290,14 @@ Route::get('/notif', [AdminController::class, 'getNotifications'])->name('get.no
 
 Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/categories/', [\App\Http\Controllers\ProductsController::class, 'categories'])->name('categories');
-    Route::get('/category/{category}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
+    Route::get('/category/{slug}', [\App\Http\Controllers\ProductsController::class, 'showByCategory'])->name('product.category');
     Route::post('/add-to-cart/', [\App\Http\Controllers\ProductsController::class, 'addToCart'])->name('product.addToCart');
     Route::get('/products/', [ \App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
     Route::get('/product/{id}', [ \App\Http\Controllers\ProductsController::class, 'find'])->name('products.find');
     Route::post('/product/post/comment/{id}', [ \App\Http\Controllers\ProductsController::class, 'postComment'])->name('products.post.comment');
     Route::get('/stores', [ \App\Http\Controllers\ProductsController::class, 'sellers'])->name('stores');
     Route::get('/store/{id}', [ \App\Http\Controllers\ProductsController::class, 'findStore'])->name('store.find');
+
 });
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){

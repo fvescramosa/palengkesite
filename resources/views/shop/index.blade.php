@@ -65,10 +65,10 @@
                     <div class="product-item" >
 
                             <a class="product-image" href="{{ route('shop.products.find', ['id' => $product->id]) }}">
-                                <img src="{{ asset($product->image) }}" alt="">
+                                <img src="{!!   asset($product->image)  !!}" alt="">
                             </a>
                             <div class="product-details">
-                                <h4>{{ $product->product->product_name }}</h4>
+                                <h4>{{ ($product->custom_title != '' ? $product->custom_title : $product->product->product_name) }}</h4>
                                 <p>Php {{ number_format($product->price, 2) }}</p>
                                 <form action="{{ route('shop.product.addToCart') }}" method="POST">
                                     @csrf
@@ -80,8 +80,8 @@
                                     <span class="out-of-stock">{{ ($product->stock) ? '' : 'Out of Stock' }}</span>
                                     <hr>
                                     <label for="">Quantity</label>
-                                    <input type="number" name="quantity" id="quantity" value="" max="{{ $product->stock }}">
-                                    <button class="btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
+                                    <input type="number" name="quantity" min="1" id="quantity" value="" max="{{ $product->stock }}">
+                                    <button class="add-to-cart btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
                                         <span class="fa fa-shopping-cart"></span>
                                         Add to Cart</button>
                                 </form>

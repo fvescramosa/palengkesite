@@ -142,47 +142,53 @@ class StallsController extends Controller
   
         if($request->file('image')){
             $file= $request->file('image');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image.'.$file->getExtension();
+            $file->move($directory, $filename);
+            $data['image']=$directory.$filename;
         }
 
 
         if($request->file('image_1')){
             $file= $request->file('image_1');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image_1']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image1.'.$file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            $data['image_1']=$directory.$filename;
         }
 
 
         if($request->file('image_2')){
             $file= $request->file('image_2');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image_2']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image2.'.$file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            $data['image_2']=$directory.$filename;
         }
 
 
         if($request->file('image_3')){
             $file= $request->file('image_3');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image_3']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image3.'.$file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            $data['image_3']=$directory.$filename;
         }
 
         if($request->file('image_4')){
             $file= $request->file('image_4');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image_4']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image4.'.$file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            $data['image_4']=$directory.$filename;
         }
 
         if($request->file('image_5')){
             $file= $request->file('image_5');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
-            $data['image_5']= $filename;
+            $directory = 'images/stalls/'.$request->stall_number.'/';
+            $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image5.'.$file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            $data['image_5']=$directory.$filename;
         }
 
 
@@ -208,73 +214,86 @@ class StallsController extends Controller
     }
 
     public function update($id, Request $request){
-        $stalls = Stall::where('id', $id)->update(
-            [
-                'number' => $request->number,
-                'sqm'	=> $request->sqm,
-                'amount_sqm' => $request->amount_sqm,
-                'rental_fee'	=> $request->rental_fee,
-                'section'	=> $request->section,
-                'market_id'	=> $request->market,
-                'image'	=> $request->image,
-                'image_1' => $request->image_1,
-                'image_2' => $request->image_2,
-                'image_3' => $request->image_3,
-                'image_4' => $request->image_4,
-                'image_5' => $request->image_5,
-                'status' => $request->status,
-                'rate' => $request->rate,
-                'coords' => $request->coords,
-                'meter_num' => $request->meter_num,
-            ]
-            );
 
+        $data =  [
+            'number' => $request->number,
+            'sqm'	=> $request->sqm,
+            'amount_sqm' => $request->amount_sqm,
+            'rental_fee'	=> $request->rental_fee,
+            'section'	=> $request->section,
+            'market_id'	=> $request->market,
+            'image'	=> $request->image,
+            'image_1' => $request->image_1,
+            'image_2' => $request->image_2,
+            'image_3' => $request->image_3,
+            'image_4' => $request->image_4,
+            'image_5' => $request->image_5,
+            'status' => $request->status,
+            'rate' => $request->rate,
+            'coords' => $request->coords,
+            'meter_num' => $request->meter_num,
+        ];
+
+
+            $directory = 'images/stalls/'.$request->number.'/';
             if($request->file('image')){
                 $file= $request->file('image');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image']= $filename;
+
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image.'.$file->getClientOriginalExtension();
+
+//                dd($directory.$filename);
+                $file->move($directory, $filename);
+                $data['image']=$directory.$filename;
+
             }
     
     
             if($request->file('image_1')){
                 $file= $request->file('image_1');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image_1']= $filename;
+
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image1.'.$file->getExtension();
+                $file->move($directory, $filename);
+                $data['image_1']=$directory.$filename;
             }
     
     
             if($request->file('image_2')){
                 $file= $request->file('image_2');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image_2']= $filename;
+
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image2.'.$file->getExtension();
+                $file->move($directory, $filename);
+                $data['image_2']=$directory.$filename;
             }
     
     
             if($request->file('image_3')){
                 $file= $request->file('image_3');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image_3']= $filename;
+
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image3.'.$file->getExtension();
+                $file->move($directory, $filename);
+                $data['image_3']=$directory.$filename;
             }
     
             if($request->file('image_4')){
                 $file= $request->file('image_4');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image_4']= $filename;
+
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image4.'.$file->getExtension();
+                $file->move($directory, $filename);
+                $data['image_4']=$directory.$filename;
             }
     
             if($request->file('image_5')){
                 $file= $request->file('image_5');
-                $filename= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('public/Image'), $filename);
-                $data['image_5']= $filename;
-            }
-    
 
+                $filename= date('YmdHi').'_'.uniqid().'_'.$request->stall_number.'_'.'image5.'.$file->getExtension();
+                $file->move($directory, $filename);
+                $data['image_5']=$directory.$filename;
+            }
+
+
+        $stalls = Stall::where('id', $id)->update(
+            $data
+        );
         if($stalls){
             $message = ['success' => true, 'message' => 'Stall updated'];
         }else{

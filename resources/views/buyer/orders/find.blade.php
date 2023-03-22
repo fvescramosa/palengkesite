@@ -9,14 +9,17 @@
                     <h1>{{ $orders->status }}</h1>
                 </div>
                 <div class="order-updates">
-                    @foreach($orders->order_statuses  as $order_status)
-                        <div class="status-update">
-                            <div class="status-update-fl">
-                                <p>{{ $order_status->status->status }}</p>
-                                <p>{{ date('F d, Y h:i:s a', strtotime($order_status->created_at)) }}</p>
+                    @if($orders->order_statuses()->exists())
+                        @foreach($orders->order_statuses  as $order_status)
+
+                            <div class="status-update">
+                                <div class="status-update-fl">
+                                    <p>{{ $order_status->status->status }}</p>
+                                    <p>{{ date('F d, Y h:i:s a', strtotime($order_status->created_at)) }}</p>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
                 <div class="order-details-box order-customer-info">
                     <div class="order-info-section-1">
@@ -57,6 +60,7 @@
                     </div>
                 </div>
 
+              {{--  @if($orders->status !== 'cancelled')--}}
                 <div class="info-item long">
                     <div id="map" style="width: 100%; height: 480px"></div>
 
@@ -126,7 +130,7 @@
 
 
                 </div>
-
+               {{-- @endif--}}
             </div>
             <div class="orders-details-wrapper-right">
                 <table class="table table-borderless order-items">
@@ -168,6 +172,44 @@
                     </tr>
 
                 </table>
+
+                <hr>
+
+
+                {{--@if($orders->order_statuses->last()->status->status == 'Placed')
+
+                    @if(!isset($_GET['cancel']))
+
+                        <form action="" method="GET">
+                            <input type="hidden" name="cancel" value="1">
+                            <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="home-btn option-btn">
+                                        {{ __('Cancel Order') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        @else
+                        <form action="{{ route('buyer.orders.cancel', ['order_id' => $orders->transaction_id]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="cancel" value="1">
+                            <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                            <input type="hidden" name="transaction_id" value="{{ $orders->transaction_id }}">
+                            <label for="" class="col-form-label">Reason</label>
+                            <textarea class="form-control-lg" type="hidden" name="reason" rows="10" style="width: 100%" ></textarea>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="home-btn option-btn">
+                                        {{ __('Cancel Order') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+                @endif--}}
             </div>
        </div>
    </div>

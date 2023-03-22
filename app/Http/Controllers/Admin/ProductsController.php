@@ -196,10 +196,10 @@ class ProductsController extends Controller
         return redirect(route('admin.products.trash'));
     }
 
-    public function showByCategory($category){
+    public function showByCategory($slug){
 
-        $products = Products::whereHas('category', function($q) use ($category){
-            $q->where('category',$category);
+        $products = Products::whereHas('category', function($q) use ($slug){
+            $q->where('category',$slug);
         })->get();
 
 

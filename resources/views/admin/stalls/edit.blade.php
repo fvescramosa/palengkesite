@@ -13,7 +13,7 @@
                     @if(isset($message))
                         <div class="alert alert-{{ ($success) ? 'success' : 'danger' }}"><strong>{{ $message  }}</strong></div>
                     @endif
-                    <form action="{{ route('admin.stalls.update', [$stalls->id]) }}" method="POST" class="form-">
+                    <form action="{{ route('admin.stalls.update', [$stalls->id]) }}" method="POST" class="form-" enctype="multipart/form-data">
                         @csrf
                         <div class="info-body-flex">
 
