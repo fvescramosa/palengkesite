@@ -2,14 +2,101 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/resources/views/cart/index.blade.php" line="41" />
-    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php" line="30" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php" line="33" />
     <bookmark url="file://$PROJECT_DIR$/public/css/shop.css" line="20" mnemonic="5" />
     <bookmark url="file://$PROJECT_DIR$/resources/views/buyer/chat.blade.php" line="39" />
     <bookmark url="file://$PROJECT_DIR$/public/css/style.css" line="2075" />
     <bookmark url="file://$PROJECT_DIR$/app/Mail/ContactUsMail.php" line="34" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2a1b217-cf41-4b7f-bf15-af9b749bb386" name="Default Changelist" comment="" />
+    <list default="true" id="d2a1b217-cf41-4b7f-bf15-af9b749bb386" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/NewOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/NewOrder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/NewOrderStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/NewOrderStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/4901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/Image/202209181347MAT 2 - New Form 2016 (with check marks).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/Image/202209181348MAT 2 - New Form 2016 (with check marks).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/Image/202209191352ALYSSA FRANCESCA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211111328distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211120526distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211120811distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211121254distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211130301distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202211130700distribution-sheet-VITAMIN-C.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212041543Escramosa, Frank Vinzon Balita.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212120103Frank Vinzon Escramosa.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212140938Frank Vinzon Escramosa.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191530Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191534Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191537Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191540PalengkeSiteLink.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191542Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191622Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212191705Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212192303Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212192313Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212192327Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212200051Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212221509Activity #2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212221520CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212221638Ulat,+Alyssa+Francesca+Resignation+letter.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212221706CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202212261307Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301040426Activity #2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301101336Buyers-Info-Sheet-with-logo-converted-signed-signed.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301180512Activity #2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301181626CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301190723Activity #2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301191623CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301191722CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301201717CICT Acquaintance Party.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301230346Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301241408Document2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301250136Displacement Notice_Ulat.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301251000Displacement Notice_Ulat.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301261306Review_Results (1).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301270312F-OJT-16-Curriculum-Vitae.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301281627Exercise4.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301311634Review_Results (1).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202301311641Review_Results (1).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122364901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122404901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122424901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122434901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122464901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/2023013122474901 MIRADOR DRIVE, AUSTIN, TX 78735.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302011355Research Proposal.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302081809Basic-Rental-Agreement-Template-Signaturely.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302090041Basic-Rental-Agreement-Template-Signaturely.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302090109Basic-Rental-Agreement-Template-Signaturely.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302090121Basic-Rental-Agreement-Template-Signaturely.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202302210037Basic-Rental-Agreement-Template-Signaturely.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/20230227165032_Payslip 11.30.22.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303040213Frank Vinzon Escramosa - Updated.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303112132James-Yaman-fairhousingnotice-1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303120020James-Yaman-fairhousingnotice-1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303121745NTE - Frank Escramosa (Feb 2023).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303122034e-Certificate National Orientation on Recognition Accreditation 2022-03-01-02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/202303131909Spider-Man No Way Home Sat 08 Jan 1100 Tickets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/1/stall/202303161941In line with recent incident last February 15.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/1/stall/202303180633Research-Ethics-Comiitee-Application-Form (3).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/11/stall/202303152020202209191352ALYSSA FRANCESCA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/12/202303160603202209181348MAT 2 - New Form 2016 (with check marks).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/2/stall/202303162007Response NTE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/3/stall/202303180703Spider-Man No Way Home Sat 08 Jan 1100 Tickets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/5/stall/202303170858Genpact_Maternity Leave Credits Allocation Form (Female EE)_signed (3) (1).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/6/202303120032Doctor Strange in the Multiverse of Madness Wed 04 May 1630 Tickets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/6/202303120033Doctor Strange in the Multiverse of Madness Wed 04 May 1630 Tickets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/public/contracts/sellers/9/stall/202303132018Spider-Man No Way Home Sat 08 Jan 1100 Tickets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/order-status.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/order-status.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,37 +124,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Mail/NewOrderStatus.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/home/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="33" column="33" lean-forward="true" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="184">
+              <caret line="74" column="22" lean-forward="true" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="900" column="22" lean-forward="true" selection-start-line="900" selection-start-column="22" selection-end-line="900" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/emails/order-status.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+            <state relative-caret-position="414">
+              <caret line="33" column="71" selection-start-line="33" selection-start-column="71" selection-end-line="33" selection-end-column="71" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Mail/NewStallAppointmentEmail.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/shop/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Mail/NewUserWelcomeMail.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="39" column="118" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="118" />
+            <state relative-caret-position="138">
+              <caret line="66" column="118" lean-forward="true" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="118" />
             </state>
           </provider>
         </entry>
@@ -84,6 +171,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>{{!!</find>
       <find>asset($</find>
       <find>{{ asset(</find>
       <find>disks</find>
@@ -99,6 +187,7 @@
       <find>move</find>
       <find>dd</find>
       <find>'contracts</find>
+      <find>navbar</find>
       <find>navbar.fixed</find>
       <find>enc</find>
       <find>Mail::to(</find>
@@ -109,11 +198,9 @@
       <find>box-shadow</find>
       <find>admin</find>
       <find>767</find>
-      <find>profile</find>
-      <find>-&gt;image</find>
-      <find>style=&quot;border-radius: 25% &quot;</find>
-      <find>navbar</find>
-      <find>{{ auth()-&gt;user()-&gt;profile_image }}</find>
+      <find>checkout</find>
+      <find>seller.</find>
+      <find>.navbar.fixed</find>
     </findStrings>
     <replaceStrings>
       <replace>SellerProduct</replace>
@@ -138,7 +225,6 @@
       <replace>$directory = '</replace>
       <replace>=$directory.$filename;</replace>
       <replace>'data/contracts</replace>
-      <replace>{{ asset(auth()-&gt;user()-&gt;profile_image) }}</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\laragon\www\palengkesite\app\Http\Controllers\Admin</dir>
@@ -234,11 +320,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/storage/framework/views/4b9607d3d32963cd7616b35ca3e9819c14bb9120.php" />
-        <option value="$PROJECT_DIR$/storage/framework/views/67a535de89f35de786f20183b9bb765a9628c56c.php" />
-        <option value="$PROJECT_DIR$/resources/views/shop/category.blade.php" />
-        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/ProductsSeeder.php" />
         <option value="$USER_HOME$/Desktop/PDFS/palengkesite.sql" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php" />
         <option value="$PROJECT_DIR$/config/filesystems.php" />
@@ -267,7 +348,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2023_03_22_002516_create_developers_table.php" />
         <option value="$PROJECT_DIR$/resources/views/about-us.php" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Developer.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/about-us/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/about-us/create.blade.php" />
@@ -280,11 +360,17 @@
         <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/app/Mail/NewOrder.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CartController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Mail/NewOrderStatus.php" />
+        <option value="$PROJECT_DIR$/resources/views/emails/new-order.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/emails/order-status.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" />
         <option value="$PROJECT_DIR$/resources/views/home/index.blade.php" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" />
-        <option value="$PROJECT_DIR$/app/Mail/NewOrderStatus.php" />
-        <option value="$PROJECT_DIR$/resources/views/emails/order-status.blade.php" />
       </list>
     </option>
   </component>
@@ -397,11 +483,11 @@
       <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-220" />
-    <option name="y" value="350" />
-    <option name="width" value="1385" />
-    <option name="height" value="745" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -409,7 +495,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -420,13 +505,7 @@
             <path>
               <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
               <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Mail" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
@@ -446,10 +525,25 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="emails" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -608,6 +702,9 @@
       <workItem from="1679364615484" duration="73000" />
       <workItem from="1679393663559" duration="4109000" />
       <workItem from="1679406503276" duration="18987000" />
+      <workItem from="1679437623240" duration="675000" />
+      <workItem from="1679484927013" duration="4219000" />
+      <workItem from="1679493718311" duration="1597000" />
     </task>
     <task id="LOCAL-00001" summary="pogi ako">
       <created>1674228112753</created>
@@ -634,7 +731,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="478121000" />
+    <option name="totallyTimeSpent" value="479113000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -646,10 +743,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="830" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27114093" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21558245" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -663,8 +760,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32820514" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.35973155" side_tool="true" visible="true" weight="0.28125" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.64026845" visible="true" weight="0.28125" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.358742" side_tool="true" weight="0.2831661" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.641258" weight="0.1884058" />
       <window_info anchor="bottom" id="File Transfer" order="12" weight="0.32820514" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -710,41 +807,12 @@
       </list>
     </option>
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pogi ako" />
     <MESSAGE value="FIX CONTROLLER SETUP" />
     <option name="LAST_COMMIT_MESSAGE" value="FIX CONTROLLER SETUP" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.editorconfig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="109" column="77" lean-forward="true" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_21_224217_create_contact_us_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -768,13 +836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/welcome-email.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -852,6 +913,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/buyer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="73" column="114" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AboutUsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -924,16 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="267" column="117" selection-start-line="267" selection-start-column="107" selection-end-line="267" selection-end-column="117" />
-          <folding>
-            <element signature="e#7#55#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -996,17 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
-          <folding>
-            <element signature="e#3013#5460#0#PHP" />
-            <element signature="e#5466#7512#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -1014,83 +1061,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/shop/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="61" lean-forward="true" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/about-us.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="805">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/home/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/welcome-email.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="56" column="67" lean-forward="true" selection-start-line="56" selection-start-column="67" selection-end-line="56" selection-end-column="67" />
+        <state relative-caret-position="161">
+          <caret line="7" selection-start-line="7" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/embed.rnc">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        <state relative-caret-position="475">
+          <caret line="112" column="62" selection-start-line="112" selection-start-column="62" selection-end-line="112" selection-end-column="62" />
+          <folding>
+            <element signature="e#2479#2536#1#PHP" />
+            <element signature="e#2555#3111#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitattributes">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="90" column="65" selection-start-line="90" selection-start-column="65" selection-end-line="90" selection-end-column="65" />
+        <state relative-caret-position="529">
+          <caret line="258" selection-start-line="258" selection-end-line="258" />
+          <folding>
+            <element signature="e#536#3007#0#PHP" />
+            <element signature="e#3013#5460#0#PHP" />
+            <element signature="e#5466#7512#0#PHP" />
+            <element signature="e#7518#7874#0#PHP" />
+            <element signature="e#7880#8949#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="901" column="24" selection-start-line="901" selection-start-column="24" selection-end-line="901" selection-end-column="24" />
+        <state relative-caret-position="1426">
+          <caret line="68" column="64" selection-start-line="68" selection-start-column="64" selection-end-line="68" selection-end-column="64" />
+          <folding>
+            <element signature="e#47#75#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/buyer.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Mail/NewOrder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="73" column="84" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="84" />
+        <state relative-caret-position="529">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/NewStallAppointmentEmail.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Buyer/ChatsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="40" />
+        <state relative-caret-position="299">
+          <caret line="20" selection-start-line="16" selection-start-column="4" selection-end-line="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/NewUserWelcomeMail.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/new-order.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="39" column="118" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="118" />
+        <state relative-caret-position="1058">
+          <caret line="46" column="84" selection-start-line="46" selection-start-column="84" selection-end-line="46" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1518">
+          <caret line="83" column="34" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="34" />
+          <folding>
+            <element signature="e#7#55#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Mail/NewOrderStatus.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="33" column="33" lean-forward="true" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+        <state relative-caret-position="552">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/order-status.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        <state relative-caret-position="1495">
+          <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/shop/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="66" column="118" lean-forward="true" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/home/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="74" column="22" lean-forward="true" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="900" column="22" lean-forward="true" selection-start-line="900" selection-start-column="22" selection-end-line="900" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="33" column="71" selection-start-line="33" selection-start-column="71" selection-end-line="33" selection-end-column="71" />
         </state>
       </provider>
     </entry>

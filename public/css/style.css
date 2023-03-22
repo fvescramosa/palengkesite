@@ -904,7 +904,7 @@ section{
 }
 
 .navbar.fixed{
-
+   height: 100px;
    z-index: 999;
    position: fixed;
    background-color: #fff;

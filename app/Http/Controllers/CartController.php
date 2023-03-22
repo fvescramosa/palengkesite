@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\DeliveryAddress;
+use App\Mail\NewOrder;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentOption;
+use App\Seller;
 use function auth;
 use function compact;
 use function dd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -41,14 +44,14 @@ class CartController extends Controller
         foreach ($carts as $cart) {
 
             //create Transaction ID
-            $transaction_id = random_int(100000, 999999);
+           /* $transaction_id = random_int(100000, 999999);
 
 
             while ($this->checkRandomNumber($transaction_id) === false){
                 $transaction_id = random_int(100000, 999999);
-            }
+            }*/
 
-
+            $transaction_id = $cart->first()->seller_id.uniqid();
             //get_price
 
             $total = '';
@@ -68,6 +71,7 @@ class CartController extends Controller
                 'status' => 'pending',
                 'payment_option_id' => $request->payment_method,
             ]);
+
 
 
 
@@ -105,7 +109,8 @@ class CartController extends Controller
                     ]);
                 }
 
-
+                $seller = Seller::find($cart->first()->seller_id);
+                Mail::to($seller->user->email)->send(new NewOrder($order));
             }
 
         }

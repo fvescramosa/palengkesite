@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\APIKeysController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Mail\NewUserWelcomeMail;
+use App\Mail\NewOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SellerController;
@@ -143,10 +144,21 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
     Route::get('/orders/{id}', [\App\Http\Controllers\Seller\OrdersController::class, 'find'])->name('orders.find');
     Route::post('/order/status/update', [\App\Http\Controllers\Seller\OrdersController::class, 'updateStatus'])->name('orders.status.update');
+    Route::get('/orders/{id}/email', function($id){
+
+        $order = \App\Order::findOrFail($id);
+        return new NewOrder($order);
+    });
+    Route::get('/order/{id}/update/status/email', function($id){
+
+        $order = \App\Order::find($id);
+        return new \App\Mail\NewOrderStatus($order);
+    });
 
     Route::get('/switch/buyer', [\App\Http\Controllers\Seller\SellerController::class, 'switch_as_buyer'])->name('switch.buyer');
 
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
+    Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
 //    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
 //    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
