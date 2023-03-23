@@ -73,6 +73,7 @@ class AnalyticsController extends Controller
 
     public function exportProductSales(){
 
+        $fileName = 'salesByProducts.csv';
 
         $sales = OrderProduct::select(DB::raw("SUM(quantity) as count"), 'product_id', 'seller_product_id')
             ->with(['product', 'seller_product'])
@@ -96,14 +97,41 @@ class AnalyticsController extends Controller
             ->get();
 
 
-        foreach ($sales as $sale){
-            dd([$sale->product->product_name, ]);
-        }
+
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+
+        $columns = array('Product Custom Name', 'Product Name', 'Sales');
+
+        $callback = function() use($sales, $columns) {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+            foreach ($sales as $data) {
+                $row['Product Custom Name']  = $data->seller_product->custom_title;
+                $row['Product Name']    = $data->product->product_name;
+                $row['Sales']    = $data->count;
+                fputcsv($file, array($row['Product Custom Name'], $row['Product Name'], $row['Sales']));
+
+            }
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
 
 //        dd([$labels, $data ]);
 
 
-        return view('seller.analytics.order-by-products', compact('labels', 'data'));
+//        return view('seller.analytics.order-by-products', compact('labels', 'data'));
     }
 
 
@@ -119,10 +147,27 @@ class AnalyticsController extends Controller
                 }
             })
             ->where('seller_id', auth()->user()->seller->id);
-//            ->orderBy('average_ratings', 'DESC')
-//            ->pluck('average_ratings', 'id');
 
+            if(isset($_GET['sort']) && $_GET['sort'] != ''){
+                $products = $products->orderBy('average_ratings', $_GET['sort']);
+            }else{
+                $products = $products->orderBy('average_ratings', 'DESC');
+            }
 
+        $products = $products->orderBy('average_ratings', 'DESC')
+            ->pluck('average_ratings', 'id');
+
+        $labels = [];
+        foreach ($products->keys() as $key){
+            $labels[] = SellerProduct::find($key)->custom_title ?? SellerProduct::find($key)->product->product_name;
+        }
+
+        $data = [];
+        foreach ($products->values() as $value){
+            $data[] = $value;
+        }
+
+        return view('seller.analytics.ratings-by-products', compact('labels', 'data'));
     }
 
 }

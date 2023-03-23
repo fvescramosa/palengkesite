@@ -99,7 +99,12 @@
                                                     <span class="item">Products</span>
                                                 </a>
                                             </li>
-
+                                            <li>
+                                                <a href="{{ route('seller.analytics.product.ratings') }}" class="{{ ( request()->routeIs('seller.analytics.product.ratings') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                    <span class="item">Ratings</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
