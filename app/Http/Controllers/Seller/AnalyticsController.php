@@ -41,10 +41,17 @@ class AnalyticsController extends Controller
                 }
             })
             ->where('seller_id', auth()->user()->seller->id)
-            ->whereYear('created_at', ( isset($_GET['YEAR']) && $_GET['YEAR'] ? date('Y' ,  strtotime( $_GET['YEAR'])) : date('Y') ) )
-            ->whereMonth('created_at',  ( isset($_GET['productOption']) && $_GET['productOption'] ? date('m' ,  strtotime( $_GET['productOption'])) : date('m') ))
-            ->groupBy([DB::raw("MONTHNAME(created_at)"), 'seller_product_id'])
-            ->pluck('count', 'seller_product_id');
+//            ->whereYear('created_at', ( isset($_GET['year']) && $_GET['year'] ? date('Y' ,  strtotime( $_GET['year'])) : date('Y') ) )
+            ->whereMonth('created_at',  ( isset($_GET['productOption']) && $_GET['productOption'] ? date('m' ,  strtotime( $_GET['productOption'])) : date('m') ));
+
+        if(isset($_GET['sort']) && $_GET['sort'] != ''){
+            $sales = $sales->orderBy('count', $_GET['sort']);
+        }else{
+            $sales = $sales->orderBy('count', 'DESC');
+        }
+
+        $sales = $sales->groupBy([DB::raw("MONTHNAME(created_at)"), 'seller_product_id'])
+                ->pluck('count', 'seller_product_id');
 
 
         $labels = [];
@@ -99,73 +106,23 @@ class AnalyticsController extends Controller
         return view('seller.analytics.order-by-products', compact('labels', 'data'));
     }
 
-    public function salesByProducts($id){
 
-        $sales = OrderProduct::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
-            ->whereYear('created_at', date('Y'))
-            /*->whereHas('order', function ($q){
-                $q->where('status', '=', 'pending');
-            })*/
-            ->where('product_id', $id)
-            ->groupBy(DB::raw("MONTHNAME(created_at)"))
-            ->pluck('count', 'month_name');
-
-        $labels = [];
-        foreach ($sales->keys() as $key){
-            $labels[] = $key;
-        }
-
-        $data = [];
-        foreach ($sales->values() as $value){
-            $data[] = $value;
-        }
-
-        $product = Products::find($id);
-
-        return view('seller.analytics.by-products-chart', compact('labels', 'data' , 'product'));
-    }
-
-    public function sellerRegistration(){
-
-        $sales = Seller::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
-            ->whereYear('created_at', date('Y'))
-            ->whereHas('seller_stalls')
-            ->groupBy(DB::raw("MONTHNAME(created_at)"))
-            ->pluck('count', 'month_name');
-
-        $labels = [];
-        foreach ($sales->keys() as $key){
-            $labels[] = $key;
-        }
-
-        $data = [];
-        foreach ($sales->values() as $value){
-            $data[] = $value;
-        }
+    public function productByRatings(){
+        $products = SellerProduct::select('average_ratings', 'product_id', 'id', 'seller_id', 'custom_title')
+            ->with(['product', 'seller'])
+            ->whereHas('product')
+            ->whereHas('product', function($q){
+                if(isset($_GET['category']) && $_GET['category'] != ''){
+                    $q->whereHas('category', function ($query){
+                        $query->where('category', $_GET['category']);
+                    });
+                }
+            })
+            ->where('seller_id', auth()->user()->seller->id);
+//            ->orderBy('average_ratings', 'DESC')
+//            ->pluck('average_ratings', 'id');
 
 
-        return view('seller.analytics.seller-registration-chart', compact('labels', 'data' ));
-    }
-    public function buyerRegistration(){
-
-        $sales = Buyer::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw("MONTHNAME(created_at)"))
-            ->pluck('count', 'month_name');
-
-        $labels = [];
-        foreach ($sales->keys() as $key){
-            $labels[] = $key;
-        }
-
-        $data = [];
-        foreach ($sales->values() as $value){
-            $data[] = $value;
-        }
-
-
-
-        return view('seller.analytics.buyer-registration-chart', compact('labels', 'data' ));
     }
 
 }

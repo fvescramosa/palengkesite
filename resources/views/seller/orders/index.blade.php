@@ -7,8 +7,18 @@
 
            <hr>
 
+           <form action="" id="filterByStatus" class="form-group" method="GET">
+               @csrf
+               <label for="">Filter</label>
+               <select name="status" id="orderStatus" class="form-control">
+                   @foreach($statuses as $status)
 
+                       <option value="{{ $status->id }}" {{ ( isset($_GET['status']) && $_GET['status'] == $status->id ? 'selected'  : '') }}>{{ $status->status }}</option>
+                   @endforeach
+               </select>
+           </form>
               @foreach($orders as $order)
+
 
                 <div class="my-order-list">
                    <div class="my-order-item">
@@ -33,10 +43,13 @@
                            </div>
                        </div>
                        <div class="my-orders-actions">
-                           <div class="alert alert-success">{{ $order->status }}</div>
+                           <span class="alert alert-{{ ($order->status == 'pending' ? 'warning' :  ($order->status == 'confirmed' ? 'success' : '' ) ) }}"> {{ ucfirst($order->status) }}</span>
 
+                           @if( $order->status == 'pending' && $order->payment_option_id == '2')
+                               <a href="{{ route('seller.orders.confirmCOD', ['id' => $order->id]) }}" class="pal-button btn-green" >Confirm COD Request</a>
+                           @endif
 
-                           <a class="btn" href="{{ route('seller.orders.find', ['id' => $order->id]) }}">View Order</a>
+                           <a class="pal-button btn-orange" href="{{ route('seller.orders.find', ['id' => $order->id]) }}">View Order</a>
                        </div>
                    </div>
                </div>
@@ -92,7 +105,7 @@
                                            <div class="form-group">
                                                <div class="col-md-6 col-md-offset-4">
                                                    <button type="submit" class="btn btn-primary">
-                                                       Paywith Paypal
+                                                       Pay with Paypal
                                                    </button>
                                                </div>
                                            </div>
@@ -112,5 +125,22 @@
 
        </div>
    </div>
+    <script>
+        const filter = {
+            onInit: function () {
+                filter.initFilterStatus( $('#orderStatus') );
+            },
 
+            initFilterStatus: function(trigger){
+                trigger.change(function(e){
+
+                    $('#filterByStatus').submit();
+                });
+            },
+        }
+
+        $(document).ready(function () {
+            filter.onInit();
+        })
+    </script>
 @endsection

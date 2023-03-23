@@ -18,10 +18,10 @@
                     @endforeach
 
 
-                    <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" method="POST">
+                    <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" class="form-group" method="POST">
                         @csrf
                         <input type="hidden" name="order_id" value="{{ $orders->id }}">
-                        <select name="status" id="orderStatus">
+                        <select name="status" id="orderStatus" class="form-control">
                             @foreach($statuses as $status)
 
 

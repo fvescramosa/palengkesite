@@ -36,16 +36,16 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="form-group short">
+                   {{-- <div class="form-group short">
                         <label for="">Year</label>
                         <select  class="form-control" id="year" name="year" placeholder="Order By"  >
                             <option value=""></option>
                             @php $year= date('Y') - 10; @endphp
                             @for($i = date('Y'); $i >= 2015; $i--)
-                                <option value="{{ $i }}" >{{ $i }}</option>
+                                <option value="{{ $i }}" {{ isset($_GET['year']) && $_GET['year'] ==  $i  ? 'selected' : ''  }}>{{ $i }}</option>
                             @endfor
                         </select>
-                    </div>
+                    </div>--}}
                     <div class="form-group short    ">
                         <label for="">Category</label>
                         <select  class="form-control" id="category" name="category" placeholder="Category"  >
@@ -53,6 +53,13 @@
                             @foreach(\App\Categories::all() as $category)
                                 <option value="{{ $category->category }}" {{ (isset($_GET['category']) && $_GET['category'] == $category->category ? 'selected' : '')  }}>{{ $category->category }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group short    ">
+                        <label for="">Sort</label>
+                        <select  class="form-control" id="sort" name="sort" placeholder="Category"  >
+                            <option value="desc" {{ (isset($_GET['sort']) && $_GET['sort'] == 'desc' ? 'selected' : '')  }}>Sales (Highest - Lowest)</option>
+                            <option value="asc" {{ (isset($_GET['sort']) && $_GET['sort'] == 'asc' ? 'selected' : '')  }}>Sales (Lowest - Highest)</option>
                         </select>
                     </div>
 
