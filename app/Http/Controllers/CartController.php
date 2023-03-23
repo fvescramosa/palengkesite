@@ -22,34 +22,115 @@ class CartController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(){
+
+    public function index()
+    {
 
         $paymentOptions = PaymentOption::all();
         return view('cart.index', compact(['paymentOptions']));
     }
 
-    public function checkout(Request $request){
+    public function checkout(Request $request)
+    {
 
 
-
-        $deliver_detail = DeliveryAddress::find($request->delivery_address);
-
-
-        if (!$deliver_detail){
-            return redirect(route('buyer.delivery.address.create'));
-        }
 
         $carts = Cart::whereIn('id', $request->cart_ids)->get()->groupBy('seller_id');
 
+        session()->put('carts', $carts);
+        session()->put('cart_ids', $request->cart_ids);
+
+
+        return redirect(route('cart.checkout.chooseDeliveryAddress'));
+    }
+
+
+
+    public function chooseDeliveryAddress(){
+
+//        dd(session()->get('carts'));
+
+        return view('cart.chooseDeliveryAddress', compact([]));
+    }
+
+    public function selectDeliveryAddress(Request $request){
+
+        $validate = $request->validate([
+            'delivery_address' => 'required',
+        ]);
+
+        if($request->delivery_address == 'others'){
+            $validate = $request->validate([
+                "stnumber" => ['required'],
+                "stname" => ['required'],
+                "city" => ['required'],
+                "barangay" => ['required'],
+                "province" => ['required'],
+                "country" => ['required'],
+                "zip" => ['required'],
+                "longitude" => '',
+                "latitude" => '',
+            ]);
+
+
+            $delivery_detail = [
+                'stnumber' => $request->stnumber,
+                'stname' => $request->stname,
+                'barangay' => $request->barangay,
+                'city' => $request->city,
+                'province' => $request->province,
+                'country' => $request->country,
+                'zip' => $request->zip,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
+                'buyer_id' => auth()->user()->buyer->id
+            ];
+
+
+
+        }else{
+
+            $deliveryAddress = DeliveryAddress::find($request->delivery_address);
+
+            $delivery_detail   =    [
+                        'stnumber' => $deliveryAddress->stnumber,
+                        'stname' => $deliveryAddress->stname,
+                        'barangay' => $deliveryAddress->barangay,
+                        'city' => $deliveryAddress->city,
+                        'province' => $deliveryAddress->province,
+                        'country' => $deliveryAddress->country,
+                        'zip' => $deliveryAddress->zip,
+                        'longitude' => $deliveryAddress->longitude,
+                        'latitude' => $deliveryAddress->latitude,
+                        'buyer_id' => auth()->user()->buyer->id
+                    ];
+        }
+
+
+        session()->put('delivery_detail', $delivery_detail);
+
+        return redirect(route('cart.checkout.choosePaymentMethod'));
+
+    }
+
+    public function choosePaymentMethod()
+    {
+
+        $paymentOptions = PaymentOption::all();
+        return view('cart.choosePaymentMethod', compact(['paymentOptions']));
+    }
+
+
+    public function selectPaymentMethod(Request $request){
+
+
+        $carts = session()->get('carts');
+
+
+        $deliver_detail =  session()->get('delivery_detail');
+
+
         foreach ($carts as $cart) {
-
-            //create Transaction ID
-           /* $transaction_id = random_int(100000, 999999);
-
-
-            while ($this->checkRandomNumber($transaction_id) === false){
-                $transaction_id = random_int(100000, 999999);
-            }*/
 
             $transaction_id = $cart->first()->seller_id.uniqid();
             //get_price
@@ -57,7 +138,6 @@ class CartController extends Controller
             $total = '';
 
             foreach ($cart as $item){
-
 
                 $total = (int)$total +  (int)$item->total;
 
@@ -71,27 +151,25 @@ class CartController extends Controller
                 'status' => 'pending',
                 'payment_option_id' => $request->payment_method,
             ]);
-
-
-
-
+//
+//
             if($order->save()){
 
                 $order->order_delivery_detail()->create(
                     [
-                        'stnumber' => $deliver_detail->stnumber,
-                        'stname' => $deliver_detail->stname,
-                        'barangay' => $deliver_detail->barangay,
-                        'city' => $deliver_detail->city,
-                        'province' => $deliver_detail->province,
-                        'country' => $deliver_detail->country,
-                        'zip' => $deliver_detail->zip,
-                        'longitude' => $deliver_detail->longitude,
-                        'latitude' => $deliver_detail->latitude,
+                        'stnumber' => $deliver_detail['stnumber'],
+                        'stname' => $deliver_detail['stname'],
+                        'barangay' => $deliver_detail['barangay'],
+                        'city' => $deliver_detail['city'],
+                        'province' => $deliver_detail['province'],
+                        'country' => $deliver_detail['country'],
+                        'zip' => $deliver_detail['zip'],
+                        'longitude' => $deliver_detail['longitude'],
+                        'latitude' => $deliver_detail['latitude'],
                         'buyer_id' => auth()->user()->buyer->id
                     ]
                 );
-
+//
                 $order->order_statuses()->create( [
                     'status_id' => 1
                  ]);
@@ -108,34 +186,43 @@ class CartController extends Controller
 
                     ]);
                 }
-
+//
                 $seller = Seller::find($cart->first()->seller_id);
                 Mail::to($seller->user->email)->send(new NewOrder($order));
             }
 
         }
 
-        Cart::whereIn('id', $request->cart_ids)->delete();
+        Cart::whereIn('id', session()->get('cart_ids'))->delete();
 
         if($request->payment_method == 1){
-            //paypal
-
+            $response = [
+                'response' => 'success',
+                'message' => 'Order has been placed. Please pay via Paypal in Orders Dashboard'
+            ];
         }else{
-
-
+            $response = [
+                'response' => 'success',
+                'message' => 'Your order has been placed!'
+            ];
         }
-        return redirect(route('buyer.orders.index'));
+
+
+        return redirect(route('buyer.orders.index'))->with($response);
     }
+
 
     public function checkRandomNumber($transaction_id)
     {
         if (Order::where('transaction_id', $transaction_id)->get()->count() > 0) {
             return false;
-        } else{
+        } else {
             return true;
         }
 
     }
+
+
 
     public function delivery_address_create(){
         return view('cart.delivery_address_create',compact([]));

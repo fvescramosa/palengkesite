@@ -143,6 +143,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     //Orders
     Route::get('/orders/', [\App\Http\Controllers\Seller\OrdersController::class, 'show'])->name('orders.show');
     Route::get('/orders/{id}', [\App\Http\Controllers\Seller\OrdersController::class, 'find'])->name('orders.find');
+    Route::get('/orders/cod/{id}/confirmed', [\App\Http\Controllers\Seller\OrdersController::class, 'confirmCOD'])->name('orders.confirmCOD');
     Route::post('/order/status/update', [\App\Http\Controllers\Seller\OrdersController::class, 'updateStatus'])->name('orders.status.update');
     Route::get('/orders/{id}/email', function($id){
 
@@ -159,7 +160,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
 
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
-    Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
+    Route::get('/analytics/products/ratings', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productByRatings'])->name('analytics.product.ratings');
 //    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
 //    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
 //    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
@@ -315,6 +316,10 @@ Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+    Route::get('/chooseDeliveryAddress', [\App\Http\Controllers\CartController::class, 'chooseDeliveryAddress'])->name('checkout.chooseDeliveryAddress');
+    Route::post('/selectDeliveryAddress', [\App\Http\Controllers\CartController::class, 'selectDeliveryAddress'])->name('checkout.selectDeliveryAddress');
+    Route::get('/choosePaymentMethod', [\App\Http\Controllers\CartController::class, 'choosePaymentMethod'])->name('checkout.choosePaymentMethod');
+    Route::post('/selectPaymentMethod', [\App\Http\Controllers\CartController::class, 'selectPaymentMethod'])->name('checkout.selectPaymentMethod');
 
 });
 
