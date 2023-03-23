@@ -59,9 +59,9 @@ class HomeController extends Controller
             });
         };
 
-        $featuredProducts = $featuredProducts->limit(5)->get();
-        $popularProducts = $popularProducts->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(5)->get();
-        $stores = $stores->limit(5)->get();
+        $featuredProducts = $featuredProducts->limit(4)->get();
+        $popularProducts = $popularProducts->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(4)->get();
+        $stores = $stores->limit(4)->get();
 
 //        dd($popularProducts);
         return view('home/index', compact(['featuredProducts', 'categories'  , 'popularProducts' ,'stores']));
