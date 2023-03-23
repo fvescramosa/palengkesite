@@ -30,9 +30,10 @@
     </div>
     <section class="home-category ">
 
-        <h1 class="title">shop by <span>category</span></h1>
+        <p class="category-subtitle reveal">What we serve</p>
+        <h1 class="title reveal">shop by <span>category</span></h1>
 
-        <div class="box-container" id="box-container">
+        <div class="box-container reveal" id="box-container">
             @foreach($categories as $category)
                      <a href="{{ route('shop.product.category', ['slug' => $category->slug]) }}" class="box-item" style="background-image: url({{ asset($category->image)  }})">
                         <div class="overlay"></div>
@@ -45,13 +46,14 @@
 
     <section class="home-products products container">
 
-        <h1 class="title">Featured <span>Products</span></h1>
+        <p class="product-subtitle reveal">You may want to have</p>
+        <h1 class="title reveal">Featured <span>Products</span></h1>
 
         <div class="products-grid">
 
             @foreach($featuredProducts as $featuredProduct)
 
-            <div class="product-item">
+            <div class="product-item reveal">
 
                     <div class="product-image">
                         <img src="{{ asset($featuredProduct->image) }}" alt="">
@@ -69,7 +71,7 @@
                             <input type="hidden" name="price" id="price" value="{{ $featuredProduct->price }}">
                             <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $featuredProduct->id }}">
                             <input type="number" name="quantity" id="quantity" value="" max="{{ $featuredProduct->stock }}">
-                            <button class="add-to-cart btn btn-green" type="submit" {{ ($featuredProduct->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
+                            <button class="add-to-cart btn btn-green" type="submit" {{ ($featuredProduct->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span> Add to Cart</button>
                         </form>
                     </div>
                 </div>
@@ -82,15 +84,16 @@
     </section>
 
 
-    <section class="home-products products container">
+    <section class="home-products products popular">
 
-        <h1 class="title">Most <span>Popular Items</span></h1>
+        <p class="product-subtitle reveal">A must try</p>
+        <h1 class="title reveal">Most <span>Popular Items</span></h1>
 
         <div class="products-grid">
 
             @foreach($popularProducts as $popularProduct)
 
-                <div class="product-item">
+                <div class="product-item reveal">
 
                     <div class="product-image">
                         <img src="{{ asset($popularProduct->seller_product->image) }}" alt="">
@@ -108,7 +111,7 @@
                             <input type="hidden" name="price" id="price" value="{{ $popularProduct->seller_product->price }}">
                             <input type="hidden" name="seller_product_id" id="seller_product_id" value="{{ $popularProduct->seller_product->id }}">
                             <input type="number" name="quantity" id="quantity" value="" max="{{ $popularProduct->seller_product->stock }}">
-                            <button class="add-to-cart btn btn-green" type="submit" {{ ($popularProduct->seller_product->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span>Add to Cart</button>
+                            <button class="add-to-cart btn btn-green" type="submit" {{ ($popularProduct->seller_product->stock ? '' : 'disabled') }}><span class="fa fa-shopping-cart "></span> Add to Cart</button>
                         </form>
                     </div>
                 </div>
@@ -122,13 +125,14 @@
 
     <section class="home-products products container">
 
-        <h1 class="title">Stores <span></span></h1>
+        <p class="product-subtitle reveal">Get to know your suki</p>
+        <h1 class="title reveal">Our <span>Stores</span></h1>
 
         <div class="products-grid">
 
             @foreach($stores as $store)
 
-                <div class="product-item" >
+                <div class="product-item reveal" >
 
                     <a class="product-image" href="{{ route('shop.store.find', ['id' => $store->id]) }}">
                         @if( $store->seller_stall_images()->exists())
@@ -158,6 +162,24 @@
 
 
     <script>    
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 120;
+
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            } else {
+                reveals[i].classList.remove("active");
+            }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
         const elements = {
             initSlick: function () {
                 $(".home-category .box-container").slick({
