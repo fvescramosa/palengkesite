@@ -188,9 +188,15 @@ section{
 .home-products .products-grid{
    width: 100%;
 }
+
 .home-products .products-grid .product-item{
    flex: 1 1 calc(25% - 30px);
    max-width: calc(25% - 30px);
+   transition: 1s;
+}
+
+.home-products .products-grid .product-item:hover{
+   transform: scale(1.1); /*zoom*/
 }
 
 .home-products.popular{
@@ -198,9 +204,9 @@ section{
 }
 
 .home-products.popular .product-subtitle,
-.home-products.popular .title
-/* .home-products.popular .product-name,
-.home-products.popular p*/{
+.home-products.popular .title,
+/* .home-products.popular .product-name*/
+.home-products.popular p{
    text-transform: uppercase;
 }
 
@@ -1039,8 +1045,8 @@ section{
 }
 
 .navbar-nav .profileImage{
-    width: 64px;
-    height: 64px;
+    width: 45px;
+    height: 45px;
     object-fit: cover;
     object-position: top;
     border-radius: 50% ;
@@ -1070,8 +1076,14 @@ section{
 .navbar .nav-item a{
    color: #fff !important;
    font-size: 18px !important;
-   margin: 0 10px;
+   margin: 0 15px;
    text-shadow: 1px 1px black;
+   font-size: 18px !important;
+}
+
+.navbar .nav-item.dropdown a{
+   display: flex;
+   align-items: center;
 }
 
 .navbar.fixed .nav-item a{
@@ -2198,7 +2210,11 @@ button{
    }
    .home-bg {
       height: 500px;
-   }  
+   }
+   
+   .navbar .nav-item a{
+      font-size: 14px !important;
+   }
   
 }
 
@@ -2214,7 +2230,7 @@ button{
    .navbar .nav-item a {
       color: #000 !important;
       font-size: 13px !important;
-      margin:  10px;
+      margin: 10px;
       text-shadow: unset !important;
 
    }

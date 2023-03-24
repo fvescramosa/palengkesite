@@ -95,7 +95,7 @@
 
                 <div class="product-item reveal">
 
-                    <a class="product-image" href="{{ route('shop.products.find', ['id' => $popularProduct->seller_product->id]) }}">>
+                    <a class="product-image" href="{{ route('shop.products.find', ['id' => $popularProduct->seller_product->id]) }}">
                         <img src="{{ asset($popularProduct->seller_product->image) }}" alt="">
                     </a>
                     <div class="product-details">

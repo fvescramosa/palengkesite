@@ -52,13 +52,13 @@
 
 }
 
-.product-item .product-details h4{
+.product-item .product-details p{
    text-transform: uppercase;
 }
 
 .product-item .product-details h4.product-name{
    font-weight: 600;
-   font-size: 19px;
+   font-size: 18px;
    text-transform: uppercase;
 }
 
@@ -373,7 +373,19 @@ h4.product-price {
    .products-grid {
       width: 65%
    }
+
 }
+
+@media screen and (max-width: 1290px){
+   .product-item .product-details p{
+      font-size: 13px;
+   }
+
+   .product-item .product-details h4.product-name{
+      font-size: 15px;
+   }
+}
+
 @media screen and (max-width: 991px){
 
 
