@@ -32,18 +32,6 @@
 
                                 </div>
 
-                                <div class="form-group long">
-                                    <div class="form-inline">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
-                                            <label class="form-check-label" for="remember">
-                                                <?php echo e(__('New Product')); ?>
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="form-group long" id="select-product">
                                     <label for="Product">Product</label>
                                     <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product"  >
@@ -55,6 +43,18 @@
                                     </span>
                                     @enderror
 
+                                </div>
+
+                                <div class="form-group long">
+                                    <div class="form-inline">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
+                                            <label class="form-check-label" for="remember">
+                                                <?php echo e(__('Is your product not on the list? Click Me.')); ?>
+                                            </label>
+
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group long" id="custom-product-container">
