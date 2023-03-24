@@ -55,9 +55,9 @@
 
             <div class="product-item reveal">
 
-                    <div class="product-image">
+                    <a class="product-image" href="{{ route('shop.products.find', ['id' => $featuredProduct->id]) }}">
                         <img src="{{ asset($featuredProduct->image) }}" alt="">
-                    </div>
+                    </a>
                     <div class="product-details">
 
 
@@ -95,9 +95,9 @@
 
                 <div class="product-item reveal">
 
-                    <div class="product-image">
+                    <a class="product-image" href="{{ route('shop.products.find', ['id' => $popularProduct->seller_product->id]) }}">>
                         <img src="{{ asset($popularProduct->seller_product->image) }}" alt="">
-                    </div>
+                    </a>
                     <div class="product-details">
 
 

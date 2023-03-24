@@ -89,12 +89,14 @@
 }
 
 .delivery-addresses{
-   width: calc(25% - 40px);
+   width: 100%;
+   /*width: calc(25% - 40px);*/
    border: 2px solid #3e9e14;
    border-radius: 5px;
    height: 100%;
    padding: 25px;
    margin-right: 20px;
+   margin-bottom: 25px;
 }
 
 .main-cart{
@@ -142,12 +144,54 @@
 
 
 .payment-options{
-   width: calc(75% - 40px);
+   width: 70%;
+   margin: 0 auto;
+   /*width: calc(75% - 40px);*/
    padding: 25px;
-   border: 2px solid #3e9e14;
+   /*border: 2px solid #3e9e14;*/
    border-radius: 5px;
    height: 100%;
-   margin-left: 20px;
+   /*margin-left: 20px;*/
+   display: flex;
+   text-align: center;
+   flex-flow: row wrap;
+   justify-content: space-between;
+}
+
+.payment-option-item{
+   width: calc(50% - 30px);
+   margin:0  15px;
+   position: relative;
+   /*border: 2px solid #3e9e14;*/
+
+}
+
+/*.payment-option-item:hover{
+   border: 2px solid #3e9e14;
+}*/
+.payment-option-item img {
+   cursor: pointer;
+   width: 240px;
+   height: 240px;
+   margin: 25px auto;
+}
+
+/* HIDE RADIO */
+.payment-option-item [type=radio] {
+   position: absolute;
+   opacity: 0;
+   width: 100%;
+   height: 100%;
+}
+
+/* IMAGE STYLES */
+.payment-option-item [type=radio] + img {
+   cursor: pointer;
+}
+
+/* CHECKED STYLES */
+.payment-option-item [type=radio]:checked + img {
+   border: 2px solid #3e9e14;
 }
 
 .button-area{

@@ -1,25 +1,10 @@
 @component('mail::message')
 
-@if( $order->order_statuses->last()->status->id == '1' )
+#COD Request
 
-    #Order {{ $order->order_statuses->last()->status->status }}
+Hi, {{ $order->buyer->user->first_name }}!
 
-@elseif( $order->order_statuses->last()->status->id == '2' )
-    #Preparing to Ship
-
-@elseif( $order->order_statuses->last()->status->id == '3' )
-    #Out for Delivery
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Delivered
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Order Cancelled
-
-@elseif( $order->order_statuses->last()->status->id == '4' )
-    #Order Completed
-@endif
-
+<p>Your COD Request has been confirmed.</p>
 
 <table class="table table-bordered" style="width: 100%; text-align: left">
     <tr>

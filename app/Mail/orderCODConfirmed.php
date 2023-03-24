@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewOrderStatus extends Mailable
+class orderCODConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,13 +17,10 @@ class NewOrderStatus extends Mailable
      * @return void
      */
     public $order;
-//    public $order_status;
     public function __construct($order)
     {
-
-        $this->order = $order;
-//        $this->order_status = $order_status;
         //
+        $this->order = $order;
     }
 
     /**
@@ -31,11 +28,9 @@ class NewOrderStatus extends Mailable
      *
      * @return $this
      */
-
-
     public function build()
     {
-        return $this->markdown('emails.order-status')
+        return $this->markdown('emails.order-cod-confirmed')
             ->subject('Order Status')
             ->with('order', $this->order);
     }

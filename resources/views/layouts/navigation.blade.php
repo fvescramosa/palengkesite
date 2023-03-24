@@ -17,6 +17,7 @@
                     <ul class="navbar-nav">
 
                         <!-- Authentication Links -->
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shop.categories') }}">Categories</a>
                         </li>
@@ -26,7 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shop.stores') }}">Stores</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
