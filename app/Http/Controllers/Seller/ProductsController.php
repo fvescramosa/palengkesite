@@ -62,6 +62,7 @@ class ProductsController extends Controller
                 'code' => '',
                 'manufacturer' => '',
                 'type' => '',
+                'stock' => '',
                 'status' => 'pending'
             ]);
 

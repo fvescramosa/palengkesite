@@ -241,6 +241,11 @@
    flex: 1 1 calc(33.3333% - 22px); /*(100% / 3 = 33.3333%) calculate the width of column - total margin left and right of 1 column*/
    max-width: calc(33.3333% - 22px);
    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+   transition: 1s;
+}
+
+.dashboard-column:hover{
+   transform: scale(1.1);
 }
 
 .dashboard-column a{
@@ -350,3 +355,12 @@ td img{
 .icon-dashboard .fa{
    padding-top: 35px;
 }
+
+::-webkit-scrollbar-thumb {
+   background: var(--orange); 
+}
+
+::-webkit-scrollbar {
+   background: var(--green); 
+ }
+ 

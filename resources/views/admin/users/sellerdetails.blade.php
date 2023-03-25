@@ -148,7 +148,17 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td class="stall-info-title-container"><p><strong>Duration: </strong></p> </td>
+                                                    <td class="stall-info-title-container"><p><strong>Start Date: </strong></p> </td>
+                                                    <td> <p>{{ date('m/d/Y', strtotime($user->seller->seller_stalls->start_date)) }}</p></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>End Date: </strong></p> </td>
+                                                    <td> <p>{{ date('m/d/Y', strtotime($user->seller->seller_stalls->end_date)) }}</p></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="stall-info-title-container"><p><strong>Duration (Months): </strong></p> </td>
                                                     <td> <p>{{ $user->seller->seller_stalls->duration }}</p></td>
                                                 </tr>
                                                 <tr>

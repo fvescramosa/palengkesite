@@ -176,7 +176,7 @@
                 <hr>
 
 
-                {{--@if($orders->order_statuses->last()->status->status == 'Placed')
+                @if($orders->order_statuses->last()->status->status == 'Placed')
 
                     @if(!isset($_GET['cancel']))
 
@@ -201,15 +201,15 @@
                             <label for="" class="col-form-label">Reason</label>
                             <textarea class="form-control-lg" type="hidden" name="reason" rows="10" style="width: 100%" ></textarea>
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="home-btn option-btn">
+                                <div class="col-md-12">
+                                    <button type="submit" class="pal-button btn-orange">
                                         {{ __('Cancel Order') }}
                                     </button>
                                 </div>
                             </div>
                         </form>
                     @endif
-                @endif--}}
+                @endif
             </div>
        </div>
    </div>

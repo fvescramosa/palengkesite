@@ -50,7 +50,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
                                             <label class="form-check-label" for="remember">
-                                                <?php echo e(__('Is your product not on the list? Click Me.')); ?>
+                                                <?php echo e(__('Custom Product')); ?>
                                             </label>
 
                                         </div>
@@ -68,6 +68,23 @@
                                     @enderror
 
                                 </div>
+
+                                <div class="form-group short">
+                                    <label for="Product">Stock or Quantity</label>
+                                    <input type="number"
+                                           class="form-control @error('stock') is-invalid @enderror"
+                                           id="stock" name="stock"
+                                           placeholder="Stock"
+                                           value="" >
+
+                                    @error('stock')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
 
                                 <div class="form-group long" id="description-container">
                                     <label for="Product">Custom Product Name</label>
