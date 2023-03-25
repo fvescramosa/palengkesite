@@ -281,6 +281,10 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('developers.store');
     Route::get('/about-us/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('developers.edit');
     Route::post('/about-us/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('developers.update');
+    Route::get('/about-us/developers-trash', [\App\Http\Controllers\Admin\AboutUsController::class, 'showDeveloperTrash'])->name('developers-trash');
+    Route::get('/about-us/delete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'deleteDeveloper'])->name('developers.delete');
+    Route::get('/about-us/permanentdelete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'DeveloperForceDelete'])->name('developers.permanentdelete');
+    Route::get('/about-us/recover/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'recoverDeveloper'])->name('developers.recover');
 });
 
 Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');

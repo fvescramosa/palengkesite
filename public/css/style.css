@@ -2526,24 +2526,31 @@ button{
 }
 
 .developer{
-   flex: 1 1 calc(20% - 30px);
-   max-width: calc(20% - 30px); ;
+   flex: 1 1 calc(28% - 30px);
+   max-width: calc(28% - 30px); ;
    border: 2px solid #000;
    background: #fff;
    position: relative;
    margin: 0 15px;
-   box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)
+   box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.4);
+   border-radius: 10px;
+   transition: 1s;
+}
+
+.developer:hover{
+   transform: scale(1.1);
 }
 
 .developer .img-section{
    position: relative;
    height: 250px;
-   border-bottom: 2px solid #000;
+   border-bottom: 1px solid #000;
 }
 .developer .img-section img{
    width: 100%;
    height: 100%;
    object-fit: cover;
+   border-radius: 10px 10px 0 0;
 }
 
 .developer .img-section ul {
@@ -2588,9 +2595,10 @@ button{
    display: flex;
    align-items: center;
    justify-content: center;
+   border-radius: 0 0 10px 10px
 }
 .developer .name-section p {
-   font-weight: 800;
+   font-weight: 500;
    text-align: center;
 }
 
@@ -2611,9 +2619,8 @@ button{
    }
 
    .developer {
-      flex: 1 1 calc(33.333% - 30px);
-      max-width: calc(33.333% - 30px);
-      margin: 0 auto;
+      flex: 1 1 calc(33.3333% - 30px);
+      max-width: calc(33.3333% - 30px);
    }
 }
 
@@ -2630,7 +2637,7 @@ button{
    .developer {
       flex: 1 1 calc(50% - 30px);
       max-width: calc(50% - 30px);
-      margin: 0 auto;
+      margin-bottom: 20px;
    }
 }
 
@@ -2639,9 +2646,9 @@ button{
       padding: 20px;
    }
    .developer {
-      flex: 1 1 calc(90% - 30px);
-      max-width: calc(90% - 30px);
-      margin: 0 auto;
+      flex: 1 1 calc(100%);
+      max-width: calc(100%);
+      margin: 20px;
    }
 }
 
@@ -2649,10 +2656,9 @@ button{
    .about-us-flex{
       padding: 20px;
    }
+
    .developer {
-      flex: 1 1 calc(95% - 30px);
-      max-width: calc(95% - 30px);
-      margin: 0 auto;
+      margin: 0 0 20px 0;
    }
 }
 

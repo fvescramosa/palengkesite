@@ -102,7 +102,8 @@
 #users_submenu li,
 #products_submenu li,
 #categories_submenu li,
-#stalls_submenu li {
+#stalls_submenu li,
+#about_submenu li {
    padding-left: 25px;
 }
 

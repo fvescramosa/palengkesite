@@ -108,4 +108,34 @@ class AboutUsController extends Controller
 
         return redirect(route('admin.about-us'))->with($response);
     }
+    public function showDeveloperTrash(){
+        $developers = Developer::onlyTrashed()->get();
+
+
+
+        return view('admin.about-us/trash', compact(['developers']));
+    }
+
+    public function deleteDeveloper($id){
+
+        $delete =  Developer::where('id', $id)->delete();
+
+        return redirect(route('admin.about-us'));
+
+    }
+
+    public function recoverDeveloper($id){
+
+        $recover = Developer::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('admin.about-us'));
+
+    }
+
+    public function DeveloperForceDelete($id){
+
+        $delete = Developer::where('id', $id)->forceDelete();
+        return redirect(route('admin.developers-trash'));
+    }
 }
+

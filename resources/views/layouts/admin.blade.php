@@ -236,12 +236,27 @@
                             <span class="item">Settings</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.about-us') }}" class="{{ ( request()->routeIs('admin.about-us') ? 'active' : '' )}}">
+                    <li class="collapsed" data-toggle="collapse" data-target="#about_submenu">
+                        <a href="#"  class="">
                             <span class="icon"><i class="fa fa-user-shield"></i></span>
                             <span class="item">About Us</span>
-
                         </a>
+                        <div class="collapse {{ (request()->segment(2) == 'about-us') ? 'show' : ''}}" id="about_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.about-us') }}" class="{{ ( request()->routeIs('admin.about-us') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-user-shield"></i></span>
+                                        <span class="item">Developers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.developers-trash') }}" class="{{ ( request()->routeIs('admin.developers-trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">

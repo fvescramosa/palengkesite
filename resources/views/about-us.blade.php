@@ -4,10 +4,10 @@
 <section class="about-us">
     <div class="container">
         <div class="about-us-flex">
-            <div class="about-us-left">
+            <div class="about-us-left reveal">
                 <img src="{{ \Illuminate\Support\Facades\URL::to('/images/logo-palengkesite.png') }}" alt="">
             </div>
-            <div class="about-us-right">
+            <div class="about-us-right reveal">
                 <h3>WHY CHOOSE US?</h3>
                 <p>
                     PalengkeSite is an e-commerce website for Batangueñoes.
@@ -30,7 +30,7 @@
     </div>
 </section>
 <section class="about-developers">
-    <div class="container">
+    <div class="container reveal">
         <h3>Developers</h3>
         <div class="developers-grid">
 
@@ -55,4 +55,24 @@
     </div>
 
 </section>
+
+<script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 120;
+
+            if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+            } else {
+                    reveals[i].classList.remove("active");
+            }
+        }
+    }
+
+        window.addEventListener("scroll", reveal);
+</script>
 @endsection
