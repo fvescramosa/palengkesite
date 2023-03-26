@@ -21,8 +21,10 @@
                     <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" class="form-group" method="POST">
                         @csrf
                         <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                        @if($orders->status !== 'Completed' && $orders->status !== 'Cancelled')
                         <select name="status" id="orderStatus" class="form-control">
                             @foreach($statuses as $status)
+
 
 
                                 <option value="{{ $status->id }}"
@@ -30,8 +32,10 @@
                                         {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}
 
                                 >{{ $status->status }}</option>
+
                             @endforeach
                         </select>
+                        @endif
                     </form>
                 </div>
                 <div class="order-details-box order-customer-info">
