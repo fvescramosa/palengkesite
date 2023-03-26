@@ -35,7 +35,10 @@
 
         <div class="box-container reveal" id="box-container">
             @foreach($categories as $category)
-                     <a href="{{ route('shop.product.category', ['slug' => $category->slug]) }}" class="box-item" style="background-image: url({{ asset($category->image)  }})">
+                     <a href="{{ route('shop.product.category', ['slug' => $category->slug]) }}"  >
+                         <canvas style="background-image: url({{ asset($category->image)  }})" class="box-item">
+
+                         </canvas>
                         <div class="overlay"></div>
                          <h3>{{ $category->category }}</h3>
                     </a>
