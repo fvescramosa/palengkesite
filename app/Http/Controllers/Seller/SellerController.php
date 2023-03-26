@@ -162,6 +162,7 @@ class SellerController extends Controller
             if(auth()->user()->seller()->exists()){
                 $seller = auth()->user()->seller;
 
+            //    dd( date('m/d/Y') > date('m/d/Y', strtotime($seller->seller_stalls->end_date)));
 
                 if(date('m/d/Y') > date('m/d/Y', strtotime($seller->seller_stalls->end_date))){
                     $seller->seller_stalls->update([

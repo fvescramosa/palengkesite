@@ -2177,6 +2177,15 @@ button{
    position: relative;
    text-decoration: none;
 }
+
+.chat li:hover{
+   background: var(--white);
+}
+
+.chat li a:hover{
+   text-decoration: none;
+}
+
 .chat li.user {
    justify-content: flex-end;
    text-align: right;
