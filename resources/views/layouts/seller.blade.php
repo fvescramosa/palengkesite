@@ -77,11 +77,10 @@
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
                                         <span class="notif badge badge-danger" id="orders-notif">
-                                            @if(auth()->user()->seller()->messages()->exists())
+                                             @if(auth()->user()->seller->orders()->exists())
                                                 {{ auth()->user()->seller->orders->where('status', 'pending')->count() }}
                                             @endif
                                         </span>
-                                        @endif
                                     </a>
                                 </li>
 
@@ -90,7 +89,7 @@
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
                                         <span class="notif badge badge-danger" id="messages-notif">
-                                            @if(auth()->user()->seller()->messages()->exists())
+                                            @if(auth()->user()->seller->messages()->exists())
                                                 {{ auth()->user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
                                             @endif
                                         </span>

@@ -96,6 +96,7 @@
                                             <span class="item">Delivery Address</span>
                                         </a>
                                     </li>
+                                    @if(auth()->user()->buyer()->exists())
                                     <li>
                                         <a href="{{ route('buyer.chats') }}">
                                             <span class="icon"><i class="fas fa-envelope"></i></span>
@@ -108,6 +109,7 @@
                                              </span>
                                         </a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('buyer.switch.seller') }}">
                                             <span class="icon"><i class="fas fa-people-arrows"></i></span>
