@@ -89,6 +89,9 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
     Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
+
+    Route::get('/getMessagesNotification', [BuyerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
+    Route::get('/setUnread', [BuyerController::class, 'setUnread'])->name('setUnread');
 });
 
 
@@ -161,6 +164,10 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
     Route::get('/analytics/products/ratings', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productByRatings'])->name('analytics.product.ratings');
+
+
+    Route::get('/getMessagesNotification', [\App\Http\Controllers\Seller\SellerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
+    Route::get('/setUnread', [\App\Http\Controllers\Seller\SellerController::class, 'setUnread'])->name('setUnread');
 //    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
 //    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
 //    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');

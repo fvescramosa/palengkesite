@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\Categories;
 use App\Http\Controllers\Controller;
 use App\Mail\NewUserWelcomeMail;
+use App\Message;
 use App\Products;
 use App\Buyer;
 use App\Seller;
@@ -190,6 +191,8 @@ class SellerController extends Controller
         }
 
 
+
+
     }
 
 
@@ -223,5 +226,20 @@ class SellerController extends Controller
         $response = ['response' => 'success', 'message' => 'Profile switch successful!'];
 
         return redirect(route('buyer.profile', ['id' => Auth::user()->id]))->with($response);
+    }
+
+    public function getMessagesNotification(){
+        $messages = Auth::user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->where('sender', 'buyer');
+
+
+        return response()->json($messages->count());
+
+    }
+
+    public function setUnread(){
+//        $messages = Auth::user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->where('sender', 'buyer')->update(['status' => 'read']);
+        $messages = Message::where('status', 'unread')->where('sender', 'buyer')->where('seller_id', auth()->user()->seller->id)->update(['status' => 'read']);
+
+        return $messages;
     }
 }

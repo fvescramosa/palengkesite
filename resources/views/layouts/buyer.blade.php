@@ -100,6 +100,8 @@
                                         <a href="{{ route('buyer.chats') }}">
                                             <span class="icon"><i class="fas fa-envelope"></i></span>
                                             <span class="item">Messages</span>
+
+                                            <span class="notif badge badge-danger" id="messages-notif">{{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}</span>
                                         </a>
                                     </li>
                                     <li>
@@ -132,7 +134,42 @@
                         const app = {
                             initCollapse: function(){
                                 console.log('A script has been loaded');
-                            }
+                                app.initNotifMessage();
+                                app.initSetUnread( $('#btn-input'));
+                            },
+                            initNotifMessage: function(){
+
+                                setInterval(function(){
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('buyer.getMessagesNotification')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+                                            $('#messages-notif').text(data);
+                                        }
+                                    });
+                                }, 5000);
+                            },
+                            initSetUnread: function (trigger) {
+                                trigger.click(function () {
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('buyer.setUnread')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+
+                                        }
+                                    });
+                                })
+                            },
                         };
 
                         $(window).on('load', function(){
