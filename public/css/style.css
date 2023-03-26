@@ -1719,6 +1719,11 @@ display: flex;
    max-width: 100% !important;
 }
 
+.home-category h1,
+.home-products h1 {
+   margin-bottom: 5rem;
+}
+
 .product-subtitle,
 .category-subtitle{
    text-align: center;
@@ -1726,7 +1731,7 @@ display: flex;
    font-size: 20px;
    font-weight: 700;
    text-transform: uppercase;
-   margin: 20px 0;
+   margin: 5px 0;
 }
 
 .box-container {
@@ -2125,18 +2130,20 @@ button{
    width: 30%;
    font-weight: 500;
    border-right: 1px solid #e3e3e3;
+   overflow-y: scroll;
+   background: #cccccc4d;
 }
 
 .chat-wrapper .chat-messages{
-   width: 70%;
+   width: 90%;
+   background: #cccccc4d;
 }
 
 .chat {
    list-style: none;
    margin: 0;
    padding: 0;
-
-   height: 450px;
+   height: 85%;
 }
 
 .chat li {
@@ -2144,10 +2151,10 @@ button{
    margin-bottom: 10px;
    /* padding-bottom: 5px; */
    padding: 10px;
-   border-bottom: 1px dotted #B3A9A9;
+   /* border-bottom: 1px dotted #B3A9A9; */
    display: block;
    padding: 13px 30px;
-   border-bottom: 1px solid #3E9E14;
+   /* border-bottom: 1px solid #3E9E14; */
    color: rgb(241, 237, 237);
    font-size: 16px;
    position: relative;
@@ -2164,8 +2171,18 @@ button{
 }
 
 .panel-body {
-   overflow-y: scroll;
    height: 350px;
+}
+
+.panel-default{
+   height: 100%;
+   overflow-y: scroll;
+}
+
+.panel-footer .input-group button{
+   margin: 0 auto;
+   padding: 12px 25px;
+   font-size: 14px;
 }
 
 .chat-body strong{

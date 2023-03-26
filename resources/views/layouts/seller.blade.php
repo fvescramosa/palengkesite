@@ -135,12 +135,12 @@
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="{{ route('index') }}">
                                 <span class="icon"><i class="fas fa-home"></i></span>
                                 <span class="item">Back to Site</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <span class="icon"><i class="fas fa-power-off"></i></span>
