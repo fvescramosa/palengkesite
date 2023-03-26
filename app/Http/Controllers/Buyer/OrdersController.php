@@ -17,12 +17,21 @@ class OrdersController extends Controller
     }
 
     
-    public function index(){
+    public function index(Request $request){
 
 
-        $orders = Auth::user()->buyer->orders;
+//        $orders = Auth::user()->buyer->orders;
+        $orders = Order::where('buyer_id', auth()->user()->buyer->id);
 
+        if($request->status){
 
+            $orders->where('status', $request->status);
+
+        }else{
+            $orders = $orders->where('status', 'pending');
+        }
+
+        $orders = $orders->get();
 
         return view('buyer.orders.index', compact(['orders']));
 

@@ -425,7 +425,7 @@
 
                 $(window).on('load', function(){
                     app.initCollapse();
-                    app.filter($('#orderby'));
+                    app.filter($('#orderby, #status'));
                     app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();

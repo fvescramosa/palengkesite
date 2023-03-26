@@ -84,32 +84,34 @@
                                             <span class="item">Profile</span>
                                         </a>
                                     </li>
-                                    @if(auth()->user()->buyer()->exists())
-                                    <li>
-                                        <a href="{{ route('buyer.orders.index') }}">
-                                            <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                                            <span class="item">My Orders</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('buyer.delivery.address.index') }}">
-                                            <span class="icon"><i class="fas fa-location-arrow"></i></span>
-                                            <span class="item">Delivery Address</span>
-                                        </a>
-                                    </li>
 
-                                    <li>
-                                        <a href="{{ route('buyer.chats') }}">
-                                            <span class="icon"><i class="fas fa-envelope"></i></span>
-                                            <span class="item">Messages</span>
+                                   @if(auth()->user()->buyer()->exists())
+                                        <li>
+                                            <a href="{{ route('buyer.orders.index') }}">
+                                                <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                                                <span class="item">My Orders</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('buyer.delivery.address.index') }}">
+                                                <span class="icon"><i class="fas fa-location-arrow"></i></span>
+                                                <span class="item">Delivery Address</span>
+                                            </a>
+                                        </li>
+                                        @if(auth()->user()->buyer->messages()->exists())
+                                        <li>
+                                            <a href="{{ route('buyer.chats') }}">
+                                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                                <span class="item">Messages</span>
 
-                                             <span class="notif badge badge-danger" id="messages-notif">
-                                                @if(auth()->user()->buyer()->messages()->exists())
-                                                 {{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
-                                                @endif
-                                             </span>
-                                        </a>
-                                    </li>
+                                                 <span class="notif badge badge-danger" id="messages-notif">
+
+                                                        {{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
+
+                                                 </span>
+                                            </a>
+                                        </li>
+                                        @endif
                                     @endif
                                     <li>
                                         <a href="{{ route('buyer.switch.seller') }}">

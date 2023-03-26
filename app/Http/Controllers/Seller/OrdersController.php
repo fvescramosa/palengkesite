@@ -23,19 +23,23 @@ class OrdersController extends Controller
 
         if($request->status){
 
-            if ($request->status == 1){
-                $orders = $orders->where('status', 'pending');
-                $orders = $orders->orWhere('status', 'confirmed');
-            }else if ($request->status == 2){
-                $orders = $orders->where('status', 'Shipping');
-            }
-            else if ($request->status == 3 ||$request->status == 4 || $request->status == 5 || $request->status == 6 ){
-                $orders = $orders->where('status', Status::find($request->status)->status);
-            }
+            $orders->where('status', $request->status);
+            //if($request->status == 'confirmed') {
+            //    $orders->where('status', 'confirmed');
+            //}else if($request->status == 'pending') {
+              //  $orders = $orders->where('status', 'pending');
+//                $orders = $orders->where('status', 'pending')->orWhere('status', 'confirmed');
+            //}
+           //else{
+//                $orders = $orders->where('status', $request->status);
 
-//            dd(Status::find($request->status)->status);
+               /* $status =  $request->status;
+                $orders = $orders->whereHas('order_statuses', function ($q) use ($status){
+                } );*/
+            //}
 
-//            $orders = $orders->where('status', );
+        }else{
+            $orders = $orders->where('status', 'Pending');
         }
 
         $statuses = Status::all();
