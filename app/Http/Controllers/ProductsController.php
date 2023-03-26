@@ -42,7 +42,10 @@ class ProductsController extends Controller
 
         $products = SellerProduct::with(['product'])->whereHas('seller', function ($q){
             $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+            $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
         });
+
+
 
         if(session()->has('shop_at_market')){
             $products = $products->whereHas('seller', function ($query){
@@ -123,6 +126,7 @@ class ProductsController extends Controller
                     })
                     ->whereHas('seller', function ($q){
                         $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+                        $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
                     });
 
         if(session()->has('shop_at_market')){
@@ -308,6 +312,7 @@ class ProductsController extends Controller
         $stores = SellerStall::with(['stall'])->where('status', 'active')
             ->whereHas('seller', function($q){
                 $q->whereHas('user');
+                $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
             })
             ->whereHas( 'stall', function($q){
                 $q->where('status', 'occupied');
@@ -348,7 +353,8 @@ class ProductsController extends Controller
 
         $products = SellerProduct::with(['PRODUCT'])->where('seller_id', $sellerStall->seller->id)
         ->whereHas('seller', function($q){
-            $q->whereHas('seller_stalls');
+//            $q->whereHas('seller_stalls');
+            $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
         });
 
         if($request->product_name){

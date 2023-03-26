@@ -1742,14 +1742,12 @@ display: flex;
    align-items: center;
 }
 
-.box-container a.box-item {
+.box-container a{
 
    flex: 1 1 20%;
    min-height: 450px;
    text-align: center;
-   background-size: cover;
-   background-position: bottom;
-   background-repeat: no-repeat;
+
    height: 100%;
    /* padding-bottom: 80px; */
    display: flex !important;
@@ -1760,12 +1758,29 @@ display: flex;
    transition: all ease-in-out .50s;
 }
 
-
-.box-container a.box-item:hover h3{
-   color: #3e9e14;
+.box-container canvas.box-item{
+   position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
 }
 
-.box-item .overlay {
+
+.box-container a h3{
+    color: #fff;
+    z-index: 999;
+}
+
+.box-container a:hover h3{
+   color: #3e9e14;
+    z-index: 999;
+}
+
+.box-container a .overlay {
    background-color: #2f4c228a;
    position: absolute;
    top:0;
@@ -1773,10 +1788,12 @@ display: flex;
    height: 100%;
    width: 100%;
    transition: all ease-in-out .50s;
+    z-index: 999;
 }
 
-.box-item:hover .overlay {
+.box-container  a:hover .overlay {
    background-color: transparent;
+    z-index: 999;
 }
 
 
@@ -1785,7 +1802,7 @@ display: flex;
    margin-bottom: 1rem;
 }
 
-.box-item h3{
+.box-container a h3{
    text-transform: uppercase;
    color: #fff;
    font-size: 23px;

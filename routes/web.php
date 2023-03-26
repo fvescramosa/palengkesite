@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ AdminController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\SellerStallsController;
 use App\Http\Controllers\Admin\StallAppointmentController;
