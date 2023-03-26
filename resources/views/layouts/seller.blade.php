@@ -69,12 +69,14 @@
                                     <a href="{{ route('seller.products.show') }}">
                                         <span class="icon"><i class="fa fa-store"></i></span>
                                         <span class="item">Products</span>
+                                        <span class="notif badge badge-danger" id="orders-notif">{{ auth()->user()->seller->seller_products->where('status', 'pending')->count() }}</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('seller.orders.show') }}">
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
+                                        <span class="notif badge badge-danger" id="orders-notif">{{ auth()->user()->seller->orders->where('status', 'pending')->count() }}</span>
                                     </a>
                                 </li>
 
@@ -82,8 +84,10 @@
                                     <a href="{{ route('seller.chats') }}">
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
+
+                                        <span class="notif badge badge-danger" id="messages-notif">{{ auth()->user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}</span>
                                     </a>
-                                </li>
+                                 </li>
 
 
                                 <li class="collapsed" data-toggle="collapse" data-target="#sellers_submenu">
@@ -192,7 +196,42 @@
                         const app = {
                             initCollapse: function(){
                                 console.log('A script has been loaded');
-                            }
+                                app.initNotifMessage();
+                                app.initSetUnread( $('#btn-input') );
+                            },
+                            initNotifMessage: function(){
+
+                                setInterval(function(){
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('seller.getMessagesNotification')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+                                            $('#messages-notif').text(data);
+                                        }
+                                    });
+                                }, 5000);
+                            },
+                            initSetUnread: function (trigger) {
+                                trigger.click(function () {
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('seller.setUnread')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+
+                                        }
+                                    });
+                                })
+                            },
                         };
 
                         $(document).ready(function () {

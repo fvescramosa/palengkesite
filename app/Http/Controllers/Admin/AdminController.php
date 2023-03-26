@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\Message;
 use function dd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -269,6 +270,8 @@ class AdminController extends Controller
         return response()->json($products->count());
         
     }
+
+
 
     public function getNotifications(){
         $notif = Notification::where('status', 'unread')->get();
