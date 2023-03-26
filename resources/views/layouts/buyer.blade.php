@@ -84,6 +84,7 @@
                                             <span class="item">Profile</span>
                                         </a>
                                     </li>
+                                    @if(auth()->user()->buyer()->exists())
                                     <li>
                                         <a href="{{ route('buyer.orders.index') }}">
                                             <span class="icon"><i class="fas fa-shopping-basket"></i></span>
@@ -96,7 +97,7 @@
                                             <span class="item">Delivery Address</span>
                                         </a>
                                     </li>
-                                    @if(auth()->user()->buyer()->exists())
+
                                     <li>
                                         <a href="{{ route('buyer.chats') }}">
                                             <span class="icon"><i class="fas fa-envelope"></i></span>
