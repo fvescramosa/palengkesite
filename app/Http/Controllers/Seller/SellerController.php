@@ -16,6 +16,7 @@ use App\Notification;
 use function compact;
 use function dd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use function response;
@@ -163,7 +164,12 @@ class SellerController extends Controller
                 $seller = auth()->user()->seller;
 
 
-                if(date('m/d/Y') > date('m/d/Y', strtotime($seller->seller_stalls->end_date))){
+                $present = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                $enddate = Carbon::createFromFormat('Y-m-d H:i:s', $seller->seller_stalls->end_date);
+
+
+
+                if($enddate->lt($present)){
                     $seller->seller_stalls->update([
                         'status' => 'inactive'
                     ]);
