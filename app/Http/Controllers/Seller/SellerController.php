@@ -154,14 +154,26 @@ class SellerController extends Controller
 
     public function profile(){
 
-
+        $response = '';
         if(session('user_type') == 'buyer') {
             return redirect(route('buyer.profile'));
         }
         else {
             if(auth()->user()->seller()->exists()){
                 $seller = auth()->user()->seller;
-                return view('seller/profile', compact(['seller']));
+
+
+                if(date('m/d/Y') > date('m/d/Y', strtotime($seller->seller_stalls->end_date))){
+                    $seller->seller_stalls->update([
+                        'status' => 'inactive'
+                    ]);
+
+                    $response = [
+                        'response' => 'error',
+                        'message' => 'Your Contract has been expired! Please contact the Admin to renew your contract.'
+                    ];
+                }
+                return view('seller/profile', compact(['seller']))->with($response);
             }else{
                 return redirect(route('seller.create'));
             }

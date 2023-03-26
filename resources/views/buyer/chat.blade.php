@@ -19,7 +19,7 @@
 
                             {{--It means buyer talking to seller--}}
                            <li class="left clearfix">
-                                <a href="{{ route('buyer.chat.seller', ['id' => $title->seller->seller_stalls['id']]) }}"> {{ $title->seller->seller_stalls['name'] ?? $title->seller }}</a>
+                                    <a href="{{ route('buyer.chat.seller', ['id' => $title->seller->seller_stalls['id']]) }}"> {{ $title->seller->seller_stalls['name'] ?? $title->seller->user->first_name }} </a>
                             </li>
 
 

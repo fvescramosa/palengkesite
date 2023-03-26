@@ -274,7 +274,7 @@ class StallsController extends Controller
             'stall_id' => $request->number,
             'name' => $request->name,
             'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+//            'end_date' => $request->end_date,
             'duration' => $request->duration,
             'occupancy_fee' => $request->occupancy_fee,
             'type' => 0,
