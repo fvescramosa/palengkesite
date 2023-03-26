@@ -23,7 +23,7 @@
                                 <td>{{ $developer->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.developers.edit', $developer->id) }}">Edit</a> |
-                                    {{--<a href="{{ route('admin.developer.delete', $developer->id) }}">Delete</a>--}}
+                                    <a href="{{ route('admin.developers.delete', $developer->id) }}">Delete</a>
                                 </td>
 
                             </tr>

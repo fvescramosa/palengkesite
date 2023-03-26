@@ -35,6 +35,7 @@
                         <tr>
                             <th>Seller</th>
                             <th>Stall No.</th>
+                            <th>Date Created</th>
                             <th>Section</th>
                             <th>Sqm</th>
                             <th>Location</th>
@@ -49,6 +50,7 @@
                             <tr class="stall-approval-row">
                                 <td> {{ $stall->seller->user->first_name }} {{ $stall->seller->user->last_name }}</td>
                                 <td> {{ $stall->stall->number }}</td>
+                                <td> {{ date('m/d/Y', strtotime($stall->stall->created_at)) }}</td>
                                 <td> {{ $stall->stall->section }}</td>
                                 <td> {{ $stall->stall->sqm }}</td>
                                 <td> {{ $stall->stall->market->market }}</td>

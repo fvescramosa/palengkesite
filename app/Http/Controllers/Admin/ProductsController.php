@@ -29,6 +29,10 @@ class ProductsController extends Controller
             });
         }
 
+        if(isset($_GET['status'])){
+            $products = $products->where('status', $_GET['status']);
+        }
+        
         $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){

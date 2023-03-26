@@ -23,6 +23,13 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <select  class="form-control" id="status" name="status" placeholder="Status" value="" >
+                                <option value="pending"     <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'pending' ) ? 'selected' : '' : '' ); ?>>Pending</option>
+                                <option value="active"     <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
+                            </select>
+                        </div>
+
                         @if(isset($_GET['page']))
                             <input type="hidden" name="page" value="{{ $_GET['page'] }}">
                         @endif
