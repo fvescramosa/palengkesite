@@ -76,7 +76,12 @@
                                     <a href="{{ route('seller.orders.show') }}">
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
-                                        <span class="notif badge badge-danger" id="orders-notif">{{ auth()->user()->seller->orders->where('status', 'pending')->count() }}</span>
+                                        <span class="notif badge badge-danger" id="orders-notif">
+                                            @if(auth()->user()->seller()->messages()->exists())
+                                                {{ auth()->user()->seller->orders->where('status', 'pending')->count() }}
+                                            @endif
+                                        </span>
+                                        @endif
                                     </a>
                                 </li>
 
@@ -84,8 +89,11 @@
                                     <a href="{{ route('seller.chats') }}">
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
-
-                                        <span class="notif badge badge-danger" id="messages-notif">{{ auth()->user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}</span>
+                                        <span class="notif badge badge-danger" id="messages-notif">
+                                            @if(auth()->user()->seller()->messages()->exists())
+                                                {{ auth()->user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
+                                            @endif
+                                        </span>
                                     </a>
                                  </li>
 

@@ -101,7 +101,11 @@
                                             <span class="icon"><i class="fas fa-envelope"></i></span>
                                             <span class="item">Messages</span>
 
-                                            <span class="notif badge badge-danger" id="messages-notif">{{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}</span>
+                                             <span class="notif badge badge-danger" id="messages-notif">
+                                                @if(auth()->user()->buyer()->messages()->exists())
+                                                 {{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
+                                                @endif
+                                             </span>
                                         </a>
                                     </li>
                                     <li>
