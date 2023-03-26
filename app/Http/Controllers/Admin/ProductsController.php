@@ -29,7 +29,7 @@ class ProductsController extends Controller
             });
         }
 
-        if(isset($_GET['status'])){
+        if(isset($_GET['status']) && $_GET['status'] != ''){
             $products = $products->where('status', $_GET['status']);
         }
         
@@ -37,29 +37,30 @@ class ProductsController extends Controller
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['product_name', 'asc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'Z-A'){
                 $orderby = ['product_name', 'desc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'recent'){
                 $orderby = ['created_at', 'desc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'oldest'){
                 $orderby = ['created_at', 'asc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
             
         }
         else{
             $orderby = ['product_name', 'asc'];
-            $products->orderBy($orderby[0], $orderby[1]);
+            $products = $products->orderBy($orderby[0], $orderby[1]);
         }
+
 
         $products = $products->paginate(10);
 
