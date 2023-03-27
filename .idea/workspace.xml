@@ -41,7 +41,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/SellerProduct.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="138">
               <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
             </state>
           </provider>
@@ -50,8 +50,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+            <state relative-caret-position="115">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Seller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/SellerStall.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-345">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/seller/products/create.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-355">
+              <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -68,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.pal</find>
       <find>paypal</find>
       <find>chat-list</find>
       <find>.my-orders-actions &gt; *</find>
@@ -98,6 +124,7 @@
       <find>$request-&gt;image1</find>
       <find>contact-us</find>
       <find>admin.abo</find>
+      <find>seller_pr</find>
     </findStrings>
     <replaceStrings>
       <replace>SellerProduct</replace>
@@ -417,6 +444,32 @@
               <item name="images" type="462c0819:PsiDirectoryNode" />
               <item name="defaults" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="seller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="seller" type="462c0819:PsiDirectoryNode" />
+              <item name="products" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -591,7 +644,7 @@
       <workItem from="1679790422473" duration="35035000" />
       <workItem from="1679883316312" duration="157000" />
       <workItem from="1679883920137" duration="123000" />
-      <workItem from="1679931323670" duration="936000" />
+      <workItem from="1679931323670" duration="2666000" />
     </task>
     <task id="LOCAL-00001" summary="pogi ako">
       <created>1674228112753</created>
@@ -618,7 +671,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="540701000" />
+    <option name="totallyTimeSpent" value="542431000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,7 +686,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17246597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17246597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -648,7 +701,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32441473" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.358742" side_tool="true" weight="0.2831661" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.641258" visible="true" weight="0.18632479" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.641258" visible="true" weight="0.18632479" />
       <window_info anchor="bottom" id="File Transfer" order="12" weight="0.32820514" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -702,27 +755,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="FIX CONTROLLER SETUP" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Mail/NewOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="37" column="42" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="37" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/orders.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="93" column="1" lean-forward="true" selection-start-line="93" selection-start-column="1" selection-end-line="93" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/seller/analytics/order-by-products.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -1054,17 +1086,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/seller/products/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-355">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Seller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/SellerProduct.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="138">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/SellerStall.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        <state relative-caret-position="115">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
