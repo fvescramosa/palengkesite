@@ -39,10 +39,9 @@
                             <th>Stall No.</th>
                             <th>Coordinates</th>
                             <th>Section</th>
-                            <th>Sqm / Area</th>
-                            <th>Amount per sqm</th>
-                            <th>Rental Fee</th>
-                            <th>Rate</th>
+                            <th>Area in sqm</th>
+                            <th>Amount per sqm / Rate</th>
+                            <th>Rental Fee per day</th>
                             <th>Meter Number</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -57,7 +56,6 @@
                                 <td>{{ $stall->sqm }}</td>
                                 <td>{{ $stall->amount_sqm }}</td>
                                 <td>{{ $stall->rental_fee }}</td>
-                                <td>{{ $stall->rate }}</td>
                                 <td>{{ $stall->meter_num }}</td>
                                 <td>{{ $stall->status }}</td>
                                 <td>

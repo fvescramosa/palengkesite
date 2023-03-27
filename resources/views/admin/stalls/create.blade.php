@@ -34,7 +34,7 @@
 
                             </div>
                             <div class="form-group long">
-                                <label for="Sqm">Sqm</label>
+                                <label for="Sqm">Area in sqm</label>
                                 <input type="text"  class="form-control @error('sqm') is-invalid @enderror"
                                                     id="sqm"
                                                     name="sqm"
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Amount_Sqm">Amount Per Sqm</label>
+                                <label for="Amount_Sqm">Amount Per Sqm / Rate</label>
                                 <input type="text"  class="form-control @error('amount_sqm') is-invalid @enderror"
                                                     id="amount_sqm"
                                                     name="amount_sqm"
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Rental_Fee">Rental Fee</label>
+                                <label for="Rental_Fee">Rental Fee per day</label>
                                 <input type="text"  class="form-control @error('rental_fee') is-invalid @enderror"
                                                     id="rental_fee"
                                                     name="rental_fee"
@@ -83,15 +83,6 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Rate">Rate</label>
-                                <input type="text"  class="form-control @error('rate') is-invalid @enderror"
-                                                    id="rate"
-                                                    name="rate"
-                                                    placeholder="" value="{{ old('rate') }}" >
-
-                            </div>
-
-                            <div class="form-group long">
                                 <label for="coordinates">Coordinates</label>
                                 <input type="text"  class="form-control @error('coordinates') is-invalid @enderror"
                                                     id="coordinates"
@@ -101,7 +92,7 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Meter Number">Meter Number</label>
+                                <label for="Meter Number">Meter Number (If no meter number, type N/A)</label>
                                 <input type="text"  class="form-control @error('meter_number') is-invalid @enderror"
                                                     id="meter_number"
                                                     name="meter_number"
