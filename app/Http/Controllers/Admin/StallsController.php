@@ -137,6 +137,7 @@ class StallsController extends Controller
             'rate' => $request->rate,
             'coords' => $request->coordinates,
             'meter_num' => $request->meter_number,
+            'category_id' => Categories::where('category', $request->section)->first()->id,
         ];
 
   
