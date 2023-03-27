@@ -10,15 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d2a1b217-cf41-4b7f-bf15-af9b749bb386" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AboutUs.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AboutUs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/buyer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/buyer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/orders/find.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/seller/orders/find.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/seller/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,68 +43,106 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/seller/orders/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="95" column="17" selection-start-line="14" selection-start-column="11" selection-end-line="95" selection-end-column="17" />
+            <state relative-caret-position="361">
+              <caret line="288" column="109" selection-start-line="288" selection-start-column="109" selection-end-line="288" selection-end-column="109" />
               <folding>
-                <element signature="e#243#1513#0#HTML" />
-                <element signature="e#2973#6816#0#HTML" />
-                <element signature="e#3473#3480#1#HTML" expanded="true" />
-                <element signature="e#6874#7304#0#HTML" />
+                <element signature="e#7#54#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="62">
+              <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
               <folding>
-                <element signature="e#174#3620#0#HTML" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/buyer.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="119" selection-start-line="19" selection-start-column="119" selection-end-line="19" selection-end-column="119" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="72" />
-              <folding>
-                <element signature="e#47#75#0#PHP" expanded="true" />
-                <element signature="e#505#1280#0#PHP" />
+                <element signature="e#46#62#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+            <state relative-caret-position="110">
+              <caret line="121" column="25" lean-forward="true" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+              <folding>
+                <element signature="e#1277#1349#0#HTML" expanded="true" />
+                <element signature="e#4901#4930#0#HTML" expanded="true" />
+                <element signature="e#5010#5048#0#HTML" expanded="true" />
+                <element signature="e#6781#7276#0#HTML" />
+                <element signature="e#8225#8324#0#HTML" />
+                <element signature="e#8674#8970#0#HTML" />
+                <element signature="e#8984#9291#0#HTML" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Order.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="17" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="17" />
+            <state relative-caret-position="92">
+              <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+              <folding>
+                <element signature="e#6351#7076#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_26_235314_add_title_colimn_to_about_us_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="18" column="68" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_27_071027_modify_description_column_about_us.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5">
+              <caret line="243" column="83" selection-start-line="243" selection-start-column="75" selection-end-line="243" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/AboutUs.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_21_224203_create_about_us_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="17" column="33" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="33" />
+              <caret line="18" column="39" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -125,13 +159,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.navbar.fixed</find>
-      <find>contact</find>
-      <find>checkout</find>
-      <find>$paymentOptions</find>
-      <find>id=&quot;cou</find>
-      <find>chats</find>
-      <find>buyer</find>
       <find>.pal</find>
       <find>paypal</find>
       <find>chat-list</find>
@@ -155,6 +182,13 @@
       <find>seller.</find>
       <find>orderby</find>
       <find>status</find>
+      <find>developers</find>
+      <find>developer</find>
+      <find>about-us</find>
+      <find>$request-&gt;image</find>
+      <find>$request-&gt;image1</find>
+      <find>contact-us</find>
+      <find>admin.abo</find>
     </findStrings>
     <replaceStrings>
       <replace>SellerProduct</replace>
@@ -274,13 +308,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Developer.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/about-us/show.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/about-us/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AboutUsController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/about-us/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/about-us.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php" />
         <option value="$PROJECT_DIR$/resources/views/home/contact-us.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
@@ -313,18 +342,23 @@
         <option value="$PROJECT_DIR$/database/migrations/2023_03_26_142001_add_status_to_messages.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/SellerController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BuyerController.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/seller.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/products/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductsController.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/orders/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/orders/find.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" />
         <option value="$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/buyer.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2023_03_26_235314_add_title_colimn_to_about_us_table.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2023_03_27_071027_modify_description_column_about_us.php" />
+        <option value="$PROJECT_DIR$/app/AboutUs.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/about-us/index.blade.php" />
       </list>
     </option>
   </component>
@@ -459,81 +493,20 @@
             <path>
               <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
               <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
               <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
               <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Buyer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Seller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="buyer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="palengkesite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="palengkesite" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="buyer" type="462c0819:PsiDirectoryNode" />
-              <item name="orders" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="defaults" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -557,11 +530,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\palengkesite\public\images\defaults" />
+      <recent name="C:\laragon\www\palengkesite\resources\views\admin\about-us" />
       <recent name="C:\laragon\www\palengkesite\resources\views\seller\analytics" />
       <recent name="C:\laragon\www\palengkesite\resources\views\emails" />
       <recent name="C:\laragon\www\palengkesite\resources\views\cart" />
-      <recent name="C:\laragon\www\palengkesite\resources\views" />
-      <recent name="C:\laragon\www\palengkesite\resources\views\admin\about-us" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\palengkesite\public\images" />
@@ -706,7 +679,7 @@
       <workItem from="1679576031731" duration="1673000" />
       <workItem from="1679585000584" duration="769000" />
       <workItem from="1679586418620" duration="14462000" />
-      <workItem from="1679790422473" duration="26634000" />
+      <workItem from="1679790422473" duration="35035000" />
     </task>
     <task id="LOCAL-00001" summary="pogi ako">
       <created>1674228112753</created>
@@ -733,7 +706,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="531084000" />
+    <option name="totallyTimeSpent" value="539485000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -817,96 +790,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="FIX CONTROLLER SETUP" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/cart/delivery_address_create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/cart/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="40" column="55" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
-          <folding>
-            <element signature="e#195#1258#0#Blade" />
-            <element signature="e#2503#3124#0#Blade" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-557">
-          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/cart/choosePaymentMethod.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding>
-            <element signature="e#270#309#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="206" column="14" lean-forward="true" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="14" />
-          <folding>
-            <element signature="e#356#432#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/shop.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="160" column="26" lean-forward="true" selection-start-line="160" selection-start-column="26" selection-end-line="160" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/buyer.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Buyer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="50" column="28" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/order-cod-confirmed.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/NewProductOrder.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/orderCODConfirmed.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="32" column="58" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/welcome-email.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/order-status.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="622">
@@ -939,16 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
           <caret line="39" column="50" lean-forward="true" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2254">
-          <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="19" />
-          <folding>
-            <element signature="e#46#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1129,23 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="427" column="52" selection-start-line="427" selection-start-column="52" selection-end-line="427" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="146" column="64" selection-start-line="146" selection-start-column="64" selection-end-line="146" selection-end-column="64" />
-          <folding>
-            <element signature="e#7#54#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1380">
@@ -1160,40 +1016,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/seller/orders/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="95" column="17" selection-start-line="14" selection-start-column="11" selection-end-line="95" selection-end-column="17" />
-          <folding>
-            <element signature="e#243#1513#0#HTML" />
-            <element signature="e#2973#6816#0#HTML" />
-            <element signature="e#3473#3480#1#HTML" expanded="true" />
-            <element signature="e#6874#7304#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#174#3620#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/buyer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="119" selection-start-line="19" selection-start-column="119" selection-end-line="19" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/OrdersController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
-          <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="72" />
+          <caret line="21" column="72" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="72" />
           <folding>
             <element signature="e#47#75#0#PHP" expanded="true" />
             <element signature="e#505#1280#0#PHP" />
@@ -1210,8 +1036,135 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Buyer/OrdersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="368">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/buyer/orders/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/buyer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1772">
+          <caret line="108" column="29" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/seller/orders/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="95" column="17" selection-start-line="14" selection-start-column="11" selection-end-line="95" selection-end-column="17" />
+          <folding>
+            <element signature="e#243#1513#0#HTML" />
+            <element signature="e#2973#6816#0#HTML" />
+            <element signature="e#3473#3480#1#HTML" expanded="true" />
+            <element signature="e#6874#7304#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_21_224203_create_about_us_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="33" />
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/public/inner-page-banner.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/logo-palengkesite.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/defaults/logo-palengkesite.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="243" column="83" selection-start-line="243" selection-start-column="75" selection-end-line="243" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/inner-page-banner.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_26_235314_add_title_colimn_to_about_us_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="18" column="68" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2023_03_27_071027_modify_description_column_about_us.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="288" column="109" selection-start-line="288" selection-start-column="109" selection-end-line="288" selection-end-column="109" />
+          <folding>
+            <element signature="e#7#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AboutUs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AboutUsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+          <folding>
+            <element signature="e#46#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding>
+            <element signature="e#6351#7076#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/about-us/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="121" column="25" lean-forward="true" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+          <folding>
+            <element signature="e#1277#1349#0#HTML" expanded="true" />
+            <element signature="e#4901#4930#0#HTML" expanded="true" />
+            <element signature="e#5010#5048#0#HTML" expanded="true" />
+            <element signature="e#6781#7276#0#HTML" />
+            <element signature="e#8225#8324#0#HTML" />
+            <element signature="e#8674#8970#0#HTML" />
+            <element signature="e#8984#9291#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>

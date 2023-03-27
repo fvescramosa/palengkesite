@@ -283,11 +283,13 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/contact-us/', [\App\Http\Controllers\Admin\ContactUsController::class, 'index'])->name('contact-us');
     Route::get('/contact-us/{id}', [\App\Http\Controllers\Admin\ContactUsController::class, 'find'])->name('contact-us.find');
 
-    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us');
-    Route::get('/about-us/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'create'])->name('developers.create');
-    Route::post('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('developers.store');
-    Route::get('/about-us/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('developers.edit');
-    Route::post('/about-us/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('developers.update');
+    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us.index');
+    Route::POST('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('about-us.store');
+    Route::get('/about-us/developers', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers'])->name('developers');
+    Route::get('/about-us/developers/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_create'])->name('developers.create');
+    Route::post('/about-us/developers/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_store'])->name('developers.store');
+    Route::get('/about-us/developers/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_edit'])->name('developers.edit');
+    Route::post('/about-us/developers/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_update'])->name('developers.update');
     Route::get('/about-us/developers-trash', [\App\Http\Controllers\Admin\AboutUsController::class, 'showDeveloperTrash'])->name('developers-trash');
     Route::get('/about-us/delete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'deleteDeveloper'])->name('developers.delete');
     Route::get('/about-us/permanentdelete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'DeveloperForceDelete'])->name('developers.permanentdelete');
