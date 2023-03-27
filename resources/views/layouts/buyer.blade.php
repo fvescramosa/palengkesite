@@ -98,20 +98,20 @@
                                                 <span class="item">Delivery Address</span>
                                             </a>
                                         </li>
-                                        @if(auth()->user()->buyer->messages()->exists())
+
                                         <li>
                                             <a href="{{ route('buyer.chats') }}">
                                                 <span class="icon"><i class="fas fa-envelope"></i></span>
                                                 <span class="item">Messages</span>
 
+                                                    @if(auth()->user()->buyer->messages()->exists())
                                                  <span class="notif badge badge-danger" id="messages-notif">
-
                                                         {{ auth()->user()->buyer->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
-
                                                  </span>
+                                                     @endif
                                             </a>
                                         </li>
-                                        @endif
+
                                     @endif
                                     <li>
                                         <a href="{{ route('buyer.switch.seller') }}">
