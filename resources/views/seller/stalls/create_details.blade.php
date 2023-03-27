@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="info-item">
-                                    <label for="">Rental Fee per Month</label>
+                                    <label for="">Rental Fee per Day</label>
                                     <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
 
                                     @error('rental_fee')
