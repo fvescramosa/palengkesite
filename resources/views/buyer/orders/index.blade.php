@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="orders">
-       <div class="orders-wrapper">
+       <div class="orders-wrapper buyer-order">
             <h3>My Orders</h3>
 
-           <hr>
+            <hr>
 
            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                <li class="nav-item" role="presentation">
@@ -89,6 +89,8 @@
                    >Cancelled</a>
                </li>
            </ul>
+
+           <hr>
               @foreach($orders as $order)
 
                 <div class="my-order-list">

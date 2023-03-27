@@ -94,6 +94,8 @@
                     >Cancelled</a>
                 </li>
             </ul>
+
+            <hr>
             <!-- Tabs navs -->
 
             <!-- Tabs content -->
