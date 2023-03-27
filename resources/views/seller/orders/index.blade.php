@@ -35,7 +35,7 @@
                             aria-selected="true"
                     >Confirmed</a>
                 </li>
-                <li class="nav-item" role="presentation">
+               {{-- <li class="nav-item" role="presentation">
                     <a
                             class="nav-link"
                             id="#orderTabPerStatus"
@@ -45,7 +45,7 @@
                             aria-controls="ex1-tabs-2"
                             aria-selected="false"
                     >Shipping</a>
-                </li>
+                </li>--}}
                 <li class="nav-item" role="presentation">
                     <a
                             class="nav-link"
