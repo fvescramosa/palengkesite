@@ -244,6 +244,12 @@
                         <div class="collapse {{ (request()->segment(2) == 'about-us') ? 'show' : ''}}" id="about_submenu" aria-expanded="false">
                             <ul>
                                 <li>
+                                    <a href="{{ route('admin.about-us.index') }}" class="{{ ( request()->routeIs('admin.about-us.index') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-user-shield"></i></span>
+                                        <span class="item">Abou Us Page</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ route('admin.developers') }}" class="{{ ( request()->routeIs('admin.developers') ? 'active' : '' )}}">
                                         <span class="icon"><i class="fa fa-user-shield"></i></span>
                                         <span class="item">Developers</span>
