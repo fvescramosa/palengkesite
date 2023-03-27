@@ -147,6 +147,7 @@
                             @csrf
                             <label for="">Mabini Public Market - </label>
                             <select name="market_option"  class="" id="market-option">
+                                <option value="">All</option>
                                 @foreach(\App\Market::all() as $market)
                                     <option value="{{ $market->id }}" {{ session()->get('shop_at_market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
                                 @endforeach
