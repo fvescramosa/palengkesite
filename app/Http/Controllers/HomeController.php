@@ -92,15 +92,23 @@ class HomeController extends Controller
     }
 
     public function selectPalengke(Request $request){
+
         session()->forget('shop_at_market');
         session(['shop_at_market' => $request->market_option]);
 
         // session()->put('market', $request->marketOtion);
-        $market = Market::find($request->market_option);
-        $response = [
-            'response' => 'success',
-            'message' => 'You have selected '. ucwords( $market->market  ) .'!'
-        ];
+        if ($request->market_option != null) {
+            $market = Market::find($request->market_option);
+            $response = [
+                'response' => 'success',
+                'message' => 'You have selected ' . ucwords($market->market) . '!'
+            ];
+        }else{
+            $response = [
+                'response' => 'success',
+                'message' => 'You have selected All Market!'
+            ];
+        }
         return redirect( url()->previous() )->with($response);
     }
 
