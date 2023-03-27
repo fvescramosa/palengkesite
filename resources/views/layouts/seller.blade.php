@@ -106,7 +106,7 @@
                                         <ul>
                                             <li>
                                                 <a href="{{ route('seller.analytics.product.sales') }}" class="{{ ( request()->routeIs('seller.analytics.product.sales') ? 'active' : '' )}}">
-                                                    <span class="icon"><i class="fa fa-users"></i></span>
+                                                    <span class="icon"><i class="fa fa-store"></i></span>
                                                     <span class="item">Products</span>
                                                 </a>
                                             </li>
