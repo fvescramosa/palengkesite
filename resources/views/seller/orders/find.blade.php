@@ -26,12 +26,15 @@
                             @foreach($statuses as $status)
 
 
-
+                                @if($status->status !== 'Ship')
                                 <option value="{{ $status->id }}"
                                         {{ (in_array($status->id, $arr_status) ? 'disabled' : '') }}
+
+
                                         {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}
 
                                 >{{ $status->status }}</option>
+                                @endif
 
                             @endforeach
                         </select>
