@@ -258,11 +258,16 @@ section{
 }
 
 @media screen and (max-width: 767px){
+   .navbar-collapse.collapse.show{
+      margin-right: 70%;
+      background: white;
+   }
+
    .home-products .products-grid .product-item,
    .products-grid .product-item
    {
-      flex: 1 1 calc(70% - 30px);
-      max-width: calc(70% - 30px);
+      flex: 1 1 calc(50% - 30px);
+      max-width: calc(50% - 30px);
       margin: 20px auto;
    }
 }
