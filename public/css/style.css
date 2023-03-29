@@ -1286,6 +1286,7 @@ span.invalid-feedback {
    display: inline-block;
    margin: 0 12.5px;
    margin-bottom: 10px;
+    position: relative;
 }
 .profile .basic-info .info-item.xshort {
    width: calc(25% - 25px);
@@ -1301,6 +1302,17 @@ span.invalid-feedback {
    text-decoration: none;
 }
 
+.prepend input[type="text"]{
+    padding-left: 37px;
+}
+
+.info-item-prepend{
+    display: flex;
+    position: absolute;
+    /*bottom: 0;*/
+    z-index: 999;
+    height: 37px;
+}
 /*PROFILE*/
 .hero-image {
    background-size: cover;

@@ -25,6 +25,13 @@
                             <input type="email" class="form-control" id="email"  placeholder="Email" value=" {{ auth()->user()->email }}" readonly>
                         </div>
 
+                        <div class="form-group info-item short prepend">
+                            <label for="mobile">Mobile</label>
+                            <div class="input-group-prepend info-item-prepend">
+                                <span class="input-group-text" id="basic-addon1">+63</span>
+                            </div>
+                            <input type="text" class="form-control" id="mobile"  placeholder="Mobile" value=" {{ auth()->user()->mobile }}" readonly>
+                        </div>
 
                         @if(auth()->user()->seller()->exists())
                             <div class="form-group info-item short">

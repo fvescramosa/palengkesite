@@ -301,6 +301,14 @@ Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCate
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
 });
+Route::get('/test/match', function (){
+    if (preg_match("~^9\d+$~", '8178402141')) {
+        dd('true');
+    }else{
+
+        dd('false');
+    }
+});
 /*
 Route::get('/chat', 'ChatsController@index');
 Route::get('/chat/messages', 'ChatsController@fetchMessages');
