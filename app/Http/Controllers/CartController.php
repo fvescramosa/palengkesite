@@ -14,6 +14,7 @@ use function compact;
 use function dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Twilio\Rest\Client;
 
 class CartController extends Controller
 {
@@ -188,7 +189,42 @@ class CartController extends Controller
                 }
 //
                 $seller = Seller::find($cart->first()->seller_id);
-                Mail::to($seller->user->email)->send(new NewOrder($order));
+                try{
+                    Mail::to($seller->user->email)->send(new NewOrder($order));
+                }catch (Exception $e) {
+                    //dd("Error: ". $e->getMessage());
+                }
+
+                if($seller->user->mobile !== ''){
+
+
+                    $receiverNumber = '+63'.$seller->user->mobile;
+                    $message = "New Order has been placed. Click this link to view order " . route('buyer.orders.find', ['order_id' => $order->transaction_id]);
+                    if (preg_match("~^9\d+$~", $seller->user->mobile)) {
+                        try {
+
+
+                            $account_sid = env("TWILIO_SID");
+                            $auth_token = env("TWILIO_TOKEN");
+                            $twilio_number = env("TWILIO_FROM");
+
+                            $client = new Client($account_sid, $auth_token);
+                            $client->messages->create($receiverNumber, [
+                                'from' => $twilio_number,
+                                'body' => $message]);
+
+                            //////dd('SMS Sent Successfully.');
+
+                        } catch (Exception $e) {
+                            //dd("Error: ". $e->getMessage());
+                        }
+
+                    }else{
+
+
+                    }
+                }
+
             }
 
         }

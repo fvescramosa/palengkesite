@@ -128,10 +128,15 @@ class SellerController extends Controller
 
 
 
+        $validate = $request->validate([
+           'mobile' =>  ['required', 'regex:/[0-9]{9}/', 'max:10'],
+        ]);
+
         $user = Auth::user()->update(
             [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
+                'mobile' => ($request->mobile != '' ? $request->mobile : ''),
             ]
         );
 
