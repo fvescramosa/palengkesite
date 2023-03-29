@@ -75,6 +75,8 @@ class BuyerController extends Controller
                     ]
                 );
 
+
+
                 /*if($request->file('image')){
                     $file= $request->file('image');
                     $filename= date('YmdHi').$file->getClientOriginalName();
@@ -180,7 +182,7 @@ class BuyerController extends Controller
             );
             $file= $request->file('profile_image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/profile/'.auth()->user()->id.'/';
+            $directory = 'images/profile/'.auth()->user()->id.'/';
             $file->move(public_path($directory), $filename);
             $userData['profile_image']= $directory.$filename;
 
@@ -227,5 +229,20 @@ class BuyerController extends Controller
 
         session()->put('user_type', 'seller');
        return redirect(route('seller.profile'));
+    }
+
+    public function getMessagesNotification(){
+        $messages = Auth::user()->buyer->messages->where('status', 'unread')->where('sender', 'seller');
+
+
+        return response()->json($messages->count());
+
+    }
+
+    public function setUnread(){
+//        $messages = Auth::user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->where('sender', 'buyer')->update(['status' => 'read']);
+        $messages = Message::where('status', 'unread')->where('sender', 'seller')->where('buyer_id', auth()->user()->buyer->id)->update(['status' => 'read']);
+
+        return $messages;
     }
 }

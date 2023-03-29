@@ -8,15 +8,15 @@
         <form class="cart-container" action="{{ route('cart.checkout') }}" method="POST">
 
             @csrf
-            <div class="delivery-addresses">
+           {{-- <div class="delivery-addresses">
                 <h3>Address</h3>
 
-              {{--  <div class="form-check">
+              --}}{{--  <div class="form-check">
                     <input class="form-check-input" type="radio" name="delivery_address" value="{{ auth()->user()->id }}">
                     <label class="form-check-label">
                         {{ auth()->user()->stnumber }} {{ auth()->user()->stname }} {{ auth()->user()->barangay }}, {{ auth()->user()->city }} {{ auth()->user()->province }}
                     </label>
-                </div>--}}
+                </div>--}}{{--
 
                 @foreach( auth()->user()->delivery_addresses as $address)
                 <div class="form-check">
@@ -26,7 +26,7 @@
                     </label>
                 </div>
                 @endforeach
-            </div>
+            </div>--}}
             <div class="main-cart">
                 <h3>Cart</h3>
 
@@ -52,7 +52,7 @@
 
                 </div>
             </div>
-            <div class="payment-options">
+           {{-- <div class="payment-options">
                 @foreach($paymentOptions as $paymentOption)
                     <div class="form-inline">
 
@@ -66,7 +66,7 @@
                     </div>
 
                 @endforeach
-            </div>
+            </div>--}}
 
             <div class="button-area">
                 <button type="submit">Checkout</button>

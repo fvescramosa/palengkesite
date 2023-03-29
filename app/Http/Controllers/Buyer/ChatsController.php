@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Buyer;
 
+use App\Buyer;
 use App\Http\Controllers\Controller;
 use App\Message;
+use App\Seller;
+use App\SellerStall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChatsController extends Controller
 {
@@ -20,27 +24,65 @@ class ChatsController extends Controller
     {
 
 
-            $messages = Auth::user()->buyer->messages->groupBy('seller_id');
 
+        $titles =  Message::where('buyer_id', auth()->user()->buyer->id)
+            ->whereHas('seller')
+            ->with(['seller', 'seller.seller_stalls'])
+            ->select(DB::raw('COUNT(*) as count'), DB::raw('seller_id'))
+
+            ->groupBy('seller_id')->get();
 
 //        $messages = Message::where('buyer_id', auth()->user()->buyer->id)->groupBy('seller_id')->distinct()->get();
 
 
-        return view('buyer.chat', compact(['messages']));
+        return view('buyer.chat', compact(['titles']));
     }
 
 
     public function seller($id)
     {
 
-        $seller_id = $id;
+
+
+//        $seller_stall = $id;
+//        $seller_stall = $id;
         //left side
-        $messages = Auth::user()->buyer->messages->groupBy('seller_id');
+
+//        $seller =  Seller::whereHas('seller_stalls')->where('id', $id)->firstOrFail();
+
+        $seller_stall =  SellerStall::whereHas('seller')->findOrFail($id);
+
+
+        $seller_id = $seller_stall->seller_id;
+
+        if(auth()->user()->buyer->messages()->where('seller_id', $seller_id)->exists() == false){
+            auth()->user()->buyer->messages()->create([
+                'message' => '',
+                'seller_id' => $seller_id,
+                'sender' => 'buyer'
+            ]);
+        }
+
+
+
+        $titles =  Message::where('buyer_id', auth()->user()->buyer->id)
+            ->whereHas('seller')
+
+            ->with(['seller', 'seller.seller_stalls'])
+            ->select(DB::raw('COUNT(*) as count'), DB::raw('seller_id'))
+
+            ->groupBy('seller_id')->get();
+
+
+//        dd($titles);
+//        $messages = Auth::user()->buyer->messages->groupBy('seller_id');
+
 
         //main panel
-        $chats = Auth::user()->buyer->messages->where('seller_id', $id);
+        $chats = Auth::user()->buyer->messages->where('seller_id', $seller_id)->where('message', '<>', '');
 
-        return view('buyer.chat', compact(['messages', 'chats', 'seller_id']));
+
+        return view('buyer.chat', compact([ 'chats', 'seller_id', 'titles', 'seller_stall']));
     }
 
     public function sendMessage(Request $request, $id)
@@ -62,11 +104,15 @@ class ChatsController extends Controller
 
 
     public function fetchAllMessages($id){
-        $chats = Auth::user()->buyer->messages->where('seller_id', $id);
+        $chats = Auth::user()->buyer->messages->where('seller_id', $id)->where('message', '<>', '');
 
         $response = '';
-        foreach ($chats as $chat){
-            $response .= '<li class="left clearfix '. ($chat->sender == 'buyer' ? 'user' : '') .'">
+
+        if($chats->count() > 0){
+            foreach ($chats as $chat){
+
+
+                $response .= '<li class="left clearfix '. ($chat->sender == 'buyer' ? 'user' : '') .'">
                                        <div class="chat-body clearfix">
                                            <div class="">
                                                <strong class="primary-font">
@@ -79,7 +125,15 @@ class ChatsController extends Controller
                                            </p>
                                        </div>
                                     </li>';
+
+
+            }
+        }else{
+            $response .= '  
+                                        <h3>No Messages</h3>
+                                   ';
         }
+
 
         return $response;
     }

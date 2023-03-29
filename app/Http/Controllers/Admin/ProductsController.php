@@ -29,33 +29,38 @@ class ProductsController extends Controller
             });
         }
 
+        if(isset($_GET['status']) && $_GET['status'] != ''){
+            $products = $products->where('status', $_GET['status']);
+        }
+        
         $orderby = '';
         if(isset($_GET['orderby'])){
             if($_GET['orderby'] == 'A-Z'){
                 $orderby = ['product_name', 'asc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'Z-A'){
                 $orderby = ['product_name', 'desc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'recent'){
                 $orderby = ['created_at', 'desc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
 
             else if($_GET['orderby'] == 'oldest'){
                 $orderby = ['created_at', 'asc'];
-                $products->orderBy($orderby[0], $orderby[1]);
+                $products = $products->orderBy($orderby[0], $orderby[1]);
             }
             
         }
         else{
             $orderby = ['product_name', 'asc'];
-            $products->orderBy($orderby[0], $orderby[1]);
+            $products = $products->orderBy($orderby[0], $orderby[1]);
         }
+
 
         $products = $products->paginate(10);
 
@@ -196,10 +201,10 @@ class ProductsController extends Controller
         return redirect(route('admin.products.trash'));
     }
 
-    public function showByCategory($category){
+    public function showByCategory($slug){
 
-        $products = Products::whereHas('category', function($q) use ($category){
-            $q->where('category',$category);
+        $products = Products::whereHas('category', function($q) use ($slug){
+            $q->where('category',$slug);
         })->get();
 
 

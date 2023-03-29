@@ -68,7 +68,7 @@
                             @endif
                         </div>
 
-                        <h4 class="product-name">{{  $sellerProduct->product->product_name }}</h4>
+                        <h4 class="product-name">{{ ($sellerProduct->custom_title != '' ? $sellerProduct->custom_title : $sellerProduct->product->product_name) }}</h4>
                         <p class="seller-name"><i class="fa fa-store"></i> <span class="stall-name">{{  $sellerProduct->seller->seller_stalls->name }} </span> - <span class="seller-name">{{  $sellerProduct->seller->user->first_name }}</span></p>
                     </div>
 
@@ -76,7 +76,10 @@
 
                     <div class="details-middle">
                         <h4 class="product-price">Php {{ number_format($sellerProduct->price, 2) }}</h4>
-                  </div>
+                        <br>
+                        <br>
+                        <p>{{ $sellerProduct->description }}</p>
+                    </div>
 
                     <div class="details-bottom">
                         @if(session('user_type') == 'buyer')
@@ -138,6 +141,8 @@
 
             <div class="comment-form-area">
                 @if(session('user_type') == 'buyer')
+
+                    
                     <form action="{{ route('shop.products.post.comment', ['id' => $sellerProduct->id]) }}" id="post-comment" method="POST">
 
 

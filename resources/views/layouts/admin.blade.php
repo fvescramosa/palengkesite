@@ -157,10 +157,19 @@
                             </ul>
                         </div>
                     </li>
+
                     <li>
                         <a href="{{ route('admin.seller.stalls.show') }}" class="{{ ( request()->routeIs('admin.seller.stalls.show') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-user-shield"></i></span>
                             <span class="item">Stall Approval</span>
+
+                            <span class="notif badge badge-danger" id="stall-approval-notif">{{ App\SellerStall::where('status', 'pending')->get()->count()  }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.contact-us') }}" class="{{ ( request()->routeIs('admin.contact-us') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fa fa-envelope-open"></i></span>
+                            <span class="item">Inquiries</span>
 
                             <span class="notif badge badge-danger" id="stall-approval-notif">{{ App\SellerStall::where('status', 'pending')->get()->count()  }}</span>
                         </a>
@@ -226,6 +235,34 @@
                             <span class="icon"><i class="fa fa-cog"></i></span>
                             <span class="item">Settings</span>
                         </a>
+                    </li>
+                    <li class="collapsed" data-toggle="collapse" data-target="#about_submenu">
+                        <a href="#"  class="">
+                            <span class="icon"><i class="fa fa-user-shield"></i></span>
+                            <span class="item">About Us</span>
+                        </a>
+                        <div class="collapse {{ (request()->segment(2) == 'about-us') ? 'show' : ''}}" id="about_submenu" aria-expanded="false">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.about-us.index') }}" class="{{ ( request()->routeIs('admin.about-us.index') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-user-shield"></i></span>
+                                        <span class="item">Abou Us Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.developers') }}" class="{{ ( request()->routeIs('admin.developers') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-user-shield"></i></span>
+                                        <span class="item">Developers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.developers-trash') }}" class="{{ ( request()->routeIs('admin.developers-trash') ? 'active' : '' )}}">
+                                        <span class="icon"><i class="fa fa-archive"></i></span>
+                                        <span class="item">Archive</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
@@ -394,7 +431,7 @@
 
                 $(window).on('load', function(){
                     app.initCollapse();
-                    app.filter($('#orderby'));
+                    app.filter($('#orderby, #status'));
                     app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Categories;
 use App\Market;
+use App\OrderProduct;
 use App\SellerProduct;
+use App\SellerStall;
 use App\User;
 use App\Verification;
 use function auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Twilio\Rest\Client;
 
@@ -27,10 +30,41 @@ class HomeController extends Controller
 
     public function index(){
 
-        $featuredProducts = SellerProduct::where('featured', 1)->limit(6)->get();
+        $featuredProducts = SellerProduct::where('featured', 1);
+        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->with(['seller', 'product', 'seller_product']);
+
         $categories = Categories::all();
 
-        return view('home/index', compact(['featuredProducts', 'categories']));
+        $stores = SellerStall::with(['stall'])->where('status', 'active')
+            ->whereHas('seller', function($q){
+                $q->whereHas('user');
+            })
+            ->whereHas( 'stall', function($q){
+                $q->where('status', 'occupied');
+            });
+
+
+        if(session()->has('shop_at_market')){
+
+            $featuredProducts = $featuredProducts->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+
+            $popularProducts = $popularProducts->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+
+            $stores = $stores->whereHas('seller', function ($query){
+                $query->where('market_id', session('shop_at_market'));
+            });
+        };
+
+        $featuredProducts = $featuredProducts->limit(4)->get();
+        $popularProducts = $popularProducts->groupBy(['seller_id', 'product_id', 'seller_product_id']   )->orderBy(DB::raw('sales'), 'DESC')->limit(4)->get();
+        $stores = $stores->limit(4)->get();
+
+//        dd($popularProducts);
+        return view('home/index', compact(['featuredProducts', 'categories'  , 'popularProducts' ,'stores']));
     }
     /**
      * Show the application dashboard.
@@ -58,15 +92,23 @@ class HomeController extends Controller
     }
 
     public function selectPalengke(Request $request){
+
         session()->forget('shop_at_market');
         session(['shop_at_market' => $request->market_option]);
 
         // session()->put('market', $request->marketOtion);
-        $market = Market::find($request->market_option);
-        $response = [
-            'response' => 'success',
-            'message' => 'You have selected '. ucwords( $market->market  ) .'!'
-        ];
+        if ($request->market_option != null) {
+            $market = Market::find($request->market_option);
+            $response = [
+                'response' => 'success',
+                'message' => 'You have selected ' . ucwords($market->market) . '!'
+            ];
+        }else{
+            $response = [
+                'response' => 'success',
+                'message' => 'You have selected All Market!'
+            ];
+        }
         return redirect( url()->previous() )->with($response);
     }
 

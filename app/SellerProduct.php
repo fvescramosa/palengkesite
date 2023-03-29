@@ -10,6 +10,9 @@ class SellerProduct extends Model
 
     protected $fillable = [
         'seller_id',
+        'custom_title',
+        'description',
+        'seller_id',
         'product_id',
         'price',
         'type',
@@ -20,6 +23,7 @@ class SellerProduct extends Model
         'image_4',
         'image_5',
         'average_ratings',
+        'stock',
     ];
 
     public function product(){

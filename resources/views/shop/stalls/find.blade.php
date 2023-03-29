@@ -7,41 +7,63 @@
             <div class="product-top-area">
                 <div class="product-img-area">
 
-                    <div id="slide-for">
-                        <div>
-                            <div class="product-main-image">
-                                <img src="{{ asset( $sellerStall->image )  }}" alt="">
-                            </div>
-                        </div>
-                        @for($i=1; $i<=5; $i++)
-                            @php $imagekey = 'image_'.$i; @endphp
-                            @if($sellerStall[$imagekey])
-                                <div>
-                                    <div class="product-main-image">
-                                        <img src="{{ asset($sellerStall[$imagekey]) }}" alt="">
-                                    </div>
-                                </div>
-                            @endif
-                        @endfor
 
-                    </div>
-                    <div id="slide-nav" class="product-gallery">
-                        <div>
-                            <div class="product-img">
-                                <img src="{{ asset($sellerStall->image) }}" alt="">
-                            </div>
-                        </div>
-                        @for($i=1; $i<=5; $i++)
-                            @php $imagekey = 'image_'.$i; @endphp
-                            @if($sellerStall[$imagekey])
+                    @if($sellerStall->seller_stall_images()->exists())
+
+                        <div id="slide-for">
+                            @foreach($sellerStall->seller_stall_images as $image)
                                 <div>
-                                    <div class="product-img">
-                                        <img src="{{ asset( $sellerStall[$imagekey] ) }}" alt="">
+                                    <div class="stall-img">
+                                        <img src="{{ asset( $image->image ) }}" alt="">
                                     </div>
                                 </div>
-                            @endif
-                        @endfor
-                    </div>
+                            @endforeach
+                        </div>
+                        <div id="slide-nav" class="">
+                            @foreach($sellerStall->seller_stall_images as $image)
+                                <div>
+                                    <div class="stall-img">
+                                        <img src="{{ asset($image->image) }}" alt="">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div id="slide-for">
+                            <div>
+                                <div class="stall-main-img">
+                                    <img src="{{ asset($sellerStall->stall->image) }}" alt="">
+                                </div>
+                            </div>
+                            @for($i=1; $i<=5; $i++)
+                                @php $imagekey = 'image_'.$i; @endphp
+                                @if($sellerStall->stall[$imagekey])
+                                    <div>
+                                        <div class="stall-img">
+                                            <img src="{{ asset($sellerStall->stall[$imagekey]) }}" alt="">
+                                        </div>
+                                    </div>
+                                @endif
+                            @endfor
+                        </div>
+                        <div id="slide-nav" class="">
+                            <div>
+                                <div class="stall-img">
+                                    <img src="{{ asset($sellerStall->stall->image) }}" alt="">
+                                </div>
+                            </div>
+                            @for($i=1; $i<=5; $i++)
+                                @php $imagekey = 'image_'.$i; @endphp
+                                @if($sellerStall->stall[$imagekey])
+                                    <div>
+                                        <div class="stall-img">
+                                            <img src="{{ asset($sellerStall->stall[$imagekey]) }}" alt="">
+                                        </div>
+                                    </div>
+                                @endif
+                            @endfor
+                        </div>
+                    @endif
 
                 </div>
                 <div class="product-details-area">
@@ -49,7 +71,7 @@
                         <h4 class="product-name">{{  $sellerStall->name }}</h4>
                         <p class="seller-name"><i class="fa fa-store"></i> By:  <span class="seller-name">{{  $sellerStall->seller->user->first_name }}</span></p>
                     </div>
-
+                    <a href="{{ route('buyer.chat.seller', ['id' => $sellerStall->id]) }}" class="pal-button btn-orange"><span class="fa fa-envelope" ></span> Messages</a>
                     <hr>
 
                     <div class="details-middle">
@@ -130,7 +152,7 @@
                             <img src="{{ asset($product->image) }}" alt="">
                         </a>
                         <div class="product-details">
-                            <h4>{{ $product->product->product_name }}</h4>
+                                <h4>{{ ($product->custom_title != '' ? $product->custom_title : $product->product->product_name) }}</h4>
                             <p>Php {{ number_format($product->price, 2) }}</p>
                             <form action="{{ route('shop.product.addToCart') }}" method="POST">
                                 @csrf
@@ -143,7 +165,7 @@
                                 <hr>
                                 <label for="">Quantity</label>
                                 <input type="number" name="quantity" id="quantity" value="" max="{{ $product->stock }}">
-                                <button class="btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
+                                <button class="add-to-cart btn btn-orange" type="submit" {{ ($product->stock ? '' : 'disabled') }}>
                                     <span class="fa fa-shopping-cart"></span>
                                     Add to Cart</button>
                             </form>

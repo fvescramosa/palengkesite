@@ -25,7 +25,9 @@ class ProductsController extends Controller
 
     public function create(){
 
-        $categories = Categories::all();
+        $category = auth()->user()->seller->seller_stalls->stall->section;
+        $categories = Categories::where('category', $category)->get();
+
         return view('seller/products/create', compact(['categories']));
     }
 
@@ -40,24 +42,29 @@ class ProductsController extends Controller
 
             if ($product->max_price != null) {
                 $validate = $request->validate([
-                    'price' => ['numeric', 'lt:' . $product->max_price]
+//                    'price' => ['numeric', 'lte:' . $product->max_price]
                 ]);
 
 
             }
 
 
-        } else {
+        }
+        else {
+
 
             $product = Products::create([
                 'category_id' => $request->category,
                 'product_name' => $request->new_product_name,
+                'custom_title' => $request->custom_title,
+                'description' => $request->description,
                 'min_price' => '',
                 'max_price' => '',
                 'srp' => '',
                 'code' => '',
                 'manufacturer' => '',
                 'type' => '',
+                'stock' => '',
                 'status' => 'pending'
             ]);
 
@@ -72,23 +79,25 @@ class ProductsController extends Controller
             'image' => $request->image,
             'featured' => $request->featured,
             'stock' => $request->stock,
+
         ]);
 
 
         if ($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image']= $directory.$filename;
         }
 
 
 
+
         if ($request->file('image_1')){
             $file= $request->file('image_1');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image_1']= $directory.$filename;
         }
@@ -96,7 +105,7 @@ class ProductsController extends Controller
         if ($request->file('image_2')){
             $file= $request->file('image_2');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image_2']= $directory.$filename;
         }
@@ -104,7 +113,7 @@ class ProductsController extends Controller
         if ($request->file('image_3')){
             $file= $request->file('image_3');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image_3']= $directory.$filename;
         }
@@ -112,7 +121,7 @@ class ProductsController extends Controller
         if ($request->file('image_4')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image_4']= $directory.$filename;
         }
@@ -120,7 +129,7 @@ class ProductsController extends Controller
         if ($request->file('image_5')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $directory = 'public/images/products/'.$create->id.'/';
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$create->id.'/';
             $file->move(public_path($directory), $filename);
             $data['image_5']= $directory.$filename;
         }
@@ -221,15 +230,70 @@ class ProductsController extends Controller
 
     public function update(Request $request)
     {
-        $update = SellerProduct::where(['seller_id' => auth()->user()->seller->id, 'id' => $request->id])
-            ->update([
-                'product_id' => $request->product,
-                'price' => $request->price,
-                'type' => $request->type,
-                'featured' => $request->featured,
-                'stock' => $request->stock,
-            ]);
+        $data = [
+            'product_id' => $request->product,
+            'price' => $request->price,
+            'type' => $request->type,
+            'featured' => $request->featured,
+            'stock' => $request->stock,
+            'custom_title' => $request->custom_title,
+            'description' => $request->description,
+        ];
 
+
+
+        if ($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+
+            $file->move(public_path($directory), $filename);
+            $data['image']= $directory.$filename;
+        }
+
+
+        if ($request->file('image_1')){
+            $file= $request->file('image_1');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_1']= $directory.$filename;
+        }
+
+        if ($request->file('image_2')){
+            $file= $request->file('image_2');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_2']= $directory.$filename;
+        }
+
+        if ($request->file('image_3')){
+            $file= $request->file('image_3');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_3']= $directory.$filename;
+        }
+
+        if ($request->file('image_4')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_4']= $directory.$filename;
+        }
+
+        if ($request->file('image_5')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $directory = 'images/seller/'.auth()->user()->seller->id.'/products/'.$request->id.'/';
+            $file->move(public_path($directory), $filename);
+            $data['image_5']= $directory.$filename;
+        }
+
+        $update = SellerProduct::where(['seller_id' => auth()->user()->seller->id, 'id' => $request->id])
+            ->update($data);
 
         $seller_products =  auth()->user()->seller->seller_products;
 

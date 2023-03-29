@@ -28,6 +28,7 @@ class AddCategoryIdToStallsTable extends Migration
     {
         Schema::table('stalls', function (Blueprint $table) {
             //
+
         });
     }
 }

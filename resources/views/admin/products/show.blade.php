@@ -23,6 +23,14 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <select  class="form-control" id="status" name="status" placeholder="Status" value="" >
+                                <option value="">Status</option>
+                                <option value="pending"     <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'pending' ) ? 'selected' : '' : '' ); ?>>Pending</option>
+                                <option value="active"     <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
+                            </select>
+                        </div>
+
                         @if(isset($_GET['page']))
                             <input type="hidden" name="page" value="{{ $_GET['page'] }}">
                         @endif
@@ -61,7 +69,7 @@
                                 <td>
                                     @if($product->status == 'active')
                                         {{ $product->status }}
-                                    @else
+                                    @elseif($product->status == 'pending')
                                         <a href="{{ route('admin.products.approve', ['id' => $product->id]) }}"  class="btn btn-primary"> Approve</a>
                                     @endif
                                 </td>

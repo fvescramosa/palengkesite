@@ -39,7 +39,7 @@
         <div class="seller">
             <!-- Page Wrapper -->
             <div class="wrapper">
-                <div class="sidebar seller">
+                <div class="sidebar seller ">
                     <div class="sidebar-header">
                         <h3><i class="fa fa-desktop"></i> Seller Dashboard</h3>
                         <hr>
@@ -51,6 +51,8 @@
                                 <span class="item">Profile</span>
                             </a>
                         </li>
+
+                        @if(auth()->user()->seller()->exists())
                         <li>
                             <a href="{{ route('seller.stalls.show') }}">
                                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
@@ -58,26 +60,41 @@
                             </a>
                         </li>
 
+
+
+                        @endif
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
                                 <li>
                                     <a href="{{ route('seller.products.show') }}">
                                         <span class="icon"><i class="fa fa-store"></i></span>
                                         <span class="item">Products</span>
+                                        <span class="notif badge badge-danger" id="orders-notif">{{ auth()->user()->seller->seller_products->where('status', 'pending')->count() }}</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('seller.orders.show') }}">
                                         <span class="icon"><i class="fas fa-shipping-fast"></i></span>
                                         <span class="item">Orders</span>
+                                        <span class="notif badge badge-danger" id="orders-notif">
+                                             @if(auth()->user()->seller->orders()->exists())
+                                                {{ auth()->user()->seller->orders->where('status', 'pending')->count() }}
+                                            @endif
+                                        </span>
                                     </a>
                                 </li>
+
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('seller.chats') }}">
                                         <span class="icon"><i class="fas fa-envelope"></i></span>
                                         <span class="item">Messages</span>
+                                        <span class="notif badge badge-danger" id="messages-notif">
+                                            @if(auth()->user()->seller->messages()->exists())
+                                                {{ auth()->user()->seller->messages->where('status', 'unread')->where('sender', 'buyer')->count() }}
+                                            @endif
+                                        </span>
                                     </a>
-                                </li>
+                                 </li>
 
 
                                 <li class="collapsed" data-toggle="collapse" data-target="#sellers_submenu">
@@ -93,7 +110,12 @@
                                                     <span class="item">Products</span>
                                                 </a>
                                             </li>
-
+                                            <li>
+                                                <a href="{{ route('seller.analytics.product.ratings') }}" class="{{ ( request()->routeIs('seller.analytics.product.ratings') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                    <span class="item">Ratings</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -123,6 +145,13 @@
                                 <span class="item">Switch as Buyer</span>
                             </a>
                         </li>
+
+                        <!-- <li>
+                            <a href="{{ route('index') }}">
+                                <span class="icon"><i class="fas fa-home"></i></span>
+                                <span class="item">Back to Site</span>
+                            </a>
+                        </li> -->
                         <li>
                             <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <span class="icon"><i class="fas fa-power-off"></i></span>
@@ -134,7 +163,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="section">
+                <div class="section ">
                     <div class="top_navbar">
                         <div class="hamburger">
                             <a href="#">
@@ -174,18 +203,56 @@
                         const app = {
                             initCollapse: function(){
                                 console.log('A script has been loaded');
-                            }
+                                app.initNotifMessage();
+                                app.initSetUnread( $('#btn-input') );
+                            },
+                            initNotifMessage: function(){
+
+                                setInterval(function(){
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('seller.getMessagesNotification')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+                                            $('#messages-notif').text(data);
+                                        }
+                                    });
+                                }, 5000);
+                            },
+                            initSetUnread: function (trigger) {
+                                trigger.click(function () {
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('seller.setUnread')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+
+                                        }
+                                    });
+                                })
+                            },
                         };
 
                         $(document).ready(function () {
                             app.initCollapse();
                             $('.hamburger').click(function(){
-                                if($('.sidebar').hasClass('close')){
-                                    $('.sidebar').removeClass('close');
-                                    $('.wrapper .section').removeClass('open');
+                                if($('.sidebar').hasClass('opened')){
+
+                                    $('.sidebar').removeClass('opened');
+                                    $('.wrapper .section').addClass('opened');
+
                                 }else{
-                                    $('.sidebar').addClass('close');
-                                    $('.wrapper .section').addClass('open');
+
+                                    $('.sidebar').addClass('opened');
+                                    $('.wrapper .section').addClass('opened');
                                 }
                             });
                         });

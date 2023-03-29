@@ -81,7 +81,7 @@
 .my-orders-actions > *{
    width:  100%;
    margin: 20px 0 ;
-   font-size: 18px;
+   /*font-size: 18px;*/
 }
 
 
@@ -103,7 +103,7 @@
    flex: 1 1 45%;
    max-width: 45%;
    background-color: #e7e8eb;
-   padding: 50px;
+   padding: 50px 25px;
 }
 .orders-details-wrapper .order-status{
    margin: 25px auto;

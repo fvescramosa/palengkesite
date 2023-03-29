@@ -41,13 +41,17 @@
                     <div class="product-item" >
 
                         <a class="product-image" href="{{ route('shop.store.find', ['id' => $store->id]) }}">
-                            <img src="{{ asset($store->image) }}" alt="">
+                            @if( $store->seller_stall_images()->exists())
+                                <img src="{{ asset( $store->seller_stall_images->first()->image ) }}" alt="">
+                            @else
+                                <img src="{{ asset( $store->stall->image ) }}" alt="">
+                            @endif
                         </a>
                         <div class="product-details">
                             <h4>{{ $store->name }}</h4>
 
 
-                            <a class="btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
+                            <a class="view-store-btn btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
                                 <span class="fa fa-store"></span>
                                 View
                             </a>
