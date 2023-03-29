@@ -34,7 +34,7 @@
                                         <div id="slide-for">
                                             <div>
                                                 <div class="stall-main-img">
-                                                    <img src="{{ asset('public/Image') .'/'. $stall->image }}" alt="">
+                                                    <img src="{{ asset($stall->image) }}" alt="">
                                                 </div>
                                             </div>
                                             @for($i=1; $i<=5; $i++)
@@ -42,7 +42,7 @@
                                                 @if($stall[$imagekey])
                                                     <div>
                                                         <div class="stall-img">
-                                                            <img src="{{ asset('public/Image') .'/'. $stall[$imagekey] }}" alt="">
+                                                            <img src="{{ asset($stall[$imagekey]) }}" alt="">
                                                         </div>
                                                     </div>
                                                 @endif
@@ -51,7 +51,7 @@
                                         <div id="slide-nav" class="stall-gallery">
                                             <div>
                                                 <div class="stall-img">
-                                                    <img src="{{ asset('public/Image') .'/'. $stall->image }}" alt="">
+                                                    <img src="{{ asset($stall->image) }}" alt="">
                                                 </div>
                                             </div>
                                             @for($i=1; $i<=5; $i++)
@@ -60,7 +60,7 @@
                                                 @if($stall[$imagekey])
                                                     <div>
                                                         <div class="stall-img">
-                                                            <img src="{{ asset('public/Image') .'/'. $stall[$imagekey] }}" alt="">
+                                                            <img src="{{ asset($stall[$imagekey]) }}" alt="">
                                                         </div>
                                                     </div>
                                                 @endif
@@ -82,10 +82,6 @@
                                                 <td> <p>₱{{ $stall->amount_sqm }}</p></td>
                                             </tr>
                                             <tr>
-                                                <td class="stall-info-title-container"><p><strong>Rate: </strong> </p> </td>
-                                                <td> <p>{{ $stall->rate}}</p></td>
-                                            </tr>
-                                            <tr>
                                                 <td class="stall-info-title-container"><p><strong>Coordinates: </strong> </p> </td>
                                                 <td> <p>{{ $stall->coords }}</p></td>
                                             </tr>
@@ -94,8 +90,8 @@
                                                 <td> <p>{{ $stall->meter_num }}</p></td>
                                             </tr>
                                             <tr>
-                                                <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
-                                                <td> <p>{{ $stall->rental_fee }}</p></td>
+                                                <td class="stall-info-title-container"><p><strong>Rental Fee per Day: </strong></p> </td>
+                                                <td> <p>₱{{ $stall->rental_fee }}</p></td>
                                             </tr>
                                             <tr>
                                                 <td class="stall-info-title-container"><p><strong>Location: </strong></p> </td>
@@ -131,7 +127,7 @@
                                 </div>
 
                                 <div class="info-item">
-                                    <label for="">Rental Fee per Month</label>
+                                    <label for="">Rental Fee per Day</label>
                                     <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" value="{{ $stall->rental_fee }}" readonly>
 
                                     @error('duration')

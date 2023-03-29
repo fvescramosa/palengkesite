@@ -258,11 +258,16 @@ section{
 }
 
 @media screen and (max-width: 767px){
+   .navbar-collapse.collapse.show{
+      margin-right: 70%;
+      background: white;
+   }
+
    .home-products .products-grid .product-item,
    .products-grid .product-item
    {
-      flex: 1 1 calc(70% - 30px);
-      max-width: calc(70% - 30px);
+      flex: 1 1 calc(50% - 30px);
+      max-width: calc(50% - 30px);
       margin: 20px auto;
    }
 }
@@ -2050,6 +2055,10 @@ button{
 .pal-button.btn-orange{
    background-color: var(--orange);
    color: #fff;
+   padding: 10px;
+   text-transform: uppercase;
+   border-radius: 5px;
+   text-decoration: none;
 }
 
 #select-market label{
@@ -2189,6 +2198,15 @@ button{
    position: relative;
    text-decoration: none;
 }
+
+.chat li:hover{
+   background: var(--white);
+}
+
+.chat li a:hover{
+   text-decoration: none;
+}
+
 .chat li.user {
    justify-content: flex-end;
    text-align: right;
@@ -2210,7 +2228,7 @@ button{
 
 .panel-footer .input-group button{
    margin: 0 auto;
-   padding: 12px 25px;
+   padding: 8px 25px;
    font-size: 14px;
 }
 
@@ -2644,8 +2662,9 @@ button{
    border-radius: 0 0 10px 10px
 }
 .developer .name-section p {
-   font-weight: 500;
+   font-weight: 400;
    text-align: center;
+   text-transform: uppercase;
 }
 
 @media screen and (max-width: 991px){
@@ -2681,8 +2700,8 @@ button{
    }
 
    .developer {
-      flex: 1 1 calc(50% - 30px);
-      max-width: calc(50% - 30px);
+      flex: 1 1 calc(80% - 20px);
+      max-width: calc(80% - 20px);
       margin-bottom: 20px;
    }
 }

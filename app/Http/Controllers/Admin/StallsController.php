@@ -118,7 +118,7 @@ class StallsController extends Controller
             'amount_sqm' => 'required',
             'rental_fee'	=> 'required',
             'section'	=> 'required',
-            'rate' => 'required',
+            'rate' => '',
             'coordinates' => 'required',
             'meter_number' => 'required',
             'market' => 'required',

@@ -169,28 +169,31 @@ class SellerController extends Controller
             if(auth()->user()->seller()->exists()){
                 $seller = auth()->user()->seller;
 
+            //    dd( date('m/d/Y') > date('m/d/Y', strtotime($seller->seller_stalls->end_date)));
 
                 if(auth()->user()->seller->seller_stalls()->exists()){
-                    $present = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-                    $enddate = Carbon::createFromFormat('Y-m-d H:i:s', $seller->seller_stalls->end_date);
+                    if($seller->seller_stalls->end_date!=''){
+                        $present = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                        $enddate = Carbon::createFromFormat('Y-m-d H:i:s', $seller->seller_stalls->end_date);
 
 
+                        if($enddate->lt($present)){
+                            $seller->seller_stalls->update([
+                                'status' => 'inactive'
+                            ]);
 
-                    if($enddate->lt($present)){
-                        $seller->seller_stalls->update([
-                            'status' => 'inactive'
-                        ]);
-
-                        $response = [
-                            'response' => 'error',
-                            'message' => 'Your Contract has been expired! Please contact the Admin to renew your contract.'
-                        ];
+                            $response = [
+                                'response' => 'error',
+                                'message' => 'Your Contract has been expired! Please contact the Admin to renew your contract.'
+                            ];
+                        }
                     }
                 }
 
                 return view('seller/profile', compact(['seller']))->with($response);
-            }else{
-                return redirect(route('seller.create'));
+                
+                }else{
+                    return redirect(route('seller.create'));
             }
         }
 

@@ -47,7 +47,7 @@
                                         <div id="slide-for">
                                             <div>
                                                 <div class="stall-main-img">
-                                                    <img src="{{ asset('public/Image') .'/'. $stall->image }}" alt="">
+                                                    <img src="{{ asset($stall->image) }}" alt="">
                                                 </div>
                                             </div>
                                             @for($i=1; $i<=5; $i++)
@@ -55,7 +55,7 @@
                                                 @if($stall[$imagekey])
                                                     <div>
                                                         <div class="stall-img">
-                                                            <img src="{{ asset('public/Image') .'/'. $stall[$imagekey] }}" alt="">
+                                                            <img src="{{ asset($stall[$imagekey]) }}" alt="">
                                                         </div>
                                                     </div>
                                                 @endif
@@ -64,7 +64,7 @@
                                         <div id="slide-nav" class="stall-gallery">
                                             <div>
                                                 <div class="stall-img">
-                                                    <img src="{{ asset('public/Image') .'/'. $stall->image }}" alt="">
+                                                    <img src="{{ asset($stall->image) }}" alt="">
                                                 </div>
                                             </div>
                                             @for($i=1; $i<=5; $i++)
@@ -73,7 +73,7 @@
                                                 @if($stall[$imagekey])
                                                     <div>
                                                         <div class="stall-img">
-                                                            <img src="{{ asset('public/Image') .'/'. $stall[$imagekey] }}" alt="">
+                                                            <img src="{{ asset($stall[$imagekey]) }}" alt="">
                                                         </div>
                                                     </div>
                                                 @endif

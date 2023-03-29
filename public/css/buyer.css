@@ -47,6 +47,9 @@ color: #000 !important;
 
 .dashboard-content{
    width: 65%;
+   background: var(--white);
+   padding: 0 25px 0 25px;
+   border-radius: 15px;
 }
 
 .dashboard-box{

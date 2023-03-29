@@ -69,6 +69,17 @@
 
                                 </div>
 
+                                <!-- <div class="form-group long">
+                                    <div class="form-inline">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="featured" id="featured"  value="1">
+                                            <label class="form-check-label" for="remember">
+                                                {{ __('Featured') }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+
                                 <div class="form-group short">
                                     <label for="Product">Stock or Quantity</label>
                                     <input type="number"

@@ -97,16 +97,12 @@
                                             <td> <p>{{ $seller_stall->stall->section }}</p></td>
                                         </tr>
                                         <tr>
-                                            <td class="stall-info-title-container"><p><strong>Area: </strong></p></td>
+                                            <td class="stall-info-title-container"><p><strong>Area in sq.m.: </strong></p></td>
                                             <td> <p>{{ $seller_stall->stall->sqm }} sqm</p></td>
                                         </tr>
                                         <tr>
-                                            <td class="stall-info-title-container"><p><strong>Amount / Sqm: </strong> </p> </td>
+                                            <td class="stall-info-title-container"><p><strong>Amount per sq.m. / Rate: </strong> </p> </td>
                                             <td> <p>₱{{ $seller_stall->stall->amount_sqm }}</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="stall-info-title-container"><p><strong>Rate: </strong> </p> </td>
-                                            <td> <p>{{ $seller_stall->stall->rate }}</p></td>
                                         </tr>
                                         <tr>
                                             <td class="stall-info-title-container"><p><strong>Coordinates: </strong> </p> </td>
@@ -117,7 +113,7 @@
                                             <td> <p>{{ $seller_stall->stall->meter_num }}</p></td>
                                         </tr>
                                         <tr>
-                                            <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                            <td class="stall-info-title-container"><p><strong>Rental Fee per day: </strong></p> </td>
                                             <td> <p>{{ $seller_stall->stall->rental_fee }}</p></td>
                                         </tr>
 

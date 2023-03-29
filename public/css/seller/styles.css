@@ -143,6 +143,10 @@ body{
     text-transform: uppercase;
 }
 
+#sellers_submenu li {
+    padding-left: 25px;
+ }
+
 
 
 
