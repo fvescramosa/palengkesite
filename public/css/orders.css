@@ -11,12 +11,24 @@
 .orders-wrapper{
    width: 100%;
    max-width: 1400px;
-   margin:60px auto;
+   margin:20px auto;
    height: auto;
    /*border: 1px solid #090909;*/
    /*box-shadow: 7px 0px 38px -11px rgb(0 0 0 / 58%);*/
-   padding: 40px;
+   padding: 20px 40px;
    position: relative;
+}
+
+.orders-wrapper.buyer-order{
+   padding: 0;
+}
+
+.orders-wrapper .nav-tabs{
+   border-bottom: 0;
+}
+
+.orders-wrapper .nav-tabs .nav-item a{
+   text-align: center;
 }
 
 .my-order-list{

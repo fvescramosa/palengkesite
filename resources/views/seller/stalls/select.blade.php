@@ -8,7 +8,7 @@
                     @foreach($stalls as $stall)
                     <a href="{{ route('seller.stalls.create', [$stall->id]) }}" class="grid-item">
                         <div class="grid-item-thumbnail">
-                            <img src="{{ asset('public/Image/'.$stall->image)  }}" alt="">
+                            <img src="{{ asset($stall->image)  }}" alt="">
                         </div>
                         <div class="grid-item-details">
                             <p><strong>Stall No: </strong> {{ $stall->number }}</p>

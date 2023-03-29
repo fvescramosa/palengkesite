@@ -246,7 +246,7 @@
                                 <li>
                                     <a href="{{ route('admin.about-us.index') }}" class="{{ ( request()->routeIs('admin.about-us.index') ? 'active' : '' )}}">
                                         <span class="icon"><i class="fa fa-user-shield"></i></span>
-                                        <span class="item">Abou Us Page</span>
+                                        <span class="item">About Us Page</span>
                                     </a>
                                 </li>
                                 <li>
