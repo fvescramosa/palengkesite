@@ -21,17 +21,24 @@
                     <form action="{{ route('seller.orders.status.update') }}" id="updateStatus" class="form-group" method="POST">
                         @csrf
                         <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                        @if($orders->status !== 'Completed' && $orders->status !== 'Cancelled')
                         <select name="status" id="orderStatus" class="form-control">
                             @foreach($statuses as $status)
 
 
+                                @if($status->status !== 'Ship')
                                 <option value="{{ $status->id }}"
                                         {{ (in_array($status->id, $arr_status) ? 'disabled' : '') }}
+
+
                                         {{ ( $orders->order_statuses->last()->status->status == $status->status  ? 'selected' : '' ) }}
 
                                 >{{ $status->status }}</option>
+                                @endif
+
                             @endforeach
                         </select>
+                        @endif
                     </form>
                 </div>
                 <div class="order-details-box order-customer-info">

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ AdminController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\SellerStallsController;
 use App\Http\Controllers\Admin\StallAppointmentController;
@@ -89,6 +89,9 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
     Route::get('chats/seller/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'seller'])->name('chat.seller');
     Route::post('chats/sendMessage/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::get('chats/fetchAllMessages/{id}', [\App\Http\Controllers\Buyer\ChatsController::class, 'fetchAllMessages'])->name('chat.fetchAllMessages');
+
+    Route::get('/getMessagesNotification', [BuyerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
+    Route::get('/setUnread', [BuyerController::class, 'setUnread'])->name('setUnread');
 });
 
 
@@ -161,6 +164,10 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
     Route::get('/analytics/products/ratings', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productByRatings'])->name('analytics.product.ratings');
+
+
+    Route::get('/getMessagesNotification', [\App\Http\Controllers\Seller\SellerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
+    Route::get('/setUnread', [\App\Http\Controllers\Seller\SellerController::class, 'setUnread'])->name('setUnread');
 //    Route::get('/analytics/products/{id}', [\App\Http\Controllers\Seller\AnalyticsController::class, 'salesByProducts'])->name('analytics.products.id');
 //    Route::get('/analytics/seller/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'sellerRegistration'])->name('analytics.sellerRegistration');
 //    Route::get('/analytics/buyer/registration', [\App\Http\Controllers\Seller\AnalyticsController::class, 'buyerRegistration'])->name('analytics.buyerRegistration');
@@ -276,17 +283,31 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/contact-us/', [\App\Http\Controllers\Admin\ContactUsController::class, 'index'])->name('contact-us');
     Route::get('/contact-us/{id}', [\App\Http\Controllers\Admin\ContactUsController::class, 'find'])->name('contact-us.find');
 
-    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us');
-    Route::get('/about-us/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'create'])->name('developers.create');
-    Route::post('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('developers.store');
-    Route::get('/about-us/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('developers.edit');
-    Route::post('/about-us/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('developers.update');
+    Route::get('/about-us/', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about-us.index');
+    Route::POST('/about-us/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('about-us.store');
+    Route::get('/about-us/developers', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers'])->name('developers');
+    Route::get('/about-us/developers/create', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_create'])->name('developers.create');
+    Route::post('/about-us/developers/store', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_store'])->name('developers.store');
+    Route::get('/about-us/developers/edit/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_edit'])->name('developers.edit');
+    Route::post('/about-us/developers/update/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'developers_update'])->name('developers.update');
+    Route::get('/about-us/developers-trash', [\App\Http\Controllers\Admin\AboutUsController::class, 'showDeveloperTrash'])->name('developers-trash');
+    Route::get('/about-us/delete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'deleteDeveloper'])->name('developers.delete');
+    Route::get('/about-us/permanentdelete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'DeveloperForceDelete'])->name('developers.permanentdelete');
+    Route::get('/about-us/recover/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'recoverDeveloper'])->name('developers.recover');
 });
 
 Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');
 
 Route::get('/test/mail', function (){
    return new NewUserWelcomeMail();
+});
+Route::get('/test/match', function (){
+    if (preg_match("~^9\d+$~", '8178402141')) {
+        dd('true');
+    }else{
+
+        dd('false');
+    }
 });
 /*
 Route::get('/chat', 'ChatsController@index');

@@ -25,8 +25,9 @@ class ContactUsController extends Controller
             ]
         );
 
+
         $contact = ContactUs::create([
-            'to' => env('MAIL_USERNAME'),
+            'to' => env('MAIL_USERNAME', 'romaalyanna@gmail.com'),
             'from' => $request->email,
             'name' => $request->name,
             'subject' => $request->subject,

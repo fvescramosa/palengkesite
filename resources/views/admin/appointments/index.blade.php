@@ -52,8 +52,8 @@
                                 <td>{{ $appointment->seller->user->first_name }} {{ $appointment->seller->user->last_name }}</td>
                                 <td> {{ $appointment->stall->number }}</td>
                                 <td> {{ $appointment->stall->market->market }}</td>
-                                <td> {{ $appointment->created_at }}</td>
-                                <td> {{ $appointment->date }}</td>
+                                <td> {{ date('m/d/Y', strtotime($appointment->created_at)) }}</td>
+                                <td> {{ date('m/d/Y', strtotime($appointment->date)) }}</td>
                                 <td> 
                                     <a href="{{ asset(  $appointment->application_letter )}}"  target="_blank">View</a>
                                 </td>

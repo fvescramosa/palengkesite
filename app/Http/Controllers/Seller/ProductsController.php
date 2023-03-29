@@ -25,7 +25,9 @@ class ProductsController extends Controller
 
     public function create(){
 
-        $categories = Categories::all();
+        $category = auth()->user()->seller->seller_stalls->stall->section;
+        $categories = Categories::where('category', $category)->get();
+
         return view('seller/products/create', compact(['categories']));
     }
 
@@ -62,6 +64,7 @@ class ProductsController extends Controller
                 'code' => '',
                 'manufacturer' => '',
                 'type' => '',
+                'stock' => '',
                 'status' => 'pending'
             ]);
 

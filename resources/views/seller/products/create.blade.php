@@ -32,18 +32,6 @@
 
                                 </div>
 
-                                <div class="form-group long">
-                                    <div class="form-inline">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
-                                            <label class="form-check-label" for="remember">
-                                                <?php echo e(__('New Product')); ?>
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="form-group long" id="select-product">
                                     <label for="Product">Product</label>
                                     <select  class="form-control @error('product') is-invalid @enderror" id="product" name="product" placeholder="Product"  >
@@ -57,6 +45,18 @@
 
                                 </div>
 
+                                <div class="form-group long">
+                                    <div class="form-inline">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="new_product" id="new_product"   >
+                                            <label class="form-check-label" for="remember">
+                                                <?php echo e(__('Custom Product')); ?>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group long" id="custom-product-container">
                                     <label for="Product">Product</label>
                                     <input type="text"  class="form-control @error('new_product_name') is-invalid @enderror" id="custom-product" name="new_product_name" placeholder="Product" value="" >
@@ -68,6 +68,23 @@
                                     @enderror
 
                                 </div>
+
+                                <div class="form-group short">
+                                    <label for="Product">Stock or Quantity</label>
+                                    <input type="number"
+                                           class="form-control @error('stock') is-invalid @enderror"
+                                           id="stock" name="stock"
+                                           placeholder="Stock"
+                                           value="" >
+
+                                    @error('stock')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
 
                                 <div class="form-group long" id="description-container">
                                     <label for="Product">Custom Product Name</label>

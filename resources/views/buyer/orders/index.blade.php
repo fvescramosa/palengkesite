@@ -7,7 +7,88 @@
 
            <hr>
 
+           <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=pending"
+                           role="tab"
+                           aria-controls="ex1-tabs-1"
+                           aria-selected="true"
+                   >Pending</a>
+               </li>
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link "
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=confirmed"
+                           role="tab"
+                           aria-controls="ex1-tabs-1"
+                           aria-selected="true"
+                   >Confirmed</a>
+               </li>
+              {{-- <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=shipping"
+                           role="tab"
+                           aria-controls="ex1-tabs-2"
+                           aria-selected="false"
+                   >Shipping</a>
+               </li>--}}
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=On Delivery"
+                           role="tab"
+                           aria-controls="ex1-tabs-3"
+                           aria-selected="false"
+                   >On Delivery</a>
+               </li>
 
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=Delivered"
+                           role="tab"
+                           aria-controls="ex1-tabs-3"
+                           aria-selected="false"
+                   >Delivered</a>
+               </li>
+
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=Completed"
+                           role="tab"
+                           aria-controls="ex1-tabs-3"
+                           aria-selected="false"
+                   >Completed</a>
+               </li>
+
+               <li class="nav-item" role="presentation">
+                   <a
+                           class="nav-link"
+                           id="#orderTabPerStatus"
+                           data-mdb-toggle="tab"
+                           href="?status=cancelled"
+                           role="tab"
+                           aria-controls="ex1-tabs-3"
+                           aria-selected="false"
+                   >Cancelled</a>
+               </li>
+           </ul>
               @foreach($orders as $order)
 
                 <div class="my-order-list">
