@@ -14,6 +14,15 @@
                                 <input  class="form-control" type="text" name="search" id="search" value="{{ old('search') ??  $_GET['search']  ?? '' }}" placeholder="Search">
                             </div>
 
+                            <div class="form-group">
+                                <label for="search">Status</label>
+                                <select  class="form-control" type="text" name="status" id="status"  placeholder="Status">
+                                    <option value="{{ old('status') ??  $_GET['status']  ?? '' }}">{{ old('status') ??  $_GET['status']  ?? '' }}</option>
+                                    <option value="Vacant">Vacant</option>
+                                    <option value="Occupied">Occupied</option>
+                                </select>
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="search">Sort</label>
@@ -68,6 +77,7 @@
                     </table>
                 </div>
 
+
                 @if( isset($_GET ) )
                 {{$stalls->appends($_GET)->links()}}
 
@@ -76,6 +86,9 @@
                 @endif
 
                 <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
+
+
+                <a href="{{ route('admin.stalls.export') }}?{{ $request->getQueryString() }}" class="btn btn-primary"><span class="fa fa-download"></span> Downloads</a>
             </div>
         </div>
     </div>
