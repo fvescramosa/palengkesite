@@ -4,9 +4,15 @@
 
 <section class="about-us">
     <div class="container">
+        <div class="about-title">
+            <p>Behind the websbite</p>
+            <h1>Get to know
+                <span>us more</span>
+            </h1>
+        </div>
         <div class="about-us-flex">
             <div class="about-us-left reveal">
-                <img src="{{ $about->image ?? \Illuminate\Support\Facades\URL::to('/images/logo-palengkesite.png') }}" alt="">
+                <img src="{{ $about->image ?? \Illuminate\Support\Facades\URL::to('/images/about.png') }}" alt="">
             </div>
             <div class="about-us-right reveal">
                 <h3>{{ $about->title ?? 'WHY CHOOSE US?' }}</h3>
