@@ -221,6 +221,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/users/update/{id}',  [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
     Route::get('/users/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'delete'])->name('users.delete');
     Route::get('/users/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'retrieve'])->name('users.retrieve');
+    Route::get('/users/seller/export', [\App\Http\Controllers\Admin\UserController::class, 'exportSeller'])->name('seller.export');
 
     //products
     Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');

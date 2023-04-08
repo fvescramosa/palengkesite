@@ -249,4 +249,6 @@ class SellerController extends Controller
 
         return $messages;
     }
+
+
 }

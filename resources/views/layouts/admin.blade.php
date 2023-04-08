@@ -431,7 +431,7 @@
 
                 $(window).on('load', function(){
                     app.initCollapse();
-                    app.filter($('#orderby, #status'));
+                    app.filter($('#orderby, #status, #stall, #contract'));
                     app.initSearch($('#search'));
                     app.initPalengkeFilter($('#marketOption'));
                     app.initNotifStallAppointment();
