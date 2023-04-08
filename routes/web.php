@@ -248,6 +248,8 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/stalls/permanentdelete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'StallForceDelete'])->name('stalls.permanentdelete');
     Route::get('/stalls/recover/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'recoverStall'])->name('stalls.recover');
 
+    Route::get('/stalls/export/', [\App\Http\Controllers\Admin\StallsController::class, 'exportStall'])->name('stalls.export');
+
 
     //categories
     Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');

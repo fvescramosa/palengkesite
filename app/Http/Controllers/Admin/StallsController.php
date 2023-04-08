@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class StallsController extends Controller
 {
     //
-    public function show(){
+    public function show(Request $request){
 
         $stalls = new Stall();
 
@@ -31,6 +31,10 @@ class StallsController extends Controller
                 });
 
             });
+        }
+
+        if(isset($_GET['status'])){
+            $stalls = $stalls->where('status', $_GET['status']);
         }
 
             //->get();
@@ -94,7 +98,7 @@ class StallsController extends Controller
 
         $stalls = $stalls->paginate(10);
         
-        return view('admin.stalls/show', compact(['stalls']));
+        return view('admin.stalls/show', compact(['stalls', 'request']));
     }
 
     public function find($id){
@@ -383,4 +387,180 @@ class StallsController extends Controller
         return redirect(route('admin.stalls.trash'));
     }
 
+
+    public function exportStall($status = null){
+
+
+        $fileName = 'stalls.csv';
+
+        $stalls = new Stall();
+
+        if(session()->has('market')){
+            $stalls = $stalls->where('market_id', session()->get('market'));
+        }
+
+
+        if(isset($_GET['search'])){
+            $stalls = $stalls->where(function ($query){
+                $query->orWhere('number', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhere('section', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhere('status', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhereHas('market', function($q){
+                    $q->where('market', 'like', '%' . $_GET['search'] . '%');
+                });
+
+            });
+        }
+
+        if(isset($_GET['status'])){
+            $stalls = $stalls->where('status', $_GET['status']);
+        }
+        //->get();
+        // $orderby = '';
+
+        // if(isset($_GET['orderby'])){
+        //     if($_GET['orderby'] == 'A-Z'){
+        //         $orderby = ['number', 'asc'];
+        //         $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'Z-A'){
+        //         $orderby = ['number', 'desc'];
+        //         $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'recent'){
+        //         $orderby = ['created_at', 'desc'];
+        //         $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+        //     }
+
+        //     else if($_GET['orderby'] == 'oldest'){
+        //         $orderby = ['created_at', 'asc'];
+        //         $stalls = $stalls->orderBy($orderby[0], $orderby[1]);
+        //     }
+
+        // }
+        // else{
+        //     $orderby = ['number', 'asc'];
+        //     $stalls = $stalls->orderByRaw('CONVERT('.$orderby[0].', SIGNED) '.$orderby[1]);
+        // }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['number', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['number', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $stalls->orderBy($orderby[0], $orderby[1]);
+            }
+
+        }
+        else{
+            $orderby = ['number', 'asc'];
+            $stalls->orderBy($orderby[0], $orderby[1]);
+        }
+
+
+
+
+        $stalls = $stalls->get();
+
+
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+
+
+
+        $columns = array('Stall Number',
+                        'SQM',
+                        'Amount Per SQM',
+                        'Rental Fee',
+                        'Rate',
+                        'Coordinates',
+                        'Meter Number',
+                        'Section',
+                        'Status',
+                    );
+
+        $callback = function() use($stalls, $columns) {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+//            "id" => 17
+//            "number" => "1001"
+//            "sqm" => "1001"
+//            "amount_sqm" => "1001"
+//            "rental_fee" => "1001"
+//            "rate" => "1001"
+//            "coords" => "1001"
+//            "meter_num" => "1001"
+//            "section" => "General Merchandise"
+//            "image" => "images/stalls/1001/202303280026_6421c3bb7ea77_1001_image.tmp"
+//            "image_1" => null
+//            "image_2" => null
+//            "image_3" => null
+//            "image_4" => null
+//            "image_5" => null
+//            "status" => "vacant"
+//            "created_at" => "2023-03-28 00:26:35"
+//            "updated_at" => "2023-03-28 00:26:35"
+//            "market_id" => 1
+//            "deleted_at" => null
+//            "category_id" => 10
+
+            foreach ($stalls as $data) {
+                $row['Stall Number']  = $data->number;
+                $row['SQM']    = $data->sqm;
+                $row['Amount Per SQM']    = $data->amount_sqm;
+                $row['Rental Fee']    = $data->rental_fee;
+                $row['Rate']    = $data->rate;
+                $row['Coordinates']    = $data->coords;
+                $row['Meter Number']    = $data->meter_num;
+                $row['Section']    = $data->section;
+                $row['Status']    = $data->status;
+                fputcsv($file, array(
+                    $row['Stall Number'],
+                    $row['SQM'] ,
+                    $row['Amount Per SQM'],
+                    $row['Rental Fee'],
+                    $row['Rate'],
+                    $row['Coordinates'],
+                    $row['Meter Number'],
+                    $row['Section'],
+                    $row['Status'],
+                ));
+
+            }
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
+
+//        dd([$labels, $data ]);
+
+
+//        return view('seller.analytics.order-by-products', compact('labels', 'data'));
+    }
 }
