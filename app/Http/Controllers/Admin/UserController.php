@@ -6,6 +6,7 @@ use App\User;
 use App\Seller;
 use App\Buyer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
@@ -61,10 +62,23 @@ class UserController extends Controller
         return view('admin.users/buyers', compact(['users']));
     }
 
-    public function showSellerList(){
+    public function showSellerList(Request $request){
 
         $users = User::whereHas('seller')->whereHas('seller.seller_stalls', function($q){
-            $q->where('status', 'active');
+
+                if(isset($_GET['stall']) && $_GET['stall'] != ''){
+                    $q->where('status', $_GET['stall']);
+                }
+
+                if(isset($_GET['contract'])){
+                    if($_GET['contract'] == 'end') {
+                        $q->whereDate('end_date', '<=', Carbon::now());
+
+                    }else if($_GET['contract'] == 'active'){
+                        $q->whereDate('end_date', '>=', Carbon::now());
+                    }
+                }
+
         });
 
         if(isset($_GET['search'])){
@@ -119,10 +133,11 @@ class UserController extends Controller
 
 
 
-        
+
+
         $users = $users->paginate(10);
         
-        return view('admin.users/sellers', compact(['users']));
+        return view('admin.users/sellers', compact(['users', 'request']));
     }
 
     public function  showSellerTrash(){
@@ -321,5 +336,138 @@ class UserController extends Controller
         
         $delete = Buyer::where('id', $id)->forceDelete();
         return redirect(route('admin.show.buyers.trash'));
+    }
+
+    public function exportSeller(){
+        $users = User::whereHas('seller')->whereHas('seller.seller_stalls', function($q){
+
+            if(isset($_GET['stall']) && $_GET['stall'] != ''){
+                $q->where('status', $_GET['stall']);
+            }
+
+            if(isset($_GET['contract'])){
+                if($_GET['contract'] == 'end') {
+                    $q->whereDate('end_date', '<=', Carbon::now());
+
+                }else if($_GET['contract'] == 'active'){
+                    $q->whereDate('end_date', '>=', Carbon::now());
+                }
+            }
+
+        });
+
+
+        if(isset($_GET['search'])){
+            $users = $users->where( function($query){
+                $query->orwhere('first_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('last_name', 'like', '%' . $_GET['search'] . '%');
+                $query->orwhere('email', 'like', '%' . $_GET['search'] . '%');
+                $query->orWhereHas('seller', function($q){
+                    $q->where('seller_type', 'like', '%' . $_GET['search'] . '%');
+                });
+            });
+        }
+
+        if(session()->has('market')){
+
+            $marketOption = session()->get('market');
+
+            $users->whereHas('seller', function($q) use ($marketOption){
+                $q->where('market_id', $marketOption);
+            });
+
+
+        }
+
+        $orderby = '';
+        if(isset($_GET['orderby'])){
+            if($_GET['orderby'] == 'A-Z'){
+                $orderby = ['first_name', 'asc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'Z-A'){
+                $orderby = ['first_name', 'desc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'recent'){
+                $orderby = ['created_at', 'desc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+            else if($_GET['orderby'] == 'oldest'){
+                $orderby = ['created_at', 'asc'];
+                $users->orderBy($orderby[0], $orderby[1]);
+            }
+
+        }
+        else{
+            $orderby = ['first_name', 'asc'];
+            $users->orderBy($orderby[0], $orderby[1]);
+        }
+
+
+
+
+
+        $users = $users->get();
+
+        $fileName = 'sellers.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+
+
+
+        $columns = array('First Name',
+                        'Last Name',
+                        'Email',
+                        'Stall Number',
+                        'End of Contract',
+        );
+
+        $callback = function() use($users, $columns) {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+            foreach ($users as $data) {
+                $row['First Name']  = $data->first_name;
+                $row['Last Name']    = $data->last_name;
+                $row['Email']    = $data->email;
+                $row['Stall Number']    = $data->seller->seller_stalls->name;
+                $row['Status']    = $data->seller->seller_stalls->status;
+                $row['End of Contract']    = $data->seller->seller_stalls->end_date;
+
+                $row['Contract Status'] = '';
+                if(isset($_GET['contract']) &&  $_GET['contract']== 'end'){
+                    $row['Contract Status']    = 'Expired';
+                }else if(isset($_GET['contract']) &&  $_GET['contract']== 'active'){
+                    $row['Contract Status']    = 'Active';
+                }
+
+                fputcsv($file, array(
+                    $row['First Name'],
+                    $row['Last Name'] ,
+                    $row['Email'],
+                    $row['Stall Number'],
+                    $row['Status'],
+                    $row['End of Contract'],
+                    $row['Contract Status'],
+                ));
+
+            }
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
+
     }
 }

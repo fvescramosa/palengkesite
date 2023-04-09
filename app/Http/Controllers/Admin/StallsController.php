@@ -507,28 +507,6 @@ class StallsController extends Controller
 
             fputcsv($file, $columns);
 
-//            "id" => 17
-//            "number" => "1001"
-//            "sqm" => "1001"
-//            "amount_sqm" => "1001"
-//            "rental_fee" => "1001"
-//            "rate" => "1001"
-//            "coords" => "1001"
-//            "meter_num" => "1001"
-//            "section" => "General Merchandise"
-//            "image" => "images/stalls/1001/202303280026_6421c3bb7ea77_1001_image.tmp"
-//            "image_1" => null
-//            "image_2" => null
-//            "image_3" => null
-//            "image_4" => null
-//            "image_5" => null
-//            "status" => "vacant"
-//            "created_at" => "2023-03-28 00:26:35"
-//            "updated_at" => "2023-03-28 00:26:35"
-//            "market_id" => 1
-//            "deleted_at" => null
-//            "category_id" => 10
-
             foreach ($stalls as $data) {
                 $row['Stall Number']  = $data->number;
                 $row['SQM']    = $data->sqm;
