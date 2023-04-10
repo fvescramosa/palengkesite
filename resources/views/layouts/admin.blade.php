@@ -231,6 +231,12 @@
                         </div>
                     </li>
                     <li>
+                        <a href="{{ route('admin.markets.show') }}" class="{{ ( request()->routeIs('admin.markets.show') ? 'active' : '' )}}">
+                            <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                            <span class="item">Market</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-cog"></i></span>
                             <span class="item">Settings</span>
@@ -293,10 +299,10 @@
                     <input type="hidden" name="orderby" value="{{ $_GET['orderby'] ?? '' }}">
                     <input type="hidden" name="search" value="{{ $_GET['search'] ?? '' }}">
                     <select  class="form-control" id="marketOption" name="marketOption" placeholder="Order By"  >
-                        <option value=""    >All</option>
-                        <option value="1"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '1' ) ? 'selected' : '' : '' ); ?>>Poblacion</option>
-                        <option value="2"     <?=  ( session()->has('market' ) ?  ( session()->get('market') == '2' ) ? 'selected' : '' : '' ); ?>>Anilao</option>
-                        <option value="3"  <?=  ( session()->has('market' ) ?  ( session()->get('market') == '3' ) ? 'selected' : '' : '' ); ?>>Talaga</option>
+                        <option value="">All</option>
+                        @foreach(\App\Market::all() as $market)
+                            <option value="{{ $market->id }}" {{ session()->get('market') ==  $market->id ? 'selected' : ''}}>{{ $market->market }}</option>
+                        @endforeach
 
                     </select>
                 </form>

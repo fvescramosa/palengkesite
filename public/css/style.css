@@ -2065,12 +2065,14 @@ button{
    color: #fff;
 }
 #select-market select{
-   width: 136px;
-   font-weight: 700;
+   width: 255px;
+   font-weight: 500;
    color: #fff;
    background-color: var(--green);
    border: 1px solid var(--green);
    text-transform: uppercase;
+   text-align: center;
+   border: 2px solid;
 
 }
 

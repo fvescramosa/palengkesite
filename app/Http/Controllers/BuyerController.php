@@ -245,4 +245,12 @@ class BuyerController extends Controller
 
         return $messages;
     }
+
+    public function getOrdersNotification(){
+        $messages = Auth::user()->buyer->orders->where('status', 'pending');
+
+
+        return response()->json($messages->count());
+
+    }
 }
