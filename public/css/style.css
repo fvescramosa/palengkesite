@@ -285,6 +285,28 @@ section{
 .contact-us .container{
    max-width: 911px !important;
 }
+
+.contact-title{
+   text-align: center; 
+   text-transform: uppercase;
+}
+
+.contact-title p{
+   font-size: 18px;
+   color: #2d5500;
+   font-weight: 600;
+}
+
+.contact-title h1{
+   color: var(--orange);
+   font-size: 3rem;
+   font-weight: 700;
+}
+
+.contact-label{
+   padding: 0;
+}
+
 .products .box-container{
    display: grid;
    grid-template-columns: repeat(auto-fit, 35rem);
@@ -2000,6 +2022,11 @@ display: flex;
    color: #fff;
    font-size: 15px;
    width: 100%;
+   text-transform: uppercase;
+}
+
+.view-store-btn span{
+   text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 button{

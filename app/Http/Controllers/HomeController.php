@@ -122,8 +122,8 @@ class HomeController extends Controller
     }
 
     public function testSMS(){
-        $receiverNumber = "+639178402141";
-        $message = "This is testing from FRANK!";
+        $receiverNumber = "";
+        $message = "This is testing from ROMA!";
 
         try {
 

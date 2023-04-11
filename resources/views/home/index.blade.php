@@ -151,7 +151,7 @@
 
 
                         <a class="view-store-btn btn btn-orange" type="submit" href="{{ route('shop.store.find', ['id' => $store->id]) }}" >
-                            <span class="fa fa-store"></span>
+                            <span class="fa fa-store"> </span>
                             View
                         </a>
 

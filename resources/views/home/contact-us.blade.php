@@ -3,27 +3,30 @@
 @section('content')
     <section class="contact-us">
         <div class="container">
-            <h1>Contact Us</h1>
-        <form action="{{ route('contact-us.submit') }}" class="form-group" method="POST">
+            <div class = "contact-title">
+                <p>If you have any inquiries</p>
+                <h1>Contact Us</h1>
+            </div>
+            <form action="{{ route('contact-us.submit') }}" class="form-group" method="POST">
 
                 @csrf
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 contact-label">
                         <label for="" class="col-form-label">Name</label>
                         <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="">
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 contact-label">
                         <label for="" class="col-form-label">Email</label>
                         <input type="text" name="email" value="{{ old('email') }}" class="form-control" id="">
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 contact-label">
                         <label for="" class="col-form-label">Subject</label>
                         <input type="text" name="subject" value="{{ old('subject') }}" class="form-control" id="">
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 contact-label">
                         <label for="" class="col-form-label">Message</label>
                         <textarea name="message" class="form-control" id="" rows="10" cols="10">{{ old('message') }}</textarea>
                     </div>

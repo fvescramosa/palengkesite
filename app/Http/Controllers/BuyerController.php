@@ -137,15 +137,15 @@ class BuyerController extends Controller
 
     public function update(Request $request){
 
-
-
-
-
+        $validate = $request->validate([
+            'mobile' =>  ['', 'regex:/[0-9]{9}/', 'max:10'],
+         ]);
 
         $userData = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'mobile' => ($request->mobile != '' ? $request->mobile : ''),
         ];
 
 

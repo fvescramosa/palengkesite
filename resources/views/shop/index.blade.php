@@ -7,11 +7,11 @@
         <div class="container shop-wrapper">
 
             <div class="filter-wrapper">
-                    <h3>Filter</h3>
                     <form action="" id="filter" method="GET">
                         <div class="by-categories">
                             <div class="form-group">
                                 <div class="form-group">
+                                    <h3>Filter</h3>
                                     <label class="" for="">Product Name</label>
                                     <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') ?? $_GET['product_name'] ?? '' }}">
                                 </div>

@@ -44,6 +44,19 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group info-item short input-group mb-3 prepend">
+                                <label for="email">Mobile</label>
+                                    <div class="input-group-prepend info-item-prepend">
+                                        <span class="input-group-text" id="basic-addon1">+63</span>
+                                    </div>
+                                    <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" placeholder="9123456789" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="{{ auth()->user()->mobile }}">
+                                    @error('mobile')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
+
 
                             @if(auth()->user()->buyer()->exists())
                             <div class="form-group info-item short">
@@ -79,7 +92,7 @@
 
                             </div>
 
-                            <div class="form-group info-item short">
+                            <!-- <div class="form-group info-item short">
                                 <label for="contact">Contact Number</label>
                                 <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="Enter your contact number" value="{{ auth()->user()->buyer->contact }}">
                                 @error('contact')
@@ -87,7 +100,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
+                            </div> -->
 
                             <div class="form-group info-item xshort">
                                 <label for="stnumber">Street Number</label>

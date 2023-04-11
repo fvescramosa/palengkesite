@@ -56,7 +56,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->filled('remember');
 
-        $maxAttempts = 3; // Maximum number of attempts allowed
+        $maxAttempts = 4; // Maximum number of attempts allowed
         $decaySeconds = 60; // Lockout period in seconds
 
         // Check if the user is locked out
@@ -112,7 +112,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->filled('remember');
 
-        $maxAttempts = 3; // Maximum number of attempts allowed
+        $maxAttempts = 4; // Maximum number of attempts allowed
         $decaySeconds = 60; // Lockout period in seconds
 
         // Check if the user is locked out
