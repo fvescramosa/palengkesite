@@ -29,7 +29,7 @@
 
 
                         <div class="row-btn">
-                            <button class="btn btn-orange" type="submit">Apply Filter</button>
+                            <button class="btn home-btn option-btn" type="submit">Apply Filter</button>
                         </div>
 
                     </form>

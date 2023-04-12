@@ -7,7 +7,7 @@
                 <p>If you have any inquiries</p>
                 <h1>Contact Us</h1>
             </div>
-            <form action="{{ route('contact-us.submit') }}" class="form-group" method="POST">
+            <form action="{{ route('contact-us.submit') }}" class="form-group contact-form" method="POST">
 
                 @csrf
                 <div class="row">
@@ -31,7 +31,7 @@
                         <textarea name="message" class="form-control" id="" rows="10" cols="10">{{ old('message') }}</textarea>
                     </div>
 
-                    <button class="home-btn option-btn">Submit</button>
+                    <button class="home-btn option-btn contact-btn">Submit</button>
                 </div>
 
         </form>

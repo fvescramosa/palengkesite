@@ -100,11 +100,15 @@
 
                                 <div class="form-group long">
                                     <label for="type">Type</label>
-                                    <input type="text"  class="form-control @error('type') is-invalid @enderror" 
+                                    <!-- <input type="text"  class="form-control @error('type') is-invalid @enderror" 
                                                         id="type" 
                                                         name="type" 
-                                                        placeholder="" value="{{ $products->type }}" >
+                                                        placeholder="" value="{{ $products->type }}" > -->
 
+                                    <select class="form-control @error('type') is-invalid @enderror" id="type"
+                                         name="type">
+                                        <option value="Retail" {{ ('Retail' == $products->type) ? 'selected' : '' }}>Retail</option>
+                                        <option value="Wholesale" {{ ('Wholesale' == $products->type) ? 'selected' : '' }}>Wholesale</option>
                                     </select>
                                     @error('product')
                                     <span class="invalid-feedback" role="alert">

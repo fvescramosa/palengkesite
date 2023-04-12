@@ -230,12 +230,14 @@
                             </ul>
                         </div>
                     </li>
+                    @if(auth()->guard('admin')->user()->is_super)
                     <li>
                         <a href="{{ route('admin.markets.show') }}" class="{{ ( request()->routeIs('admin.markets.show') ? 'active' : '' )}}">
                             <span class="icon"><i class="fas fa-shopping-basket"></i></span>
                             <span class="item">Market</span>
                         </a>
                     </li>
+                    @endif
                     <li>
                         <a href="{{ route('admin.settings') }}" class="{{ ( request()->routeIs('admin.settings') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-cog"></i></span>
