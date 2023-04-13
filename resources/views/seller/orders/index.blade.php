@@ -22,7 +22,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-1"
                             aria-selected="true"
-                    >Pending</a>
+                    >Pending
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'pending')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a
@@ -33,7 +39,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-1"
                             aria-selected="true"
-                    >Confirmed</a>
+                    >Confirmed
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'confirmed')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
                {{-- <li class="nav-item" role="presentation">
                     <a
@@ -55,7 +67,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-3"
                             aria-selected="false"
-                    >On Delivery</a>
+                    >On Delivery
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'On Delivery')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
 
                 <li class="nav-item" role="presentation">
@@ -67,7 +85,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-3"
                             aria-selected="false"
-                    >Delivered</a>
+                    >Delivered
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'Delivered')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
 
                 <li class="nav-item" role="presentation">
@@ -79,7 +103,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-3"
                             aria-selected="false"
-                    >Completed</a>
+                    >Completed
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'Completed')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
 
                 <li class="nav-item" role="presentation">
@@ -91,7 +121,13 @@
                             role="tab"
                             aria-controls="ex1-tabs-3"
                             aria-selected="false"
-                    >Cancelled</a>
+                    >Cancelled
+                    <span class="notif badge badge-danger" id="orders-notif">
+                        @if(auth()->user()->seller->orders()->exists())
+                            {{ auth()->user()->seller->orders->where('status', 'cancelled')->count() }}
+                        @endif
+                    </span>
+                    </a>
                 </li>
             </ul>
 
