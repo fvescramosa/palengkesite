@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after login.
@@ -35,6 +36,10 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    protected $maxAttempts = 3; // Default is 5
+    protected $decayMinutes = 2; // Default is 1
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -81,6 +86,7 @@ class LoginController extends Controller
             if (Auth::user()->user_type_id == 2) {
                 return redirect()->intended(route('seller.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             } else {
+
                 return redirect()->intended(route('buyer.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             }
         } else {
@@ -100,6 +106,7 @@ class LoginController extends Controller
 
             return back()->withInput($request->only('email', 'remember'))->with(['response' => 'error', 'message' => 'Login Failed!']);
         }
+
     }
 
     public function adminLogin(Request $request)
