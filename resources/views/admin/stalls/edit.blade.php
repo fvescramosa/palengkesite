@@ -304,7 +304,7 @@
     </div>
     <script type="text/javascript">
 
-         // Get the file input element
+       /*  // Get the file input element
         const imageInput = document.querySelector('#image');
 
         // Listen for changes in the file input element
@@ -324,11 +324,13 @@
 
             // Read the selected file as a data URL
             reader.readAsDataURL(file);
-        });
+        });*/
 
         var stall = {
         init: function () {
             this.addImage($('#addImage'));
+            this.previewImage($('input[type="file"]'));
+
         },
 
         addImage: function (trigger) {
@@ -352,6 +354,29 @@
                 }*/
 
             })
+        },
+
+        previewImage: function (trigger) {
+            trigger.change(function (event) {
+                let self = $(this);
+                // Get the selected file
+                const file = event.target.files[0];
+
+                // Create a new FileReader object
+                const reader = new FileReader();
+
+                // Listen for the FileReader to load the file
+                reader.addEventListener('load', (event) => {
+                    // Update the image preview source with the loaded file data
+                    const imagePreview = self.closest('.stall-image').find('#imagePreview');
+                    imagePreview.attr('src', event.target.result);
+                });
+
+                // Read the selected file as a data URL
+                reader.readAsDataURL(file);
+
+            });
+
         }
     };
 
