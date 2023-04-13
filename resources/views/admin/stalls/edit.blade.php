@@ -66,7 +66,7 @@
 
                             <div class="form-group long">
                                 <label for="Section">Section</label>
-                                <select   class="form-control @error('section') is-invalid @enderror" id="market"
+                                <select   class="form-control @error('section') is-invalid @enderror" id="category"
                                          name="section">
                                     @foreach($categories as $category)
                                         <option value="{{ $category->category }}" {{ ($stalls->section == $category->category) ? 'selected' : '' }}>
@@ -133,7 +133,7 @@
 
                             </div>
 
-                            <div class="form-group long">
+                            <div class="form-group long" id="rentalFeeGroup">
                                 <label for="Rental_Fee">Rental Fee</label>
                                 <input type="text"  class="form-control @error('rental_fee') is-invalid @enderror"
                                        id="rental_fee"
@@ -149,7 +149,7 @@
 
                             </div>
 
-                            <div class="form-group long">
+                            <div class="form-group long" id="annualFeeGroup">
                                 <label for="annual_fee">Annual Fee</label>
                                 <input type="text"  class="form-control @error('annual_fee') is-invalid @enderror"
                                        id="annual_fee"
@@ -362,6 +362,59 @@
 
     $(window).on('load', function(){
         stall.init();
+
+        const marketSelect = $('#market');
+        const rentalFeeGroup = $('#rentalFeeGroup');
+        const rentalFeeInput = $('#rental_fee');
+        const annualFeeGroup = $('#annualFeeGroup');
+        const annualFeeInput = $('#annual_fee');
+
+
+        //THIS WILL WORK ON LOAD ONLY
+        if (marketSelect.val() === '3') {
+            rentalFeeInput.val('N/A');
+            // rentalFeeInput.disabled = true;
+
+            annualFeeInput.val('');
+            annualFeeInput.attr('disabled', false);
+
+            rentalFeeGroup.hide();
+            annualFeeGroup.show();
+        } else {
+            rentalFeeInput.val('');
+            rentalFeeInput.attr('disabled', false);
+
+            annualFeeInput.val('N/A');
+            // annualFeeInput.disabled = true;
+
+            rentalFeeGroup.show();
+            annualFeeGroup.hide();
+        }
+
+        //THIS WILL WORK WHEN MARKET CHANGES
+        marketSelect.change(function(){
+            const selectedMarketId = marketSelect.val();
+
+            if (selectedMarketId === '3') {
+                rentalFeeInput.val('N/A');
+                // rentalFeeInput.disabled = true;
+
+                annualFeeInput.val('');
+                annualFeeInput.attr('disabled', false);
+
+                rentalFeeGroup.hide();
+                annualFeeGroup.show();
+            } else {
+                rentalFeeInput.val('');
+                rentalFeeInput.attr('disabled', false);
+
+                annualFeeInput.val('N/A');
+                // annualFeeInput.disabled = true;
+
+                rentalFeeGroup.show();
+                annualFeeGroup.hide();
+            }
+        });
     })
     </script>
 
