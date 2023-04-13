@@ -22,6 +22,22 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <select  class="form-control" id="stall" name="stall" placeholder="Stall Status" value="" >
+                                <option value="">All</option>
+                                <option value="active"     <?=  ( isset( $_GET['stall'] ) ?  ( $_GET['stall'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
+                                <option value="inactive"     <?=  ( isset( $_GET['stall'] ) ?  ( $_GET['stall'] == 'inactive' ) ? 'selected' : '' : '' ); ?>>Inactive</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select  class="form-control" id="contract" name="contract" placeholder="Contract" value="" >
+                                <option value="">All</option>
+                                <option value="active"     <?=  ( isset( $_GET['contract'] ) ?  ( $_GET['contract'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
+                                <option value="end"     <?=  ( isset( $_GET['contract'] ) ?  ( $_GET['contract'] == 'end' ) ? 'selected' : '' : '' ); ?>>Contract End</option>
+                            </select>
+                        </div>
+
                         @if(isset($_GET['page']))
                             <input type="hidden" name="page" value="{{ $_GET['page'] }}">
                         @endif
@@ -67,10 +83,10 @@
                 {{$users->links()}}
                 @endif
                 <!-- <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i> Create</a> -->
+                <a href="{{ route('admin.seller.export') }}?{{ $request->getQueryString() }}" class="btn btn-primary"><span class="fa fa-download"></span> Downloads</a>
             </div>
         </div>
     </div>
 @endsection
 
 
-</script>

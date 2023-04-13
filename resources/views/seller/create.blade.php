@@ -73,10 +73,15 @@
                                 
                                 <div class="form-group info-item ">
                                     <label for="market">Market</label>
-                                    <select  class="form-control" id="market_id" name="market_id" placeholder="" value="" >
+                                    <!-- <select  class="form-control" id="market_id" name="market_id" placeholder="" value="" >
                                         <option value="1">Poblacion</option>
                                         <option value="2">Anilao</option>
                                         <option value="3">Talaga</option>
+                                    </select> -->
+                                    <select  class="form-control" id="market_id" name="market_id" placeholder="" value="" >
+                                        @foreach(\App\Market::all() as $market)
+                                            <option value="{{ $market->id }}">{{ $market->market }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             

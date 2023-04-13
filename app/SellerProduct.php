@@ -24,6 +24,7 @@ class SellerProduct extends Model
         'image_5',
         'average_ratings',
         'stock',
+        'featured',
     ];
 
     public function product(){

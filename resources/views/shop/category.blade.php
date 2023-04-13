@@ -5,12 +5,12 @@
         <div class="container  shop-wrapper">
 
                 <div class="filter-wrapper">
-                    <h3>Filter</h3>
                     <form action="" id="filter" method="GET">
 
                         <div class="by-price">
                             <div class="form-group">
 
+                                <h3>Filter</h3>
                                 <label for="">Min. Price</label>
                                 <input type="number" class="form-control" name="min_price" id="min_price" value="{{ old('min_price') ?? $_GET['min_price'] ?? '' }}">
 

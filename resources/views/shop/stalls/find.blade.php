@@ -71,7 +71,7 @@
                         <h4 class="product-name">{{  $sellerStall->name }}</h4>
                         <p class="seller-name"><i class="fa fa-store"></i> By:  <span class="seller-name">{{  $sellerStall->seller->user->first_name }}</span></p>
                     </div>
-                    <a href="{{ route('buyer.chat.seller', ['id' => $sellerStall->id]) }}" class="pal-button btn-orange"><span class="fa fa-envelope" ></span> Messages</a>
+                    <a href="{{ route('buyer.chat.seller', ['id' => $sellerStall->id]) }}" class="pal-button btn-orange"><span class="fa fa-envelope" ></span> Message</a>
                     <hr>
 
                     <div class="details-middle">
@@ -91,11 +91,11 @@
         <div class="container shop-wrapper" style="display: flex; flex-flow: row wrap; padding: 25px">
 
             <div class="filter-wrapper">
-                <h3>Filter</h3>
                 <form action="" id="filter" method="GET">
                     <div class="by-categories">
                         <div class="form-group">
                             <div class="form-group">
+                                <h3>Filter</h3>
                                 <label class="" for="">Product Name</label>
                                 <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') ?? $_GET['product_name'] ?? '' }}">
                             </div>
@@ -137,7 +137,7 @@
                         @endfor
                     </div>
                     <div class="row-btn">
-                        <button class="btn btn-orange" type="submit">Apply Filter</button>
+                        <button class="btn home-btn option-btn" type="submit">Apply Filter</button>
                     </div>
 
                 </form>

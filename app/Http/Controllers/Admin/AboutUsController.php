@@ -47,7 +47,7 @@ class AboutUsController extends Controller
             $data['image'] = $directory.$filename;
 
         }else{
-            $data['image'] = storage_path('public/images/defaults/logo-palengkesite.png');
+            $data['image'] = storage_path('public/images/about.png');
         }
 
 

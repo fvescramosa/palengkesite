@@ -90,6 +90,9 @@
                                             <a href="{{ route('buyer.orders.index') }}">
                                                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
                                                 <span class="item">My Orders</span>
+                                                <span class="notif badge badge-danger" id="orders-notif">
+                                                        {{ auth()->user()->buyer->orders->where('status', 'pending')->count() }}
+                                                 </span>
                                             </a>
                                         </li>
                                         <li>
@@ -163,6 +166,23 @@
                                     });
                                 }, 5000);
                             },
+                            initNotifOrder: function(){
+
+                                setInterval(function(){
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url:"{{route('buyer.getOrdersNotification')}}",
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+                                            $('#orders-notif').text(data);
+                                        }
+                                    });
+                                }, 5000);
+                            },
                             initSetUnread: function (trigger) {
                                 trigger.click(function () {
                                     $.ajax({
@@ -183,6 +203,7 @@
 
                         $(window).on('load', function(){
                             app.initCollapse();
+                            app.initNotifOrder();
                             $('.hamburger').click(function(){
                                 if($('.sidebar').hasClass('close')){
                                     $('.sidebar').removeClass('close');

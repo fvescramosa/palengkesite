@@ -69,9 +69,15 @@
                                 <tr>
                                     <td class="stall-info-title-container"><p><strong>Amount / Sqm: </strong> </p> </td>
                                     <td> <p>Php {{ $stall->amount_sqm }}</p></td>
+                                    
+                                    @if($stall->market_id == 3)
+                                        <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
+                                        <td> <p>{{ $stall->annual_fee }}</p></td>   
+                                    @else
+                                        <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                        <td> <p>{{ $stall->rental_fee }}</p></td>
+                                    @endif
 
-                                    <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
-                                    <td> <p>{{ $stall->rental_fee }}</p></td>
                                 </tr>
                             </table>
                         </div>

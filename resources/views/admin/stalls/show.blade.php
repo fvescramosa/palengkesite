@@ -14,7 +14,6 @@
                                 <input  class="form-control" type="text" name="search" id="search" value="{{ old('search') ??  $_GET['search']  ?? '' }}" placeholder="Search">
                             </div>
 
-
                             <div class="form-group">
                                 <label for="search">Sort</label>
                                 <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
@@ -22,6 +21,15 @@
                                     <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Name (Z-A)</option>
                                     <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
                                     <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="search">Status</label>
+                                <select  class="form-control" type="text" name="status" id="status"  placeholder="Status">
+                                    <option value="">All</option>
+                                    <option value="vacant" <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'vacant' ) ? 'selected' : '' : '' ); ?>>Vacant</option>
+                                    <option value="occupied" <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'occupied' ) ? 'selected' : '' : '' ); ?>>Occupied</option>
                                 </select>
                             </div>
 
@@ -41,7 +49,8 @@
                             <th>Section</th>
                             <th>Area in sqm</th>
                             <th>Amount per sqm / Rate</th>
-                            <th>Rental Fee per day</th>
+                            <th>Rental Fee</th>
+                            <th>Annual Fee</th>
                             <th>Meter Number</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -56,6 +65,7 @@
                                 <td>{{ $stall->sqm }}</td>
                                 <td>{{ $stall->amount_sqm }}</td>
                                 <td>{{ $stall->rental_fee }}</td>
+                                <td>{{ $stall->annual_fee }}</td>
                                 <td>{{ $stall->meter_num }}</td>
                                 <td>{{ $stall->status }}</td>
                                 <td>
@@ -68,6 +78,7 @@
                     </table>
                 </div>
 
+
                 @if( isset($_GET ) )
                 {{$stalls->appends($_GET)->links()}}
 
@@ -76,6 +87,9 @@
                 @endif
 
                 <a href="{{ route('admin.stalls.create') }}" class="info-header-edit"> <i class="fa fa-plus-circle"></i></a>
+
+
+                <a href="{{ route('admin.stalls.export') }}?{{ $request->getQueryString() }}" class="btn btn-primary"><span class="fa fa-download"></span> Downloads</a>
             </div>
         </div>
     </div>

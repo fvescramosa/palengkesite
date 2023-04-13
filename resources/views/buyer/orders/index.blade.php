@@ -17,7 +17,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-1"
                            aria-selected="true"
-                   >Pending</a>
+                   >Pending 
+                        <span class="notif badge badge-danger">
+                            {{ auth()->user()->buyer->orders->where('status', 'pending')->count() }}
+                        </span>
+                    </a> 
                </li>
                <li class="nav-item" role="presentation">
                    <a
@@ -28,7 +32,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-1"
                            aria-selected="true"
-                   >Confirmed</a>
+                   >Confirmed
+                    <span class="notif badge badge-danger">
+                        {{ auth()->user()->buyer->orders->where('status', 'confirmed')->count() }}
+                    </span>
+                    </a>
                </li>
               {{-- <li class="nav-item" role="presentation">
                    <a
@@ -50,7 +58,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-3"
                            aria-selected="false"
-                   >On Delivery</a>
+                   >On Delivery
+                    <span class="notif badge badge-danger">
+                        {{ auth()->user()->buyer->orders->where('status', 'On Delivery')->count() }}
+                    </span>
+                    </a>
                </li>
 
                <li class="nav-item" role="presentation">
@@ -62,7 +74,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-3"
                            aria-selected="false"
-                   >Delivered</a>
+                   >Delivered
+                    <span class="notif badge badge-danger">
+                        {{ auth()->user()->buyer->orders->where('status', 'Delivered')->count() }}
+                    </span>
+                    </a>
                </li>
 
                <li class="nav-item" role="presentation">
@@ -74,7 +90,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-3"
                            aria-selected="false"
-                   >Completed</a>
+                   >Completed
+                    <span class="notif badge badge-danger">
+                        {{ auth()->user()->buyer->orders->where('status', 'Completed')->count() }}
+                    </span>
+                    </a>
                </li>
 
                <li class="nav-item" role="presentation">
@@ -86,7 +106,11 @@
                            role="tab"
                            aria-controls="ex1-tabs-3"
                            aria-selected="false"
-                   >Cancelled</a>
+                   >Cancelled
+                    <span class="notif badge badge-danger">
+                        {{ auth()->user()->buyer->orders->where('status', 'cancelled')->count() }}
+                    </span>
+                    </a>
                </li>
            </ul>
 

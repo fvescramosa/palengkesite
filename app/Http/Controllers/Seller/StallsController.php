@@ -31,7 +31,7 @@ class StallsController extends Controller
 
         $validate = $request->validate([
             'application_letter' => "required|mimes:jpeg,jpg,png",
-            'residency' => "required|mimes:jpeg,jpg,png",
+            // 'residency' => "required|mimes:jpeg,jpg,png",
             'image' => "required|mimes:jpeg,jpg,png",
             'id1' => "required|mimes:jpeg,jpg,png",
             'id2' => "required|mimes:jpeg,jpg,png",
@@ -69,13 +69,13 @@ class StallsController extends Controller
             $appointment['application_letter'] = $directory.$filename;
         }
 
-        if($request->file('residency')){
-            $file= $request->file('residency');
-            $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
-            $filename= auth()->user()->seller->id.'_residency.'.$request->file('residency')->extension();
-            $file->move($directory, $filename);
-            $appointment['residency'] = $directory.$filename;
-        }
+        // if($request->file('residency')){
+        //     $file= $request->file('residency');
+        //     $directory = 'files/sellers/'.auth()->user()->seller->id.'/stall/';
+        //     $filename= auth()->user()->seller->id.'_residency.'.$request->file('residency')->extension();
+        //     $file->move($directory, $filename);
+        //     $appointment['residency'] = $directory.$filename;
+        // }
 
         if($request->file('image')){
             $file= $request->file('image');

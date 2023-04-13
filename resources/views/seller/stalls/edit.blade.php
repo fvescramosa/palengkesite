@@ -49,16 +49,30 @@
                                 @enderror
                             </div>
 
-                            <div class="info-item">
-                                <label for="">Rental Fee per Month</label>
-                                <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
+                            @if($seller_stall->stall->market_id == 3)
 
-                                @error('rental_fee')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                @enderror
-                            </div>
+                                <div class="info-item">
+                                    <label for="">Annual Fee</label>
+                                    <input type="text" class="form-control @error('annual_fee') is-invalid @enderror" name="annual_fee" id="annual_fee" value="{{ $seller_stall->stall->annual_fee }}" readonly>
+
+                                    @error('annual_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            @else
+                                <div class="info-item">
+                                    <label for="">Rental Fee</label>
+                                    <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" readonly>
+
+                                    @error('rental_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            @endif
 
                             <div class="info-item short">
                                 <label for="">Start Date</label>

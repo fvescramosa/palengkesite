@@ -92,6 +92,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/getMessagesNotification', [BuyerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
     Route::get('/setUnread', [BuyerController::class, 'setUnread'])->name('setUnread');
+    Route::get('/getOrdersNotification', [BuyerController::class, 'getOrdersNotification'])->name('getOrdersNotification');
 });
 
 
@@ -221,6 +222,7 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::post('/users/update/{id}',  [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
     Route::get('/users/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'delete'])->name('users.delete');
     Route::get('/users/recover/{id}', [\App\Http\Controllers\Admin\UserController::class, 'retrieve'])->name('users.retrieve');
+    Route::get('/users/seller/export', [\App\Http\Controllers\Admin\UserController::class, 'exportSeller'])->name('seller.export');
 
     //products
     Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
@@ -247,6 +249,8 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/stalls/delete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'deleteStall'])->name('stalls.delete');
     Route::get('/stalls/permanentdelete/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'StallForceDelete'])->name('stalls.permanentdelete');
     Route::get('/stalls/recover/{id}', [\App\Http\Controllers\Admin\StallsController::class, 'recoverStall'])->name('stalls.recover');
+
+    Route::get('/stalls/export/', [\App\Http\Controllers\Admin\StallsController::class, 'exportStall'])->name('stalls.export');
 
 
     //categories
@@ -294,6 +298,13 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/about-us/delete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'deleteDeveloper'])->name('developers.delete');
     Route::get('/about-us/permanentdelete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'DeveloperForceDelete'])->name('developers.permanentdelete');
     Route::get('/about-us/recover/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'recoverDeveloper'])->name('developers.recover');
+
+    //markets
+    Route::get('/markets/show', [\App\Http\Controllers\Admin\MarketsController::class, 'show'])->name('markets.show');
+    Route::get('/markets/edit/{id}', [\App\Http\Controllers\Admin\MarketsController::class, 'edit'])->name('markets.edit');
+    Route::post('/markets/update/{id}', [\App\Http\Controllers\Admin\MarketsController::class, 'update'])->name('markets.update');
+    Route::get('/markets/create', [\App\Http\Controllers\Admin\MarketsController::class, 'create'])->name('markets.create');
+    Route::post('/markets/store', [\App\Http\Controllers\Admin\MarketsController::class, 'store'])->name('markets.store');
 });
 
 Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');

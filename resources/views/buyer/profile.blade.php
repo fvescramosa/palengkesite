@@ -24,9 +24,17 @@
                             <input type="email" class="form-control" id="email"  placeholder="Email" value=" {{ auth()->user()->email }}" readonly>
                         </div>
 
+                        <div class="form-group info-item short prepend">
+                            <label for="mobile">Mobile</label>
+                            <div class="input-group-prepend info-item-prepend">
+                                <span class="input-group-text" id="basic-addon1">+63</span>
+                            </div>
+                            <input type="text" class="form-control" id="mobile"  placeholder="Mobile" value=" {{ auth()->user()->mobile }}" readonly>
+                        </div>
+
 
                         @if(auth()->user()->buyer()->exists())
-                            <div class="form-group info-item short">
+                            <div class="form-group info-item xshort">
                                 <label for="birthday">Birthday</label>
                                 <input type="text" class="form-control" id="birthday"  placeholder="Birthday" value="{{ date('m/d/Y', strtotime(auth()->user()->buyer->birthday)) }}" readonly>
                             </div>
@@ -36,19 +44,19 @@
                                 <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->age }}" readonly>
                             </div>
 
-                            <div class="form-group info-item xshort">
+                            <div class="form-group info-item short">
                                 <label for="gender">Gender</label>
                                 <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->gender }}" readonly>
                             </div>
 
 
-                            <div class="form-group info-item short">
+                            <div class="form-group info-item long">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="age"  placeholder="Age" value="{{ auth()->user()->buyer->stnumber  .' '. auth()->user()->buyer->barangay .', '. auth()->user()->buyer->city .', '.  auth()->user()->buyer->province .', '.  auth()->user()->buyer->country .' '.  auth()->user()->buyer->zip }}" readonly>
 
                             </div>
 
-                            <a href="{{ route('buyer.switch.seller') }}" class="btn btn-primary">Switch as Seller</a>
+                            <!-- <a href="{{ route('buyer.switch.seller') }}" class="btn btn-primary">Switch as Seller</a> -->
 
                          @endif
                     </div>

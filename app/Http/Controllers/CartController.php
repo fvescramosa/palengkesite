@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\DeliveryAddress;
 use App\Mail\NewOrder;
+use App\Mail\NewOrderBuyer;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentOption;
@@ -191,6 +192,7 @@ class CartController extends Controller
                 $seller = Seller::find($cart->first()->seller_id);
                 try{
                     Mail::to($seller->user->email)->send(new NewOrder($order));
+                    Mail::to(auth()->user()->email)->send(new NewOrderBuyer($order));
                 }catch (Exception $e) {
                     //dd("Error: ". $e->getMessage());
                 }
@@ -201,6 +203,36 @@ class CartController extends Controller
                     $receiverNumber = '+63'.$seller->user->mobile;
                     $message = "New Order has been placed. Click this link to view order " . route('buyer.orders.find', ['order_id' => $order->transaction_id]);
                     if (preg_match("~^9\d+$~", $seller->user->mobile)) {
+                        try {
+
+
+                            $account_sid = env("TWILIO_SID");
+                            $auth_token = env("TWILIO_TOKEN");
+                            $twilio_number = env("TWILIO_FROM");
+
+                            $client = new Client($account_sid, $auth_token);
+                            $client->messages->create($receiverNumber, [
+                                'from' => $twilio_number,
+                                'body' => $message]);
+
+                            //////dd('SMS Sent Successfully.');
+
+                        } catch (Exception $e) {
+                            //dd("Error: ". $e->getMessage());
+                        }
+
+                    }else{
+
+
+                    }
+                }
+
+                if(auth()->user()->mobile !== ''){
+
+
+                    $receiverNumber = '+63'.auth()->user()->mobile;
+                    $message = "You've just placed an order. Click this link to view order " . route('buyer.orders.find', ['order_id' => $order->transaction_id]);
+                    if (preg_match("~^9\d+$~", auth()->user()->mobile)) {
                         try {
 
 

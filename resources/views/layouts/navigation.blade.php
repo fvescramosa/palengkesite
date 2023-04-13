@@ -60,10 +60,10 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                                <a class="nav-link dropdown-item" href="{{ route('buyer.profile') }}" >
+                                                <a class="nav-link dropdown-item" href="{{ route('buyer.profile') }}" style="padding: 0 25px 0 0;" >
                                                     <span class="fa fa-user"></span> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                                 </a>
-                                                <a class="dropdown-item" href="{{ route('user.logout') }}"
+                                                <a class="dropdown-item" href="{{ route('user.logout') }}" style="padding: 0 25px 0 0;"
                                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                                     <span class="fa fa-power-off"></span>  {{ __('Logout') }}

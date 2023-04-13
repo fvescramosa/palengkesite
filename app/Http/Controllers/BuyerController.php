@@ -137,15 +137,15 @@ class BuyerController extends Controller
 
     public function update(Request $request){
 
-
-
-
-
+        $validate = $request->validate([
+            'mobile' =>  ['', 'regex:/[0-9]{9}/', 'max:10'],
+         ]);
 
         $userData = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'mobile' => ($request->mobile != '' ? $request->mobile : ''),
         ];
 
 
@@ -244,5 +244,13 @@ class BuyerController extends Controller
         $messages = Message::where('status', 'unread')->where('sender', 'seller')->where('buyer_id', auth()->user()->buyer->id)->update(['status' => 'read']);
 
         return $messages;
+    }
+
+    public function getOrdersNotification(){
+        $messages = Auth::user()->buyer->orders->where('status', 'pending');
+
+
+        return response()->json($messages->count());
+
     }
 }

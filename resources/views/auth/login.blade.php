@@ -50,7 +50,7 @@
 
                 <div class="row mb-0">
                     <div class="">
-                        <button type="submit" class="home-btn option-btn">
+                        <button type="submit" class="home-btn option-btn login-btn">
                             {{ __('Login') }}
                         </button>
 
