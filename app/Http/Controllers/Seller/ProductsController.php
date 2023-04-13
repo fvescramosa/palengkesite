@@ -77,6 +77,7 @@ class ProductsController extends Controller
             'price' => $request->price,
             'type' => $request->type,
             'image' => $request->image,
+            'description' => $request->description,
             'featured' => $request->featured,
             'stock' => $request->stock,
 

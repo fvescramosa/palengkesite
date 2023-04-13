@@ -16,11 +16,6 @@ class StallsController extends Controller
 
         $stalls = new Stall();
 
-        if(session()->has('market')){
-            $stalls = $stalls->Where('market_id', session()->get('market'));
-        }
-
-
         if(isset($_GET['search'])){
             $stalls = $stalls->where(function ($query){
                 $query->orWhere('number', 'like', '%' . $_GET['search'] . '%');
@@ -31,6 +26,10 @@ class StallsController extends Controller
                 });
 
             });
+        }
+
+        if(session()->has('market')){
+            $stalls = $stalls->Where('market_id', session()->get('market'));
         }
 
         if(isset($_GET['status'])){
@@ -95,7 +94,6 @@ class StallsController extends Controller
             $stalls->orderBy($orderby[0], $orderby[1]);
         }
 
-
         $stalls = $stalls->paginate(10);
         
         return view('admin.stalls/show', compact(['stalls', 'request']));
@@ -127,6 +125,7 @@ class StallsController extends Controller
             'meter_number' => 'required',
             'market' => 'required',
             'image'	=> 'required|mimes:jpeg,jpg,png',
+            'annual_fee' => 'required',
         ]);
 
         $data = [
@@ -142,6 +141,7 @@ class StallsController extends Controller
             'coords' => $request->coordinates,
             'meter_num' => $request->meter_number,
             'category_id' => Categories::where('category', $request->section)->first()->id,
+            'annual_fee' => $request->annual_fee,
         ];
 
   
@@ -237,6 +237,7 @@ class StallsController extends Controller
             'rate' => $request->rate,
             'coords' => $request->coords,
             'meter_num' => $request->meter_num,
+            'annual_fee' => $request->annual_fee,
         ];
 
 
@@ -300,12 +301,10 @@ class StallsController extends Controller
             $data
         );
         if($stalls){
-            $message = ['success' => true, 'message' => 'Stall updated'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Stall has been updated', 'response' => 'success']);
         }else{
-            $message = ['success' => false, 'message' => 'Stall update failed'];
+            return redirect(route('admin.stalls.show'))->with(['message' => 'Failed to update', 'response' => 'error']);
         }
-
-        return redirect(route('admin.stalls.show'))->with($message);
     }
 
     public function trash(){

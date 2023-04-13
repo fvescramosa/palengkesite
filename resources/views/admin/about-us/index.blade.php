@@ -120,7 +120,7 @@
                     @if($aboutUs)
                         <img src="{{ asset($aboutUs->image) }}" alt="">
                     @else
-                        <img src="{{  asset('images/defaults/logo-palengkesite.png') }}" alt="" >
+                        <img src="{{  asset('images/about.png') }}" alt="" >
                     @endif
                 </div>
                 <div class="about-us-right reveal active">
@@ -143,7 +143,7 @@
                             their groceries and their needs in the market online and can help sellers to recover from financial loss
                         </p>
 
-                        <a href="https://palengkesite.test/contact-us" class="pal-button btn-orange">Contact Us</a>
+                        <!-- <a href="https://palengkesite.test/contact-us" class="pal-button btn-orange">Contact Us</a> -->
                     @endif
 
 

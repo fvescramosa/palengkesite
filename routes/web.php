@@ -92,6 +92,7 @@ Route::name('buyer.')->prefix('/buyer')->namespace('\App\Http\Controllers')->gro
 
     Route::get('/getMessagesNotification', [BuyerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
     Route::get('/setUnread', [BuyerController::class, 'setUnread'])->name('setUnread');
+    Route::get('/getOrdersNotification', [BuyerController::class, 'getOrdersNotification'])->name('getOrdersNotification');
 });
 
 
@@ -297,6 +298,13 @@ Route::name('admin.')->prefix('/admin')->namespace('\App\Http\Controllers\Admin'
     Route::get('/about-us/delete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'deleteDeveloper'])->name('developers.delete');
     Route::get('/about-us/permanentdelete/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'DeveloperForceDelete'])->name('developers.permanentdelete');
     Route::get('/about-us/recover/{id}', [\App\Http\Controllers\Admin\AboutUsController::class, 'recoverDeveloper'])->name('developers.recover');
+
+    //markets
+    Route::get('/markets/show', [\App\Http\Controllers\Admin\MarketsController::class, 'show'])->name('markets.show');
+    Route::get('/markets/edit/{id}', [\App\Http\Controllers\Admin\MarketsController::class, 'edit'])->name('markets.edit');
+    Route::post('/markets/update/{id}', [\App\Http\Controllers\Admin\MarketsController::class, 'update'])->name('markets.update');
+    Route::get('/markets/create', [\App\Http\Controllers\Admin\MarketsController::class, 'create'])->name('markets.create');
+    Route::post('/markets/store', [\App\Http\Controllers\Admin\MarketsController::class, 'store'])->name('markets.store');
 });
 
 Route::get('/products/category/{slug}', [ ProductsController::class, 'showByCategory'])->name('products.category');

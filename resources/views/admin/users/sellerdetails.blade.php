@@ -128,10 +128,19 @@
                                                     <td class="stall-info-title-container"><p><strong>Amount per sqm / rate: </strong> </p> </td>
                                                     <td> <p>Php {{ $user->seller->seller_stalls->stall->amount_sqm }}</p></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="stall-info-title-container"><p><strong>Rental Fee per day: </strong></p> </td>
-                                                    <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
-                                                </tr>
+
+                                                @if($user->seller->seller_stalls->stall->market_id == 3)
+                                                    <tr>
+                                                        <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
+                                                        <td> <p>{{ $user->seller->seller_stalls->stall->annual_fee }}</p></td>
+                                                    </tr>
+                                                @else
+                                                    <tr>
+                                                        <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                                        <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
+                                                    </tr>
+                                                @endif
+
 
                                                 <tr>
                                                     <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>

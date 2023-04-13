@@ -12,17 +12,15 @@
 			<div class="footer-links-center">
 
 				<p class="footer-links">
-					<a class="link-1" href="#">Home</a>
+					<a class="link-1" href="{{ url('/') }}">Home</a>
 
-					<a href="#">Products</a>
+					<a href="{{ route('shop.products.index') }}">Products</a>
 
-					<a href="#">Stores</a>
+					<a href="{{ route('shop.stores') }}">Stores</a>
 
-					<a href="#">Cart</a>
+					<a href="{{ route('about-us') }}">About</a>
 
-					<a href="#">About</a>
-
-					<a href="#">Contact</a>
+					<a href="{{ route('contact-us') }}">Contact</a>
 				</p>
 
 				<p>PalengkeSite &copy; <?= date('Y'); ?> by <span>University of Batangas</span> | All Rights Reserved! </p>

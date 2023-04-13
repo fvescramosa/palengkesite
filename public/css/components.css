@@ -70,11 +70,18 @@ section{
    margin-top: 1rem;
    border-radius: .5rem;
    color:var(--white);
-   font-size: 2rem;
-   padding:1.3rem 3rem;
+   font-size: 15px;
+   padding: 5px;
    text-transform: uppercase;
    cursor: pointer;
    text-align: center;
+}
+
+.login-btn,
+.contact-btn
+{
+   font-size: 2rem;
+   padding: 8px;
 }
 
 .mission-btn,

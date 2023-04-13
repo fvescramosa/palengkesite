@@ -99,7 +99,7 @@
 
                             </div>
                             <div class="form-group long">
-                                <label for="photo">Linked In</label>
+                                <label for="photo">Photo</label>
                                 <input type="file"  class="form-control @error('photo') is-invalid @enderror"
                                        id="profile_image"
                                        name="photo"
