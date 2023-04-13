@@ -304,27 +304,42 @@
     </div>
     <script type="text/javascript">
 
-         // Get the file input element
+         // Get the file input elements
         const imageInput = document.querySelector('#image');
+        const image1Input = document.querySelector('#image_1');
+        const image2Input = document.querySelector('#image_2');
+        const image3Input = document.querySelector('#image_3');
+        const image4Input = document.querySelector('#image_4');
+        const image5Input = document.querySelector('#image_5');
 
-        // Listen for changes in the file input element
-        imageInput.addEventListener('change', (event) => {
-            // Get the selected file
-            const file = event.target.files[0];
+        // Listen for changes in the file input elements
+        imageInput.addEventListener('change', handleImageChange);
+        image1Input.addEventListener('change', handleImageChange);
+        image2Input.addEventListener('change', handleImageChange);
+        image3Input.addEventListener('change', handleImageChange);
+        image4Input.addEventListener('change', handleImageChange);
+        image5Input.addEventListener('change', handleImageChange);
 
-            // Create a new FileReader object
-            const reader = new FileReader();
+        function handleImageChange(event) {
+        // Get the selected file
+        const file = event.target.files[0];
 
-            // Listen for the FileReader to load the file
-            reader.addEventListener('load', (event) => {
-                // Update the image preview source with the loaded file data
-                const imagePreview = document.querySelector('#imagePreview');
-                imagePreview.src = event.target.result;
-            });
+        // Create a new FileReader object
+        const reader = new FileReader();
 
-            // Read the selected file as a data URL
-            reader.readAsDataURL(file);
+        // Get the image preview element
+        const imagePreview = document.querySelector(`#${event.target.id}Preview`);
+
+        // Listen for the FileReader to load the file
+        reader.addEventListener('load', (event) => {
+            // Update the image preview source with the loaded file data
+            imagePreview.src = event.target.result;
         });
+
+        // Read the selected file as a data URL
+        reader.readAsDataURL(file);
+
+        };
 
         var stall = {
         init: function () {
