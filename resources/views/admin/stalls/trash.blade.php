@@ -44,10 +44,10 @@
                         <th>Stall No.</th>
                         <th>Coordinates</th>
                         <th>Section</th>
-                        <th>Sqm / Area</th>
-                        <th>Amount per sqm</th>
+                        <th>Area in sqm</th>
+                        <th>Amount per sqm / Rate</th>
                         <th>Rental Fee</th>
-                        <th>Rate</th>
+                        <th>Annual Fee</th>
                         <th>Meter Number</th>
                         <th>Action</th>
                     </tr>
@@ -61,7 +61,7 @@
                             <td>{{ $stall->sqm }}</td>
                             <td>{{ $stall->amount_sqm }}</td>
                             <td>{{ $stall->rental_fee }}</td>
-                            <td>{{ $stall->rate }}</td>
+                            <td>{{ $stall->annual_fee }}</td>
                             <td>{{ $stall->meter_num }}</td>
                             <td>
                                 <a href="{{ route('admin.stalls.recover', $stall->id) }}"> Retrieve </a> | 
