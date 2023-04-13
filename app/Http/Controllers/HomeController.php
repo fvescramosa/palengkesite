@@ -122,7 +122,9 @@ class HomeController extends Controller
     }
 
     public function testSMS(){
-        $receiverNumber = "+639178402141";
+
+
+        $receiverNumber = "+639199421745";
         $message = "This is testing from FRANK!";
 
         try {
@@ -131,7 +133,7 @@ class HomeController extends Controller
             $auth_token = env("TWILIO_TOKEN");
             $twilio_number = env("TWILIO_FROM");
 
-            $client = new Client(   $account_sid, $auth_token);
+            $client = new Client($account_sid, $auth_token);
             $client->messages->create($receiverNumber, [
                 'from' => $twilio_number,
                 'body' => $message]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after login.
@@ -34,6 +35,10 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    protected $maxAttempts = 3; // Default is 5
+    protected $decayMinutes = 2; // Default is 1
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -52,18 +57,31 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
-//        dd(Auth::guard('web')->attempt(['email' => $request->email_address,'password' => $request->password,'status' => 'active']));
+        //dd($request);
 
+//        dd(Auth::guard('web')->attempt(['email' => $request->email_address,'password' => $request->password,'status' => 'active']));
+        $attempt = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'], $request->get('remember'));
+
+
+        /*if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }*/
+
+//        dd($attempt);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'], $request->get('remember'))) {
 
             if(Auth::user()->user_type_id == 2){
+//                $this->clearLoginAttempts($request);
                 return redirect()->intended(route('seller.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             }else{
-
+//                $this->clearLoginAttempts($request);
                 return redirect()->intended(route('buyer.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             }
         }
+        $this->incrementLoginAttempts($request);
         return back()->withInput($request->only('email', 'remember'))->with(['response' => 'error', 'message' => 'Login Failed!']);
+
     }
 
     public function adminLogin(Request $request)
