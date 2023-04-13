@@ -94,14 +94,15 @@
                                                 <td class="stall-info-title-container"><p><strong>Amount / Sqm: </strong> </p> </td>
                                                 <td> <p>Php {{ $stall->amount_sqm }}</p></td>
                                             </tr>
-                                            <tr>
+
+                                            @if($stall->market_id == 3)
+                                                <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
+                                                <td> <p>{{ $stall->annual_fee }}</p></td>   
+                                            @else
                                                 <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
                                                 <td> <p>{{ $stall->rental_fee }}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="stall-info-title-container"><p><strong>Rate: </strong></p> </td>
-                                                <td> <p>{{ $stall->rate }}</p></td>
-                                            </tr>
+                                            @endif
+                                            
                                             <tr>
                                                 <td class="stall-info-title-container"><p><strong>Coordinates: </strong></p> </td>
                                                 <td> <p>{{ $stall->coords }}</p></td>
@@ -168,7 +169,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group medium">
+                                <!-- <div class="form-group medium">
                                     <label for="residency">Bonifide Resident of Mabini, Batangas</label>
                                     <input type="file"
                                            class="form-control @error('residency') is-invalid @enderror"
@@ -182,7 +183,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </div>
+                                </div> -->
 
                                 <div class="form-group medium">
                                     <label for="image">2 X 2 picture</label>

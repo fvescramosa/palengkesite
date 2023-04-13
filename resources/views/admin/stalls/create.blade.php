@@ -55,17 +55,6 @@
                             </div>
 
                             <div class="form-group long">
-                                <label for="Rental_Fee">Rental Fee per day</label>
-                                <input type="text"  class="form-control @error('rental_fee') is-invalid @enderror"
-                                                    id="rental_fee"
-                                                    name="rental_fee"
-                                                    placeholder="" value="{{ old('rental_fee') }}" >
-
-
-
-                            </div>
-
-                            <div class="form-group long">
 
                             <label for="Section">Section</label>
                                 <select  class="form-control @error('section') is-invalid @enderror" 
@@ -111,7 +100,22 @@
                                                 <option value="{{ $market->id }}" {{ ( old('market') == $market->id ) ? 'selected' : '' }}>{{ $market->market }}</option>
                                             @endforeach
                                 </select>
+                            </div>
 
+                            <div class="form-group long" id="rentalFeeGroup" style="display: none">
+                                <label for="Rental_Fee">Rental Fee</label>
+                                <input type="text" class="form-control @error('rental_fee') is-invalid @enderror"
+                                    id="rental_fee"
+                                    name="rental_fee"
+                                    placeholder="" value="{{ old('rental_fee') }}">
+                            </div>
+
+                            <div class="form-group long" id="annualFeeGroup" style="display: none">
+                                <label for="annual_fee">Annual Fee</label>
+                                <input type="text" class="form-control @error('annual_fee') is-invalid @enderror"
+                                    id="annual_fee"
+                                    name="annual_fee"
+                                    placeholder="" value="{{ old('annual_fee') }}">
                             </div>
 
                             <div class="form-group long  stall-image">
@@ -182,7 +186,6 @@
 
                         </div>
 
-
                         </div>
                         <div class="row-btn">
                             <div class="btn-container" style="padding: 0 10px 15px;">
@@ -198,6 +201,35 @@
     </div>
 
 <script type="text/javascript">
+    const marketSelect = document.querySelector('#market');
+    const rentalFeeGroup = document.querySelector('#rentalFeeGroup');
+    const rentalFeeInput = document.querySelector('#rental_fee');
+    const annualFeeGroup = document.querySelector('#annualFeeGroup');
+    const annualFeeInput = document.querySelector('#annual_fee');
+
+    marketSelect.addEventListener('change', () => {
+        const selectedMarketId = marketSelect.value;
+
+        if (selectedMarketId === '3') {
+        rentalFeeInput.value = 'N/A';
+        // rentalFeeInput.disabled = true;
+
+        annualFeeInput.value = '';
+        annualFeeInput.disabled = false;
+
+        rentalFeeGroup.style.display = 'none';
+        annualFeeGroup.style.display = 'block';
+        } else {
+        rentalFeeInput.value = '';
+        rentalFeeInput.disabled = false;
+
+        annualFeeInput.value = 'N/A';
+        // annualFeeInput.disabled = true;
+
+        rentalFeeGroup.style.display = 'block';
+        annualFeeGroup.style.display = 'none';
+        }
+    });
     var stall = {
         init: function () {
             this.addImage($('#addImage'));

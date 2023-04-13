@@ -27,6 +27,7 @@ class Stall extends Model
         'coords',
         'meter_num',
         'category_id',
+        'annual_fee',
     ];
 
     public function seller_stall(){

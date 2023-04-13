@@ -89,10 +89,13 @@
                                                 <td class="stall-info-title-container"><p><strong>Meter Number: </strong> </p> </td>
                                                 <td> <p>{{ $stall->meter_num }}</p></td>
                                             </tr>
-                                            <tr>
-                                                <td class="stall-info-title-container"><p><strong>Rental Fee per Day: </strong></p> </td>
-                                                <td> <p>₱{{ $stall->rental_fee }}</p></td>
-                                            </tr>
+                                            @if($stall->market_id == 3)
+                                                <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
+                                                <td> <p>{{ $stall->annual_fee }}</p></td>   
+                                            @else
+                                                <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                                <td> <p>{{ $stall->rental_fee }}</p></td>
+                                            @endif
                                             <tr>
                                                 <td class="stall-info-title-container"><p><strong>Location: </strong></p> </td>
                                                 <td> <p>{{ $stall->market->market }}</p></td>

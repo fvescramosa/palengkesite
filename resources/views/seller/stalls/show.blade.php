@@ -112,10 +112,13 @@
                                             <td class="stall-info-title-container"><p><strong>Meter Number: </strong> </p> </td>
                                             <td> <p>{{ $seller_stall->stall->meter_num }}</p></td>
                                         </tr>
-                                        <tr>
-                                            <td class="stall-info-title-container"><p><strong>Rental Fee per day: </strong></p> </td>
-                                            <td> <p>{{ $seller_stall->stall->rental_fee }}</p></td>
-                                        </tr>
+                                        @if( $seller_stall->stall->market_id == 3)
+                                            <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
+                                            <td> <p>{{  $seller_stall->stall->annual_fee }}</p></td>   
+                                        @else
+                                            <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                            <td> <p>{{  $seller_stall->stall->rental_fee }}</p></td>
+                                        @endif
 
                                         <tr>
                                             <td class="stall-info-title-container"><p><strong>Duration: </strong></p> </td>

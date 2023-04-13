@@ -24,7 +24,7 @@
 
                         <div class="form-group">
                             <select  class="form-control" id="stall" name="stall" placeholder="Stall Status" value="" >
-                                <option value=""></option>
+                                <option value="">All</option>
                                 <option value="active"     <?=  ( isset( $_GET['stall'] ) ?  ( $_GET['stall'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
                                 <option value="inactive"     <?=  ( isset( $_GET['stall'] ) ?  ( $_GET['stall'] == 'inactive' ) ? 'selected' : '' : '' ); ?>>Inactive</option>
                             </select>
@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <select  class="form-control" id="contract" name="contract" placeholder="Contract" value="" >
-                                <option value=""></option>
+                                <option value="">All</option>
                                 <option value="active"     <?=  ( isset( $_GET['contract'] ) ?  ( $_GET['contract'] == 'active' ) ? 'selected' : '' : '' ); ?>>Active</option>
                                 <option value="end"     <?=  ( isset( $_GET['contract'] ) ?  ( $_GET['contract'] == 'end' ) ? 'selected' : '' : '' ); ?>>Contract End</option>
                             </select>

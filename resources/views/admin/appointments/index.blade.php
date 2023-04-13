@@ -39,7 +39,7 @@
                             <th>Date Created</th>
                             <th>Date of Appointment</th>
                             <th>Application Letter</th>
-                            <th>Residency</th>
+                            <!-- <th>Residency</th> -->
                             <th>2 x 2 Picture</th>
                             <th style="padding: 0 22px 5px 22px;">Valid IDs</th>
                             <th>Status</th>
@@ -57,9 +57,9 @@
                                 <td> 
                                     <a href="{{ asset(  $appointment->application_letter )}}"  target="_blank">View</a>
                                 </td>
-                                <td> 
+                                <!-- <td> 
                                     <a href="{{ asset(  $appointment->residency )}}"  target="_blank">View</a>
-                                </td>
+                                </td> -->
                                 <td> 
                                     <a href="{{ asset(  $appointment->image )}}"  target="_blank">View</a>
                                 </td>

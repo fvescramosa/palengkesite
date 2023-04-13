@@ -15,22 +15,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="search">Status</label>
-                                <select  class="form-control" type="text" name="status" id="status"  placeholder="Status">
-                                    <option value="{{ old('status') ??  $_GET['status']  ?? '' }}">{{ old('status') ??  $_GET['status']  ?? '' }}</option>
-                                    <option value="Vacant">Vacant</option>
-                                    <option value="Occupied">Occupied</option>
-                                </select>
-                            </div>
-
-
-                            <div class="form-group">
                                 <label for="search">Sort</label>
                                 <select  class="form-control" id="orderby" name="orderby" placeholder="Order By" value="" >
                                     <option value="A-Z"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'A-Z' ) ? 'selected' : '' : '' ); ?>>Name (A-Z)</option>
                                     <option value="Z-A"     <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'Z-A' ) ? 'selected' : '' : '' ); ?>>Name (Z-A)</option>
                                     <option value="recent"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'recent' ) ? 'selected' : '' : '' ); ?>>Recent</option>
                                     <option value="oldest"  <?=  ( isset( $_GET['orderby'] ) ?  ( $_GET['orderby'] == 'oldest' ) ? 'selected' : '' : '' ); ?>>Oldest</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="search">Status</label>
+                                <select  class="form-control" type="text" name="status" id="status"  placeholder="Status">
+                                    <option value="">All</option>
+                                    <option value="vacant" <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'vacant' ) ? 'selected' : '' : '' ); ?>>Vacant</option>
+                                    <option value="occupied" <?=  ( isset( $_GET['status'] ) ?  ( $_GET['status'] == 'occupied' ) ? 'selected' : '' : '' ); ?>>Occupied</option>
                                 </select>
                             </div>
 
@@ -50,7 +49,8 @@
                             <th>Section</th>
                             <th>Area in sqm</th>
                             <th>Amount per sqm / Rate</th>
-                            <th>Rental Fee per day</th>
+                            <th>Rental Fee</th>
+                            <th>Annual Fee</th>
                             <th>Meter Number</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -65,6 +65,7 @@
                                 <td>{{ $stall->sqm }}</td>
                                 <td>{{ $stall->amount_sqm }}</td>
                                 <td>{{ $stall->rental_fee }}</td>
+                                <td>{{ $stall->annual_fee }}</td>
                                 <td>{{ $stall->meter_num }}</td>
                                 <td>{{ $stall->status }}</td>
                                 <td>
