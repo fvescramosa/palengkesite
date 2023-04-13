@@ -170,8 +170,6 @@
                         <a href="{{ route('admin.contact-us') }}" class="{{ ( request()->routeIs('admin.contact-us') ? 'active' : '' )}}">
                             <span class="icon"><i class="fa fa-envelope-open"></i></span>
                             <span class="item">Inquiries</span>
-
-                            <span class="notif badge badge-danger" id="stall-approval-notif">{{ App\SellerStall::where('status', 'pending')->get()->count()  }}</span>
                         </a>
                     </li>
                     <li>
