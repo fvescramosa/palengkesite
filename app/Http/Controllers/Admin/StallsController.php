@@ -14,6 +14,8 @@ class StallsController extends Controller
     //
     public function show(Request $request){
 
+
+
         $stalls = new Stall();
 
         if(isset($_GET['search'])){
@@ -32,7 +34,7 @@ class StallsController extends Controller
             $stalls = $stalls->Where('market_id', session()->get('market'));
         }
 
-        if(isset($_GET['status'])){
+        if(isset($_GET['status']) && $_GET['status'] != ''){
             $stalls = $stalls->where('status', $_GET['status']);
         }
 
@@ -93,6 +95,7 @@ class StallsController extends Controller
             $orderby = ['number', 'asc'];
             $stalls->orderBy($orderby[0], $orderby[1]);
         }
+
 
         $stalls = $stalls->paginate(10);
         
@@ -390,7 +393,7 @@ class StallsController extends Controller
     public function exportStall($status = null){
 
 
-        $fileName = 'stalls.csv';
+        $fileName = 'Stalls-'.date('F-d-Y-h-i-a').'.csv';
 
         $stalls = new Stall();
 
@@ -411,7 +414,7 @@ class StallsController extends Controller
             });
         }
 
-        if(isset($_GET['status'])){
+        if(isset($_GET['status']) && $_GET['status'] != ''){
             $stalls = $stalls->where('status', $_GET['status']);
         }
         //->get();
