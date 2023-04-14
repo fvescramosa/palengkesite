@@ -71,7 +71,12 @@
                         <div class="dashboard">
                             <div class="dashboard-box">
                                 <div class="profile">
+                                @if (auth()->user()->profile_image)
                                     <img src="{{ asset(auth()->user()->profile_image)  }}" alt="" id="profileImg">
+                                @else
+                                    <i class="fa fa-user" style="padding: 25px; font-size: 45px; color: white;"></i>
+                                @endif
+                                    <!-- <img src="{{ asset(auth()->user()->profile_image)  }}" alt="" id="profileImg"> -->
                                     <div class="hi-profile">
                                         <h1>Hi, <span>{{ auth()->user()->first_name }}!</span></h1>
                                     </div>
