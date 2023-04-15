@@ -337,7 +337,15 @@ class ProductsController extends Controller
 
         $delete =  SellerProduct::where('id', $id)->delete();
 
-        return redirect(route('seller.products.show'));
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Product was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Product was not deleted!'];
+        }
+
+        return response()->json($response);
+
+//        return redirect(route('seller.products.show'));
 
     }
 

@@ -219,8 +219,15 @@ class AdminController extends Controller
        
         $delete =  Admin::where('id', $id)->delete();
 
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Staff was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Staff was not deleted!'];
+        }
 
-        return redirect(route('admin.show.staff')); 
+        return response()->json($response);
+
+//        return redirect(route('admin.show.staff'));
         
     }
 
