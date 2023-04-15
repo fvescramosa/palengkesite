@@ -143,7 +143,8 @@ body{
     text-transform: uppercase;
 }
 
-#sellers_submenu li {
+#sellers_submenu li,
+#products_submenu li {
     padding-left: 25px;
  }
 

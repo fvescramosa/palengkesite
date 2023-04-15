@@ -65,12 +65,27 @@
                         @endif
                         @if(auth()->user()->seller()->exists())
                             @if(auth()->user()->seller->seller_stalls()->where('status', 'active')->count()  > 0)
-                                <li>
-                                    <a href="{{ route('seller.products.show') }}">
+                                <li class="collapsed" data-toggle="collapse" data-target="#products_submenu">
+                                    <a href="#"  class="">
                                         <span class="icon"><i class="fa fa-store"></i></span>
                                         <span class="item">Products</span>
-                                        <span class="notif badge badge-danger" id="orders-notif">{{ auth()->user()->seller->seller_products->where('status', 'pending')->count() }}</span>
                                     </a>
+                                    <div class="collapse {{ (request()->segment(2) == 'products') ? 'show' : ''}}" id="products_submenu" aria-expanded="false">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('seller.products.show') }}" class="{{ ( request()->routeIs('seller.products.show') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-store"></i></span>
+                                                    <span class="item">List</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('seller.products.trash') }}" class="{{ ( request()->routeIs('seller.products.trash') ? 'active' : '' )}}">
+                                                    <span class="icon"><i class="fa fa-archive"></i></span>
+                                                    <span class="item">Archive</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                                 <li>
                                     <a href="{{ route('seller.orders.show') }}">
