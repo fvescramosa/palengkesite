@@ -221,11 +221,12 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
+        $products = Products::all();
         $seller_product = SellerProduct::with(['product', 'seller', 'product.category'])->where(['seller_id' => auth()->user()->seller->id])->findorFail($id);
 
-//        $seller_products =  auth()->user()->seller->seller_products->where(['id' => $id]);
+        // $seller_products =  auth()->user()->seller->seller_products->where(['id' => $id]);
 
-        return view('seller/products/edit', compact(['seller_product']))->with(['message' => '']);
+        return view('seller/products/edit', compact(['seller_product', 'products']))->with(['message' => '']);
 
     }
 
@@ -240,7 +241,6 @@ class ProductsController extends Controller
             'custom_title' => $request->custom_title,
             'description' => $request->description,
         ];
-
 
 
         if ($request->file('image')){
@@ -324,6 +324,37 @@ class ProductsController extends Controller
 //        return view('seller/products/list', compact(['products']));
         return response()->json($data);
     }
+
+    public function trash(){
+        $seller_products = SellerProduct::onlyTrashed()->get();
+
+
+
+        return view('seller.products/trash', compact(['seller_products']));
+    }
+
+    public function deleteSellerProduct($id){
+
+        $delete =  SellerProduct::where('id', $id)->delete();
+
+        return redirect(route('seller.products.show'));
+
+    }
+
+    public function recoverSellerProduct($id){
+
+        $recover = SellerProduct::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('seller.products.show'));
+
+    }
+
+    public function SellerProductForceDelete($id){
+
+        $delete = SellerProduct::where('id', $id)->forceDelete();
+        return redirect(route('seller.products.trash'));
+    }
+
 
 
 }

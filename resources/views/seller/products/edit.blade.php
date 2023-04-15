@@ -92,6 +92,14 @@
 
                                 </div>
 
+                                 <div class="alert alert-info" role="alert">
+                                    @foreach ($products as $product)
+                                        @if($product->id == $seller_product->product_id)
+                                            Maximum Price: <input type="text"  id="max_price" name="max_price" placeholder="" value="{{$product->max_price}}" style="text-align: center;" readonly>
+                                        @endif
+                                    @endforeach
+                                </div>
+
                                 <div class="info-item form-group xshort">
                                     <label for="Product">Stocks</label>
                                     <input type="number"

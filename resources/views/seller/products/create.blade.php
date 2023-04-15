@@ -219,7 +219,7 @@
 
                                 <div class="form-group long">
                                     <label for="Product">Price</label>
-                                    <input type="text"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Price" value="" >
+                                    <input type="text"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Price" value="" onchange="validatePrice()">
 
                                     @error('price')
                                     <span class="invalid-feedback" role="alert">
@@ -264,6 +264,15 @@
         </div>
     </div>
     <script>
+        function validatePrice() {
+        var price = document.getElementById("price").value;
+        var maxPrice = document.getElementById("max_price").value;
+
+            if (price > maxPrice) {
+                alert("Price cannot exceed maximum price.");
+                document.getElementById("price").value = "";
+            }
+        }
         const products = {
             init: function(  ){
                 products.initCategories($('#category'));
