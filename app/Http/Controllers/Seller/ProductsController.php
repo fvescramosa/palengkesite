@@ -242,6 +242,15 @@ class ProductsController extends Controller
             'description' => $request->description,
         ];
 
+        $product = Products::findorFail($request->product);
+
+
+            if ($product->max_price != null) {
+                $validate = $request->validate([
+                   'price' => ['numeric', 'lte:' . $product->max_price]
+                ]);
+            }
+
 
         if ($request->file('image')){
             $file= $request->file('image');
