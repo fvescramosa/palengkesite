@@ -69,8 +69,8 @@
                                 <td>{{ $user->seller->seller_type}}</td>
                                 <td>
                                     <a href="{{ route('admin.show.seller', $user->id) }}">View</a> | 
-                                    <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
-                                    <a href="{{ route('admin.sellers.delete', $user->id) }}"> Delete </a>
+                                    <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> |
+                                    <a href="#" data-action-delete="User" data-href="{{ route('admin.sellers.delete', $user->id) }}"> Delete </a>
                                 </td>
                             </tr>
                         @endforeach

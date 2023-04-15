@@ -370,7 +370,15 @@ class StallsController extends Controller
         $delete =  Stall::where('id', $id)->delete();
 
 
-        return redirect(route('admin.stalls.show')); 
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Stall was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Stall was not deleted!'];
+        }
+
+        return response()->json($response);
+
+//        return redirect(route('admin.stalls.show'));
         
     }
 
