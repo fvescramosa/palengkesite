@@ -293,9 +293,15 @@ class UserController extends Controller
        
         $delete =  Seller::where('user_id', $id)->delete();
 
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Seller was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Seller was not deleted!'];
+        }
 
-        return redirect(route('admin.show.sellers.list')); 
-        
+        return response()->json($response);
+//        return redirect(route('admin.show.sellers.list'))->with($response);
+
     }
 
     public function deleteBuyer($id){
@@ -304,7 +310,15 @@ class UserController extends Controller
         $delete =  Buyer::where('user_id', $id)->delete();
 
 
-        return redirect(route('admin.show.buyers.list')); 
+
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Buyer was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Buyer was not deleted!'];
+        }
+
+        return response()->json($response);
+//        return redirect(route('admin.show.buyers.list'));
         
     }
 

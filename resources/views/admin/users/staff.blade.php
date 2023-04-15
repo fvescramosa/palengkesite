@@ -47,7 +47,7 @@
                                 <td>{{ $staff->email }}</td>
                                 <td>
                                     <a href="{{ route('admin.edit.staff', $staff->id) }}">Edit</a> | 
-                                    <a href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
+                                    <a href="#" data-action-delete="User" data-href="{{ route('admin.staffs.delete', $staff->id) }}"> Delete </a>
                                 
                                 </td>
                                 
