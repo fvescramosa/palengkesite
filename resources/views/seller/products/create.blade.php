@@ -265,11 +265,20 @@
     </div>
     <script>
         function validatePrice() {
-        var price = document.getElementById("price").value;
-        var maxPrice = document.getElementById("max_price").value;
+        var price = parseInt(document.getElementById("price").value);
+        var maxPrice = parseInt(document.getElementById("max_price").value);
 
             if (price > maxPrice) {
-                alert("Price cannot exceed maximum price.");
+                // alert("Price cannot exceed maximum price.");
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Price cannot exceed maximum price.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+
+                }).then((result) => {
+
+                });
                 document.getElementById("price").value = "";
             }
         }
