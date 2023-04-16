@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\Message;
 use App\User;
 use App\DeliveryAddress;
 use function dd;
