@@ -30,8 +30,8 @@ class HomeController extends Controller
 
     public function index(){
 
-        $featuredProducts = SellerProduct::where('featured', 1);
-        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->with(['seller', 'product', 'seller_product']);
+        $featuredProducts = SellerProduct::where('featured', 1)->whereHas('product');
+        $popularProducts = OrderProduct::select(DB::raw('COUNT(*) as sales'), 'seller_id' , 'product_id', 'seller_product_id')->whereHas('product')->with(['seller', 'product', 'seller_product']);
 
         $categories = Categories::all();
 
