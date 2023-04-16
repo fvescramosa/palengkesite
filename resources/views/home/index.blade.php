@@ -46,6 +46,14 @@
                     </a>
             @endforeach
         </div>
+        <div class="home-category-arrow">
+            <i class="category-previous fa fa-angle-left">
+
+            </i>
+            <i class="category-next fa fa-angle-right">
+
+            </i>
+        </div>
 
     </section>
 
@@ -196,8 +204,8 @@
                     infinite: true,
                     slide: 'div',
                     cssEase: 'linear',
-                    nextArrow: false,
-                    prevArrow: false,
+                    prevArrow: jQuery('.home-category .category-previous'),
+                    nextArrow: jQuery('.home-category .category-next'),
                     responsive: [
                         {
                             breakpoint: 991,
