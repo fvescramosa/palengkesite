@@ -9,13 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2a1b217-cf41-4b7f-bf15-af9b749bb386" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/analytics/buyer-registration-chart.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/analytics/by-products-chart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/seller/analytics/by-products-chart.blade.php.bck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/seller/analytics/seller-registration-chart.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="138" column="58" lean-forward="true" selection-start-line="138" selection-start-column="58" selection-end-line="138" selection-end-column="58" />
+            <state relative-caret-position="92">
+              <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding>
                 <element signature="e#501#2280#0#PHP" />
                 <element signature="e#2286#4660#0#PHP" />
@@ -57,10 +51,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="245" column="55" selection-start-line="238" selection-start-column="27" selection-end-line="245" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="37" column="149" selection-start-line="37" selection-start-column="149" selection-end-line="37" selection-end-column="149" />
+            <state relative-caret-position="130">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -129,8 +132,8 @@
       <find>Message::</find>
       <find>message</find>
       <find>226</find>
-      <find>downlo</find>
       <find>sales</find>
+      <find>downlo</find>
     </findStrings>
     <replaceStrings>
       <replace>SellerProduct</replace>
@@ -270,7 +273,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/about-us/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/profile.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CartController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/SellerController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/stalls/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
@@ -301,6 +303,7 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php" />
         <option value="$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CartController.php" />
       </list>
     </option>
   </component>
@@ -705,7 +708,7 @@
       <workItem from="1681424109221" duration="599000" />
       <workItem from="1681575310735" duration="7353000" />
       <workItem from="1681602884428" duration="2004000" />
-      <workItem from="1681646516313" duration="6148000" />
+      <workItem from="1681646516313" duration="6470000" />
     </task>
     <task id="LOCAL-00001" summary="pogi ako">
       <created>1674228112753</created>
@@ -732,7 +735,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590511000" />
+    <option name="totallyTimeSpent" value="590833000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -747,7 +750,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -762,7 +765,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32441473" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.358742" side_tool="true" weight="0.2831661" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.641258" weight="0.18283166" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.641258" visible="true" weight="0.18283166" />
       <window_info anchor="bottom" id="File Transfer" order="12" weight="0.32820514" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -845,13 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="43" column="110" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4485">
-          <caret line="207" column="62" selection-start-line="207" selection-start-column="62" selection-end-line="207" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -1156,17 +1152,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="138" column="58" lean-forward="true" selection-start-line="138" selection-start-column="58" selection-end-line="138" selection-end-column="58" />
-          <folding>
-            <element signature="e#501#2280#0#PHP" />
-            <element signature="e#2286#4660#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/seller/analytics/order-by-products.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -1189,8 +1174,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/seller/analytics/ratings-by-products.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="37" column="149" selection-start-line="37" selection-start-column="149" selection-end-line="37" selection-end-column="149" />
+        <state relative-caret-position="130">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Seller/AnalyticsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding>
+            <element signature="e#501#2280#0#PHP" />
+            <element signature="e#2286#4660#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CartController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="245" column="55" selection-start-line="238" selection-start-column="27" selection-end-line="245" selection-end-column="55" />
         </state>
       </provider>
     </entry>
