@@ -29,6 +29,7 @@
                         <td>{{ $seller_product->type }}</td>
                         <td>{{ $seller_product->product->status }}</td>
                         <td>
+                            <a href="{{ route('seller.products.find', ['id' => $seller_product->id]) }}">View </a>|
                             <a href="{{ route('seller.products.edit', $seller_product->id) }}">Edit </a>|
                             <a href="#" data-action-delete="Product" data-href="{{ route('seller.products.delete', $seller_product->id) }}"> Delete</a>
                         </td>
