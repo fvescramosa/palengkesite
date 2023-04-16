@@ -40,10 +40,12 @@ class ProductsController extends Controller
                })->get()->groupBy('seller_products.seller_id');*/
 
 
-        $products = SellerProduct::with(['product'])->whereHas('seller', function ($q){
-            $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
-            $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
-        });
+        $products = SellerProduct::with(['product'])
+            ->whereHas('product')
+            ->whereHas('seller', function ($q){
+                $q->whereHas('user', function ($s){ $s->where('status', 'active'); });
+                $q->whereHas('seller_stalls', function ($s){ $s->where('status', 'active'); });
+            });
 
 
 
@@ -121,6 +123,7 @@ class ProductsController extends Controller
         $categories = Categories::where('slug', $slug)->first();
 
         $products = SellerProduct::with(['product'])
+                    ->whereHas('product')
                     ->whereHas('product.category', function($q) use ($categories){
                         $q->where('category', $categories->category);
                     })
