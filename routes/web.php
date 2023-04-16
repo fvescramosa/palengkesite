@@ -169,6 +169,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
     Route::get('/analytics/products/ratings', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productByRatings'])->name('analytics.product.ratings');
+    Route::get('/analytics/products/ratings/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductByRatings'])->name('analytics.product.ratings.export');
 
 
     Route::get('/getMessagesNotification', [\App\Http\Controllers\Seller\SellerController::class, 'getMessagesNotification'])->name('getMessagesNotification');

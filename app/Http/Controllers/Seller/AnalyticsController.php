@@ -169,5 +169,66 @@ class AnalyticsController extends Controller
 
         return view('seller.analytics.ratings-by-products', compact('labels', 'data'));
     }
+    public function exportProductByRatings(){
+
+        $fileName = 'products-by-ratings.csv';
+
+        $products = SellerProduct::select('average_ratings', 'product_id', 'id', 'seller_id', 'custom_title')
+            ->with(['product', 'seller'])
+            ->whereHas('product')
+            ->whereHas('product', function($q){
+                if(isset($_GET['category']) && $_GET['category'] != ''){
+                    $q->whereHas('category', function ($query){
+                        $query->where('category', $_GET['category']);
+                    });
+                }
+            })
+            ->where('seller_id', auth()->user()->seller->id);
+
+
+
+        if(isset($_GET['sort']) && $_GET['sort'] != ''){
+            $products = $products->orderBy('average_ratings', $_GET['sort']);
+        }else{
+            $products = $products->orderBy('average_ratings', 'DESC');
+        }
+
+        $products = $products->get();
+
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+
+        $columns = array('Product Custom Name', 'Product Name', 'Ratings');
+
+        $callback = function() use($products, $columns) {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+            foreach ($products as $data) {
+                $row['Product Custom Name']  = $data->custom_title;
+                $row['Product Name']    = $data->product->product_name;
+                $row['Ratings']    = $data->average_ratings;
+                fputcsv($file, array($row['Product Custom Name'], $row['Product Name'], $row['Ratings']));
+
+            }
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
+
+//        dd([$labels, $data ]);
+
+
+//        return view('seller.analytics.order-by-products', compact('labels', 'data'));
+    }
 
 }
