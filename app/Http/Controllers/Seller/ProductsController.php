@@ -318,6 +318,14 @@ class ProductsController extends Controller
 
     }
 
+    public function find($id)
+    {
+
+        $sellerProduct = SellerProduct::findOrFail($id);
+
+        return view('seller.products.find', compact(['sellerProduct']))->with(['message' => '']);
+
+    }
     public function findByCategory(Request $request){
 
         $data = Products::where('category_id', $request->id)->get();

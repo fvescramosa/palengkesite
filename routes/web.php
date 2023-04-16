@@ -108,11 +108,12 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     //products
     Route::get('/products/create', [\App\Http\Controllers\Seller\ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [\App\Http\Controllers\Seller\ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/find/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'find'])->name('products.find');
     Route::get('/products/show', [\App\Http\Controllers\Seller\ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/edit/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'edit'])->name('products.edit');
     Route::post('/products/update/', [\App\Http\Controllers\Seller\ProductsController::class, 'update'])->name('products.update');
     Route::get('/products/trash', [\App\Http\Controllers\Seller\ProductsController::class, 'trash'])->name('products.trash');
-    Route::get('/products//delete/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'deleteSellerProduct'])->name('products.delete');
+    Route::get('/products/delete/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'deleteSellerProduct'])->name('products.delete');
     Route::get('/products/permanentdelete/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'SellerProductForceDelete'])->name('products.permanentdelete');
     Route::get('/products/recover/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'recoverSellerProduct'])->name('products.recover');
     Route::post('/products/find-by-category', [\App\Http\Controllers\Seller\ProductsController::class, 'findByCategory'])->name('products.find.category');
