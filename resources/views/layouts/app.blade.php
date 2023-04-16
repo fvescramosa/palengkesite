@@ -140,7 +140,7 @@
             @endif
 
 
-            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index' && \Illuminate\Support\Facades\Route::currentRouteName() != 'shop.products.find')
                 <div class="longbar green-bar">
                     <div class="">
                         <form action="{{ route('select.market') }}" method="POST" id="select-market">
