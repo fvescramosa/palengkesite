@@ -269,8 +269,8 @@
         var maxPrice = parseInt(document.getElementById("max_price").value);
 
             if (price > maxPrice) {
-                // alert("Price cannot exceed maximum price.");
-                Swal.fire({
+                 alert("Price cannot exceed maximum price.");
+                /*Swal.fire({
                     title: 'Error!',
                     text: 'Price cannot exceed maximum price.',
                     icon: 'error',
@@ -278,7 +278,7 @@
 
                 }).then((result) => {
 
-                });
+                });*/
                 document.getElementById("price").value = "";
             }
         }

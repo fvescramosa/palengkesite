@@ -74,7 +74,7 @@
                     <div class="product-details">
 
 
-                        <h4 class="product-name">{{ $featuredProduct->product->product_name }}</h4>
+                        <h4 class="product-name">{{ ($featuredProduct->custom_title != '' ? $featuredProduct->custom_title : $featuredProduct->product->product_name) }}</h4>
                         <p>Php {{ number_format($featuredProduct->price, 2) }}</p>
                         <form action="{{ route('shop.product.addToCart') }}" method="POST">
 
@@ -114,7 +114,7 @@
                     <div class="product-details">
 
 
-                        <h4 class="product-name">{{ $popularProduct->product->product_name }}</h4>
+                        <h4 class="product-name">{{ ($popularProduct->custom_title != '' ? $popularProduct->custom_title : $popularProduct->product->product_name) }}</h4>
                         <p>Php {{ number_format($popularProduct->seller_product->price, 2) }}</p>
                         <form action="{{ route('shop.product.addToCart') }}" method="POST">
 
