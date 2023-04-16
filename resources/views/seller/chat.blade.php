@@ -11,8 +11,9 @@
                 <ul class="chat">
 
                     @foreach($messages as $message)
+
                         {{--It means buyer talking to seller--}}
-                        <li class="left clearfix">
+                        <li class="{{ ($message->where('sender', 'buyer')->where('status',  'unread')->count() > 0 ? 'unread' : '')  }} left clearfix">
                             <a href="{{ route('seller.chat.buyer', ['id' => $message->last()->buyer->id]) }}">{{ $message->last()->buyer->user->first_name  }}</a>
                         </li>
 
