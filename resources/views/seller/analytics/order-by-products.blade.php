@@ -9,7 +9,7 @@
 
                 <div class="" style="width: 100%; display: flex">
                     <div class="form-group short    ">
-                        <label for="">Month></label>
+                        <label for="">Month</label>
                         <select  class="form-control" id="productOption" name="productOption" placeholder="Order By"  >
                             <option value=""></option>
                             @for($i=1; $i<=12; $i++)
@@ -46,7 +46,7 @@
                             @endfor
                         </select>
                     </div>--}}
-                    <div class="form-group short    ">
+                    <!-- <div class="form-group short    ">
                         <label for="">Category</label>
                         <select  class="form-control" id="category" name="category" placeholder="Category"  >
                             <option value=""></option>
@@ -54,7 +54,7 @@
                                 <option value="{{ $category->category }}" {{ (isset($_GET['category']) && $_GET['category'] == $category->category ? 'selected' : '')  }}>{{ $category->category }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group short    ">
                         <label for="">Sort</label>
                         <select  class="form-control" id="sort" name="sort" placeholder="Category"  >

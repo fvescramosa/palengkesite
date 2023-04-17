@@ -86,12 +86,12 @@
 
 .my-orders-actions{
    flex: 1 1 15%;
-   max-width: 15%;
+   max-width: 20%;
    text-align: center;
 }
 
 .my-orders-actions > *{
-   width:  100%;
+   /* width:  100%; */
    margin: 20px 0 ;
    /*font-size: 18px;*/
 }
