@@ -32,6 +32,23 @@ class CartController extends Controller
         return view('cart.index', compact(['paymentOptions']));
     }
 
+
+    public function delete($id)
+    {
+
+        $delete =  Cart::where('id', $id)->delete();
+
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Item was deleted'];
+        }else {
+            $response = ['response' => 'error', 'message' => 'Opps! Something went wrong'];
+        }
+
+        return response()->json($response);
+
+//        return view('cart.index', compact(['paymentOptions']));
+    }
+
     public function checkout(Request $request)
     {
 

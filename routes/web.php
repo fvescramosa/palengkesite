@@ -353,6 +353,7 @@ Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::get('/delete/{id}', [\App\Http\Controllers\CartController::class, 'delete'])->name('delete');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
     Route::get('/chooseDeliveryAddress', [\App\Http\Controllers\CartController::class, 'chooseDeliveryAddress'])->name('checkout.chooseDeliveryAddress');
     Route::post('/selectDeliveryAddress', [\App\Http\Controllers\CartController::class, 'selectDeliveryAddress'])->name('checkout.selectDeliveryAddress');

@@ -46,6 +46,7 @@
                             <div class="product-name">{{ $cart->seller_product->product->product_name  }}</div>
                             <div class="product-price">Php {{ $cart->seller_product->price  }} x {{ $cart->quantity }}</div>
                             <div class="product-total">{{ $cart->total }}</div>
+                            <a href="#" data-action-delete="Item" data-href="{{ route('cart.delete', $cart->id) }}" > <i class="fa fa-trash"></i></a>
                         </div>
                     @endforeach
 

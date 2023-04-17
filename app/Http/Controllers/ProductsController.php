@@ -335,16 +335,20 @@ class ProductsController extends Controller
 
         if($request->categories){
             $filter_categories = $request->categories;
+
             $stores = $stores->whereHas('stall', function ($query) use ($filter_categories){
-                $query->whereIn('category_id', $filter_categories);
+
+               $query->whereIn('category_id', $filter_categories);
             });
         }
+
 
 
         $categories = Categories::all();
 
 
         $stores = $stores->get();
+
 
 
         $innerPageBanner = '';
