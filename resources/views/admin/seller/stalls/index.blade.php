@@ -41,6 +41,7 @@
                             <th>Location</th>
                             <th>Amount per sqm</th>
                             <th>Rental Fee</th>
+                            <th>Annual Fee</th>
                             <th>Contract</th>
                             <th>Status</th>
                         </tr>
@@ -56,6 +57,7 @@
                                 <td> {{ $stall->stall->market->market }}</td>
                                 <td> {{ $stall->stall->amount_sqm }}</td>
                                 <td> {{ $stall->stall->rental_fee }}</td>
+                                <td> {{ $stall->stall->annual_fee }}</td>
                                 <td>
                                     @if($stall->contact_of_lease)
                                         <a href="{{ asset( $stall->contact_of_lease )}}"  target="_blank"><span class="fa fa-eye"></span> View Contract</a>
