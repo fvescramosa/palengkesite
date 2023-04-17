@@ -134,7 +134,7 @@
 
 
                             </li>
-                            @if(auth()->user()->buyer && auth()->user()->buyer->carts && auth()->user()->buyer->carts->isNotEmpty())
+                            {{--@if(auth()->user()->buyer && auth()->user()->buyer->carts && auth()->user()->buyer->carts->isNotEmpty())--}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('cart.index') }}" style="min-width: 55px;">
                                     <i class="fa fa-shopping-cart ">
@@ -144,7 +144,7 @@
                                     </i>
                                 </a>
                             </li>
-                            @endif
+                            {{--@endif--}}
                         @endguest
                     </ul>
                 </div>
