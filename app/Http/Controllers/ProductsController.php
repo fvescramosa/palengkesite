@@ -327,9 +327,15 @@ class ProductsController extends Controller
             });
         };
 
+
+        if($request->store_name && $request->store_name != ''){
+            $filter_categories = $request->categories;
+            $stores = $stores->where('name', 'like', '%'.$request->store_name.'%');
+        }
+
         if($request->categories){
             $filter_categories = $request->categories;
-            $products = $stores->whereHas('stall', function ($query) use ($filter_categories){
+            $stores = $stores->whereHas('stall', function ($query) use ($filter_categories){
                 $query->whereIn('category_id', $filter_categories);
             });
         }

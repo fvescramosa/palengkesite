@@ -12,8 +12,8 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <h3>Filter</h3>
-                                <label class="" for="">Product Name</label>
-                                <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') ?? $_GET['product_name'] ?? '' }}">
+                                <label class="" for="">Store Name</label>
+                                <input type="text" class="form-control" name="store_name" id="product_name" value="{{ old('store_name') ?? $_GET['store_name'] ?? '' }}">
                             </div>
                         </div>
 
