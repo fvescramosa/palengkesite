@@ -31,7 +31,8 @@
                 <h3>Cart</h3>
 
                 <div class="cart-items">
-                    @foreach(auth()->user()->buyer->carts as $cart)
+                    @foreach($carts as $cart)
+                    {{--@foreach(auth()->user()->buyer->carts as $cart)--}}
                         <div class="cart-item">
                             <div class="product-check">
                                 <div class="form-check">

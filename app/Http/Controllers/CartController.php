@@ -28,8 +28,9 @@ class CartController extends Controller
     public function index()
     {
 
+        $carts= Cart::where('buyer_id', auth()->user()->buyer->id)->whereHas('product')->get();
         $paymentOptions = PaymentOption::all();
-        return view('cart.index', compact(['paymentOptions']));
+        return view('cart.index', compact(['paymentOptions', 'carts']));
     }
 
 
