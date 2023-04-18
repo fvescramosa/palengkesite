@@ -117,7 +117,7 @@
                                 <h1>{{ $pageTitle ?? '' }}</h1>
                             </section>
                          @else
-                                <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                                <section class="banner" style="background-image: url('{{ asset('images/defaults/inner-page-banner.jpg') }}')">
                                     <div class="overlay"></div>
                                     <h1>{{ $pageTitle ?? '' }}</h1>
                                 </section>
@@ -127,12 +127,12 @@
 
                                 @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
 
-                                    <section class="banner" style="background-image: url({{ $innerPage ?? asset('public/inner-page-banner.jpg') }})">
+                                    <section class="banner" style="background-image: url({{ $innerPage ?? asset('images/defaults/inner-page-banner.jpg') }})">
                                         <div class="overlay"></div>
                                     </section>
                                 @endif--}}
                 @else
-                    <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                    <section class="banner" style="background-image: url('{{ asset('images/defaults/inner-page-banner.jpg') }}')">
                         <div class="overlay"></div>
                     </section>
 
