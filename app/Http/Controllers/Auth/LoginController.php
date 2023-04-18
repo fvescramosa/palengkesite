@@ -84,9 +84,10 @@ class LoginController extends Controller
 
             // Redirect the user to their profile
             if (Auth::user()->user_type_id == 2) {
+                session()->put('user_type', 'seller');
                 return redirect()->intended(route('seller.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             } else {
-
+                session()->put('user_type', 'buyer');
                 return redirect()->intended(route('buyer.profile'))->with(['response' => 'success', 'message' => 'Login success!']);
             }
         } else {
