@@ -93,7 +93,7 @@
                                                 <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
                                                 <td> <p>{{ $stall->annual_fee }}</p></td>   
                                             @else
-                                                <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                                <td class="stall-info-title-container"><p><strong>Rental Fee per Day: </strong></p> </td>
                                                 <td> <p>{{ $stall->rental_fee }}</p></td>
                                             @endif
                                             <tr>
@@ -143,7 +143,7 @@
                                     </div>
                                 @else
                                     <div class="info-item">
-                                        <label for="">Rental Fee</label>
+                                        <label for="">Rental Fee per Day</label>
                                         <input type="text" class="form-control @error('rental_fee') is-invalid @enderror" name="rental_fee" id="rental_fee" value="{{ $stall->rental_fee }}" readonly>
 
                                         @error('rental_fee')

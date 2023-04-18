@@ -65,7 +65,7 @@
                                       <div id="slide-for">
                                           <div>
                                               <div class="stall-main-img">
-                                                  <img src="{{ asset('public/Image/' . $user->seller->seller_stalls->image) }}" alt="">
+                                                  <img src="{{ asset($user->seller->seller_stalls->image) }}" alt="">
                                               </div>
                                           </div>
                                           @for($i=1; $i<=5; $i++)
@@ -73,7 +73,7 @@
                                               @if($user->seller->seller_stalls->stall[$imagekey])
                                                   <div>
                                                       <div class="stall-img">
-                                                          <img src="{{ asset('public/Image') .'/'. $user->seller->seller_stalls->stall[$imagekey] }}" alt="">
+                                                          <img src="{{ asset($user->seller->seller_stalls->stall[$imagekey]) }}" alt="">
                                                       </div>
                                                   </div>
                                               @endif
@@ -82,7 +82,7 @@
                                       <div id="slide-nav" class="">
                                           <div>
                                               <div class="stall-img">
-                                                  <img src="{{ asset('public/Image/' . $user->seller->seller_stalls->stall->image) }}" alt="">
+                                                  <img src="{{ asset($user->seller->seller_stalls->stall->image) }}" alt="">
                                               </div>
                                           </div>
                                           @for($i=1; $i<=5; $i++)
@@ -90,7 +90,7 @@
                                               @if($user->seller->seller_stalls->stall[$imagekey])
                                                   <div>
                                                       <div class="stall-img">
-                                                          <img src="{{ asset('public/Image') .'/'. $user->seller->seller_stalls->stall[$imagekey] }}" alt="">
+                                                          <img src="{{ asset($user->seller->seller_stalls->stall[$imagekey]) }}" alt="">
                                                       </div>
                                                   </div>
                                               @endif
@@ -136,7 +136,7 @@
                                                     </tr>
                                                 @else
                                                     <tr>
-                                                        <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                                        <td class="stall-info-title-container"><p><strong>Rental Fee per Day: </strong></p> </td>
                                                         <td> <p>{{ $user->seller->seller_stalls->stall->rental_fee }}</p></td>
                                                     </tr>
                                                 @endif
