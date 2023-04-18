@@ -140,6 +140,7 @@
 
 
             <div class="comment-form-area">
+                {{ session('user_type') }}
                 @if(session('user_type') == 'buyer')
 
                     
