@@ -242,19 +242,19 @@
                             <span class="item">Settings</span>
                         </a>
                     </li>
-                    <li class="collapsed" data-toggle="collapse" data-target="#about_submenu">
+                    <!-- <li class="collapsed" data-toggle="collapse" data-target="#about_submenu">
                         <a href="#"  class="">
                             <span class="icon"><i class="fa fa-user-shield"></i></span>
                             <span class="item">About Us</span>
                         </a>
                         <div class="collapse {{ (request()->segment(2) == 'about-us') ? 'show' : ''}}" id="about_submenu" aria-expanded="false">
                             <ul>
-                                <!-- <li>
+                                <li>
                                     <a href="{{ route('admin.about-us.index') }}" class="{{ ( request()->routeIs('admin.about-us.index') ? 'active' : '' )}}">
                                         <span class="icon"><i class="fa fa-user-shield"></i></span>
                                         <span class="item">About Us Page</span>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li>
                                     <a href="{{ route('admin.developers') }}" class="{{ ( request()->routeIs('admin.developers') ? 'active' : '' )}}">
                                         <span class="icon"><i class="fa fa-user-shield"></i></span>
@@ -269,7 +269,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                             <span class="icon"><i class="fas fa-power-off"></i></span>
@@ -431,8 +431,56 @@
                                 }
                             }); 
                         }, 5000);
-                    }
-                    
+                    },
+
+                    initDeleteFunction: function (trigger) {
+                        trigger.click(function (e) {
+
+                            let self = $(this);
+                            let url = self.attr('data-href');
+
+                            //seller, buyer, staff, stall etc..
+                            let action =  self.attr('data-action-delete');
+
+                            e.preventDefault();
+                            Swal.fire({
+                                title: 'Are you sure you want to delete this '+ action +'?',
+                                showDenyButton: true,
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                denyButtonText: `No`,
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"json",
+                                        url: url,
+                                        crossDomain:true,
+                                        data: {
+                                            _token: "{{ csrf_token() }}"
+                                        },
+                                        success:function(data) {
+                                            Swal.fire({
+                                                title: data.response + '!',
+                                                text: data.message,
+                                                icon: data.response,
+                                                confirmButtonText: 'Ok',
+
+                                            }).then((result) => {
+                                                location.reload(true);
+                                            });
+
+                                        }
+                                    });
+                                } else if (result.isDenied) {
+
+                                }
+                            })
+                        });
+
+                    },
+
                 };
 
                 $(window).on('load', function(){
@@ -443,6 +491,7 @@
                     app.initNotifStallAppointment();
                     app.initNotifStallApproval();
                     app.initNotifProduct();
+                    app.initDeleteFunction($('a[data-action-delete]'));
                     // app.initNotifications();
                     $('.hamburger').click(function(){
                         if($('.sidebar').hasClass('close')){

@@ -108,9 +108,14 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     //products
     Route::get('/products/create', [\App\Http\Controllers\Seller\ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [\App\Http\Controllers\Seller\ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/find/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'find'])->name('products.find');
     Route::get('/products/show', [\App\Http\Controllers\Seller\ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/edit/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'edit'])->name('products.edit');
     Route::post('/products/update/', [\App\Http\Controllers\Seller\ProductsController::class, 'update'])->name('products.update');
+    Route::get('/products/trash', [\App\Http\Controllers\Seller\ProductsController::class, 'trash'])->name('products.trash');
+    Route::get('/products/delete/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'deleteSellerProduct'])->name('products.delete');
+    Route::get('/products/permanentdelete/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'SellerProductForceDelete'])->name('products.permanentdelete');
+    Route::get('/products/recover/{id}', [\App\Http\Controllers\Seller\ProductsController::class, 'recoverSellerProduct'])->name('products.recover');
     Route::post('/products/find-by-category', [\App\Http\Controllers\Seller\ProductsController::class, 'findByCategory'])->name('products.find.category');
     Route::post('/products/details', [\App\Http\Controllers\Seller\ProductsController::class, 'findByID'])->name('products.details');
 
@@ -165,6 +170,7 @@ Route::name('seller.')->prefix('/seller')->namespace('\App\Http\Controllers')->g
     Route::get('/analytics/products/', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productSales'])->name('analytics.product.sales');
     Route::get('/analytics/products/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductSales'])->name('analytics.product.sales.export');
     Route::get('/analytics/products/ratings', [\App\Http\Controllers\Seller\AnalyticsController::class, 'productByRatings'])->name('analytics.product.ratings');
+    Route::get('/analytics/products/ratings/export', [\App\Http\Controllers\Seller\AnalyticsController::class, 'exportProductByRatings'])->name('analytics.product.ratings.export');
 
 
     Route::get('/getMessagesNotification', [\App\Http\Controllers\Seller\SellerController::class, 'getMessagesNotification'])->name('getMessagesNotification');
@@ -347,6 +353,7 @@ Route::name('shop.')->prefix('/shop')->namespace('\App\Http\Controllers')->group
 
 Route::name('cart.')->prefix('/cart')->namespace('\App\Http\Controllers')->group(function(){
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::get('/delete/{id}', [\App\Http\Controllers\CartController::class, 'delete'])->name('delete');
     Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
     Route::get('/chooseDeliveryAddress', [\App\Http\Controllers\CartController::class, 'chooseDeliveryAddress'])->name('checkout.chooseDeliveryAddress');
     Route::post('/selectDeliveryAddress', [\App\Http\Controllers\CartController::class, 'selectDeliveryAddress'])->name('checkout.selectDeliveryAddress');

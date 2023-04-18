@@ -80,6 +80,7 @@ class ProductsController extends Controller
             'description' => $request->description,
             'featured' => $request->featured,
             'stock' => $request->stock,
+            'custom_title' => $request->custom_title,
 
         ]);
 
@@ -221,11 +222,12 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
+        $products = Products::all();
         $seller_product = SellerProduct::with(['product', 'seller', 'product.category'])->where(['seller_id' => auth()->user()->seller->id])->findorFail($id);
 
-//        $seller_products =  auth()->user()->seller->seller_products->where(['id' => $id]);
+        // $seller_products =  auth()->user()->seller->seller_products->where(['id' => $id]);
 
-        return view('seller/products/edit', compact(['seller_product']))->with(['message' => '']);
+        return view('seller/products/edit', compact(['seller_product', 'products']))->with(['message' => '']);
 
     }
 
@@ -241,6 +243,14 @@ class ProductsController extends Controller
             'description' => $request->description,
         ];
 
+        $product = Products::findorFail($request->product);
+
+
+            if ($product->max_price != null) {
+                $validate = $request->validate([
+                   'price' => ['numeric', 'lte:' . $product->max_price]
+                ]);
+            }
 
 
         if ($request->file('image')){
@@ -309,6 +319,14 @@ class ProductsController extends Controller
 
     }
 
+    public function find($id)
+    {
+
+        $sellerProduct = SellerProduct::findOrFail($id);
+
+        return view('seller.products.find', compact(['sellerProduct']))->with(['message' => '']);
+
+    }
     public function findByCategory(Request $request){
 
         $data = Products::where('category_id', $request->id)->get();
@@ -324,6 +342,45 @@ class ProductsController extends Controller
 //        return view('seller/products/list', compact(['products']));
         return response()->json($data);
     }
+
+    public function trash(){
+        $seller_products = SellerProduct::onlyTrashed()->get();
+
+
+
+        return view('seller.products/trash', compact(['seller_products']));
+    }
+
+    public function deleteSellerProduct($id){
+
+        $delete =  SellerProduct::where('id', $id)->delete();
+
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Product was successfully deleted!'];
+        }else{
+            $response = ['response' => 'error', 'message' => 'Product was not deleted!'];
+        }
+
+        return response()->json($response);
+
+//        return redirect(route('seller.products.show'));
+
+    }
+
+    public function recoverSellerProduct($id){
+
+        $recover = SellerProduct::withTrashed()->where('id', $id)->restore();
+
+        return redirect(route('seller.products.show'));
+
+    }
+
+    public function SellerProductForceDelete($id){
+
+        $delete = SellerProduct::where('id', $id)->forceDelete();
+        return redirect(route('seller.products.trash'));
+    }
+
 
 
 }

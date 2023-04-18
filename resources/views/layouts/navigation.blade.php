@@ -111,7 +111,11 @@
                                         </a>
                                     @else
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('seller.profile') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            <img class="profileImage"  src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
+                                            @if (auth()->user()->profile_image)
+                                                <img class="profileImage"  src="{{ asset(auth()->user()->profile_image) }}" alt="" width="64" height="64" >
+                                            @else
+                                                <i class="fa fa-user" style="font-size: 28px;"></i>
+                                            @endif
                                             {{--{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
                                         </a>
                                     @endif
@@ -130,11 +134,21 @@
 
 
                             </li>
-                        @endguest
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart "></i></a>
-                        </li>
+                            @if(auth()->user()->buyer()->exists())
+                                @if(auth()->user()->buyer && auth()->user()->buyer->carts && auth()->user()->buyer->carts->isNotEmpty())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('cart.index') }}" style="min-width: 55px;">
+                                        <i class="fa fa-shopping-cart ">
+                                            <span class="notif badge badge-danger">
+                                                {{ auth()->user()->buyer->carts->count() }}
+                                            </span>
+                                        </i>
+                                    </a>
+                                </li>
+                                @endif
+                            @endif
+                        @endguest
                     </ul>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                 <div class="" style="width: 100%; display: flex">
 
 
-                    <div class="form-group short    ">
+                    <!-- <div class="form-group short    ">
                         <label for="">Category</label>
                         <select  class="form-control" id="category" name="category" placeholder="Category"  >
                             <option value=""></option>
@@ -18,7 +18,7 @@
                                 <option value="{{ $category->category }}" {{ (isset($_GET['category']) && $_GET['category'] == $category->category ? 'selected' : '')  }}>{{ $category->category }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group short    ">
                         <label for="">Sort</label>
                         <select  class="form-control" id="sort" name="sort" placeholder="Category"  >
@@ -35,7 +35,7 @@
 
             <canvas id="myChart" height="100px"></canvas>
 
-            <button id="downloadCSV">Download </button>
+            <a class="pal-button btn-green" href="{{ route('seller.analytics.product.ratings.export') }}" id="downloadCSV"><i class="fa fa-download"></i> Download </a>
             <script>
                 var labels =   @json($labels) ;
                 var sales =  @json($data) ;

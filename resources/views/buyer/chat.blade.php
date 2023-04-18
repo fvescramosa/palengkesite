@@ -17,8 +17,9 @@
                     @if(count($titles) > 0)
                         @foreach($titles as $title)
 
+
                             {{--It means buyer talking to seller--}}
-                           <li class="left clearfix">
+                           <li class="left clearfix {{ ($title->where('sender', 'seller')->where('status', 'unread')->count() > 0 ? 'unread' : '') }}">
                                     <a href="{{ route('buyer.chat.seller', ['id' => $title->seller->seller_stalls['id']]) }}"> {{ $title->seller->seller_stalls['name'] ?? $title->seller->user->first_name }} </a>
                             </li>
 

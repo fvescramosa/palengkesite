@@ -82,7 +82,8 @@
                                            class="form-control @error('price') is-invalid @enderror"
                                            id="price" name="price"
                                            placeholder="Price"
-                                           value="{{ $seller_product->price }}" >
+                                           value="{{ $seller_product->price }}"
+                                            onchange="validatePrice()">
 
                                     @error('price')
                                     <span class="invalid-feedback" role="alert">
@@ -90,6 +91,14 @@
                                     </span>
                                     @enderror
 
+                                </div>
+
+                                 <div class="alert alert-info" role="alert">
+                                    @foreach ($products as $product)
+                                        @if($product->id == $seller_product->product_id)
+                                            Maximum Price: <input type="text"  id="max_price" name="max_price" placeholder="" value="{{$product->max_price}}" style="text-align: center;" readonly>
+                                        @endif
+                                    @endforeach
                                 </div>
 
                                 <div class="info-item form-group xshort">
@@ -247,6 +256,26 @@
         </div>
     </div>
     <script>
+
+        function validatePrice() {
+            var price = document.getElementById("price").value;
+            var maxPrice = document.getElementById("max_price").value;
+
+            if (price > maxPrice) {
+                 alert("Price cannot exceed maximum price.");
+               /* Swal.fire({
+                    title: 'Error!',
+                    text: 'Price cannot exceed maximum price.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+
+                }).then((result) => {
+
+                });*/
+                document.getElementById("price").value = "";
+            }
+        }
+
         const products = {
             init: function(  ){
                 products.initCategories($('#category'));

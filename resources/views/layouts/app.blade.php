@@ -117,7 +117,7 @@
                                 <h1>{{ $pageTitle ?? '' }}</h1>
                             </section>
                          @else
-                                <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                                <section class="banner" style="background-image: url('{{ asset('images/defaults/inner-page-banner.jpg') }}')">
                                     <div class="overlay"></div>
                                     <h1>{{ $pageTitle ?? '' }}</h1>
                                 </section>
@@ -127,12 +127,12 @@
 
                                 @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
 
-                                    <section class="banner" style="background-image: url({{ $innerPage ?? asset('public/inner-page-banner.jpg') }})">
+                                    <section class="banner" style="background-image: url({{ $innerPage ?? asset('images/defaults/inner-page-banner.jpg') }})">
                                         <div class="overlay"></div>
                                     </section>
                                 @endif--}}
                 @else
-                    <section class="banner" style="background-image: url('{{ asset('public/inner-page-banner.jpg') }}')">
+                    <section class="banner" style="background-image: url('{{ asset('images/defaults/inner-page-banner.jpg') }}')">
                         <div class="overlay"></div>
                     </section>
 
@@ -140,7 +140,7 @@
             @endif
 
 
-            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index')
+            @if(  \Illuminate\Support\Facades\Route::currentRouteName() != 'index' && \Illuminate\Support\Facades\Route::currentRouteName() != 'shop.products.find')
                 <div class="longbar green-bar">
                     <div class="">
                         <form action="{{ route('select.market') }}" method="POST" id="select-market">
@@ -206,7 +206,54 @@
                 //     dots: false ,
                 //     focusOnSelect: true
                 // });
-            }
+            },
+            initDeleteFunction: function (trigger) {
+                trigger.click(function (e) {
+
+                    let self = $(this);
+                    let url = self.attr('data-href');
+
+                    //seller, buyer, staff, stall etc..
+                    let action =  self.attr('data-action-delete');
+
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure you want to remove this '+ action +'?',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        denyButtonText: `No`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type:'GET',
+                                dataType:"json",
+                                url: url,
+                                crossDomain:true,
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success:function(data) {
+                                    Swal.fire({
+                                        title: data.response + '!',
+                                        text: data.message,
+                                        icon: data.response,
+                                        confirmButtonText: 'Ok',
+
+                                    }).then((result) => {
+                                        location.reload(true);
+                                    });
+                                }
+                            });
+                        } 
+                        else if (result.isDenied) {
+
+                        }
+                    })
+                });
+
+            },
        }
 
        $(window).on('scroll', function(){
@@ -216,6 +263,7 @@
        $(window).on('load', function(){
             el.initSlick();
             el.changeMarket($('#market-option'));
+            el.initDeleteFunction($('a[data-action-delete]'));
         });
     </script>
     {{--<script type="text/javascript" src="{{ asset('js/app.js') }}"  ></script>--}}

@@ -42,7 +42,7 @@
 
                                 </div>
 
-                                <div class="info-item short">
+                                <div class="info-item  short">
                                     <label for="email">Gender</label>
                                     <select  class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" placeholder="Gender" value="" >
                                         <option value="Male" {{ ( old('gender') == 'Male')   ? 'selected' : '' }}>Male</option>
@@ -58,9 +58,12 @@
 
                                 </div>
 
-                                <div class="info-item short">
+                            <div class="form-group info-item short input-group mb-3 prepend">
                                     <label for="contact">Contact Number</label>
-                                    <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="Enter your contact number" value="">
+                                    <div class="input-group-prepend info-item-prepend">
+                                        <span class="input-group-text" id="basic-addon1">+63</span>
+                                    </div>
+                                    <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact"  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Enter your contact number eg 9123456789" value="">
                                     @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +72,22 @@
 
                                 </div>
 
-                                <div class="info-item short">
+                          {{--  <div class="form-group info-item short input-group mb-3 prepend">
+                                <label for="email">Mobile</label>
+                                <div class="input-group-prepend info-item-prepend">
+                                    <span class="input-group-text" id="basic-addon1">+63</span>
+                                </div>
+                                <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" placeholder="9123456789" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="{{ auth()->user()->mobile }}">
+                                @error('mobile')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+
+                            </div>--}}
+
+                                <div class="info-item long">
                                     <label for="stnumber">Street Number</label>
                                     <input type="text" class="form-control @error('stnumber') is-invalid @enderror" id="stnumber" name="stnumber" placeholder="Example: 123" value="">
                                     @error('stnumber')

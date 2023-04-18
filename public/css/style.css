@@ -1768,12 +1768,50 @@ display: flex;
 
 
 .home-category{
+    position: relative;
    max-width: 100% !important;
 }
 
 .home-category h1,
 .home-products h1 {
    margin-bottom: 5rem;
+}
+
+.home-category-arrow a {
+    outline: none !important;
+    text-decoration: none !important;
+}
+
+.home-category-arrow .slick-arrow {
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-transition: all .325s ease-in-out;
+    -moz-transition: all .325s ease-in-out;
+    -ms-transition: all .325s ease-in-out;
+    transition: all .325s ease-in-out;
+    display: none;
+    font-size: 80px;
+}
+
+.home-category-arrow{
+    /*display: none;*/
+    top: 53%;
+    z-index: 99;
+    position: absolute;
+    width: 95%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    color: var(--green);
+}
+
+.home-category .category-previous{
+    position: absolute;
+    left: 0
+}
+.home-category .category-next{
+    position: absolute;
+    right: 0
 }
 
 .product-subtitle,
@@ -2247,6 +2285,17 @@ button{
 
 .chat li a:hover{
    text-decoration: none;
+}
+
+.chat li.unread {
+    background: #fff;
+}
+
+.chat li a {
+    font-weight: 400;
+}
+.chat li.unread a {
+    font-weight: 900 !important;
 }
 
 .chat li.user {

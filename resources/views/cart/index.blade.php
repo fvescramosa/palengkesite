@@ -31,7 +31,8 @@
                 <h3>Cart</h3>
 
                 <div class="cart-items">
-                    @foreach(auth()->user()->buyer->carts as $cart)
+                    @foreach($carts as $cart)
+                    {{--@foreach(auth()->user()->buyer->carts as $cart)--}}
                         <div class="cart-item">
                             <div class="product-check">
                                 <div class="form-check">
@@ -46,6 +47,7 @@
                             <div class="product-name">{{ $cart->seller_product->product->product_name  }}</div>
                             <div class="product-price">Php {{ $cart->seller_product->price  }} x {{ $cart->quantity }}</div>
                             <div class="product-total">{{ $cart->total }}</div>
+                            <a href="#" data-action-delete="Item" data-href="{{ route('cart.delete', $cart->id) }}" > <i class="fa fa-trash"></i></a>
                         </div>
                     @endforeach
 

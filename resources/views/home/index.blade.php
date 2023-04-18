@@ -46,6 +46,14 @@
                     </a>
             @endforeach
         </div>
+        <div class="home-category-arrow">
+            <i class="category-previous fa fa-angle-left">
+
+            </i>
+            <i class="category-next fa fa-angle-right">
+
+            </i>
+        </div>
 
     </section>
 
@@ -66,7 +74,7 @@
                     <div class="product-details">
 
 
-                        <h4 class="product-name">{{ $featuredProduct->product->product_name }}</h4>
+                        <h4 class="product-name">{{ ($featuredProduct->custom_title != '' ? $featuredProduct->custom_title : $featuredProduct->product->product_name) }}</h4>
                         <p>Php {{ number_format($featuredProduct->price, 2) }}</p>
                         <form action="{{ route('shop.product.addToCart') }}" method="POST">
 
@@ -106,7 +114,7 @@
                     <div class="product-details">
 
 
-                        <h4 class="product-name">{{ $popularProduct->product->product_name }}</h4>
+                        <h4 class="product-name">{{ ($popularProduct->custom_title != '' ? $popularProduct->custom_title : $popularProduct->product->product_name) }}</h4>
                         <p>Php {{ number_format($popularProduct->seller_product->price, 2) }}</p>
                         <form action="{{ route('shop.product.addToCart') }}" method="POST">
 
@@ -196,8 +204,8 @@
                     infinite: true,
                     slide: 'div',
                     cssEase: 'linear',
-                    nextArrow: false,
-                    prevArrow: false,
+                    prevArrow: jQuery('.home-category .category-previous'),
+                    nextArrow: jQuery('.home-category .category-next'),
                     responsive: [
                         {
                             breakpoint: 991,

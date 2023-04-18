@@ -28,8 +28,26 @@ class CartController extends Controller
     public function index()
     {
 
+        $carts= Cart::where('buyer_id', auth()->user()->buyer->id)->whereHas('product')->get();
         $paymentOptions = PaymentOption::all();
-        return view('cart.index', compact(['paymentOptions']));
+        return view('cart.index', compact(['paymentOptions', 'carts']));
+    }
+
+
+    public function delete($id)
+    {
+
+        $delete =  Cart::where('id', $id)->delete();
+
+        if($delete){
+            $response = ['response' => 'success', 'message' => 'Item was deleted'];
+        }else {
+            $response = ['response' => 'error', 'message' => 'Opps! Something went wrong'];
+        }
+
+        return response()->json($response);
+
+//        return view('cart.index', compact(['paymentOptions']));
     }
 
     public function checkout(Request $request)
@@ -206,14 +224,14 @@ class CartController extends Controller
                         try {
 
 
-                            $account_sid = env("TWILIO_SID");
+                            /*$account_sid = env("TWILIO_SID");
                             $auth_token = env("TWILIO_TOKEN");
                             $twilio_number = env("TWILIO_FROM");
 
                             $client = new Client($account_sid, $auth_token);
                             $client->messages->create($receiverNumber, [
                                 'from' => $twilio_number,
-                                'body' => $message]);
+                                'body' => $message]);*/
 
                             //////dd('SMS Sent Successfully.');
 
@@ -236,7 +254,7 @@ class CartController extends Controller
                         try {
 
 
-                            $account_sid = env("TWILIO_SID");
+                           $account_sid = env("TWILIO_SID");
                             $auth_token = env("TWILIO_TOKEN");
                             $twilio_number = env("TWILIO_FROM");
 

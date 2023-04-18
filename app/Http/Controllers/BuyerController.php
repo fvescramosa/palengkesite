@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\Message;
 use App\User;
 use App\DeliveryAddress;
 use function dd;
@@ -35,12 +36,11 @@ class BuyerController extends Controller
     public function store(Request $request){
 
 
-
         $validate = $request->validate([
             'birthday' => ['required', ''],
             'age' => ['required', 'numeric', 'min:18'],
             'gender' => ['required', ''],
-            'contact' => ['required', ''],
+            'contact' =>  ['required', 'regex:/[0-9]{9}/', 'max:10'],
             'stnumber' => ['required', ''],
             'stname' => [''],
             'barangay' =>[''],
@@ -53,6 +53,7 @@ class BuyerController extends Controller
 
 
         if (!Auth::user()->buyer()->exists()){
+
 
             if($validate){
                 $buyer = Buyer::create(
@@ -71,11 +72,12 @@ class BuyerController extends Controller
                         'longitude' =>  $request->longitude,
                         'latitude' =>  $request->latitude,
                         'user_id' => auth()->user()->id,
-                        'profile_image' => $request->profile_image,
+//                        'profile_image' => $request->profile_image,
                     ]
                 );
 
 
+                $buyer->user()->update(['mobile' => $request->contact ]);
 
                 /*if($request->file('image')){
                     $file= $request->file('image');
@@ -85,16 +87,35 @@ class BuyerController extends Controller
                 }*/
 
 
-                if ($request->file('profile_image')){
+                /*if ($request->file('profile_image')){
 
                     $image = $request->profile_image;
                     $fileName = $image->getClientOriginalName();
                     $directory = auth()->user()->id . "/profile";
                     $imageStoreResult = Storage::disk('public')->put($directory, $image);
                     $data['profile_image']= $imageStoreResult;
+                    $buyerData['image']= $imageStoreResult;
 
                     $buyer->user()->update($data);
+                    $buyer->update($buyerData);
 
+                }*/
+
+                if ($request->file('profile_image')){
+                    $validate = $request->validate(
+                        [
+                            'profile_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000' // max 10000kb
+                        ]
+                    );
+                    $file= $request->file('profile_image');
+                    $filename= date('YmdHi').$file->getClientOriginalName();
+                    $directory = 'images/profile/'.auth()->user()->id.'/';
+                    $file->move(public_path($directory), $filename);
+                    $data['profile_image']= $directory.$filename;
+                    $buyerData['image']= $directory.$filename;;
+
+                    $buyer->user()->update($data);
+                    $buyer->update($buyerData);
                 }
 
                 if($buyer->save()){
@@ -165,6 +186,8 @@ class BuyerController extends Controller
             'latitude' =>  $request->latitude,
             'image'	=> $request->image,
         ]);
+
+        \auth()->user()->update(['mobile' => $request->contact ]);
 
         if($request->file('image')){
             $file= $request->file('image');

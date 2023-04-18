@@ -64,7 +64,7 @@
                                 <td>{{ $product->type }}</td>
                                 <td>
                                     <a href="{{ route('admin.products.edit', $product->id) }}">Edit</a> |
-                                    <a href="{{ route('admin.products.delete', $product->id) }}">Delete</a>
+                                    <a href="#" data-action-delete="Product" data-href="{{ route('admin.products.delete', $product->id) }}">Delete</a>
                                 </td>
                                 <td>
                                     @if($product->status == 'active')

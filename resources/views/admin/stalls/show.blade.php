@@ -49,7 +49,7 @@
                             <th>Section</th>
                             <th>Area in sqm</th>
                             <th>Amount per sqm / Rate</th>
-                            <th>Rental Fee</th>
+                            <th>Rental Fee per Day</th>
                             <th>Annual Fee</th>
                             <th>Meter Number</th>
                             <th>Status</th>
@@ -70,7 +70,7 @@
                                 <td>{{ $stall->status }}</td>
                                 <td>
                                     <a href="{{ route('admin.stalls.edit', $stall->id) }}">Edit</a> |
-                                    <a href="{{ route('admin.stalls.delete', $stall->id) }}"> Delete</a>
+                                    <a href="#" data-action-delete="Stall" data-href="{{ route('admin.stalls.delete', $stall->id) }}" > Delete</a>
                                 </td>
                             </tr>
                         @endforeach

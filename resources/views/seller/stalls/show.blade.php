@@ -83,7 +83,9 @@
                                         <div class="info-item short">
                                             <h3>Stall No: {{ $seller_stall->stall->number }}</h3>
 
-                                            <a href="{{ route('seller.stalls.edit', ['id' => $seller_stall->id]) }}" class=""><span class="fa fa-edit"></span> Edit</a>
+                                            @if($seller_stall->status == 'active')
+                                                <a href="{{ route('seller.stalls.edit', ['id' => $seller_stall->id]) }}" class=""><span class="fa fa-edit"></span> Edit</a>
+                                            @endif
                                         </div>
 
                                         <div class="info-item short">
@@ -116,7 +118,7 @@
                                             <td class="stall-info-title-container"><p><strong>Annual Fee: </strong></p> </td>
                                             <td> <p>{{  $seller_stall->stall->annual_fee }}</p></td>   
                                         @else
-                                            <td class="stall-info-title-container"><p><strong>Rental Fee: </strong></p> </td>
+                                            <td class="stall-info-title-container"><p><strong>Rental Fee Per Day: </strong></p> </td>
                                             <td> <p>{{  $seller_stall->stall->rental_fee }}</p></td>
                                         @endif
 

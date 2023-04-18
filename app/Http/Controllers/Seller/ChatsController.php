@@ -23,7 +23,6 @@ class ChatsController extends Controller
             $messages = Auth::user()->seller->messages->groupBy('buyer_id');
 
 
-
 //        $messages = Message::where('buyer_id', auth()->user()->buyer->id)->groupBy('seller_id')->distinct()->get();
 
 
