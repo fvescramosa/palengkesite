@@ -36,12 +36,11 @@ class BuyerController extends Controller
     public function store(Request $request){
 
 
-
         $validate = $request->validate([
             'birthday' => ['required', ''],
             'age' => ['required', 'numeric', 'min:18'],
             'gender' => ['required', ''],
-            'contact' => ['required', ''],
+            'contact' =>  ['required', 'regex:/[0-9]{9}/', 'max:10'],
             'stnumber' => ['required', ''],
             'stname' => [''],
             'barangay' =>[''],
@@ -54,6 +53,7 @@ class BuyerController extends Controller
 
 
         if (!Auth::user()->buyer()->exists()){
+
 
             if($validate){
                 $buyer = Buyer::create(
@@ -72,11 +72,12 @@ class BuyerController extends Controller
                         'longitude' =>  $request->longitude,
                         'latitude' =>  $request->latitude,
                         'user_id' => auth()->user()->id,
-                        'profile_image' => $request->profile_image,
+//                        'profile_image' => $request->profile_image,
                     ]
                 );
 
 
+                $buyer->user()->update(['mobile' => $request->contact ]);
 
                 /*if($request->file('image')){
                     $file= $request->file('image');
@@ -93,8 +94,10 @@ class BuyerController extends Controller
                     $directory = auth()->user()->id . "/profile";
                     $imageStoreResult = Storage::disk('public')->put($directory, $image);
                     $data['profile_image']= $imageStoreResult;
+                    $buyerData['image']= $imageStoreResult;
 
                     $buyer->user()->update($data);
+                    $buyer->update($buyerData);
 
                 }
 
@@ -166,6 +169,8 @@ class BuyerController extends Controller
             'latitude' =>  $request->latitude,
             'image'	=> $request->image,
         ]);
+
+        $buyer->user()->update(['mobile' => $request->contact ]);
 
         if($request->file('image')){
             $file= $request->file('image');
