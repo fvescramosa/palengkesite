@@ -87,7 +87,7 @@ class BuyerController extends Controller
                 }*/
 
 
-                if ($request->file('profile_image')){
+                /*if ($request->file('profile_image')){
 
                     $image = $request->profile_image;
                     $fileName = $image->getClientOriginalName();
@@ -99,6 +99,23 @@ class BuyerController extends Controller
                     $buyer->user()->update($data);
                     $buyer->update($buyerData);
 
+                }*/
+
+                if ($request->file('profile_image')){
+                    $validate = $request->validate(
+                        [
+                            'profile_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000' // max 10000kb
+                        ]
+                    );
+                    $file= $request->file('profile_image');
+                    $filename= date('YmdHi').$file->getClientOriginalName();
+                    $directory = 'images/profile/'.auth()->user()->id.'/';
+                    $file->move(public_path($directory), $filename);
+                    $data['profile_image']= $directory.$filename;
+                    $buyerData['image']= $directory.$filename;;
+
+                    $buyer->user()->update($data);
+                    $buyer->update($buyerData);
                 }
 
                 if($buyer->save()){
@@ -170,7 +187,7 @@ class BuyerController extends Controller
             'image'	=> $request->image,
         ]);
 
-        $buyer->user()->update(['mobile' => $request->contact ]);
+        \auth()->user()->update(['mobile' => $request->contact ]);
 
         if($request->file('image')){
             $file= $request->file('image');
