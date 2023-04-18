@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="form-group long" id="rentalFeeGroup" style="display: none">
-                                <label for="Rental_Fee">Rental Fee</label>
+                                <label for="Rental_Fee">Rental Fee per Day</label>
                                 <input type="text" class="form-control @error('rental_fee') is-invalid @enderror"
                                     id="rental_fee"
                                     name="rental_fee"

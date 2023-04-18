@@ -80,6 +80,7 @@ class ProductsController extends Controller
             'description' => $request->description,
             'featured' => $request->featured,
             'stock' => $request->stock,
+            'custom_title' => $request->custom_title,
 
         ]);
 

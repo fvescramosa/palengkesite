@@ -46,7 +46,7 @@
                         <th>Section</th>
                         <th>Area in sqm</th>
                         <th>Amount per sqm / Rate</th>
-                        <th>Rental Fee</th>
+                        <th>Rental Fee per Day</th>
                         <th>Annual Fee</th>
                         <th>Meter Number</th>
                         <th>Action</th>
